@@ -74,14 +74,21 @@ class TurnLeft(State):
     def run():
         #tell only right motor to go forward
         wrapper.right_motor.setSpeed(RIGHT_FORWARD)
-        #tell only right motor to go forward
         wrapper.left_motor.setSpeed(0)
         sleep(1)
         return WalkForward(wrapper)
     
 
 class TurnRight(State):
-    raise NotImplementedError
+    def run():
+        #tell only right motor to go forward
+        wrapper.right_motor.setSpeed(0)
+        #tell only right motor to go forward
+        wrapper.left_motor.setSpeed(LEFT_FORWARD)
+        sleep(1)
+        return WalkForward(wrapper)
+    
+
 
 #back up until there's enough room
 class Stuck(State):
@@ -98,14 +105,14 @@ class Stuck(State):
 #class Timer:
 #    pass
     
-class IRModule(threading.Thread,ir2):
-    def __init__(self):
+class IRModule(threading.Thread):
+    def __init__(self,ir2):
         #IR value
         ir_val=0
         self.ir=ir2
     def run(self):
         while True:
-            ir_val = ir.getValue()
+            ir_val = self.ir.getValue()
             time.sleep(0.1)
             #get one measurement every second
 
