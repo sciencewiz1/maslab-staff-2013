@@ -19,6 +19,9 @@ RIGHT_BACK=126
 
 
 class State:
+    def __init__(self,wrap):
+        #create a wrapper for arduino that handles all I/O
+        self.wrapper=wrap
     def run(self):
         raise NotImplementedError
 
@@ -31,6 +34,8 @@ class ArduinoWrapper:
         right_motor = arduino.Motor(ard, 0, 2, 3)
         #IR sensor
         ir_module=IRModule(arduino.AnalogInput(ard, 0))
+        #start a thread that takes IR readings
+        ir_module.run()
 
 class StateMachine:
     def __init__(self,wrap):
@@ -38,8 +43,6 @@ class StateMachine:
         self.wrapper=wrap
         #self.arduino=ard
     def runSM(self):
-        #start a thread that takes IR readings
-        self.wrapper.ir_module.run()
         #set the starting state
         self.state=WalkForward(wrapper)
         #in the future, categorize states more sophisticatedly (ex. explore)
