@@ -27,11 +27,11 @@ class State:
 
 class ArduinoWrapper:
     def __init__(self, ard):
-        #I don't know the right numbers right now.
+        #Syntax for motors: arduino, currentPic, directionPin, pwmPin
         #Left motor
-        left_motor = arduino.Motor(ard, 0, 2, 3)
+        left_motor = arduino.Motor(ard, 5, 3, 1)
         #Right motor
-        right_motor = arduino.Motor(ard, 0, 2, 3)
+        right_motor = arduino.Motor(ard, 6, 4, 2)
         #IR sensor
         ir_module=IRModule(arduino.AnalogInput(ard, 0))
         #start a thread that takes IR readings
@@ -44,7 +44,7 @@ class StateMachine:
         #self.arduino=ard
     def runSM(self):
         #set the starting state
-        self.state=WalkForward(wrapper)
+        self.state=WalkForward(self.wrapper)
         #in the future, categorize states more sophisticatedly (ex. explore)
         while True:
             #does whatever it's supposed to in this state and then transitions
@@ -61,7 +61,12 @@ class WalkForward(State):
         wrapper.right_motor.setSpeed(RIGHT_FORWARD)
         #check if there's an obstacle. If so, turn left
         while True:
-            if ir_module.ir_val >=IR_THRESHOLD
+            #should atomic this
+            if ir_module.ir_val >=IR_THRESHOLD2:
+                #way too close, back up
+                return Stuck(wrapper)
+            if ir_module.ir_val >=IR_THRESHOLD:
+                #close, turn left before you get way too close
                 return TurnLeft(wrapper)
 #it might be better to make methods in ArduinoWrapper to do low-level stuff.
 
@@ -80,7 +85,13 @@ class TurnRight(State):
 
 #back up until there's enough room
 class Stuck(State):
-    raise NotImplementedError
+    def run():
+        #tell left motor to go back
+        wrapper.left_motor.setSpeed(LEFT_BACK)
+        #tell right motor to go back
+        wrapper.right_motor.setSpeed(RIGHT_BACK)
+        sleep(1)
+        return TurnLeft(State)
     #for now, back up a fixed amount
     
 
