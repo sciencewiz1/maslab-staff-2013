@@ -13,9 +13,9 @@ IR_THRESHOLD2 = 400.0
 STOP_TIME = 180
 #check these signs
 LEFT_FORWARD=126
-RIGHT_FORWARD=-126
+RIGHT_FORWARD=126
 LEFT_BACK=-126
-RIGHT_BACK=126
+RIGHT_BACK=-126
 
 
 class State:
@@ -27,15 +27,20 @@ class State:
 
 class ArduinoWrapper:
     def __init__(self, ard):
+	print "creating wrapper"
         #Syntax for motors: arduino, currentPic, directionPin, pwmPin
         #Left motor
-        left_motor = arduino.Motor(ard, 5, 3, 1)
+        self.left_motor = arduino.Motor(ard, 7, 53, 13)
+	print "L motor"
         #Right motor
-        right_motor = arduino.Motor(ard, 6, 4, 2)
+        self.right_motor = arduino.Motor(ard, 6, 52, 12)
+	print "R motor"
         #IR sensor
-        ir_module=IRModule(arduino.AnalogInput(ard, 0))
+        self.ir_module=IRModule(arduino.AnalogInput(ard, 0))
+	print "IR module"
         #start a thread that takes IR readings
-        ir_module.run()
+        self.ir_module.start()
+	print "IR module running"
 
 class StateMachine:
     def __init__(self,wrap):
@@ -45,6 +50,7 @@ class StateMachine:
     def runSM(self):
         #set the starting state
         self.state=WalkForward(self.wrapper)
+	print "set starting state"
         #in the future, categorize states more sophisticatedly (ex. explore)
         while True:
             #does whatever it's supposed to in this state and then transitions
@@ -54,49 +60,53 @@ class StateMachine:
 
 #upgrade this to "explore" later on
 class WalkForward(State):
-    def run():
+    def run(self):
+	print "walk forward"
         #tell left motor to go forward
-        wrapper.left_motor.setSpeed(LEFT_FORWARD)
+        self.wrapper.left_motor.setSpeed(LEFT_FORWARD)
         #tell right motor to go forward
-        wrapper.right_motor.setSpeed(RIGHT_FORWARD)
+        self.wrapper.right_motor.setSpeed(RIGHT_FORWARD)
         #check if there's an obstacle. If so, turn left
         while True:
             #should atomic this
-            if ir_module.ir_val >=IR_THRESHOLD2:
+            if self.wrapper.ir_module.ir_val >=IR_THRESHOLD2:
                 #way too close, back up
-                return Stuck(wrapper)
-            if ir_module.ir_val >=IR_THRESHOLD:
+                return Stuck(self.wrapper)
+            if self.wrapper.ir_module.ir_val >=IR_THRESHOLD:
                 #close, turn left before you get way too close
-                return TurnLeft(wrapper)
+                return TurnLeft(self.wrapper)
 #it might be better to make methods in ArduinoWrapper to do low-level stuff.
 
 class TurnLeft(State):
-    def run():
+    def run(self):
+	print "turn left"
         #tell only right motor to go forward
-        wrapper.right_motor.setSpeed(RIGHT_FORWARD)
-        wrapper.left_motor.setSpeed(0)
+        self.wrapper.right_motor.setSpeed(RIGHT_FORWARD)
+        self.wrapper.left_motor.setSpeed(0)
         sleep(1)
-        return WalkForward(wrapper)
+        return WalkForward(self.wrapper)
     
 
 class TurnRight(State):
-    def run():
+    def run(self):
+	print "turn right"
         #tell only right motor to go forward
-        wrapper.right_motor.setSpeed(0)
+        self.wrapper.right_motor.setSpeed(0)
         #tell only right motor to go forward
-        wrapper.left_motor.setSpeed(LEFT_FORWARD)
+        self.wrapper.left_motor.setSpeed(LEFT_FORWARD)
         sleep(1)
-        return WalkForward(wrapper)
+        return WalkForward(self.wrapper)
     
 
 
 #back up until there's enough room
 class Stuck(State):
-    def run():
+    def run(self):
+	print "stuck"
         #tell left motor to go back
-        wrapper.left_motor.setSpeed(LEFT_BACK)
+        self.wrapper.left_motor.setSpeed(LEFT_BACK)
         #tell right motor to go back
-        wrapper.right_motor.setSpeed(RIGHT_BACK)
+        self.wrapper.right_motor.setSpeed(RIGHT_BACK)
         sleep(1)
         return TurnLeft(State)
     #for now, back up a fixed amount
@@ -108,11 +118,15 @@ class Stuck(State):
 class IRModule(threading.Thread):
     def __init__(self,ir2):
         #IR value
-        ir_val=0
+	super(IRModule, self).__init__()
+	threading.Thread.__init__(self)
+        self.ir_val=0
         self.ir=ir2
     def run(self):
         while True:
-            ir_val = self.ir.getValue()
+	    print self.ir_val
+            self.ir_val = self.ir.getValue()
+	    print self.ir_val
             time.sleep(0.1)
             #get one measurement every second
 
