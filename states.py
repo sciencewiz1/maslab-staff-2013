@@ -86,7 +86,16 @@ class AvoidWall(State):
 class TurnAndLook(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
-        self.action=TurnLeft
+        #if ball is to the right
+        if wrap.vs.getTargetDistFromCenter()[0]>=0:
+            self.action=TurnRight
+        elif wrap.vs.getTargetDistFromCenter()[0]<0:
+            self.action=TurnLeft
+        elif not wrap.vs.see():
+            if random.randint(0,1)==0:
+                self.action=TurnLeft
+            else:
+                self.action=TurnRight
         #Maybe change to *randomly* (or intelligently choose between)
         #turn left or right
     def stopfunction(self):
@@ -96,6 +105,8 @@ class TurnAndLook(State):
         elif time.time() > self.wrapper.time+360*TURN_SPEED:
             return Wander
             #turned 360, no balls in sight
+            #in the future, should probably change direction
+            #for instance, have a TurnTowardsOpen state.
         else:
             return 0
             #keep turning
@@ -126,6 +137,9 @@ class Stuck(State):
         return 0
         #keep turning
     
+#not yet implemented
+class CaptureBall(State):
+    pass
 
 #not yet implemented
 class HitPyramidWall(State):

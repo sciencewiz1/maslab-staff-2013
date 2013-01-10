@@ -1,5 +1,8 @@
 import arduino, time, threading
 from constants import *
+import sys
+sys.path.append("./Vision System")
+from VisionSystem import *
 
 '''Contains all the information and arduino I/O that needs to be passed
 between states'''
@@ -25,17 +28,20 @@ class Wrapper:
         self.color=RED
         #last time logged
         self.time=time.time()
-        #also, image processor here
-    #NOT YET IMPLEMENTED (need OpenCV)
+        #image processor here
+        self.vs=VisionSystem()
+        self.vs.start()
     #does it see a ball?
     def see(self):
-        return 0
+        print "ball at ",self.vs.getTargetDistFromCenter()
+        return self.vs.getTargetDistFromCenter() != None
     def ballCentered(self):
-        return 0
+        return (math.fabs(self.vs.getTargetDistFromCenter()[0])<=CENTER_THRESHOLD)
     '''return array of coordinates of balls'''
     def ballCoordinates(self):
-        return []
+        return self.vs.getTargetDistFromCenter()
 
+'''Module that records IR measurements'''
 class IRModule(threading.Thread):
     def __init__(self,ir2):
         #IR value
