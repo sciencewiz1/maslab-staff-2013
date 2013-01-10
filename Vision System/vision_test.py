@@ -3,7 +3,7 @@ import numpy
 import serial
 import scipy
 import time
-image1=cv.LoadImage("C:/Users/David G. Goehring/Desktop/test4.jpg")
+'''image1=cv.LoadImage("C:/Users/David G. Goehring/Desktop/test4.jpg")
 template=cv.LoadImage("C:/Users/David G. Goehring/Desktop/template.jpg")
 width = abs(image1.width - template.width)+1
 height = abs(image1.height - template.height)+1
@@ -16,7 +16,7 @@ result= cv.MinMaxLoc(result_image)
 #CV_TM_SQDIFF
 #cv.ShowImage('a_window', image)
 #g_capture = cv.CreateFileCapture('somevideo.avi')
-#img=cv.QueryFrame(g_capture) '''
+#img=cv.QueryFrame(g_capture) 
 print result
 (x,y)=result[2]
 (x2,y2)=(x+template.width,y+template.height)
@@ -44,3 +44,29 @@ cv.WaitKey(0)
 #cv.ShowImage('a_window', image) #Show the image
 #cv.Waitkey(10000)
 #cv.SaveImage('C:/Users/David G. Goehring/Desktop/image.png', image) #Saves the image
+'''
+'''#Load the haar cascade
+cv.NamedWindow("t")
+cv.WaitKey(0)
+hc = cv.Load("haarcascade_frontalface_alt.xml")
+#Detect face in image
+face = cv.HaarDetectObjects('t', hc, cv.CreateMemStorage(), 1.2,2, cv.CV_HAAR_DO_CANNY_PRUNING, (0,0) )
+for (x,y,w,h) in face:
+    print 'face found at: '+str(w)+','+str(h)
+'''
+#when modifying image, need to create image container to hold new image
+#need to convert image to binary and greyscale before contour search can begin
+image=cv.LoadImage("test2.jpg")
+clone=cv.CloneImage(image)
+grey=cv.CreateImage(cv.GetSize(clone),8,1)
+cv.CvtColor(clone,grey,cv.CV_BGR2GRAY)
+cv.Threshold(grey,grey,100,255,cv.CV_THRESH_BINARY)
+cv.NamedWindow("test",cv.CV_WINDOW_NORMAL)
+cv.ShowImage("test",grey)
+cv.WaitKey(0)
+#contours, hierarchy=cv.FindContours(clone, cv.CreateMemStorage(), cv.CV_RETR_LIST, cv.CV_CHAIN_APPROX_SIMPLE, (0, 0))
+storage = cv.CreateMemStorage(0)
+contours = cv.FindContours (grey, storage, method = cv.CV_CHAIN_APPROX_SIMPLE)
+cv.DrawContours(grey, contours, 0, cv.RGB(255, 0, 0),0)
+cv.ShowImage("test",grey)
+cv.WaitKey(0)
