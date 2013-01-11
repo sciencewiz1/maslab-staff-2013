@@ -82,7 +82,7 @@ class ForwardToBall(Action):#or GoForward
         if dist==None:
             return
             #this will exit the ApproachBallState: lost the ball:`(
-        adjust=self.controller.adjust(self.wrapper.vs.getTargetDistanceFromCenter())
+        adjust=self.controller.adjust(self.wrapper.vs.getTargetDistanceFromCenter()/8)
         new_left_speed=LEFT_FORWARD+adjust
         #scale so speeds <=126
         multiplier=max(math.fabs(new_left_speed/126.0),1)
