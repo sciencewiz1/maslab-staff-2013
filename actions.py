@@ -1,4 +1,6 @@
 from constants import *
+from wrapper import PIDController
+import math
 
 """An action is a basic movement. It consists of 2 methods:
 run: what to do at the beginning of an action (ex. set the motors to go forward)
@@ -67,3 +69,26 @@ class TurnRight(Action):
         #return Wander(self.wrapper)
     def loop(self):
         print "looping ",self.__class__.__name__
+
+class ForwardToBall(Action):#or GoForward
+    def __init__(self):
+        Action.__init__(self)
+        self.controller=PIDController(TURN_KP,TURN_KI,TURN_KD)
+    def run(self):
+        pass
+    def loop(self):
+        print "looping ",self.__class__.__name__
+        dist=wrapper.vs.getTargetDistanceFromCenter()
+        if dist==None:
+            return
+            #this will exit the ApproachBallState: lost the ball:`(
+        adjust=self.controller.adjust(self.wrapper.vs.getTargetDistanceFromCenter())
+        new_left_speed=LEFT_FORWARD+adjust
+        #scale so speeds <=126
+        multiplier=max(math.fabs(new_left_speed/126.0),1)
+        new_left_speed=int(new_left_speed/multiplier)
+        new_right_speed=int(RIGHT_FORWARD/multiplier)
+        print "L/R speeds: ",new_left_speed,new_right_speed
+        self.wrapper.left_motor.setSpeed(new_left_speed)
+        self.wrapper.right_motor.setSpeed(new_right_speed)
+        sleep(0.1)

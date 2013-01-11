@@ -12,7 +12,7 @@ class VisionSystem(threading.Thread):
     '''Initialization method that creates the
         camera object and initializes Thread data'''
     def __init__(self,target):
-        self.capture = cv.CaptureFromCAM(1) #camera object
+        self.capture = cv.CaptureFromCAM(0) #camera object
         self.target=target
         self.active=True
         self.targets={"redBall":cv.LoadImage("redBallTemplate.jpg"),"greenBall":cv.LoadImage("greenBallTemplate.jpg"),"pyramidTopTemplate":cv.LoadImage("pyramidTopTemplate.jpg")}

@@ -14,7 +14,7 @@ class StateMachine:
         #self.arduino=ard
     def runSM(self):
         #set the starting state
-        self.state=Wander(self.wrapper)
+        self.state=TurnAndLook(self.wrapper)
         print "set starting state"
         #in the future, categorize states more sophisticatedly (ex. explore)
         while True:

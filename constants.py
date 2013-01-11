@@ -9,6 +9,7 @@ LEFT_FORWARD=64
 RIGHT_FORWARD=50
 LEFT_BACK=-64
 RIGHT_BACK=-50
+LEFT_RIGHT_RATIO=1.28
 #what are we looking for?
 BALL_MODE=0
 PYRAMID_MODE=1
@@ -24,3 +25,24 @@ LEFT=-1
 RIGHT=1
 
 CENTER_THRESHOLD=60
+
+#Right now I randomly estimate 1 degree/4 pixels, change this to something more
+#exact later
+#in units of (motor speed)/(angle in degrees).
+#motor speed is -126 to 126
+TURN_KP = 60
+#in units of (motor speed)/(angle in degrees*s)
+TURN_KI = 10
+#in units of (motor speed s)/(angle in degrees)
+TURN_KD = 10
+
+
+#angle in degrees between straight forward and furthest right the camera can see
+CAMERA_HALF_WIDTH=31
+#half the number of pixels horizontally
+PIXELS=250
+
+#regression line for IR to distance
+SLOPE=-2177.305428
+Y_INTERCEPT=-0.84208
+

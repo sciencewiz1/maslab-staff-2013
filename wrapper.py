@@ -35,6 +35,8 @@ class Wrapper:
         print "starting vs"
         self.vs.start()
         print "started"
+        #when turn 360, get IR data (useful for mapping)
+        self.ir360={}
     #does it see a ball?
     def see(self):
         print "ball at ",self.vs.getTargetDistFromCenter()
@@ -61,3 +63,35 @@ class IRModule(threading.Thread):
             #print self.ir_val
             time.sleep(0.1)
             #get one measurement every .1 second
+    def obstacleDistance(self):
+        return Y_INTERCEPT+SLOPE*self.ir_val
+
+'''PID controller
+kp,ki,kd are the constants
+desired is the desired value (speed, angle, etc.)
+'''
+class PIDController:
+    def __init__(self,kp, ki, kd):#,input_method,wrapper):
+        self.kp=kp
+        self.ki=ki
+        self.kd=kd
+        self.integral=0
+        self.last_error=None
+        self.time=time.time()
+        #self.input_method=input_method
+        #self.wrapper=wrapper
+    def adjust(self,error):
+        if self.last_error==None:
+            last_error=error
+        current_time=time.time()
+        #error=desired-actual
+        #numerically integrate using trapezoidal rule
+        self.integral+=.5*(last_error+error)
+        print "error= ",error
+        print "integral= ",integral
+        print "derivative= ",derivative
+        output=kp*(self.desired-self.actual)+ki*self.integral+\
+                kd*(self.error-self.last_error)/(current_time-time)
+        time=current_time
+        self.last_error=error
+        return output

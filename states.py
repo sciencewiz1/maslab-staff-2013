@@ -127,16 +127,18 @@ class TurnAndLook(State):
 class ApproachBall(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
-        self.action=GoForward
+        #Change to ForwardToBall
+        self.action=ForwardToBall
     def stopfunction(self):
         if self.wrapper.ballCentered():
-            return ApproachBall
-            #found ball
-        if time.time() > self.wrapper.time+3:
-            return Wander
-            #turned 360, no balls in sight
-        return 0
-        #keep turning
+            return 0
+            #still going after ball
+        if self.wrapper.see():
+            return TurnAndLook
+            #if you see the ball and it's not centered
+        #if lose track of ball
+        return Wander
+#Note: need to do something about inaccessible balls
         
 #back up for 1 second
 #(this is not very sophisticated right now)
