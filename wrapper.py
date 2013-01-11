@@ -3,6 +3,7 @@ from constants import *
 import sys
 sys.path.append("./Vision System")
 from VisionSystem import *
+import math
 
 '''Contains all the information and arduino I/O that needs to be passed
 between states'''
@@ -29,14 +30,20 @@ class Wrapper:
         #last time logged
         self.time=time.time()
         #image processor here
-        self.vs=VisionSystem()
+        print "init vision system"
+        self.vs=VisionSystem("redBall")
+        print "starting vs"
         self.vs.start()
+        print "started"
     #does it see a ball?
     def see(self):
         print "ball at ",self.vs.getTargetDistFromCenter()
         return self.vs.getTargetDistFromCenter() != None
     def ballCentered(self):
-        return (math.fabs(self.vs.getTargetDistFromCenter()[0])<=CENTER_THRESHOLD)
+        dist=self.vs.getTargetDistFromCenter()
+        if dist== None:
+            return 0
+        return (math.fabs(dist[0])<=CENTER_THRESHOLD)
     '''return array of coordinates of balls'''
     def ballCoordinates(self):
         return self.vs.getTargetDistFromCenter()
@@ -50,8 +57,7 @@ class IRModule(threading.Thread):
         self.ir=ir2
     def run(self):
         while True:
-            print self.ir_val
             self.ir_val = self.ir.getValue()
-            print self.ir_val
+            #print self.ir_val
             time.sleep(0.1)
             #get one measurement every .1 second

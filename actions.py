@@ -35,7 +35,7 @@ class GoForward(Action):
         self.wrapper.right_motor.setSpeed(RIGHT_FORWARD)
     def loop(self):
         #in the future put PID controls to keep it going straight
-        pass
+        print "looping ",self.__class__.__name__
 
 class GoBack(Action):
     def run(self):
@@ -43,7 +43,7 @@ class GoBack(Action):
         #tell right motor to go forward
         self.wrapper.right_motor.setSpeed(RIGHT_BACK)
     def loop(self):
-        pass
+        print "looping ",self.__class__.__name__
 
 class TurnLeft(Action):
     def run(self):
@@ -54,7 +54,7 @@ class TurnLeft(Action):
         #sleep(1)
         #return Wander(self.wrapper)
     def loop(self):
-        pass
+        print "looping ",self.__class__.__name__
 #more sophisticated: can update wrapper with angle turned (using sensory input)
 
 class TurnRight(Action):
@@ -65,3 +65,5 @@ class TurnRight(Action):
         self.wrapper.left_motor.setSpeed(LEFT_FORWARD)
         #sleep(1)
         #return Wander(self.wrapper)
+    def loop(self):
+        print "looping ",self.__class__.__name__

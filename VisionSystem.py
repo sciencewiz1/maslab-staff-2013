@@ -12,7 +12,7 @@ class VisionSystem(threading.Thread):
     '''Initialization method that creates the
         camera object and initializes Thread data'''
     def __init__(self,target):
-        self.capture = cv.CaptureFromCAM(0) #camera object
+        self.capture = cv.CaptureFromCAM(1) #camera object
         self.target=target
         self.active=True
         self.targets={"redBall":cv.LoadImage("redBallTemplate.jpg"),"greenBall":cv.LoadImage("greenBallTemplate.jpg"),"pyramidTopTemplate":cv.LoadImage("pyramidTopTemplate.jpg")}
@@ -48,11 +48,11 @@ class VisionSystem(threading.Thread):
         cv.Rectangle(image1,center,centerEnd,(0,0,255),1,0)
         #threshold for ball detection
         #add detector box and update last seen coordinate
-        if minResult<=TEMPLATE_MATCH_THRESHOLD:
-            cv.Rectangle(image1,(x,y),(x2,y2),(255,0,0),1,0)
-            xdist=image1.width/float(2)-x
-            ydist=image1.height/float(2)-y
-            self.targetLocationsFromCenter[self.target]=(xdist,ydist)
+        #if minResult<=TEMPLATE_MATCH_THRESHOLD:
+        cv.Rectangle(image1,(x,y),(x2,y2),(255,0,0),1,0)
+        xdist=x-image1.width/float(2)
+        ydist=image1.height/float(2)-y
+        self.targetLocationsFromCenter[self.target]=(xdist,ydist)
         return image1
     def getTargetDistFromCenter(self):
         return self.targetLocationsFromCenter[self.target]
@@ -68,7 +68,7 @@ class VisionSystem(threading.Thread):
             self.stop()
             return "Camera Init Failed!"
         while self.active:
-            print self.getTargetDistFromCenter()
+            #print self.getTargetDistFromCenter()
             image=cv.QueryFrame(self.capture)
             image1=self.findTarget(image)
             cv.ShowImage('Tracker',image1)
@@ -78,8 +78,10 @@ class VisionSystem(threading.Thread):
                 self.active=False
                 break
         cv.DestroyWindow("Tracker")
-test=VisionSystem("redBall")
-test.start() 
+
+if __name__=="__main__":
+    test=VisionSystem("redBall")
+    test.start() 
 #test.changeTarget("greenBall")
 #time.sleep(10)
 #test.changeTarget("pyramidTopTemplate")

@@ -2,6 +2,7 @@ import time, threading
 from constants import *
 from actions import *
 from wrapper import *
+from random import *
 
 """A state of the state machine.
 wrapper: States ALWAYS pass the wrapper on to the next state. The wrapper
@@ -32,12 +33,14 @@ class State:
     def stopfunction(self):
         raise NotImplementedError
     def run(self):
-        print self.__class__.__name__
+        print "Running ",self.__class__.__name__
         #check if there's an obstacle. If so, avoid it
         action_instance=self.action(self.wrapper)
         self.wrapper.time=time.time()
         #stopfunction returns the transition
+        print "trying to start next state"
         next_state = action_instance.start(self.stopfunction)
+        print "started state"
         return next_state(self.wrapper)    
 
 class Wander(State):
@@ -85,29 +88,39 @@ class AvoidWall(State):
 
 class TurnAndLook(State):
     def __init__(self,wrap):
+        print "init turn and look"
         State.__init__(self,wrap)
         #if ball is to the right
-        if wrap.vs.getTargetDistFromCenter()[0]>=0:
-            self.action=TurnRight
-        elif wrap.vs.getTargetDistFromCenter()[0]<0:
-            self.action=TurnLeft
-        elif not wrap.vs.see():
-            if random.randint(0,1)==0:
+        #ATOMIC this
+        dist=wrap.vs.getTargetDistFromCenter()
+        print "dist ",dist
+        if dist==None:
+            print "don't see ball"
+            if randint(0,1)==0:
                 self.action=TurnLeft
             else:
-                self.action=TurnRight
+                self.action=TurnRight        
+        elif dist[0]>=0:
+            print "see ball to right"
+            self.action=TurnRight
+        elif dist[0]<0:
+            print "see ball to left"
+            self.action=TurnLeft
         #Maybe change to *randomly* (or intelligently choose between)
         #turn left or right
     def stopfunction(self):
         if self.wrapper.ballCentered():
+            print "centered ball, approach!"
             return ApproachBall
             #found ball
         elif time.time() > self.wrapper.time+360*TURN_SPEED:
+            print "now go wander"
             return Wander
             #turned 360, no balls in sight
             #in the future, should probably change direction
             #for instance, have a TurnTowardsOpen state.
         else:
+            print "keep turning"
             return 0
             #keep turning
 
@@ -119,7 +132,7 @@ class ApproachBall(State):
         if self.wrapper.ballCentered():
             return ApproachBall
             #found ball
-        if time.time() > self.wrapper.time+360*TURN_SPEED:
+        if time.time() > self.wrapper.time+3:
             return Wander
             #turned 360, no balls in sight
         return 0
