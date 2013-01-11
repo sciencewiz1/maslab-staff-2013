@@ -57,7 +57,10 @@ class Arduino(threading.Thread):
         for i in range(4):
             try:
                 # Try to create the serial connection
-                self.port=serial.Serial(port='/dev/ttyACM{0}'.format(i), baudrate=9600, timeout=0.5)
+                try: #required for windows
+                    self.port=serial.Serial(port=i, baudrate=9600, timeout=0.5)
+                except:#required for linux
+                    self.port=serial.Serial(port='/dev/ttyACM{0}'.format(i), baudrate=9600, timeout=0.5)
                 if self.port.isOpen():
                     time.sleep(2) # Wait for Arduino to initialize
                     print "Connected"

@@ -54,7 +54,7 @@ face = cv.HaarDetectObjects('t', hc, cv.CreateMemStorage(), 1.2,2, cv.CV_HAAR_DO
 for (x,y,w,h) in face:
     print 'face found at: '+str(w)+','+str(h)
 '''
-#when modifying image, need to create image container to hold new image
+'''#when modifying image, need to create image container to hold new image
 #need to convert image to binary and greyscale before contour search can begin
 image=cv.LoadImage("test2.jpg")
 clone=cv.CloneImage(image)
@@ -69,4 +69,23 @@ storage = cv.CreateMemStorage(0)
 contours = cv.FindContours (grey, storage, method = cv.CV_CHAIN_APPROX_SIMPLE)
 cv.DrawContours(grey, contours, 0, cv.RGB(255, 0, 0),0)
 cv.ShowImage("test",grey)
+cv.WaitKey(0)'''
+image=cv.LoadImage("test.jpg")
+hue=cv.CreateImage(cv.GetSize(image),8,1)
+sat=cv.CreateImage(cv.GetSize(image),8,1)
+val=cv.CreateImage(cv.GetSize(image),8,1)
+hsv=cv.CreateImage(cv.GetSize(image),8,3)
+cv.CvtColor(image,hsv,cv.CV_RGB2HSV)
+cv.Split(hsv, hue, sat, val, None)
+thresholded = cv.CreateImage(cv.GetSize(image), cv.IPL_DEPTH_8U, 1)
+hsv_min = cv.Scalar(0, 105, 255)
+hsv_max = cv.Scalar(255, 255, 255)
+cv.InRangeS(hsv, (0, 105, 255), (140, 255, 255), thresholded)
+#cv.InRangeS(hsv, hsv_min, hsv_max, thresholded)
+#canny=cv.CreateImage(cv.GetSize(image),8,1)
+#cv.Canny (image, canny, 100, 255)
+#cv.NamedWindow("test")
+#cv.ShowImage("test",canny)
+cv.ShowImage("test",hsv)
+cv.ShowImage("test1",thresholded)
 cv.WaitKey(0)

@@ -48,11 +48,11 @@ class VisionSystem(threading.Thread):
         cv.Rectangle(image1,center,centerEnd,(0,0,255),1,0)
         #threshold for ball detection
         #add detector box and update last seen coordinate
-        #if minResult<=TEMPLATE_MATCH_THRESHOLD:
-        cv.Rectangle(image1,(x,y),(x2,y2),(255,0,0),1,0)
-        xdist=x-image1.width/float(2)
-        ydist=image1.height/float(2)-y
-        self.targetLocationsFromCenter[self.target]=(xdist,ydist)
+        if minResult<=TEMPLATE_MATCH_THRESHOLD:
+            cv.Rectangle(image1,(x,y),(x2,y2),(255,0,0),1,0)
+            xdist=x-image1.width/float(2)
+            ydist=image1.height/float(2)-y
+            self.targetLocationsFromCenter[self.target]=(xdist,ydist)
         return image1
     def getTargetDistFromCenter(self):
         return self.targetLocationsFromCenter[self.target]
