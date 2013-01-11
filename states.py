@@ -34,6 +34,7 @@ class State:
         raise NotImplementedError
     def run(self):
         print "Running ",self.__class__.__name__
+        print "Init action ",self.action.__name__
         #check if there's an obstacle. If so, avoid it
         action_instance=self.action(self.wrapper)
         self.wrapper.time=time.time()
