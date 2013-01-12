@@ -4,7 +4,8 @@ import serial
 import scipy
 import time
 import threading
-TEMPLATE_MATCH_THRESHOLD=5562633.0
+TEMPLATE_MATCH_THRESHOLD=25000
+#image dimensions from webcam are: 640x480
 #NOTE: This code is still in development stages and commenting has not been completed.
 '''Team 12 MASLAB 2013 Vision System API designed to locate certain objects
 and command the robot to move towards them'''
@@ -12,16 +13,39 @@ class VisionSystem(threading.Thread):
     '''Initialization method that creates the
         camera object and initializes Thread data'''
     def __init__(self,target):
-        self.capture = cv.CaptureFromCAM(0) #camera object
+        self.capture = cv.CaptureFromCAM(1) #camera object
         self.target=target
         self.active=True
-        self.targets={"redBall":cv.LoadImage("redBallTemplate.jpg"),"greenBall":cv.LoadImage("greenBallTemplate.jpg"),"pyramidTopTemplate":cv.LoadImage("pyramidTopTemplate.jpg")}
-        self.targetLocationsFromCenter={"redBall":None,"greenBall":None,"pyramidTopTemplate":None}
+        self.targets={"redBall":((0,180,250),(25,255,255))}
+        self.targetLocations={"redBall":None,"greenBall":None,"pyramidTopTemplate":None}
         #call super class init method and bind to instance
         threading.Thread.__init__(self)
 
-    def processImage(self):
-        pass
+    def processImage(self,image):
+        #clone image so that we do not tamper with original
+        clone=cv.CloneImage(image)
+        #blurrs image to reduce color noise
+        blurred=cv.Smooth(clone,clone,cv.CV_BLUR, 3)
+        #converts image to hsv
+        hsv=cv.CreateImage(cv.GetSize(clone),8,3)
+        cv.CvtColor(clone,hsv,cv.CV_BGR2HSV)
+        #threshold image to get only color we want
+        thresholded=cv.CreateImage(cv.GetSize(hsv),8,1)
+        lowerBound,upperBound=self.targets[self.target]
+        cv.InRangeS(hsv,lowerBound,upperBound,thresholded)
+        return thresholded   
+    def findMomentsAndArea(self,image):
+        mat=cv.GetMat(image)
+        moments=cv.Moments(mat)
+        area=cv.GetCentralMoment(moments,0,0)
+        return (moments,area)
+    def findCenterOfMass(self,moments,area):
+        if area>0:
+            x = int(cv.GetSpatialMoment(moments, 1, 0)/area) 
+            y = int(cv.GetSpatialMoment(moments, 0, 1)/area)
+            return (x,y)
+        else:
+            return (None,None)
     '''
     This method locates a desired target in an image.
     @param image- an cv image file, ascertained by doing cv.LoadImage("example.jpg")
@@ -29,31 +53,31 @@ class VisionSystem(threading.Thread):
     around the center of the image
     '''
     def findTarget(self,image):
+        image=cv.CloneImage(image)
         #reset
-        self.targetLocationsFromCenter[self.target]=None
-        #rename image variable
-        image1=image
-        template=self.targets[self.target]
-        width = abs(image1.width - template.width)+1
-        height = abs(image1.height - template.height)+1
-        result_image = cv.CreateImage((width, height), cv.IPL_DEPTH_32F, 1)
-        cv.Zero(result_image)
-        cv.MatchTemplate(image1, template,result_image,cv.CV_TM_SQDIFF)
-        result= cv.MinMaxLoc(result_image)
-        (x,y)=result[2]
-        minResult=result[0]
-        (x2,y2)=(x+template.width,y+template.height)
-        center=(int(image1.width/float(2)),int(image1.height/float(2)))
-        centerEnd=(int(image1.width/float(2)+template.width),int(image1.height/float(2)+template.height))
-        cv.Rectangle(image1,center,centerEnd,(0,0,255),1,0)
-        #threshold for ball detection
-        #add detector box and update last seen coordinate
-        if minResult<=TEMPLATE_MATCH_THRESHOLD:
-            cv.Rectangle(image1,(x,y),(x2,y2),(255,0,0),1,0)
-            xdist=x-image1.width/float(2)
-            ydist=image1.height/float(2)-y
-            self.targetLocationsFromCenter[self.target]=(xdist,ydist)
-        return image1
+        self.targetLocations[self.target]=None
+        #process image
+        processedImage=self.processImage(image)
+        moments,area=self.findMomentsAndArea(processedImage)
+        (x,y)=self.findCenterOfMass(moments,area)
+        #find center of image
+        length=10
+        centerX,centerY=(int(image.width/float(2)),int(image.height/float(2)))
+        center=(centerX-length,centerY-length)
+        centerEnd=(centerX+length,centerY+length)
+        cv.Rectangle(image,center,centerEnd,(0,0,255),1,0)
+        cv.ShowImage("t1",processedImage)
+        if TEMPLATE_MATCH_THRESHOLD>25000 and (x,y)!=(None,None):
+            #create target find overlay
+            overlay = cv.CreateImage(cv.GetSize(image), 8, 3)
+            cv.Circle(overlay, (x, y), 2, (0, 0, 255), 20) 
+            cv.Add(image, overlay, image) 
+            #set internal variable of ball location from center point
+            xdist=x-image.width/float(2)
+            ydist=image.height/float(2)-y
+            self.targetLocationsFromCenter[self.target]=((xdist,ydist),area)
+            #cv.Merge(processedImage, None, None, None, image)
+        return image
     def getTargetDistFromCenter(self):
         return self.targetLocationsFromCenter[self.target]
     def changeTarget(self,target):
@@ -71,7 +95,8 @@ class VisionSystem(threading.Thread):
             #print self.getTargetDistFromCenter()
             image=cv.QueryFrame(self.capture)
             image1=self.findTarget(image)
-            cv.ShowImage('Tracker',image1)
+            cv.ShowImage('Tracker',image)
+            cv.ShowImage('Tracker1',image1)
             key=cv.WaitKey(2)
             if key==27:
                 print "Stopping Vision System"
@@ -82,8 +107,3 @@ class VisionSystem(threading.Thread):
 if __name__=="__main__":
     test=VisionSystem("redBall")
     test.start() 
-#test.changeTarget("greenBall")
-#time.sleep(10)
-#test.changeTarget("pyramidTopTemplate")
-#time.sleep(10)
-#test.stop()
