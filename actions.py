@@ -79,8 +79,6 @@ class ForwardToBall(Action):#or GoForward
         #self.wrapper.right_motor.setSpeed(0)
         #self.wrapper.left_motor.setSpeed(0)
     def loop(self):
-        while True:
-            pass
         print "looping ",self.__class__.__name__
         dist=self.wrapper.vs.getTargetDistFromCenter()
         if dist==None:
