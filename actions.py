@@ -17,6 +17,7 @@ class Action:
         self.run()
         b=method()
         while not b:
+            print time.time()
             self.loop()
             b=method()
         #exit state
