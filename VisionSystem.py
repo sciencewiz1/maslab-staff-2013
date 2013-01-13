@@ -80,7 +80,7 @@ class VisionSystem(threading.Thread):
             print self.targetLocations[self.target]
         return image
     def getTargetDistFromCenter(self):
-        return self.targetLocationsFromCenter[self.target]
+        return self.targetLocations[self.target]
     def changeTarget(self,target):
         self.target=target
     def stop(self):
