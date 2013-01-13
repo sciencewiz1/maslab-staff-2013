@@ -67,7 +67,7 @@ class VisionSystem(threading.Thread):
         centerEnd=(centerX+length,centerY+length)
         cv.Rectangle(image,center,centerEnd,(0,0,255),1,0)
         cv.ShowImage("t1",processedImage)
-        if TEMPLATE_MATCH_THRESHOLD>25000 and (x,y)!=(None,None):
+        if area>TEMPLATE_MATCH_THRESHOLD and (x,y)!=(None,None):
             #create target find overlay
             overlay = cv.CreateImage(cv.GetSize(image), 8, 3)
             cv.Circle(overlay, (x, y), 2, (0, 0, 255), 20) 
@@ -75,8 +75,9 @@ class VisionSystem(threading.Thread):
             #set internal variable of ball location from center point
             xdist=x-image.width/float(2)
             ydist=image.height/float(2)-y
-            self.targetLocationsFromCenter[self.target]=((xdist,ydist),area)
-            #cv.Merge(processedImage, None, None, None, image)
+            self.targetLocations[self.target]=((xdist,ydist),area)
+            cv.Merge(processedImage, None, None, None, image)
+            print self.targetLocations[self.target]
         return image
     def getTargetDistFromCenter(self):
         return self.targetLocationsFromCenter[self.target]
