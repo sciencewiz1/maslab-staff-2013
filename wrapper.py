@@ -45,7 +45,7 @@ class Wrapper:
         dist=self.vs.getTargetDistFromCenter()
         if dist== None:
             return 0
-        return (math.fabs(dist[0])<=CENTER_THRESHOLD)
+        return (math.fabs(dist[0][0])<=CENTER_THRESHOLD)
     '''return array of coordinates of balls'''
     def ballCoordinates(self):
         return self.vs.getTargetDistFromCenter()

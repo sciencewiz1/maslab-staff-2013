@@ -105,10 +105,10 @@ class TurnAndLook(State):
                 self.action=TurnLeft
             else:
                 self.action=TurnRight        
-        elif dist[0]>=0:
+        elif dist[0][0]>=0:
             print "see ball to right"
             self.action=TurnRight
-        elif dist[0]<0:
+        elif dist[0][0]<0:
             print "see ball to left"
             self.action=TurnLeft
         #Maybe change to *randomly* (or intelligently choose between)
