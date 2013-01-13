@@ -95,7 +95,7 @@ class TurnAndLook(State):
         #    if math.fabs(
         #
         #
-        elif time.time() > self.wrapper.time+360*TURN_SPEED:
+        elif time.time() > self.wrapper.time+360/TURN_SPEED:
             print "now go wander"
             return Wander
             #turned 360, no balls in sight
@@ -113,6 +113,8 @@ class ApproachBall(State):
         #Change to ForwardToBall
         self.action=ForwardToBall
     def stopfunction(self):
+        if self.wrapper.vs.close():
+            return CaptureBall
         if self.wrapper.ballCentered():
             return 0
             #still going after ball

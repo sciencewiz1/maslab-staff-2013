@@ -66,8 +66,8 @@ class IRModule(threading.Thread):
     def run(self):
         while True:
             self.ir_val = self.ir.getValue()
-            f.write(str(self.ir_val))
-            f.write('\n')
+            self.f.write(str(self.ir_val))
+            self.f.write('\n')
             #print self.ir_val
             time.sleep(0.1)
             #get one measurement every .1 second
