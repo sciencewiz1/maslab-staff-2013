@@ -1,6 +1,7 @@
 from constants import *
 from wrapper import PIDController
 import math
+import time
 
 """An action is a basic movement. It consists of 2 methods:
 run: what to do at the beginning of an action (ex. set the motors to go forward)
@@ -18,6 +19,10 @@ class Action:
         b=method()
         while not b:
             print time.time()
+            if time.time()-self.wrapper.start_time>=STOP_TIME:
+                return Stop
+#            if time.time()-self.wrapper.start_time>=WALL_TIME:
+#                self.wrapper.mode=WALL_MODE
             self.loop()
             b=method()
         #exit state
@@ -95,3 +100,59 @@ class ForwardToBall(Action):#or GoForward
         self.wrapper.left_motor.setSpeed(new_left_speed)
         self.wrapper.right_motor.setSpeed(new_right_speed)
         #sleep(0.1)
+
+class DoNothing(Action):
+    def run(self):
+        self.wrapper.left_motor.setSpeed(0)
+        self.wrapper.right_motor.setSpeed(0)
+    def loop(self):
+        print "looping ",self.__class__.__name__, time.time()
+
+"""A state of the state machine.
+wrapper: States ALWAYS pass the wrapper on to the next state. The wrapper
+includes the arduino I/O and any other miscellaneous bits of data.
+
+action: Basic action associated with state
+
+stopfunction: Given the current wrapper state, return the next state if we
+should transition, otherwise return false=0
+Needs to be implemented in subclasses
+
+The default behavior of the state is just initialize the action and then keep
+doing it until stopfunction returns true.
+All you need to specify in a subclass is the action and the stopfunction,
+unless you want to override the default behavior.
+"""
+class State:
+    def __init__(self,wrap,mode=0):
+        #create a wrapper for arduino that handles all I/O
+        self.wrapper=wrap
+        self.mode=mode
+        self.action=None
+    def run(self):
+        raise NotImplementedError
+    """Return false=0 if keep going, and the next state if transitioning
+    (stopfunction is really equivalent to 'next'.)
+    """
+    def stopfunction(self):
+        raise NotImplementedError
+    def run(self):
+        if DEBUG:
+            print "Running ",self.__class__.__name__
+            print "Init action ",self.action.__name__
+        #check if there's an obstacle. If so, avoid it
+        action_instance=self.action(self.wrapper)
+        self.wrapper.time=time.time()
+        #stopfunction returns the transition
+        next_state = action_instance.start(self.stopfunction)
+        return next_state(self.wrapper)     
+
+    
+class Stop(State):
+    def __init__(self,wrap):
+        State.__init__(self,wrap)
+        self.action=DoNothing
+    def run(self):
+        self.wrapper.vs.stop()
+    def stopfunction(self):
+        return 0

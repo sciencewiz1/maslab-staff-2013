@@ -4,46 +4,8 @@ from actions import *
 from wrapper import *
 from random import *
 import math
+from distance_calculations import *
 
-"""A state of the state machine.
-wrapper: States ALWAYS pass the wrapper on to the next state. The wrapper
-includes the arduino I/O and any other miscellaneous bits of data.
-
-action: Basic action associated with state
-
-stopfunction: Given the current wrapper state, return the next state if we
-should transition, otherwise return false=0
-Needs to be implemented in subclasses
-
-The default behavior of the state is just initialize the action and then keep
-doing it until stopfunction returns true.
-All you need to specify in a subclass is the action and the stopfunction,
-unless you want to override the default behavior.
-"""
-class State:
-    def __init__(self,wrap,mode=0):
-        #create a wrapper for arduino that handles all I/O
-        self.wrapper=wrap
-        self.mode=mode
-        self.action=None
-    def run(self):
-        raise NotImplementedError
-    """Return false=0 if keep going, and the next state if transitioning
-    (stopfunction is really equivalent to 'next'.)
-    """
-    def stopfunction(self):
-        raise NotImplementedError
-    def run(self):
-        print "Running ",self.__class__.__name__
-        print "Init action ",self.action.__name__
-        #check if there's an obstacle. If so, avoid it
-        action_instance=self.action(self.wrapper)
-        self.wrapper.time=time.time()
-        #stopfunction returns the transition
-        print "trying to start next state"
-        next_state = action_instance.start(self.stopfunction)
-        print "started state"
-        return next_state(self.wrapper)    
 
 class Wander(State):
     def __init__(self,wrap):
@@ -81,6 +43,12 @@ class AvoidWall(State):
         #Maybe change to *randomly* (or intelligently choose between)
         #turn left or right
     def stopfunction(self):
+        if self.wrapper.ir_module.ir_val >=IR_THRESHOLD2:
+            return Stuck
+        #I'm not too sure about this.
+        #Be careful of robot trying to get an inaccessible ball
+        if self.wrapper.see():
+            return TurnAndLook
         if self.wrapper.ir_module.ir_val <IR_THRESHOLD:
             return Wander
             #far enough away, stop turning
@@ -93,29 +61,32 @@ class AvoidWall(State):
 
 class TurnAndLook(State):
     def __init__(self,wrap):
-        print "init turn and look"
+        #print "init turn and look"
         State.__init__(self,wrap)
         #if ball is to the right
-        #ATOMIC this
         dist=wrap.vs.getTargetDistFromCenter()
         print "dist ",dist
         if dist==None:
-            print "don't see ball"
+            if DEBUG:
+                print "don't see ball"
             if randint(0,1)==0:
                 self.action=TurnLeft
             else:
                 self.action=TurnRight        
-        elif dist[0][0]>=0:
-            print "see ball to right"
+        elif dist[0]>=0:
+            if DEBUG:
+                print "see ball to right"
             self.action=TurnRight
-        elif dist[0][0]<0:
-            print "see ball to left"
+        elif dist[0]<0:
+            if DEBUG:
+                print "see ball to left"
             self.action=TurnLeft
         #Maybe change to *randomly* (or intelligently choose between)
         #turn left or right
     def stopfunction(self):
         if self.wrapper.ballCentered():
-            print "centered ball, approach!"
+            if DEBUG:
+                print "centered ball, approach!"
             return ApproachBall
             #found ball
         #
@@ -128,6 +99,7 @@ class TurnAndLook(State):
             print "now go wander"
             return Wander
             #turned 360, no balls in sight
+            #log the IR readings during turning.
             #in the future, should probably change direction
             #for instance, have a TurnTowardsOpen state.
         else:
@@ -163,9 +135,15 @@ class Stuck(State):
         return 0
         #keep turning
     
-#not yet implemented
 class CaptureBall(State):
-    pass
+    def __init__(self,wrap):
+        State.__init__(self,wrap)
+        self.action=GoForward
+    def stopfunction(self):
+        if time.time() > self.wrapper.time+2:
+            return TurnAndLook
+        return 0
+        #keep capturing
 
 #not yet implemented
 class HitPyramidWall(State):
@@ -174,5 +152,4 @@ class HitPyramidWall(State):
 #not yet implemented
 class RealignPyramid(State):
     pass
-    
-    
+

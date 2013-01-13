@@ -28,7 +28,8 @@ class Wrapper:
         self.mode=BALL_MODE
         self.color=RED
         #last time logged
-        self.time=time.time()
+        self.start_time=time.time()
+        self.time=self.start_time
         #image processor here
         print "init vision system"
         self.vs=VisionSystem("redBall")
@@ -37,6 +38,10 @@ class Wrapper:
         print "started"
         #when turn 360, get IR data (useful for mapping)
         self.ir360={}
+        #start timer
+        self.wt=WallTimer(self)
+        self.wt.start()
+#        self.active=True
     #does it see a ball?
     def see(self):
         print "ball at ",self.vs.getTargetDistFromCenter()
@@ -57,9 +62,12 @@ class IRModule(threading.Thread):
         super(IRModule, self).__init__()
         self.ir_val=0
         self.ir=ir2
+        self.f=open('ir_log.txt','w')
     def run(self):
         while True:
             self.ir_val = self.ir.getValue()
+            f.write(str(self.ir_val))
+            f.write('\n')
             #print self.ir_val
             time.sleep(0.1)
             #get one measurement every .1 second
@@ -95,3 +103,16 @@ class PIDController:
         self.last_time=current_time
         self.last_error=error
         return output
+
+'''Will raise a flag when it's time to abandon balls and go for the wall to score.
+(If there are other flags to be raised at certain times, I can abstractify this more.
+'''
+class WallTimer(threading.Thread):
+    def __init__(self,wrapper):
+        #IR value
+        super(WallTimer, self).__init__()
+        self.wrapper=wrapper
+    def run(self):
+        while time.time()<self.wrapper.start_time+WALL_TIME:
+            print time.time()-self.wrapper.start_time
+        self.wrapper.mode=WALL_MODE
