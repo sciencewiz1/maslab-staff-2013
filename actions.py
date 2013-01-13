@@ -71,18 +71,22 @@ class TurnRight(Action):
         print "looping ",self.__class__.__name__
 
 class ForwardToBall(Action):#or GoForward
-    def __init__(self):
-        Action.__init__(self)
+    def __init__(self,wrapper):
+        Action.__init__(self,wrapper)
         self.controller=PIDController(TURN_KP,TURN_KI,TURN_KD)
     def run(self):
         pass
+        #self.wrapper.right_motor.setSpeed(0)
+        #self.wrapper.left_motor.setSpeed(0)
     def loop(self):
+        while True:
+            pass
         print "looping ",self.__class__.__name__
-        dist=wrapper.vs.getTargetDistanceFromCenter()
+        dist=self.wrapper.vs.getTargetDistFromCenter()
         if dist==None:
             return
             #this will exit the ApproachBallState: lost the ball:`(
-        adjust=self.controller.adjust(self.wrapper.vs.getTargetDistanceFromCenter()/8)
+        adjust=self.controller.adjust(dist[0]/8)
         new_left_speed=LEFT_FORWARD+adjust
         #scale so speeds <=126
         multiplier=max(math.fabs(new_left_speed/126.0),1)
@@ -91,4 +95,4 @@ class ForwardToBall(Action):#or GoForward
         print "L/R speeds: ",new_left_speed,new_right_speed
         self.wrapper.left_motor.setSpeed(new_left_speed)
         self.wrapper.right_motor.setSpeed(new_right_speed)
-        sleep(0.1)
+        #sleep(0.1)

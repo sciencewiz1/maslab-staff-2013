@@ -77,21 +77,21 @@ class PIDController:
         self.kd=kd
         self.integral=0
         self.last_error=None
-        self.time=time.time()
+        self.last_time=time.time()
         #self.input_method=input_method
         #self.wrapper=wrapper
     def adjust(self,error):
         if self.last_error==None:
-            last_error=error
+            self.last_error=error
         current_time=time.time()
         #error=desired-actual
         #numerically integrate using trapezoidal rule
-        self.integral+=.5*(last_error+error)
+        self.integral+=.5*(self.last_error+error)
         print "error= ",error
-        print "integral= ",integral
-        print "derivative= ",derivative
-        output=kp*(self.desired-self.actual)+ki*self.integral+\
-                kd*(self.error-self.last_error)/(current_time-time)
-        time=current_time
+        print "integral= ",self.integral
+        print "derivative= ",self.kd*(error-self.last_error)/(current_time-self.last_time)
+        output=self.kp*(error)+self.ki*self.integral+\
+                self.kd*(error-self.last_error)/(current_time-self.last_time)
+        self.last_time=current_time
         self.last_error=error
         return output

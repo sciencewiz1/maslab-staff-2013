@@ -3,6 +3,7 @@ from constants import *
 from actions import *
 from wrapper import *
 from random import *
+import math
 
 """A state of the state machine.
 wrapper: States ALWAYS pass the wrapper on to the next state. The wrapper
@@ -49,6 +50,9 @@ class Wander(State):
         State.__init__(self,wrap)
         self.action=GoForward
     def stopfunction(self):
+        #
+        #return Wander
+        #
         if self.wrapper.ir_module.ir_val >=IR_THRESHOLD2:
         #way too close, back up
             return Stuck
@@ -80,7 +84,7 @@ class AvoidWall(State):
         if self.wrapper.ir_module.ir_val <IR_THRESHOLD:
             return Wander
             #far enough away, stop turning
-        elif time.time() > self.wrapper.time+270*TURN_SPEED:
+        elif time.time() > self.wrapper.time+180*TURN_SPEED:
             return Wander
             #timeout, stop turning
         else:
@@ -114,6 +118,12 @@ class TurnAndLook(State):
             print "centered ball, approach!"
             return ApproachBall
             #found ball
+        #
+        #dist=self.wrapper.vs.getTargetDistFromCenter
+        #if dist != None:
+        #    if math.fabs(
+        #
+        #
         elif time.time() > self.wrapper.time+360*TURN_SPEED:
             print "now go wander"
             return Wander
