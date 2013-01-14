@@ -16,7 +16,7 @@ HUE_THRESHOLD=25
 #saturation-how much mixed with white
 #value-how much mixed with black
 #NOTE: This code is still in development stages and commenting has not been completed.
-class VisionSystemApp(Frame):
+class VisionSystemApp(Frame,threading.Thread):
     def __init__(self,target):
         #set main instance variables
         self.master=Tk()
@@ -28,12 +28,15 @@ class VisionSystemApp(Frame):
         self.master.protocol('WM_DELETE_WINDOW',self.exitMain)
         #call super class methods
         Frame.__init__(self,self.master)
+        threading.Thread.__init__(self)
         self.pack()
         self.createWidgets()
         self.setPresets()
         #start the threads and the application mainloop
         #start threads BEFORE mainloop
         self.vision.start()
+        self.start()
+    def run(self):
         self.mainloop()
     def createWidgets(self):
         self.mainLabel=Label(self, text="Ball Detection Callibration")
