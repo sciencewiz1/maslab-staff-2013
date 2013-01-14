@@ -120,7 +120,7 @@ class ApproachBall(State):
         #Change to ForwardToBall
         self.action=ForwardToBall
     def stopfunction(self):
-        if self.wrapper.vs.close():
+        if self.wrapper.vs.isClose():
             return CaptureBall
         if self.wrapper.ballCentered():
             return 0

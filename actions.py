@@ -161,6 +161,6 @@ class Stop(State):
         self.action=DoNothing
         self.wrapper.vs.stop()
         '''!!!!!!'''
-#        self.wrapper.roller_motor.setSpeed(0)
+        self.wrapper.roller_motor.setSpeed(0)
     def stopfunction(self):
         return 0

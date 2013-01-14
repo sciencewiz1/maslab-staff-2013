@@ -41,9 +41,9 @@ CENTER_THRESHOLD=200
 #motor speed is -126 to 126
 TURN_KP = 1
 #in units of (motor speed)/(angle in degrees*s)
-TURN_KI = 0
+TURN_KI = .2
 #in units of (motor speed s)/(angle in degrees)
-TURN_KD = 0
+TURN_KD = .1
 
 
 #angle in degrees between straight forward and furthest right the camera can see
