@@ -178,9 +178,6 @@ class VisionSystem(threading.Thread):
     def findTarget(self,image):
          #3 in away=3386655.0 pixel area
         image=cv.CloneImage(image)
-        #reset
-        previous=self.getTargetDistFromCenter()
-        self.targetLocations[self.target]=None
         #process image
         processedImage=self.processImage(image)
         moments,area=self.findMomentsAndArea(processedImage)
