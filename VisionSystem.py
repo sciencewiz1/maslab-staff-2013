@@ -126,7 +126,7 @@ class VisionSystem(threading.Thread):
         self.capture = cv.CaptureFromCAM(1) #camera object
         self.target=target
         self.active=True
-        self.targets={"redBall":((0, 128, 79), (25, 255, 255)),"greenBall":((45, 150, 150), (90, 255, 255))}
+        self.targets={"redBall":((0, 128, 79), (25, 255, 255)),"greenBall":((45, 150, 36), (90, 255, 255))}
         self.calibrated=False
         self.targetLocations={"redBall":None,"greenBall":None,"pyramidTopTemplate":None}
         self.detectionThreshold=TEMPLATE_MATCH_THRESHOLD
@@ -258,7 +258,6 @@ class VisionSystem(threading.Thread):
             return "Camera Init Failed!"
         while self.active:
             if self.run_counter>=1 or self.override:
-                self.isClose()
                 #print self.targets[self.target]
                 #print self.getTargetDistFromCenter()
                 image=cv.QueryFrame(self.capture)
@@ -277,5 +276,5 @@ class VisionSystem(threading.Thread):
         cv.DestroyWindow("Tracker")
 
 if __name__=="__main__":
-    t=VisionSystemApp("redBall")
+    t=VisionSystemApp("greenBall")
 
