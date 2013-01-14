@@ -43,7 +43,7 @@ class Wrapper:
             string="greenBall"
         print string
         self.vs=VisionSystemApp(string).getVisionSystem()
-        self.vs=VisionSystem(string)
+        #self.vs=VisionSystem(string)
         print "starting vs"
         #self.vs.start()
         print "started"
@@ -105,7 +105,7 @@ class PIDController:
         current_time=time.time()
         #error=desired-actual
         #numerically integrate using trapezoidal rule
-        self.integral+=.5*(current_time-last_time)*(self.last_error+error)
+        self.integral+=.5*(current_time-self.last_time)*(self.last_error+error)
         print "error= ",error
         print "integral= ",self.integral
         print "derivative= ",self.kd*(error-self.last_error)/(current_time-self.last_time)
