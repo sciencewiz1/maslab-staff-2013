@@ -6,9 +6,9 @@ import time
 import threading
 import time
 from Tkinter import *
-TEMPLATE_MATCH_THRESHOLD=100
-CLOSE_THRESHOLD=3386655500.0
-VALUE_THRESHOLD=100
+TEMPLATE_MATCH_THRESHOLD=200
+CLOSE_THRESHOLD=20000.0
+VALUE_THRESHOLD=200
 SAT_THRESHOLD=100
 HUE_THRESHOLD=25
 #image dimensions from webcam are: 640x480
@@ -213,6 +213,7 @@ class VisionSystem(threading.Thread):
             if len(centers)!=0:
                 closest=max(centers)
                 areat,(x,y)=closest
+                print areat
                 xdist=x-image.width/float(2)
                 ydist=image.height/float(2)-y
                 self.targetLocations[self.target]=((xdist,ydist),leftExtreme,rightExtreme,areat)
@@ -230,7 +231,9 @@ class VisionSystem(threading.Thread):
             return False
         else:
             (x,y),left,right,area=sample
-            if area>=CLOSE_THRESHOLD:
+            (x1,y1)=left
+            if area>=CLOSE_THRESHOLD or y>=y1:
+                print "isClose"
                 return True
             else:
                 return False
@@ -248,6 +251,7 @@ class VisionSystem(threading.Thread):
             return "Camera Init Failed!"
         while self.active:
             if self.run_counter>=1 or self.override:
+                self.isClose()
                 #print self.targets[self.target]
                 #print self.getTargetDistFromCenter()
                 image=cv.QueryFrame(self.capture)
