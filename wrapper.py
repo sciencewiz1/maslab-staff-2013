@@ -19,7 +19,6 @@ class Wrapper:
         print "R motor"
         '''!!!!!!!'''
         self.roller_motor = arduino.Motor(ard, 5, 51, 11)
-        self.roller_motor.setSpeed(ROLLER_SIGN*126)
         #IR sensor
         self.ir_module=IRModule(arduino.AnalogInput(ard, 0))
         print "IR module"
@@ -28,8 +27,9 @@ class Wrapper:
         print "IR module running"
         #Run arduino (note this must be done after sensors are set up)
         ard.run()
+        self.roller_motor.setSpeed(ROLLER_SIGN*126)
         self.mode=BALL_MODE
-        self.color=RED
+        self.color=RED#change this when change color!!!
         #last time logged
         self.start_time=time.time()
         self.time=self.start_time
@@ -37,9 +37,13 @@ class Wrapper:
         print "init vision system"
         #self.vs=VisionSystem("redBall")
         '''!!!'''
-        self.vs=VisionSystemApp("redBall").getVisionSystem()
+        if self.color==RED:
+            string="redBall"
+        if self.color==GREEN:
+            string="greenBall"
+        self.vs=VisionSystemApp(string).getVisionSystem()
         print "starting vs"
-        self.vs.start()
+        #self.vs.start()
         print "started"
         #when turn 360, get IR data (useful for mapping)
         self.ir360={}
