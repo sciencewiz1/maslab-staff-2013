@@ -18,12 +18,18 @@ class Action:
         self.run()
         b=method()
         while not b:
-            print time.time()
+            print "time in action: ",time.time()
             if time.time()-self.wrapper.start_time>=STOP_TIME:
+                print "stopping"
                 return Stop
 #            if time.time()-self.wrapper.start_time>=WALL_TIME:
 #                self.wrapper.mode=WALL_MODE
+            print "calling loop"
             self.loop()
+            print "calling stopfunction"
+            print "method=",method
+            if method==None:
+                print "NONONONONONONO!"
             b=method()
         #exit state
         return b
@@ -91,7 +97,7 @@ class ForwardToBall(Action):#or GoForward
             return
             #this will exit the ApproachBallState: lost the ball:`(
         adjust=self.controller.adjust(dist[0][0]/8)
-        new_left_speed=LEFT_FORWARD+adjust
+        new_left_speed=LEFT_FORWARD+LEFT_SIGN*adjust
         #scale so speeds <=126
         multiplier=max(math.fabs(new_left_speed/126.0),1)
         new_left_speed=int(new_left_speed/multiplier)
@@ -129,8 +135,6 @@ class State:
         self.wrapper=wrap
         self.mode=mode
         self.action=None
-    def run(self):
-        raise NotImplementedError
     """Return false=0 if keep going, and the next state if transitioning
     (stopfunction is really equivalent to 'next'.)
     """
@@ -152,7 +156,6 @@ class Stop(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
         self.action=DoNothing
-    def run(self):
         self.wrapper.vs.stop()
     def stopfunction(self):
         return 0

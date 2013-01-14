@@ -44,7 +44,7 @@ class Wrapper:
 #        self.active=True
     #does it see a ball?
     def see(self):
-        print "ball at ",self.vs.getTargetDistFromCenter()
+        print "see ball at ",self.vs.getTargetDistFromCenter()
         return self.vs.getTargetDistFromCenter() != None
     def ballCentered(self):
         dist=self.vs.getTargetDistFromCenter()
@@ -114,5 +114,6 @@ class WallTimer(threading.Thread):
         self.wrapper=wrapper
     def run(self):
         while time.time()<self.wrapper.start_time+WALL_TIME:
-            print time.time()-self.wrapper.start_time
+            print "walltimer: ",time.time()-self.wrapper.start_time
+            time.sleep(1)
         self.wrapper.mode=WALL_MODE

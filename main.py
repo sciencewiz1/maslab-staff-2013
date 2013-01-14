@@ -20,12 +20,15 @@ class StateMachine:
         while True:
             #does whatever it's supposed to in this state and then transitions
             self.state=self.state.run()
+            print "SM next state"
             #repeat indefinitely
             #in the future add a timer, stop when time over threshold
 
 ard = arduino.Arduino()
 wrapper=Wrapper(ard)
-sm=StateMachine(wrapper)
-sm.runSM()
+#wrapper.left_motor.setSpeed(-68)
+#wrapper.right_motor.setSpeed(64)
+#sm=StateMachine(wrapper)
+#sm.runSM()
     
     

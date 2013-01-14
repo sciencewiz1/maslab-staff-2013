@@ -20,7 +20,7 @@ class VisionSystem(threading.Thread):
     '''Initialization method that creates the
         camera object and initializes Thread data'''
     def __init__(self,target):
-        self.capture = cv.CaptureFromCAM(1) #camera object
+        self.capture = cv.CaptureFromCAM(0) #camera object
         self.target=target
         self.active=True
         self.targets={"redBall":((0,150,150),(25,255,255))}
@@ -77,7 +77,7 @@ class VisionSystem(threading.Thread):
         image=cv.CloneImage(image)
         #reset
         previous=self.getTargetDistFromCenter()
-        self.targetLocations[self.target]=None
+        #self.targetLocations[self.target]=None #H
         #process image
         processedImage=self.processImage(image)
         moments,area=self.findMomentsAndArea(processedImage)

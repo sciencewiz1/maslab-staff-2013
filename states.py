@@ -22,6 +22,7 @@ class Wander(State):
         
         #see ball, stop wandering
         if self.wrapper.see():
+            print "sawball!"
             return TurnAndLook
         
         #close, turn left before you get way too close
@@ -84,10 +85,13 @@ class TurnAndLook(State):
         #Maybe change to *randomly* (or intelligently choose between)
         #turn left or right
     def stopfunction(self):
+        if DEBUG:
+            print "looping in (stopfunction of) ", self.__class__.__name__
         if self.wrapper.ballCentered():
             if DEBUG:
                 print "centered ball, approach!"
-            return ApproachBall
+            return ApproachBall #H
+            #return Stop#H
             #found ball
         #
         #dist=self.wrapper.vs.getTargetDistFromCenter
@@ -95,9 +99,10 @@ class TurnAndLook(State):
         #    if math.fabs(
         #
         #
-        elif time.time() > self.wrapper.time+360/TURN_SPEED:
+        if time.time() > self.wrapper.time+360/TURN_SPEED:
             print "now go wander"
-            return Wander
+            return Wander#H
+            #return TurnAndLook#H
             #turned 360, no balls in sight
             #log the IR readings during turning.
             #in the future, should probably change direction
@@ -118,7 +123,9 @@ class ApproachBall(State):
         if self.wrapper.ballCentered():
             return 0
             #still going after ball
+        print "ball not centered!"
         if self.wrapper.see():
+            print "still see ball, turn to face."
             return TurnAndLook
             #if you see the ball and it's not centered
         #if lose track of ball
