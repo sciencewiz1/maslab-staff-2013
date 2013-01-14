@@ -41,7 +41,7 @@ class Wrapper:
             string="redBall"
         if self.color==GREEN:
             string="greenBall"
-        self.vs=VisionSystemApp(string).getVisionSystem()
+        self.vs=VisionSystem(string)
         print "starting vs"
         #self.vs.start()
         print "started"
