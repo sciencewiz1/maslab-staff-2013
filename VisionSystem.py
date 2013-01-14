@@ -4,6 +4,8 @@ import serial
 import scipy
 import time
 import threading
+import time
+from Tkinter import *
 TEMPLATE_MATCH_THRESHOLD=100
 CLOSE_THRESHOLD=3386655500.0
 VALUE_THRESHOLD=100
@@ -14,31 +16,129 @@ HUE_THRESHOLD=25
 #saturation-how much mixed with white
 #value-how much mixed with black
 #NOTE: This code is still in development stages and commenting has not been completed.
+class VisionSystemApp(Frame):
+    def __init__(self,target):
+        #set main instance variables
+        self.master=Tk()
+        self.active=True
+        self.target=target
+        self.vision=VisionSystem(target)
+        self.default=self.vision.targets.copy()
+        self.master.title("Ball Tracker System")
+        self.master.protocol('WM_DELETE_WINDOW',self.exitMain)
+        #call super class methods
+        Frame.__init__(self,self.master)
+        self.pack()
+        self.createWidgets()
+        self.setPresets()
+        #start the threads and the application mainloop
+        #start threads BEFORE mainloop
+        self.vision.start()
+        self.mainloop()
+    def createWidgets(self):
+        self.mainLabel=Label(self, text="Ball Detection Callibration")
+        self.lowerLabel=Label(self, text="HSV Lower Bound")
+        self.upperLabel=Label(self, text="HSV Upper Bound")
+        self.hueLowerScale=Scale(self,from_=0,to=180, orient=HORIZONTAL,command=self.updateSliders, length=200)
+        self.satLowerScale=Scale(self,from_=0,to=255, orient=HORIZONTAL, command=self.updateSliders,length=200)
+        self.valueLowerScale=Scale(self,from_=0,to=255,orient=HORIZONTAL, command=self.updateSliders,length=200)
+        self.hueUpperScale=Scale(self,from_=0,to=180, orient=HORIZONTAL, command=self.updateSliders,length=200)
+        self.satUpperScale=Scale(self,from_=0,to=255, orient=HORIZONTAL, command=self.updateSliders,length=200)
+        self.valueUpperScale=Scale(self,from_=0,to=255,orient=HORIZONTAL, command=self.updateSliders,length=200)
+        self.defaults=Button(text="Reset To Defaults",command=self.reset)
+        self.override=Button(text="Override",command=self.override)
+        self.defaults.pack()
+        self.override.pack()
+        self.mainLabel.pack()
+        self.lowerLabel.pack()
+        self.hueLowerScale.pack()
+        self.satLowerScale.pack()
+        self.valueLowerScale.pack()
+        self.upperLabel.pack()
+        self.hueUpperScale.pack()
+        self.satUpperScale.pack()
+        self.valueUpperScale.pack()
+    def getVisionSystem(self):
+        return self.vision
+    def override(self):
+        self.vision.override=True
+    def reset(self):
+        (lower,upper)=self.default[self.target]
+        self.vision.targets[self.target]=(lower,upper)
+        (lH,lS,lV)=lower
+        self.hueLowerScale.set(lH)
+        self.satLowerScale.set(lS)
+        self.valueLowerScale.set(lV)
+        (hH,hS,hV)=upper
+        self.hueUpperScale.set(hH)
+        self.satUpperScale.set(hS)
+        self.valueUpperScale.set(hV)
+    def setPresets(self):
+        lower,upper=self.getBounds()
+        (lH,lS,lV)=lower
+        self.hueLowerScale.set(lH)
+        self.satLowerScale.set(lS)
+        self.valueLowerScale.set(lV)
+        (hH,hS,hV)=upper
+        self.hueUpperScale.set(hH)
+        self.satUpperScale.set(hS)
+        self.valueUpperScale.set(hV)
+    def updateSliders(self,val):
+        hueLower=self.hueLowerScale.get()
+        satLower=self.satLowerScale.get()
+        valLower=self.valueLowerScale.get()
+        lower=(hueLower,satLower,valLower)
+        self.changeLowerBound(lower)
+        hueUpper=self.hueUpperScale.get()
+        satUpper=self.satUpperScale.get()
+        valUpper=self.valueUpperScale.get()
+        upper=(hueUpper,satUpper,valUpper)
+        self.changeUpperBound(upper)
+    '''def setHueLower(self,val):
+    def setHueUpper(self,val):
+    def setSatLower(self,val):
+    def setSatUpper(self,val):
+    def setValLower(self,val):
+    def setValUpper(self,val):'''
+    def getBounds(self):
+        return self.vision.targets[self.vision.target]
+    def changeLowerBound(self,lower):
+        lowerOld,upper=self.getBounds()
+        self.vision.targets[self.vision.target]=(lower,upper)
+    def changeUpperBound(self,upper):
+        lower,upperOld=self.getBounds()
+        self.vision.targets[self.vision.target]=(lower,upper)
+    def exitMain(self):
+        self.active=False
+        self.vision.active=False
+        self.vision.join()
+        self.master.destroy()
+        self.master.quit()
 '''Team 12 MASLAB 2013 Vision System API designed to locate certain objects
 and command the robot to move towards them'''
 class VisionSystem(threading.Thread):
     '''Initialization method that creates the
         camera object and initializes Thread data'''
     def __init__(self,target):
-        self.capture = cv.CaptureFromCAM(0) #camera object
+        self.capture = cv.CaptureFromCAM(1) #camera object
         self.target=target
         self.active=True
-        self.targets={"redBall":((0,150,150),(25,255,255))}
+        self.targets={"redBall":((0, 128, 79), (25, 255, 255)),"greenBall":((45, 150, 150), (90, 255, 255))}
         self.calibrated=False
         self.targetLocations={"redBall":None,"greenBall":None,"pyramidTopTemplate":None}
         self.detectionThreshold=TEMPLATE_MATCH_THRESHOLD
-        #Holden
         self.run_counter=1
+        self.override=False
         #call super class init method and bind to instance
-        #self.calibrate()
         threading.Thread.__init__(self)
-    def calibrate(self):
-        pass
-        '''ideas:
-        1) modify saturation and value
-        2) find the combo that produces an area in the desired range
-        3) return that up through the recursion calls in the DP style of making mods
-        '''
+    def smIntegrate(self):
+        self.override=False
+    def letmerun(self):
+        self.run_counter+=1
+    def activate(self):
+        self.calibrated=True
+        self.active=True
+        print "calibrated"
     def processImage(self,image):
         #clone image so that we do not tamper with original
         clone=cv.CloneImage(image)
@@ -76,10 +176,11 @@ class VisionSystem(threading.Thread):
     around the center of the image
     '''
     def findTarget(self,image):
+         #3 in away=3386655.0 pixel area
         image=cv.CloneImage(image)
         #reset
         previous=self.getTargetDistFromCenter()
-        #self.targetLocations[self.target]=None #H
+        self.targetLocations[self.target]=None
         #process image
         processedImage=self.processImage(image)
         moments,area=self.findMomentsAndArea(processedImage)
@@ -94,7 +195,7 @@ class VisionSystem(threading.Thread):
         rightExtreme=(image.width,int(image.height/float(2)))
         #place center marker
         cv.Rectangle(image,center,centerEnd,(0,0,255),1,0)
-        cv.ShowImage("t1",processedImage)
+        cv.ShowImage("Ball Tracker Computer Vision",processedImage)
         if self.updateCheck((x,y),area):
             #create target find overlay
             overlay = cv.CreateImage(cv.GetSize(image), 8, 3)
@@ -119,18 +220,14 @@ class VisionSystem(threading.Thread):
                 ydist=image.height/float(2)-y
                 self.targetLocations[self.target]=((xdist,ydist),leftExtreme,rightExtreme,areat)
                 cv.Circle(overlay, (x,y), 2, (0, 0, 255), 20)
-                #cv.Circle(overlay,leftExtreme,2,(0,0,255),20)
-                #cv.Circle(overlay,rightExtreme,2,(0,0,255),20)
                 cv.Add(image, overlay, image)
                 cv.Merge(processedImage, None, None, None, image)
-                #print self.targetLocations[self.target]
-            #3 in away=3386655.0 pixel area
             else:
                 self.targetLocations[self.target]=None
         return image
     def getTargetDistFromCenter(self):
         return self.targetLocations[self.target]
-    def close(self):
+    def isClose(self):
         sample=self.targetLocations[self.target]
         if sample==None:
             return False
@@ -149,29 +246,28 @@ class VisionSystem(threading.Thread):
         print "Stopping Vision System"
     def run(self):
         print "Starting Vision System"
-        cv.NamedWindow("Tracker", 1 )
         if self.capture=="None":
             self.stop()
             return "Camera Init Failed!"
         while self.active:
-            #print "cv time=",time.time()
-            #print self.getTargetDistFromCenter()
-            if self.run_counter>=1:#Holden
-                print "cv time=",time.time()#Holden
+            if self.run_counter>=1 or self.override:
+                #print self.targets[self.target]
+                #print self.getTargetDistFromCenter()
                 image=cv.QueryFrame(self.capture)
+                #print "captured image"
+                #print time.time()
                 image1=self.findTarget(image)
-                cv.ShowImage('Tracker',image)
-                cv.ShowImage('Tracker1',image1)
-                self.run_counter-=1#Holden
-            key=cv.WaitKey(2)
-            if key==27:
-                print "Stopping Vision System"
-                self.active=False
-                break
+                #print "found targets"
+                cv.ShowImage('Ball Tracker Original',image)
+                cv.ShowImage('Ball Tracker Processed',image1)
+                if not self.override:
+                    self.run_counter-=1
+                cv.WaitKey(1)
+        print "Stopping Vision System"
+        #destroy capture 
+        del(self.capture)
         cv.DestroyWindow("Tracker")
-    def letmerun(self):
-        self.run_counter+=1
 
 if __name__=="__main__":
-    test=VisionSystem("redBall")
-    test.start() 
+    t=VisionSystemApp("redBall")
+
