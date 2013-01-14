@@ -27,6 +27,8 @@ class VisionSystem(threading.Thread):
         self.calibrated=False
         self.targetLocations={"redBall":None,"greenBall":None,"pyramidTopTemplate":None}
         self.detectionThreshold=TEMPLATE_MATCH_THRESHOLD
+        #Holden
+        self.run_counter=1
         #call super class init method and bind to instance
         #self.calibrate()
         threading.Thread.__init__(self)
@@ -152,17 +154,23 @@ class VisionSystem(threading.Thread):
             self.stop()
             return "Camera Init Failed!"
         while self.active:
+            #print "cv time=",time.time()
             #print self.getTargetDistFromCenter()
-            image=cv.QueryFrame(self.capture)
-            image1=self.findTarget(image)
-            cv.ShowImage('Tracker',image)
-            cv.ShowImage('Tracker1',image1)
+            if self.run_counter>=1:#Holden
+                print "cv time=",time.time()#Holden
+                image=cv.QueryFrame(self.capture)
+                image1=self.findTarget(image)
+                cv.ShowImage('Tracker',image)
+                cv.ShowImage('Tracker1',image1)
+                self.run_counter-=1#Holden
             key=cv.WaitKey(2)
             if key==27:
                 print "Stopping Vision System"
                 self.active=False
                 break
         cv.DestroyWindow("Tracker")
+    def letmerun(self):
+        self.run_counter+=1
 
 if __name__=="__main__":
     test=VisionSystem("redBall")

@@ -17,6 +17,9 @@ class Wrapper:
         #Right motor
         self.right_motor = arduino.Motor(ard, 6, 52, 12)
         print "R motor"
+        '''!!!!!!!'''
+#        self.roller_motor = arduino.Motor(ard, 5, 51, 11)
+#        self.roller_motor.setSpeed(ROLLER_SIGN*126)
         #IR sensor
         self.ir_module=IRModule(arduino.AnalogInput(ard, 0))
         print "IR module"

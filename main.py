@@ -26,7 +26,7 @@ class StateMachine:
 
 ard = arduino.Arduino()
 wrapper=Wrapper(ard)
-#wrapper.left_motor.setSpeed(-68)
+#wrapper.left_motor.setSpeed(-64)
 #wrapper.right_motor.setSpeed(64)
 sm=StateMachine(wrapper)
 sm.runSM()

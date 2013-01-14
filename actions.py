@@ -18,6 +18,9 @@ class Action:
         self.run()
         b=method()
         while not b:
+            self.wrapper.vs.letmerun()
+            '''Holden: this prevents vision code
+            from hogging time'''
             print "time in action: ",time.time()
             if time.time()-self.wrapper.start_time>=STOP_TIME:
                 print "stopping"
@@ -157,5 +160,7 @@ class Stop(State):
         State.__init__(self,wrap)
         self.action=DoNothing
         self.wrapper.vs.stop()
+        '''!!!!!!'''
+#        self.wrapper.roller_motor.setSpeed(0)
     def stopfunction(self):
         return 0
