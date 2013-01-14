@@ -43,6 +43,7 @@ class Wrapper:
             string="greenBall"
         print string
         self.vs=VisionSystemApp(string).getVisionSystem()
+        self.vs=VisionSystem(string)
         print "starting vs"
         #self.vs.start()
         print "started"
