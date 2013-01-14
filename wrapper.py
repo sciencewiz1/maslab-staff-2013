@@ -29,7 +29,7 @@ class Wrapper:
         ard.run()
         self.roller_motor.setSpeed(ROLLER_SIGN*126)
         self.mode=BALL_MODE
-        self.color=GREEN#change this when change color!!!
+        self.color=RED#change this when change color!!!
         #last time logged
         self.start_time=time.time()
         self.time=self.start_time

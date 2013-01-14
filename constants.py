@@ -1,5 +1,5 @@
 #IR threshold: what counts as "close"?
-IR_THRESHOLD = 200.0
+IR_THRESHOLD = 180.0
 #IR threshold: what counts as "too close"?
 IR_THRESHOLD2 = 300.0
 #when to go for the wall

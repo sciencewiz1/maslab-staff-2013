@@ -127,7 +127,7 @@ class VisionSystem(threading.Thread):
         self.capture = cv.CaptureFromCAM(CAMERA_NUM) #camera object
         self.target=target
         self.active=True
-        self.targets={"redBall":((0, 128, 79), (25, 255, 255)),"greenBall":((45, 150, 36), (90, 255, 255))}
+        self.targets={"redBall":((0, 128, 153), (15, 255, 255)),"greenBall":((45, 150, 36), (90, 255, 255))}
         self.calibrated=False
         self.targetLocations={"redBall":None,"greenBall":None,"pyramidTopTemplate":None}
         self.detectionThreshold=TEMPLATE_MATCH_THRESHOLD
@@ -277,5 +277,5 @@ class VisionSystem(threading.Thread):
         cv.DestroyWindow("Tracker")
 
 if __name__=="__main__":
-    t=VisionSystemApp("greenBall")
+    t=VisionSystemApp("redBall")
 
