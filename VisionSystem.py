@@ -19,24 +19,24 @@ HUE_THRESHOLD=25
 class VisionSystemApp(Frame,threading.Thread):
     def __init__(self,target):
         #set main instance variables
-        self.master=Tk()
         self.active=True
         self.target=target
         self.vision=VisionSystem(target)
         self.default=self.vision.targets.copy()
-        self.master.title("Ball Tracker System")
-        self.master.protocol('WM_DELETE_WINDOW',self.exitMain)
         #call super class methods
-        Frame.__init__(self,self.master)
         threading.Thread.__init__(self)
-        self.pack()
-        self.createWidgets()
-        self.setPresets()
         #start the threads and the application mainloop
         #start threads BEFORE mainloop
         self.vision.start()
         self.start()
     def run(self):
+        self.master=Tk()
+        self.master.title("Ball Tracker System")
+        self.master.protocol('WM_DELETE_WINDOW',self.exitMain)
+        Frame.__init__(self,self.master)
+        self.pack()
+        self.createWidgets()
+        self.setPresets()
         self.mainloop()
     def createWidgets(self):
         self.mainLabel=Label(self, text="Ball Detection Callibration")
