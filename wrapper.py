@@ -77,10 +77,11 @@ class IRModule(threading.Thread):
     def run(self):
         while True:
             self.ir_val = self.ir.getValue()
+            print "IR=",self.ir_val
             self.f.write(str(self.ir_val))
             self.f.write('\n')
             #print self.ir_val
-            time.sleep(0.1)
+            time.sleep(0.01)
             #get one measurement every .1 second
     def obstacleDistance(self):
         return Y_INTERCEPT+SLOPE*self.ir_val

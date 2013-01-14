@@ -6,6 +6,7 @@ import time
 import threading
 import time
 from Tkinter import *
+CAMERA_NUM=0
 TEMPLATE_MATCH_THRESHOLD=200
 CLOSE_THRESHOLD=20000.0
 VALUE_THRESHOLD=200
@@ -123,7 +124,7 @@ class VisionSystem(threading.Thread):
     '''Initialization method that creates the
         camera object and initializes Thread data'''
     def __init__(self,target):
-        self.capture = cv.CaptureFromCAM(1) #camera object
+        self.capture = cv.CaptureFromCAM(CAMERA_NUM) #camera object
         self.target=target
         self.active=True
         self.targets={"redBall":((0, 128, 79), (25, 255, 255)),"greenBall":((45, 150, 36), (90, 255, 255))}

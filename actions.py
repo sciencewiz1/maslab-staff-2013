@@ -162,5 +162,6 @@ class Stop(State):
         self.wrapper.vs.stop()
         '''!!!!!!'''
         self.wrapper.roller_motor.setSpeed(0)
+        self.wrapper.ir_module.f.close()
     def stopfunction(self):
         return 0

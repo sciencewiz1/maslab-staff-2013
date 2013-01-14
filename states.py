@@ -92,7 +92,8 @@ class TurnAndLook(State):
         if self.wrapper.ballCentered():
             if DEBUG:
                 print "centered ball, approach!"
-            return ApproachBall #H
+            return Pause
+            #return ApproachBall #H
             #return Stop#H
             #found ball
         #
@@ -155,6 +156,15 @@ class CaptureBall(State):
             return TurnAndLook
         return 0
         #keep capturing
+
+class Pause(State):
+    def __init__(self, wrap):
+        State.__init__(self,wrap)
+        self.action=DoNothing
+    def stopfunction(self):
+        if time.time()>self.wrapper.time+0.5:
+            return ApproachBall
+        return 0
 
 #not yet implemented
 class HitPyramidWall(State):

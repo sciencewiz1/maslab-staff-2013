@@ -1,11 +1,11 @@
 #IR threshold: what counts as "close"?
 IR_THRESHOLD = 200.0
 #IR threshold: what counts as "too close"?
-IR_THRESHOLD2 = 400.0
+IR_THRESHOLD2 = 300.0
 #when to go for the wall
 WALL_TIME = 120
 #when to stop (seconds)
-STOP_TIME = 180
+STOP_TIME = 30
 #for testing
 #check these signs
 LEFT_SIGN=-1
@@ -39,7 +39,7 @@ CENTER_THRESHOLD=200
 #exact later
 #in units of (motor speed)/(angle in degrees).
 #motor speed is -126 to 126
-TURN_KP = 1
+TURN_KP = .8
 #in units of (motor speed)/(angle in degrees*s)
 TURN_KI = .2
 #in units of (motor speed s)/(angle in degrees)
