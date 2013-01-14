@@ -36,6 +36,8 @@ class Wrapper:
         #image processor here
         print "init vision system"
         self.vs=VisionSystem("redBall")
+        '''!!!'''
+        #self.vs=VisionSystemApp("redBall").getVisionSystem()
         print "starting vs"
         self.vs.start()
         print "started"
