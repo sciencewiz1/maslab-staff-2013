@@ -4,9 +4,6 @@ from wrapper import *
 from actions import *
 from states import *
 
-"""Note: I created specific actions as subclasses of Action, though an
-alternative is to make objects of type Action"""
-
 class StateMachine:
     def __init__(self,wrap):
         #create a wrapper for arduino that handles all I/O
@@ -26,8 +23,8 @@ class StateMachine:
 
 ard = arduino.Arduino()
 wrapper=Wrapper(ard)
-#wrapper.left_motor.setSpeed(-64)
-#wrapper.right_motor.setSpeed(64)
+#wrapper.left_motor.setSpeed(LEFT_FORWARD)
+#wrapper.right_motor.setSpeed(RIGHT_FORWARD)
 sm=StateMachine(wrapper)
 sm.runSM()
     

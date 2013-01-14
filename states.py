@@ -12,10 +12,12 @@ class Wander(State):
         State.__init__(self,wrap)
         self.action=GoForward
     def stopfunction(self):
+        ir=self.wrapper.ir_module.getIRVal()
+        print "IR=",ir
         #
         #return Wander
         #
-        if self.wrapper.ir_module.ir_val >=IR_THRESHOLD2:
+        if ir >=IR_THRESHOLD2:
         #way too close, back up
             return Stuck
         #should change to bump sensor
@@ -26,7 +28,7 @@ class Wander(State):
             return TurnAndLook
         
         #close, turn left before you get way too close
-        if self.wrapper.ir_module.ir_val >=IR_THRESHOLD:
+        if ir >=IR_THRESHOLD:
             return AvoidWall
 
         #timeout
@@ -44,13 +46,15 @@ class AvoidWall(State):
         #Maybe change to *randomly* (or intelligently choose between)
         #turn left or right
     def stopfunction(self):
-        if self.wrapper.ir_module.ir_val >=IR_THRESHOLD2:
+        ir=self.wrapper.ir_module.getIRVal()
+        print "IR=",ir
+        if ir >=IR_THRESHOLD2:
             return Stuck
         #I'm not too sure about this.
         #Be careful of robot trying to get an inaccessible ball
         if self.wrapper.see():
             return TurnAndLook
-        if self.wrapper.ir_module.ir_val <IR_THRESHOLD:
+        if ir <IR_THRESHOLD:
             return Wander
             #far enough away, stop turning
         elif time.time() > self.wrapper.time+180*TURN_SPEED:

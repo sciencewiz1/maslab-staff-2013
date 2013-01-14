@@ -23,13 +23,13 @@ class Wrapper:
         self.ir_module=IRModule(arduino.AnalogInput(ard, 0))
         print "IR module"
         #start a thread that takes IR readings
-        self.ir_module.start()
+        #self.ir_module.start()
         print "IR module running"
         #Run arduino (note this must be done after sensors are set up)
         ard.run()
         self.roller_motor.setSpeed(ROLLER_SIGN*126)
         self.mode=BALL_MODE
-        self.color=RED#change this when change color!!!
+        self.color=GREEN#change this when change color!!!
         #last time logged
         self.start_time=time.time()
         self.time=self.start_time
@@ -67,22 +67,38 @@ class Wrapper:
         return self.vs.getTargetDistFromCenter()
 
 '''Module that records IR measurements'''
-class IRModule(threading.Thread):
+class IRModule():#(threading.Thread):
     def __init__(self,ir2):
         #IR value
-        super(IRModule, self).__init__()
+        #super(IRModule, self).__init__()
         self.ir_val=0
         self.ir=ir2
         self.f=open('ir_log.txt','w')
-    def run(self):
-        while True:
-            self.ir_val = self.ir.getValue()
-            print "IR=",self.ir_val
-            self.f.write(str(self.ir_val))
-            self.f.write('\n')
-            #print self.ir_val
-            time.sleep(0.01)
-            #get one measurement every .1 second
+        #self.read=False
+    #def reset(self):
+        #self.read=False
+    #def run(self):
+        #pass
+        #while True:
+        #    self.ir_val = self.ir.getValue()
+        #    self.read=True
+        #    print "IR=",self.ir_val
+        #    self.f.write(str(self.ir_val))
+        #    self.f.write('\n')
+        #    #print self.ir_val
+        #    #time.sleep(0.01)
+        #    #get one measurement every .1 second
+    def getIRVal(self, wait=False):
+        #if not wait:
+        #    return self.ir_val
+        #self.reset()
+        #while self.read==False:
+        #    pass
+        self.ir_val = self.ir.getValue()
+        self.f.write(str(self.ir_val))
+        self.f.write('\n')
+        print "IR=",self.ir_val
+        return self.ir_val
     def obstacleDistance(self):
         return Y_INTERCEPT+SLOPE*self.ir_val
 

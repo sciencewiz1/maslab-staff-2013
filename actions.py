@@ -10,6 +10,8 @@ An state initializes an action by passing it a method. When method return
 false, the action should continue.
 Otherwise, the action should terminate.
 """
+"""Note: I created specific actions as subclasses of Action, though an
+alternative is to make objects of type Action"""
 class Action:
     def __init__(self,wrapper):
         self.wrapper=wrapper
@@ -19,9 +21,14 @@ class Action:
         b=method()
         while not b:
             self.wrapper.vs.letmerun()
+            #print "time in action: ",time.time()
+            #ir_read=False#
+            #ir_read=self.wrapper.ir_module.reset()#
+            #while ir_read=False:#
+            #    ir_read=self.wrapper.read#
             '''Holden: this prevents vision code
             from hogging time'''
-            print "time in action: ",time.time()
+            #print "IR value read=", self.wrapper.ir_module.ir_val
             if time.time()-self.wrapper.start_time>=STOP_TIME:
                 print "stopping"
                 return Stop
@@ -30,9 +37,9 @@ class Action:
             print "calling loop"
             self.loop()
             print "calling stopfunction"
-            print "method="#,method
-            if method==None:
-                print "NONONONONONONO!"
+            #print "method=",method
+            #if method==None:
+            #    print "NONONONONONONO!"
             b=method()
         #exit state
         return b
@@ -65,9 +72,9 @@ class GoBack(Action):
 class TurnLeft(Action):
     def run(self):
         #tell right motor to go forward
-        self.wrapper.right_motor.setSpeed(RIGHT_FORWARD)
+        self.wrapper.right_motor.setSpeed(RIGHT_TURN)
         #tell left motor to go backwards
-        self.wrapper.left_motor.setSpeed(LEFT_BACK)
+        self.wrapper.left_motor.setSpeed(-LEFT_TURN)
         #sleep(1)
         #return Wander(self.wrapper)
     def loop(self):
@@ -77,9 +84,9 @@ class TurnLeft(Action):
 class TurnRight(Action):
     def run(self):
         #tell right motor to go backwards
-        self.wrapper.right_motor.setSpeed(RIGHT_BACK)
+        self.wrapper.right_motor.setSpeed(-RIGHT_TURN)
         #tell left right motor to go forward
-        self.wrapper.left_motor.setSpeed(LEFT_FORWARD)
+        self.wrapper.left_motor.setSpeed(LEFT_TURN)
         #sleep(1)
         #return Wander(self.wrapper)
     def loop(self):

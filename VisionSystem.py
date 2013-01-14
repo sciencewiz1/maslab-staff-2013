@@ -240,7 +240,7 @@ class VisionSystem(threading.Thread):
             (x1,y1)=left
             #print  (xAbs,yAbs)
             #print  (x1,y1)
-            if area>=CLOSE_THRESHOLD or yAbs>=y1:
+            if area>=CLOSE_THRESHOLD or yAbs>=(y1/float(2)):
                 #print "isClose"
                 return True
             else:
