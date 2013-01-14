@@ -27,7 +27,7 @@ class Action:
             print "calling loop"
             self.loop()
             print "calling stopfunction"
-            print "method=",method
+            print "method="#,method
             if method==None:
                 print "NONONONONONONO!"
             b=method()
