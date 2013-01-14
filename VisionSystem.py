@@ -120,7 +120,7 @@ class VisionSystem(threading.Thread):
     '''Initialization method that creates the
         camera object and initializes Thread data'''
     def __init__(self,target):
-        self.capture = cv.CaptureFromCAM(0) #camera object
+        self.capture = cv.CaptureFromCAM(1) #camera object
         self.target=target
         self.active=True
         self.targets={"redBall":((0, 128, 79), (25, 255, 255)),"greenBall":((45, 150, 150), (90, 255, 255))}
@@ -143,7 +143,8 @@ class VisionSystem(threading.Thread):
         #clone image so that we do not tamper with original
         clone=cv.CloneImage(image)
         #blurrs image to reduce color noise
-        blurred=cv.Smooth(clone,clone,cv.CV_BLUR, 3)
+        #cv.CV_BLUR, cv.CV_GAUSSIAN
+        blurred=cv.Smooth(clone,clone,cv.CV_GAUSSIAN, 3)
         #converts image to hsv
         hsv=cv.CreateImage(cv.GetSize(clone),8,3)
         cv.CvtColor(clone,hsv,cv.CV_BGR2HSV)
@@ -151,6 +152,7 @@ class VisionSystem(threading.Thread):
         thresholded=cv.CreateImage(cv.GetSize(hsv),8,1)
         lowerBound,upperBound=self.targets[self.target]
         cv.InRangeS(hsv,lowerBound,upperBound,thresholded)
+        #cv.Erode(thresholded, thresholded, None, 5)
         return thresholded   
     def findMomentsAndArea(self,image):
         mat=cv.GetMat(image)
@@ -213,10 +215,10 @@ class VisionSystem(threading.Thread):
             if len(centers)!=0:
                 closest=max(centers)
                 areat,(x,y)=closest
-                print areat
+                #print areat
                 xdist=x-image.width/float(2)
                 ydist=image.height/float(2)-y
-                self.targetLocations[self.target]=((xdist,ydist),leftExtreme,rightExtreme,areat)
+                self.targetLocations[self.target]=((xdist,ydist),(x,y), leftExtreme,rightExtreme,areat)
                 cv.Circle(overlay, (x,y), 2, (0, 0, 255), 20)
                 cv.Add(image, overlay, image)
                 cv.Merge(processedImage, None, None, None, image)
@@ -230,10 +232,12 @@ class VisionSystem(threading.Thread):
         if sample==None:
             return False
         else:
-            (x,y),left,right,area=sample
+            (xDiff,yDiff),(xAbs,yAbs), left,right,area=sample
             (x1,y1)=left
-            if area>=CLOSE_THRESHOLD or y>=y1:
-                print "isClose"
+            #print  (xAbs,yAbs)
+            #print  (x1,y1)
+            if area>=CLOSE_THRESHOLD or yAbs>=y1:
+                #print "isClose"
                 return True
             else:
                 return False
