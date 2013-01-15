@@ -20,26 +20,23 @@ class Action:
         self.run()
         b=method()
         while not b:
+            '''Holden: this prevents vision code
+            from hogging time'''
             self.wrapper.vs.letmerun()
             #print "time in action: ",time.time()
             #ir_read=False#
             #ir_read=self.wrapper.ir_module.reset()#
             #while ir_read=False:#
             #    ir_read=self.wrapper.read#
-            '''Holden: this prevents vision code
-            from hogging time'''
             #print "IR value read=", self.wrapper.ir_module.ir_val
             if time.time()-self.wrapper.start_time>=STOP_TIME:
                 print "stopping"
                 return Stop
 #            if time.time()-self.wrapper.start_time>=WALL_TIME:
 #                self.wrapper.mode=WALL_MODE
-            print "calling loop"
+#            print "calling loop"
             self.loop()
-            print "calling stopfunction"
-            #print "method=",method
-            #if method==None:
-            #    print "NONONONONONONO!"
+#            print "calling stopfunction"
             b=method()
         #exit state
         return b
@@ -87,6 +84,29 @@ class TurnRight(Action):
         self.wrapper.right_motor.setSpeed(-RIGHT_TURN)
         #tell left right motor to go forward
         self.wrapper.left_motor.setSpeed(LEFT_TURN)
+        #sleep(1)
+        #return Wander(self.wrapper)
+    def loop(self):
+        print "looping ",self.__class__.__name__
+
+class MaxTurnLeft(Action):
+    def run(self):
+        #tell right motor to go forward
+        self.wrapper.right_motor.setSpeed(MAX_RIGHT)
+        #tell left motor to go backwards
+        self.wrapper.left_motor.setSpeed(-MAX_LEFT)
+        #sleep(1)
+        #return Wander(self.wrapper)
+    def loop(self):
+        print "looping ",self.__class__.__name__
+#more sophisticated: can update wrapper with angle turned (using sensory input)
+
+class MaxTurnRight(Action):
+    def run(self):
+        #tell right motor to go backwards
+        self.wrapper.right_motor.setSpeed(-MAX_RIGHT)
+        #tell left right motor to go forward
+        self.wrapper.left_motor.setSpeed(MAX_LEFT)
         #sleep(1)
         #return Wander(self.wrapper)
     def loop(self):

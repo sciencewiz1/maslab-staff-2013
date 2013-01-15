@@ -58,7 +58,8 @@ class AvoidWall(State):
             return Wander
             #far enough away, stop turning
         elif time.time() > self.wrapper.time+180*TURN_SPEED:
-            return Wander
+            #return Wander
+            return Stuck
             #timeout, stop turning
         else:
             return 0
@@ -127,6 +128,9 @@ class ApproachBall(State):
     def stopfunction(self):
         if self.wrapper.vs.isClose():
             return CaptureBall
+        #NEW (to avoid stuck)
+        if time.time()>=self.wrapper.time+10:
+            return Stuck
         if self.wrapper.ballCentered():
             return 0
             #still going after ball
@@ -168,6 +172,21 @@ class Pause(State):
     def stopfunction(self):
         if time.time()>self.wrapper.time+0.5:
             return ApproachBall
+        return 0
+
+class MaxRandom(State)
+    def __init__(self,wrap):
+        State.__init__(self,wrap)
+        a=randint(0,2)
+        if a==0:
+            self.action=MaxTurnLeft
+        elif a==1:
+            self.action=MaxTurnRight
+        elif a==2:
+            self.action=GoBack
+    def stopfunctoin(self):
+        if time.time()> self.wrapper.time+2
+            return TurnAndLook
         return 0
 
 #not yet implemented
