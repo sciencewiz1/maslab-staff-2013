@@ -50,7 +50,10 @@ class Arduino(threading.Thread):
     def stop(self):
         # This should tell the thread to finish
         self.killReceived = True
-        self.readWriteThread.join()
+        try:
+            self.readWriteThread.join()
+        except:
+            print "Arduino not connected so there is no comm thread to join."
 
     # Create the serial connection to the arduino
     def connect(self):

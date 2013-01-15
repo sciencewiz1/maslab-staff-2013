@@ -6,7 +6,6 @@ import time
 import threading
 import time
 from Tkinter import *
-CAMERA_NUM=0
 TEMPLATE_MATCH_THRESHOLD=200
 CLOSE_THRESHOLD=20000.0
 VALUE_THRESHOLD=200
@@ -119,14 +118,13 @@ class VisionSystemApp(Frame,threading.Thread):
         self.vision.active=False
         self.vision.join()
         self.master.quit()
-        self.join()
 '''Team 12 MASLAB 2013 Vision System API designed to locate certain objects
 and command the robot to move towards them'''
 class VisionSystem(threading.Thread):
     '''Initialization method that creates the
         camera object and initializes Thread data'''
     def __init__(self,target):
-        self.capture = cv.CaptureFromCAM(CAMERA_NUM) #camera object
+        self.capture = cv.CaptureFromCAM(0) #camera object
         self.target=target
         self.active=True
         self.targets={"redBall":((0, 128, 153), (15, 255, 255)),"greenBall":((45, 150, 36), (90, 255, 255))}
@@ -135,8 +133,15 @@ class VisionSystem(threading.Thread):
         self.detectionThreshold=TEMPLATE_MATCH_THRESHOLD
         self.run_counter=1
         self.override=False
+        self.pause=False
+        self.lock=threading.Lock()
         #call super class init method and bind to instance
         threading.Thread.__init__(self)
+    def changeCameraNumber(self,index):
+        with self.lock:
+            self.pause=True
+            del(self.capture)
+            self.capture=cv.CaptureFromCAM(index)
     def smIntegrate(self):
         self.override=False
     def letmerun(self):
@@ -260,7 +265,7 @@ class VisionSystem(threading.Thread):
             self.stop()
             return "Camera Init Failed!"
         while self.active:
-            if self.run_counter>=1 or self.override:
+            if self.run_counter>=1 or self.override and not self.pause:
                 #print self.targets[self.target]
                 #print self.getTargetDistFromCenter()
                 image=cv.QueryFrame(self.capture)

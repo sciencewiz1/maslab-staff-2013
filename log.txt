@@ -1,2 +1,579 @@
-1
-2hi
+creating wrapper
+L motor
+R motor
+IR module
+IR module running
+Connecting
+Arduino not connected on ACM0
+Arduino not connected on ACM1
+Arduino not connected on ACM2
+Arduino not connected on ACM3
+Failed to connect
+init vision system
+redBall
+Starting Vision Systemstarting vs
+
+started
+walltimer:  4.05199980736
+walltimer:  5.05799984932
+walltimer:  6.06299996376
+walltimer:  7.06999993324
+walltimer:  8.0759999752
+dist  None
+don't see ball
+set starting state
+Running  TurnAndLook
+Init action  TurnLeft
+Running  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeftwalltimer: 
+ looping in (stopfunction of) 9.08299994469 
+TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+walltimer: keep turning 
+10.0939998627looping 
+ TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  walltimer: TurnLeft 
+11.1229999065looping in (stopfunction of) 
+ TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping walltimer:   TurnLeft12.1629998684
+
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+ keep turningwalltimer: 
+ looping 13.1740000248 
+TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+ looping in (stopfunction of) walltimer:   TurnAndLook14.2070000172
+
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+ looping walltimer:   TurnLeft15.2400000095
+
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+keep turning
+looping  TurnLeft
+looping in (stopfunction of)  TurnAndLook
+now go wander
+SM next state
+walltimer:  16.2509999275
+walltimer:  17.257999897
+walltimer:  18.2699999809
+Arduino not connected so there is no comm thread to join.
+Stopping Vision System
