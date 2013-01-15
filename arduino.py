@@ -33,6 +33,7 @@ class Arduino(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         self.portOpened = False
+        self.port=None
         self.killReceived = False
 
     # Start the connection and the thread that communicates with the arduino
@@ -47,7 +48,10 @@ class Arduino(threading.Thread):
     def stop(self):
         # This should tell the thread to finish
         self.killReceived = True
-        self.readWriteThread.join()
+        try:
+            self.readWriteThread.join()
+        except:
+            print "Arduino not connected so there is no thread to terminate!"
 
     # Create the serial connection to the arduino
     def connect(self):

@@ -30,9 +30,11 @@ class VisionSystemApp(Frame,threading.Thread):
         self.vision.start()
         self.start()
     def run(self):
+        self.buildGUI()
+    def buildGUI(self):
         self.master=Tk()
         self.master.title("Ball Tracker System")
-        self.master.protocol('WM_DELETE_WINDOW',self.exitMain)
+        self.master.protocol('WM_DELETE_WINDOW',self.stop)
         Frame.__init__(self,self.master)
         self.pack()
         self.createWidgets()
@@ -111,12 +113,12 @@ class VisionSystemApp(Frame,threading.Thread):
     def changeUpperBound(self,upper):
         lower,upperOld=self.getBounds()
         self.vision.targets[self.vision.target]=(lower,upper)
-    def exitMain(self):
+    def stop(self):
         self.active=False
         self.vision.active=False
         self.vision.join()
-        self.master.destroy()
         self.master.quit()
+        self.join()
 '''Team 12 MASLAB 2013 Vision System API designed to locate certain objects
 and command the robot to move towards them'''
 class VisionSystem(threading.Thread):

@@ -8,25 +8,26 @@ import math
 '''Contains all the information and arduino I/O that needs to be passed
 between states'''
 class Wrapper:
-    def __init__(self, ard):
+    def __init__(self):
+        self.ard=arduino.Arduino()
         print "creating wrapper"
         #Syntax for motors: arduino, currentPic, directionPin, pwmPin
         #Left motor
-        self.left_motor = arduino.Motor(ard, 7, 53, 13)
+        self.left_motor = arduino.Motor(self.ard, 7, 53, 13)
         print "L motor"
         #Right motor
-        self.right_motor = arduino.Motor(ard, 6, 52, 12)
+        self.right_motor = arduino.Motor(self.ard, 6, 52, 12)
         print "R motor"
         '''!!!!!!!'''
-        self.roller_motor = arduino.Motor(ard, 5, 51, 11)
+        self.roller_motor = arduino.Motor(self.ard, 5, 51, 11)
         #IR sensor
-        self.ir_module=IRModule(arduino.AnalogInput(ard, 0))
+        self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
         print "IR module"
         #start a thread that takes IR readings
         self.ir_module.start()
         print "IR module running"
         #Run arduino (note this must be done after sensors are set up)
-        ard.run()
+        self.ard.run()
         self.roller_motor.setSpeed(ROLLER_SIGN*126)
         self.mode=BALL_MODE
         self.color=RED#change this when change color!!!
@@ -42,10 +43,9 @@ class Wrapper:
         if self.color==GREEN:
             string="greenBall"
         print string
-        self.vs=VisionSystemApp(string).getVisionSystem()
-        #self.vs=VisionSystem(string)
+        self.vsApp=VisionSystemApp(string)
+        self.vs=self.vsApp.getVisionSystem()
         print "starting vs"
-        #self.vs.start()
         print "started"
         #when turn 360, get IR data (useful for mapping)
         self.ir360={}
@@ -65,6 +65,13 @@ class Wrapper:
     '''return array of coordinates of balls'''
     def ballCoordinates(self):
         return self.vs.getTargetDistFromCenter()
+    def connected(self):
+        return (self.ard.portOpened, self.ard.port)
+    def stop(self):
+        self.ard.stop()
+        self.ir_module.stop()
+        self.wt.stop()
+        self.vsApp.stop()
 
 '''Module that records IR measurements'''
 class IRModule(threading.Thread):
@@ -74,8 +81,9 @@ class IRModule(threading.Thread):
         self.ir_val=0
         self.ir=ir2
         self.f=open('ir_log.txt','w')
+        self.active=True
     def run(self):
-        while True:
+        while self.active:
             self.ir_val = self.ir.getValue()
             self.f.write(str(self.ir_val))
             self.f.write('\n')
@@ -84,6 +92,8 @@ class IRModule(threading.Thread):
             #get one measurement every .1 second
     def obstacleDistance(self):
         return Y_INTERCEPT+SLOPE*self.ir_val
+    def stop(self):
+        self.active=False
 
 '''PID controller
 kp,ki,kd are the constants
@@ -123,8 +133,11 @@ class WallTimer(threading.Thread):
         #IR value
         super(WallTimer, self).__init__()
         self.wrapper=wrapper
+        self.active=True
     def run(self):
-        while time.time()<self.wrapper.start_time+WALL_TIME:
+        while time.time()<self.wrapper.start_time+WALL_TIME and self.active:
             print "walltimer: ",time.time()-self.wrapper.start_time
             time.sleep(1)
         self.wrapper.mode=WALL_MODE
+    def stop(self):
+        self.active=False
