@@ -24,7 +24,7 @@ class Wrapper:
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
         print "IR module"
         #start a thread that takes IR readings
-        self.ir_module.start()
+        #self.ir_module.start()
         print "IR module running"
         #Run arduino (note this must be done after sensors are set up)
         self.ard.run()
@@ -74,10 +74,10 @@ class Wrapper:
         self.vsApp.stop()
 
 '''Module that records IR measurements'''
-class IRModule(threading.Thread):
+class IRModule():#(threading.Thread):
     def __init__(self,ir2):
         #IR value
-        super(IRModule, self).__init__()
+        #super(IRModule, self).__init__()
         self.ir_val=0
         self.ir=ir2
         self.f=open('ir_log.txt','w')
@@ -90,6 +90,31 @@ class IRModule(threading.Thread):
             #print self.ir_val
             time.sleep(0.1)
             #get one measurement every .1 second
+        #self.read=False
+    #def reset(self):
+        #self.read=False
+    #def run(self):
+        #pass
+        #while True:
+        #    self.ir_val = self.ir.getValue()
+        #    self.read=True
+        #    print "IR=",self.ir_val
+        #    self.f.write(str(self.ir_val))
+        #    self.f.write('\n')
+        #    #print self.ir_val
+        #    #time.sleep(0.01)
+        #    #get one measurement every .1 second
+    def getIRVal(self, wait=False):
+        #if not wait:
+        #    return self.ir_val
+        #self.reset()
+        #while self.read==False:
+        #    pass
+        self.ir_val = self.ir.getValue()
+        self.f.write(str(self.ir_val))
+        self.f.write('\n')
+        print "IR=",self.ir_val
+        return self.ir_val
     def obstacleDistance(self):
         return Y_INTERCEPT+SLOPE*self.ir_val
     def stop(self):

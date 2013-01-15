@@ -72,6 +72,8 @@ class Arduino(threading.Thread):
             except:
                 # Some debugging prints
                 print "Arduino not connected on ACM{0}".format(i)
+                if i==4:
+                    raise Exception("Failed to connect!")
         print "Failed to connect"
         return False
 

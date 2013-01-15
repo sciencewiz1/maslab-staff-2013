@@ -1,7 +1,7 @@
 #IR threshold: what counts as "close"?
-IR_THRESHOLD = 200.0
+IR_THRESHOLD = 180.0
 #IR threshold: what counts as "too close"?
-IR_THRESHOLD2 = 400.0
+IR_THRESHOLD2 = 300.0
 #when to go for the wall
 WALL_TIME = 120
 #when to stop (seconds)
@@ -12,13 +12,15 @@ LEFT_SIGN=-1
 RIGHT_SIGN=1
 ROLLER_SIGN=1
 '''!!!!!!!!!!'''
+LEFT_TURN=LEFT_SIGN*48
+RIGHT_TURN=RIGHT_SIGN*68
 LEFT_FORWARD=LEFT_SIGN*64
-RIGHT_FORWARD=RIGHT_SIGN*72
+RIGHT_FORWARD=RIGHT_SIGN*91
 LEFT_BACK=-LEFT_SIGN*64
-RIGHT_BACK=-RIGHT_SIGN*72
+RIGHT_BACK=-RIGHT_SIGN*91
 MAX_LEFT=LEFT_SIGN*126
 MAX_RIGHT=RIGHT_SIGN*126
-LEFT_RIGHT_RATIO=64.0/72
+LEFT_RIGHT_RATIO=64.0/91
 #what are we looking for?
 BALL_MODE=0
 WALL_MODE=1
@@ -33,13 +35,13 @@ GREEN=1
 LEFT=-1
 RIGHT=1
 
-CENTER_THRESHOLD=200
+CENTER_THRESHOLD=100
 
 #Right now I randomly estimate 1 degree/4 pixels, change this to something more
 #exact later
 #in units of (motor speed)/(angle in degrees).
 #motor speed is -126 to 126
-TURN_KP = 1
+TURN_KP = .8
 #in units of (motor speed)/(angle in degrees*s)
 TURN_KI = .2
 #in units of (motor speed s)/(angle in degrees)

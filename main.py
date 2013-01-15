@@ -120,8 +120,8 @@ class StateMachine(threading.Thread):
 
 '''ard = arduino.Arduino()
 wrapper=Wrapper(ard)
-#wrapper.left_motor.setSpeed(-64)
-#wrapper.right_motor.setSpeed(64)
+#wrapper.left_motor.setSpeed(LEFT_FORWARD)
+#wrapper.right_motor.setSpeed(RIGHT_FORWARD)
 sm=StateMachine(wrapper)
 sm.runSM()'''
 system=RobotControllerApp()
