@@ -35,6 +35,7 @@ class Arduino(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         self.portOpened = False
+        self.port=None
         self.killReceived = False
 
     # Start the connection and the thread that communicates with the arduino

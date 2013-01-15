@@ -174,7 +174,7 @@ class Pause(State):
             return ApproachBall
         return 0
 
-class MaxRandom(State)
+class MaxRandom(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
         a=randint(0,2)
@@ -185,7 +185,7 @@ class MaxRandom(State)
         elif a==2:
             self.action=GoBack
     def stopfunctoin(self):
-        if time.time()> self.wrapper.time+2
+        if time.time()> self.wrapper.time+2:
             return TurnAndLook
         return 0
 
