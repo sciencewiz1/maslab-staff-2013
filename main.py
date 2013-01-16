@@ -133,7 +133,6 @@ class RobotControllerApp(Frame, threading.Thread):
         self.master.ExitMainLoop() #self.master.Exit()   # or wx.GetApp().ExitMainLoop()
         
         
-        
 
 """Note: I created specific actions as subclasses of Action, though an
 alternative is to make objects of type Action"""

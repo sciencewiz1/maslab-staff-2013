@@ -39,13 +39,13 @@ class Wrapper:
         print "creating wrapper"
         #Syntax for motors: arduino, currentPic, directionPin, pwmPin
         #Left motor
-        self.left_motor = arduino.Motor(self.ard, 7, 53, 13)
+        self.left_motor = arduino.Motor(self.ard, 3, 51, 9)
         print "L motor"
         #Right motor
-        self.right_motor = arduino.Motor(self.ard, 6, 52, 12)
+        self.right_motor = arduino.Motor(self.ard, 4, 50, 10)
         print "R motor"
         '''!!!!!!!'''
-        self.roller_motor = arduino.Motor(self.ard, 5, 51, 11)
+        self.roller_motor = arduino.Motor(self.ard, 2, 53, 8)
         #IR sensor
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
         print "IR module"
