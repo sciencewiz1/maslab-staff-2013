@@ -159,7 +159,9 @@ class Arduino(threading.Thread):
                 x = ord(self.serialRead())
                 y = ord(self.serialRead())
                 z = ord(self.serialRead())
+                print "read IMU values"#added
                 self.imuVals[0] = (compass, x, y, z)
+                #time.sleep(0)#added
             # End of packet
             elif (mode == ';'):
                 done = True

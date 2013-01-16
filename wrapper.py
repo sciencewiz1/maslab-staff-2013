@@ -22,11 +22,15 @@ class Wrapper:
         self.roller_motor = arduino.Motor(self.ard, 5, 51, 11)
         #IR sensor
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
+        #Add this when we add more IR modules
+        #self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 1))
+        #self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 2))
         print "IR module"
         #start a thread that takes IR readings
         #self.ir_module.start()
-        print "IR module running"
-        #Run arduino (note this must be done after sensors are set up)
+        #de-threaded for now
+        #self.left_bump=arduino.DigitalInput(self.ard,1)
+        #self.right_bump=arduino.DigitalInput(self.ard,2)
         self.ard.run()
         self.roller_motor.setSpeed(ROLLER_SIGN*126)
         self.mode=BALL_MODE
@@ -46,7 +50,6 @@ class Wrapper:
         self.vsApp=VisionSystemApp(string)
         self.vs=self.vsApp.getVisionSystem()
         print "starting vs"
-        print "started"
         #when turn 360, get IR data (useful for mapping)
         self.ir360={}
         #start timer
@@ -78,13 +81,14 @@ class IRModule():#(threading.Thread):
     def __init__(self,ir2):
         #IR value
         #super(IRModule, self).__init__()
-        self.ir_val=0
+        #self.ir_val=0
         self.ir=ir2
         self.f=open('ir_log.txt','w')
         self.active=True
+        self.ir_list=[]
     def run(self):
         while self.active:
-            self.ir_val = self.ir.getValue()
+            self.ir_list.append(self.ir.getValue())
             self.f.write(str(self.ir_val))
             self.f.write('\n')
             #print self.ir_val
@@ -104,7 +108,7 @@ class IRModule():#(threading.Thread):
         #    #print self.ir_val
         #    #time.sleep(0.01)
         #    #get one measurement every .1 second
-    def getIRVal(self, wait=False):
+    def getIRVal(self, filtered=False):
         #if not wait:
         #    return self.ir_val
         #self.reset()
@@ -164,5 +168,7 @@ class WallTimer(threading.Thread):
             print "walltimer: ",time.time()-self.wrapper.start_time
             time.sleep(1)
         self.wrapper.mode=WALL_MODE
+        #Update this once David puts in code to look for walls.
+        #self.wrapper.cv.changeTarget("wall")
     def stop(self):
         self.active=False

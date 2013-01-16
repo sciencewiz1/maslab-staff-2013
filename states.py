@@ -70,6 +70,7 @@ class TurnAndLook(State):
         #print "init turn and look"
         State.__init__(self,wrap)
         #if ball is to the right
+        #also wall
         dist=wrap.vs.getTargetDistFromCenter()
         print "dist ",dist
         if dist==None:
@@ -174,7 +175,7 @@ class Pause(State):
             return ApproachBall
         return 0
 
-class MaxRandom(State)
+class MaxRandom(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
         a=randint(0,2)
@@ -185,9 +186,36 @@ class MaxRandom(State)
         elif a==2:
             self.action=GoBack
     def stopfunctoin(self):
-        if time.time()> self.wrapper.time+2
+        if time.time()> self.wrapper.time+2:
             return TurnAndLook
         return 0
+
+#Uncomment this once we get the bump sensors, wall recognition, and ball release working
+
+##class AlignWithWall(State)
+##    def __init__(self,wrap):
+##        State.__init__(self,wrap)
+##        self.action=GoForward
+##    def stopfunction(self):
+##        if (wrapper.left_bump.getValue()==1 and wrapper.right_bump.getValue()==1)\
+##           or time.time()-self.wrapper.start_time>=STOP_TIME-1:
+##            return Score
+##        #if aligning with wall takes too long
+##        #back up and try again
+##        if time.time()>self.wrapper.time+5:
+##            return Stuck
+##        return 0
+##
+##class Score(State)
+##    def __init__(self,wrap):
+##        State.__init(self,wrap)
+##        self.action=ReleaseBalls
+##    def stopfunction(self):
+##        if time.time()>self.wrapper.time+3:
+##            self.wrapper.mode=BALL_MODE
+##            #go collect balls (if time remains)
+##            return Stuck
+##        return 0
 
 #not yet implemented
 class HitPyramidWall(State):
