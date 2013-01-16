@@ -7,13 +7,17 @@ from wx import *
 import sys
 import pickle
 
+'''This object replaces the standard stdout object so that we can write print statements
+to the console and to a file.'''
 class Tee(object):
     def __init__(self, *files):
         self.files = files
     def write(self, obj):
         for f in self.files:
             f.write(obj)
-
+'''
+Main GUI class used to control the robot.
+'''
 class RobotControllerApp(Frame, threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
