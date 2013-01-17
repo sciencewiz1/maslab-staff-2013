@@ -22,6 +22,7 @@ class Action:
         while not b:
             '''Holden: this prevents vision code
             from hogging time'''
+            #@David: do we still need this?
             self.wrapper.vs.letmerun()
             #print "time in action: ",time.time()
             #ir_read=False#
@@ -30,8 +31,9 @@ class Action:
             #    ir_read=self.wrapper.read#
             #print "IR value read=", self.wrapper.ir_module.ir_val
             if time.time()-self.wrapper.start_time>=STOP_TIME:
-                print "stopping"
+                print "Stopping"
                 return Stop
+#            WallTimer now takes care of this
 #            if time.time()-self.wrapper.start_time>=WALL_TIME:
 #                self.wrapper.mode=WALL_MODE
 #            print "calling loop"
@@ -51,27 +53,27 @@ class Action:
 
 class GoForward(Action):
     def run(self):
-        self.wrapper.left_motor.setSpeed(LEFT_FORWARD)
+        self.wrapper[LEFT_MOTOR]=LEFT_FORWARD
         #tell right motor to go forward
-        self.wrapper.right_motor.setSpeed(RIGHT_FORWARD)
+        self.wrapper[RIGHT_MOTOR]=RIGHT_FORWARD
     def loop(self):
         #in the future put PID controls to keep it going straight
         print "looping ",self.__class__.__name__
 
 class GoBack(Action):
     def run(self):
-        self.wrapper.left_motor.setSpeed(LEFT_BACK)
+        self.wrapper[LEFT_MOTOR]=LEFT_BACK
         #tell right motor to go forward
-        self.wrapper.right_motor.setSpeed(RIGHT_BACK)
+        self.wrapper[RIGHT_MOTOR]=RIGHT_BACK
     def loop(self):
         print "looping ",self.__class__.__name__
 
 class TurnLeft(Action):
     def run(self):
         #tell right motor to go forward
-        self.wrapper.right_motor.setSpeed(RIGHT_TURN)
+        self.wrapper[RIGHT_MOTOR]=RIGHT_TURN
         #tell left motor to go backwards
-        self.wrapper.left_motor.setSpeed(-LEFT_TURN)
+        self.wrapper.[LEFT_MOTOR]=-LEFT_TURN
         #sleep(1)
         #return Wander(self.wrapper)
     def loop(self):
@@ -81,9 +83,9 @@ class TurnLeft(Action):
 class TurnRight(Action):
     def run(self):
         #tell right motor to go backwards
-        self.wrapper.right_motor.setSpeed(-RIGHT_TURN)
+        self.wrapper[RIGHT_MOTOR]=-RIGHT_TURN
         #tell left right motor to go forward
-        self.wrapper.left_motor.setSpeed(LEFT_TURN)
+        self.wrapper[LEFT_MOTOR]=LEFT_TURN
         #sleep(1)
         #return Wander(self.wrapper)
     def loop(self):
@@ -92,9 +94,9 @@ class TurnRight(Action):
 class MaxTurnLeft(Action):
     def run(self):
         #tell right motor to go forward
-        self.wrapper.right_motor.setSpeed(MAX_RIGHT)
+        self.wrapper[RIGHT_MOTOR]=MAX_RIGHT
         #tell left motor to go backwards
-        self.wrapper.left_motor.setSpeed(-MAX_LEFT)
+        self.wrapper[LEFT_MOTOR]=-MAX_LEFT
         #sleep(1)
         #return Wander(self.wrapper)
     def loop(self):
@@ -104,9 +106,9 @@ class MaxTurnLeft(Action):
 class MaxTurnRight(Action):
     def run(self):
         #tell right motor to go backwards
-        self.wrapper.right_motor.setSpeed(-MAX_RIGHT)
+        self.wrapper[RIGHT_MOTOR]=-MAX_RIGHT
         #tell left right motor to go forward
-        self.wrapper.left_motor.setSpeed(MAX_LEFT)
+        self.wrapper[LEFT_MOTOR]=MAX_LEFT
         #sleep(1)
         #return Wander(self.wrapper)
     def loop(self):
@@ -128,19 +130,20 @@ class ForwardToBall(Action):#or GoForward
             #this will exit the ApproachBallState: lost the ball:`(
         adjust=self.controller.adjust(dist[0][0]/8)
         new_left_speed=LEFT_FORWARD+LEFT_SIGN*adjust
+        #do I want to subtract from right motor too?
         #scale so speeds <=126
         multiplier=max(math.fabs(new_left_speed/126.0),1)
         new_left_speed=int(new_left_speed/multiplier)
         new_right_speed=int(RIGHT_FORWARD/multiplier)
         print "L/R speeds: ",new_left_speed,new_right_speed
-        self.wrapper.left_motor.setSpeed(new_left_speed)
-        self.wrapper.right_motor.setSpeed(new_right_speed)
+        self.wrapper[LEFT_MOTOR]=new_left_speed
+        self.wrapper[RIGHT_MOTOR]=new_right_speed
         #sleep(0.1)
 
 class DoNothing(Action):
     def run(self):
-        self.wrapper.left_motor.setSpeed(0)
-        self.wrapper.right_motor.setSpeed(0)
+        self.wrapper[LEFT_MOTOR]=0
+        self.wrapper[RIGHT_MOTOR]=0
     def loop(self):
         print "looping ",self.__class__.__name__, time.time()
 
@@ -187,8 +190,7 @@ class Stop(State):
         State.__init__(self,wrap)
         self.action=DoNothing
         self.wrapper.vs.stop()
-        '''!!!!!!'''
-        self.wrapper.roller_motor.setSpeed(0)
+        self.wrapper[ROLLER_MOTOR]=0
         self.wrapper.ir_module.f.close()
     def stopfunction(self):
         return 0

@@ -12,23 +12,32 @@ class Wander(State):
         State.__init__(self,wrap)
         self.action=GoForward
     def stopfunction(self):
-        ir=self.wrapper.ir_module.getIRVal()
-        print "IR=",ir
-        #
-        #return Wander
-        #
-        if ir >=IR_THRESHOLD2:
+        '''
+        In order of priority:
+        1. If bumped against wall, back up.
+        2. If see ball, turn to ball.
+        3. If too close to wall, back up.
+        4. If close to wall, swerve to avoid.
+        '''
+        
+        #if either bump sensor is pressed, we are stuck!
+        if self.wrapper[LEFT_BUMP] or self.wrapper[RIGHT_BUMP]:
+            return Stuck
+
+        dist=self.wrapper[FRONT_DIST]
+        
+        if dist >= TOO_CLOSE:
         #way too close, back up
             return Stuck
         #should change to bump sensor
         
         #see ball, stop wandering
         if self.wrapper.see():
-            print "sawball!"
+            print "saw ball!"
             return TurnAndLook
         
         #close, turn left before you get way too close
-        if ir >=IR_THRESHOLD:
+        if dist >= CLOSE:
             return AvoidWall
 
         #timeout
@@ -46,17 +55,27 @@ class AvoidWall(State):
         #Maybe change to *randomly* (or intelligently choose between)
         #turn left or right
     def stopfunction(self):
-        ir=self.wrapper.ir_module.getIRVal()
-        print "IR=",ir
-        if ir >=IR_THRESHOLD2:
+        '''
+        In order of priority:
+        1. If bumped against wall, back up. (Stuck)
+        2. If see ball, turn to ball. (TurnAndLook))
+        3. If too close to wall, back up. (Stuck)
+        4. If no longer close to wall, stop turning and move forwards. (Wander)
+        5. If turned 180 degrees and still close to wall, assume it's stuck. (Stuck)
+        '''
+        if self.wrapper[LEFT_BUMP] or self.wrapper[RIGHT_BUMP]:
             return Stuck
+        dist=self.wrapper[FRONT_DIST]
         #I'm not too sure about this.
         #Be careful of robot trying to get an inaccessible ball
         if self.wrapper.see():
             return TurnAndLook
-        if ir <IR_THRESHOLD:
+        if dist>=TOO_CLOSE:
+            return Stuck
+        if dist <CLOSE:
             return Wander
             #far enough away, stop turning
+        #REPLACE THIS WITH COMPASS READING
         elif time.time() > self.wrapper.time+180*TURN_SPEED:
             #return Wander
             return Stuck
@@ -79,7 +98,8 @@ class TurnAndLook(State):
             if randint(0,1)==0:
                 self.action=TurnLeft
             else:
-                self.action=TurnRight        
+                self.action=TurnRight
+        '''Turn in the direction of the ball if the ball is in sight'''
         elif dist[0][0]>=0:
             if DEBUG:
                 print "dist ",dist
@@ -99,19 +119,14 @@ class TurnAndLook(State):
             if DEBUG:
                 print "centered ball, approach!"
             return Pause
-            #return ApproachBall #H
-            #return Stop#H
+            #return ApproachBall
+            #return Stop
             #found ball
-        #
-        #dist=self.wrapper.vs.getTargetDistFromCenter
-        #if dist != None:
-        #    if math.fabs(
-        #
-        #
+        '''Replace with compass heading'''
         if time.time() > self.wrapper.time+360/TURN_SPEED:
             print "now go wander"
-            return Wander#H
-            #return TurnAndLook#H
+            return Wander
+            #return TurnAndLook
             #turned 360, no balls in sight
             #log the IR readings during turning.
             #in the future, should probably change direction
@@ -127,11 +142,25 @@ class ApproachBall(State):
         #Change to ForwardToBall
         self.action=ForwardToBall
     def stopfunction(self):
+        '''
+        Priority:
+        1. If sensors bumped, or takes too long, give up (Stuck)
+        2. If close to ball, prepare to capture (CaptureBall)
+        3. If ball no longer centered, turn to face the ball. (TurnAndLook)
+        4. If lose track of ball, wander. (Wander)
+        '''
+        #note presence of AND here: give up when both sensors bumped,
+        #or when one sensor bumped and time too long, or too long
+        if (self.wrapper[LEFT_BUMP] and self.wrapper[RIGHT_BUMP]) or\
+           ((self.wrapper[LEFT_BUMP] or self.wrapper[RIGHT_BUMP]) and\
+            time.time()>=self.wrapper.time+5) or\
+           time.time()>=self.wrapper.time+10:
+            return Stuck
+            '''!!!'''
+            #WARNING: after it gets unstuck it might go towards the same ball again!
+            #Need to prevent this!
         if self.wrapper.vs.isClose():
             return CaptureBall
-        #NEW (to avoid stuck)
-        if time.time()>=self.wrapper.time+10:
-            return Stuck
         if self.wrapper.ballCentered():
             return 0
             #still going after ball
@@ -143,6 +172,7 @@ class ApproachBall(State):
         #if lose track of ball
         return Wander
 #Note: need to do something about inaccessible balls
+#optimally, it wouldn't go for balls over walls.
         
 #back up for 1 second
 #(this is not very sophisticated right now)
@@ -167,16 +197,16 @@ class CaptureBall(State):
         #keep capturing
 
 class Pause(State):
-    def __init__(self, wrap):
+    def __init__(self, wrap,action=DoNothing):
         State.__init__(self,wrap)
-        self.action=DoNothing
+        self.action=action
     def stopfunction(self):
         if time.time()>self.wrapper.time+0.5:
-            return ApproachBall
+            return self.action
         return 0
 
 class MaxRandom(State):
-    def __init__(self,wrap):
+    def __init__(self,wrap,action=TurnAndLook):
         State.__init__(self,wrap)
         a=randint(0,2)
         if a==0:
@@ -185,12 +215,13 @@ class MaxRandom(State):
             self.action=MaxTurnRight
         elif a==2:
             self.action=GoBack
-    def stopfunctoin(self):
+    def stopfunction(self):
         if time.time()> self.wrapper.time+2:
-            return TurnAndLook
+            return self.action
         return 0
 
 #Uncomment this once we get the bump sensors, wall recognition, and ball release working
+#and we're ready for scoring
 
 ##class AlignWithWall(State)
 ##    def __init__(self,wrap):

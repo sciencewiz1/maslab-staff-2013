@@ -54,8 +54,27 @@ CAMERA_HALF_WIDTH=31
 PIXELS=250
 
 #regression line for IR to distance
+#obstacle distance = Y_INTERCEPT+SLOPE*1/self.getIRVal()
+SLOPE=-2177.305428
+Y_INTERCEPT=-0.84208
+#regression line for IR to distance
 SLOPE=-2177.305428
 Y_INTERCEPT=-0.84208
 
 DEBUG=1
 #set to 1 when debugging, 0 otherwise
+
+#output to laptop
+FRONT_DIST=0
+LEFT_DIST=1
+RIGHT_DIST=2
+LEFT_BUMP=4
+RIGHT_BUMP=5
+COMPASS=10
+X_ACC=11
+Y_ACC=12
+Z_ACC=13
+#input to arduino
+ROLLER_MOTOR=20
+LEFT_MOTOR=21
+RIGHT_MOTOR=22
