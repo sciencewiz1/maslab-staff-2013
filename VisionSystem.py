@@ -1,13 +1,14 @@
 import cv
-import numpy
+import numpy as np
 import serial
 import scipy
 import time
 import threading
 import time
+import math
 from Tkinter import *
-TEMPLATE_MATCH_THRESHOLD=200
-CLOSE_THRESHOLD=20000.0
+TEMPLATE_MATCH_THRESHOLD=200/2.7 #depends on image size
+CLOSE_THRESHOLD=20000.0/2.7
 VALUE_THRESHOLD=200
 SAT_THRESHOLD=100
 HUE_THRESHOLD=25
@@ -53,7 +54,7 @@ class VisionSystemApp(Frame,threading.Thread):
         self.cameraLabel=Label(self,text="Change Camera Number")
         self.targetString1 = StringVar(self.master)
         self.targetString1.set("redBall")
-        self.selectTarget1=OptionMenu(self, self.targetString1, "redBall","greenBall","blueWall",command=self.switchTargetScales)
+        self.selectTarget1=OptionMenu(self, self.targetString1, "redBall","greenBall","blueWall","yellowWall","purpleWall","yellowWall2",command=self.switchTargetScales)
         self.cameraString=StringVar(self.master)
         self.cameraString.set("0")
         self.selectCamera=OptionMenu(self, self.cameraString,"0","1","2",command=self.changeCameraNumber)
@@ -153,9 +154,13 @@ class VisionSystem(threading.Thread):
         self.targets=[]
         self.active=True
         self.targetColorProfiles={"redBall":((0, 128, 153), (15, 255, 255)),"greenBall":((45, 150, 36), (90, 255, 255)),
-                      "blueWall":((104, 141, 94), (109, 255, 255))}
+                      "blueWall":((103, 141, 94), (115, 255, 255)),"yellowWall":((29, 150, 36), (64, 255, 255)),
+                                  "purpleWall":((119, 117, 52), (129, 255, 255)),"yellowWall2":((26, 53,117), (32, 255, 255))}
+        self.targetShapeProfiles={"redBall":self.detectCircle,"greenBall":self.detectCircle,
+                      "blueWall":self.detectRectangle,"yellowWall":self.detectRectangle,"purpleWall":self.detectRectangle,
+                                  "yellowWall2":self.detectRectangle}
         self.calibrated=False
-        self.targetLocations={"redBall":None,"greenBall":None,"blueWall":None}
+        self.targetLocations={"redBall":None,"greenBall":None,"blueWall":None,"yellowWall":None,"purpleWall":None,"yellowWall2":None}
         self.bestTargetOverall=None #will be (target,distFromCenter,absolute coordinates,area)
         self.detectionThreshold=TEMPLATE_MATCH_THRESHOLD
         self.run_counter=1
@@ -224,7 +229,7 @@ class VisionSystem(threading.Thread):
         clone=cv.CloneImage(image)
         #blurrs image to reduce color noise
         #cv.CV_BLUR, cv.CV_GAUSSIAN
-        blurred=cv.Smooth(clone,clone,cv.CV_GAUSSIAN, 3)
+        blurred=cv.Smooth(clone,clone,cv.CV_GAUSSIAN, 3,3)
         #converts image to hsv
         hsv=cv.CreateImage(cv.GetSize(clone),8,3)
         cv.CvtColor(clone,hsv,cv.CV_BGR2HSV)
@@ -237,7 +242,14 @@ class VisionSystem(threading.Thread):
         cv.InRangeS(processedImage,lowerBound,upperBound,thresholded)
         return thresholded
     def findTargets(self,image):
-        initialProcessedImage=self.processImage(image) 
+        initialProcessedImage=self.processImage(image)
+        #remove top of image
+        targetMain="blueWall"
+        (data,processedImagePhase2)=self.findTarget(initialProcessedImage,targetMain)
+        ignoreRegion=None
+        if data!=None:
+            ((xdist,ydist),(x,y),areat,centers)=data
+            ignoreRegion=y
         targetLocations=[]
         processedImages=[]
         maxTargetArea=0
@@ -245,7 +257,7 @@ class VisionSystem(threading.Thread):
         maxTargetLocation=None
         if len(self.targets)!=0:
             for target in self.targets:
-                (targetsData,processedImagePhase2)=self.findTarget(initialProcessedImage,target)
+                (targetsData,processedImagePhase2)=self.findTarget(initialProcessedImage,target,ignoreRegion)
                 processedImages.append(processedImagePhase2)
                 if targetsData==None:
                     continue
@@ -278,6 +290,10 @@ class VisionSystem(threading.Thread):
         cv.Add(original, overlay, original)
         #cv.Merge(completeProcessedImage, None, None, None, original)
         cv.ShowImage('Ball Tracker Processed',original)
+    def detectCircle(self,processedImage,contours,area):
+        return True
+    def detectRectangle(self,processedImage,contours,area):
+        return True
     def findMomentsAndArea(self,image):
         mat=cv.GetMat(image)
         moments=cv.Moments(mat)
@@ -305,7 +321,7 @@ class VisionSystem(threading.Thread):
         leftExtreme=(0,int(image.height/float(2)))
         rightExtreme=(image.width,int(image.height/float(2)))
         return ((center,centerEnd),leftExtreme,rightExtreme)
-    def findTarget(self,processedImage,target):
+    def findTarget(self,processedImage,target,ignoreRegion=None):
          #3 in away=3386655.0 pixel area
         image=cv.CloneImage(processedImage)
         #process image
@@ -327,12 +343,23 @@ class VisionSystem(threading.Thread):
             while contours:
                 area1=cv.ContourArea (contours)
                 if area1>=TEMPLATE_MATCH_THRESHOLD:
-                    moments1 = cv.Moments(contours)
-                    #print list(contours)
-                    x1 = int(cv.GetSpatialMoment(moments1, 1, 0)/area1) 
-                    y1 = int(cv.GetSpatialMoment(moments1, 0, 1)/area1)
-                    #cv.DrawContours(image,contours,(0,255,0),(0,255,0),1,20,1)
-                    centers.append((area1,(x1,y1)))
+                    #see if found contour matches shape description
+                    objectMatch=self.targetShapeProfiles[target](processedImagePhase2,contours,area1)
+                    if objectMatch:
+                        moments1 = cv.Moments(contours)
+                        #print list(contours)
+                        x1 = int(cv.GetSpatialMoment(moments1, 1, 0)/area1) 
+                        y1 = int(cv.GetSpatialMoment(moments1, 0, 1)/area1)
+                        #cv.DrawContours(image,contours,(0,255,0),(0,255,0),1,20,1)
+                        #ignore the object detected if a blue wall is detected and the the object is above the wall
+                        #helps prevent detecting objects from audience
+                        #ignore region is essentially the region above the horizontal line that represents the y coordinate
+                        #of the center of mass of the blue wall detected
+                        if ignoreRegion!=None and target!="blueWall":
+                            if y1>ignoreRegion:
+                                centers.append((area1,(x1,y1)))
+                        else:
+                            centers.append((area1,(x1,y1)))
                 contours=contours.h_next()
             if len(centers)!=0:
                 closest=max(centers)
@@ -357,9 +384,11 @@ class VisionSystem(threading.Thread):
                 #print self.targets[self.target]
                 #print self.getTargetDistFromCenter()
                 image=cv.QueryFrame(self.capture)
+                downSampledImage=cv.CreateImage((480,240),8,3)
+                cv.Resize(image,downSampledImage)
                 #print "captured image"
                 #print time.time()
-                self.findTargets(image)
+                self.findTargets(downSampledImage)
                 #print "found targets"
                 if not self.override:
                     self.run_counter-=1
