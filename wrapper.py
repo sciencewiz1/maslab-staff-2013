@@ -6,7 +6,7 @@ from VisionSystem import *
 import math
 import wx
 
-FILTER=[.0625,.25, .375, .25, .0625]
+FILTER=[.0625, .25, .375, .25, .0625]
 F_LEN=len(FILTER)
 
 '''Manual override thread, requires arduino object that it should control!'''
@@ -71,14 +71,15 @@ class Wrapper:
         if self.color==GREEN:
             string="greenBall"
         print string
-        self.vsApp=VisionSystemApp(string)
+        self.vsApp=VisionSystemApp()
         self.vs=self.vsApp.getVisionSystem()
+        self.vs.addTarget(string)
         print "starting vs"
         #start timer
         self.wt=WallTimer(self)
         self.wt.start()
 #        self.active=True
-    def __getItem__(self,index):
+    def __getitem__(self,index):
         if index==FRONT_DIST:
             return self.ir_module.distance()
 ##        if index==LEFT_DIST:
@@ -96,7 +97,7 @@ class Wrapper:
             return
             #to be done
     
-    def __setItem__(self,index,value):
+    def __setitem__(self,index,value):
         if index==ROLLER_MOTOR:
             self.roller_motor.setSpeed(value)
         elif index==LEFT_MOTOR:
@@ -154,7 +155,7 @@ class IRModule(threading.Thread):
     '''Starts IR thread with an empty list of logged IR values'''
     def __init__(self,ir2,long_range=False):
         #IR value
-        #super(IRModule, self).__init__()
+        threading.Thread.__init__(self)
         #self.ir_val=0
         self.ir=ir2
         self.f=open('ir_log.txt','w')
@@ -199,7 +200,7 @@ class IRModule(threading.Thread):
         if len(self.ir_list)< F_LEN:
             return self.__corrected(self.m*1/self.ir_list[0]+self.b)
         #if filtered, take the last F_LEN ir values and calculate the distances 
-        recent_dist=[self.__corrected(self.m*1/ir+self.b) for ir in ir_list[-F_LEN:]])
+        recent_dist=[self.__corrected(self.m*1/ir+self.b) for ir in ir_list[-F_LEN:]]
         #now take a weighted average of the distances
         dist = sum([weight*d for (weight, d) in zip(FILTER,recent_dist)])
         if dist>self.too_far:

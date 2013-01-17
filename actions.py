@@ -73,7 +73,7 @@ class TurnLeft(Action):
         #tell right motor to go forward
         self.wrapper[RIGHT_MOTOR]=RIGHT_TURN
         #tell left motor to go backwards
-        self.wrapper.[LEFT_MOTOR]=-LEFT_TURN
+        self.wrapper[LEFT_MOTOR]=-LEFT_TURN
         #sleep(1)
         #return Wander(self.wrapper)
     def loop(self):
@@ -128,7 +128,7 @@ class ForwardToBall(Action):#or GoForward
         if dist==None:
             return
             #this will exit the ApproachBallState: lost the ball:`(
-        adjust=self.controller.adjust(dist[0][0]/8)
+        adjust=self.controller.adjust(dist[1][0]/8)
         new_left_speed=LEFT_FORWARD+LEFT_SIGN*adjust
         #do I want to subtract from right motor too?
         #scale so speeds <=126
