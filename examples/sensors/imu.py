@@ -8,6 +8,9 @@ ard = arduino.Arduino()
 imu = arduino.IMU(ard)
 ard.run()
 
-while True:
+start_time=time.time()
+while time.time()-start_time<=10:
     print imu.getRawValues()
     time.sleep(0.05)
+ard.cleanup()
+ard.stop()

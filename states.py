@@ -197,16 +197,18 @@ class CaptureBall(State):
         #keep capturing
 
 class Pause(State):
-    def __init__(self, wrap,action=DoNothing):
+    def __init__(self, wrap,next_state=TurnAndLook):
         State.__init__(self,wrap)
-        self.action=action
+        self.action=DoNothing
+        self.next_state=next_state
     def stopfunction(self):
         if time.time()>self.wrapper.time+0.5:
-            return self.action
+            print "transition to...", self.next_state.__name__
+            return self.next_state
         return 0
 
 class MaxRandom(State):
-    def __init__(self,wrap,action=TurnAndLook):
+    def __init__(self,wrap,next_state=TurnAndLook):
         State.__init__(self,wrap)
         a=randint(0,2)
         if a==0:
@@ -215,9 +217,10 @@ class MaxRandom(State):
             self.action=MaxTurnRight
         elif a==2:
             self.action=GoBack
+        self.next_state=next_state
     def stopfunction(self):
         if time.time()> self.wrapper.time+2:
-            return self.action
+            return self.next_state
         return 0
 
 #Uncomment this once we get the bump sensors, wall recognition, and ball release working

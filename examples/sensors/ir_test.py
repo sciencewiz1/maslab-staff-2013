@@ -11,7 +11,7 @@ import arduino
 #THRESH = 200.0  # Experimentally chosen
 
 ard = arduino.Arduino()  # Create the Arduino object
-a0 = arduino.AnalogInput(ard, 1)  # Create an analog sensor on pin A0
+a0 = arduino.AnalogInput(ard, 0)  # Create an analog sensor on pin A0
 ard.run()  # Start the thread which communicates with the Arduino
 
 # Main loop -- check the sensor and update the digital output
@@ -21,3 +21,5 @@ while time.time()-start_time<=10:
     #print time.time()-start_time
     print ir_val#, ir_val >= THRESH
     time.sleep(0.1)
+ard.cleanup()
+ard.stop()

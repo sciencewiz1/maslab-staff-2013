@@ -48,8 +48,6 @@ class Wrapper:
         self.roller_motor = arduino.Motor(self.ard, 2, 53, 8)
         print "Roller motor"
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
-        #start a thread that takes IR readings
-        self.ir_module.start()
         '''Add this when we add more IR modules'''
         #self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 1))
         #self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 2))
@@ -77,8 +75,14 @@ class Wrapper:
         print "starting vs"
         #start timer
         self.wt=WallTimer(self)
-        self.wt.start()
+
 #        self.active=True
+    def start(self):
+        #start a thread that takes IR readings
+        self.ir_module.start()
+        self.start_time=time.time()
+        self.time=self.start_time
+        self.wt.start()
     def __getitem__(self,index):
         if index==FRONT_DIST:
             return self.ir_module.distance()
@@ -103,7 +107,7 @@ class Wrapper:
         elif index==LEFT_MOTOR:
             self.left_motor.setSpeed(value)
         elif index==RIGHT_MOTOR:
-            self.right_motor.setSPeed(value)
+            self.right_motor.setSpeed(value)
     #does it see a ball?
     
     def see(self):
@@ -113,7 +117,7 @@ class Wrapper:
         dist=self.vs.getTargetDistFromCenter()
         if dist== None:
             return 0
-        return (math.fabs(dist[0][0])<=CENTER_THRESHOLD)
+        return (math.fabs(dist[1][0])<=CENTER_THRESHOLD)
     '''return array of coordinates of balls'''
     def ballCoordinates(self):
         return self.vs.getTargetDistFromCenter()
@@ -180,7 +184,7 @@ class IRModule(threading.Thread):
             self.f.write(str(ir_val))
             self.f.write('\n')
             #print self.ir_val
-            time.sleep(0)
+            time.sleep(0.01)
     '''Get IR values. If filtered, gives a weighted average for noise reduction'''
     def getIRVal(self):
         return self.ir_list[-1]

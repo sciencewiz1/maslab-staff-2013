@@ -118,6 +118,8 @@ class RobotControllerApp(Frame, threading.Thread):
         self.sm.pauseSM()
         self.wrapper.turnMotorsOff()
         self.status.SetStatusText("SM Paused...",0)
+        #Holden added
+        self.wrapper.ir_module.active=False
     def writeLog(self):
         self.original=sys.stdout
         self.fsock=open("log.txt",'w')
@@ -152,6 +154,7 @@ class StateMachine(threading.Thread):
         #self.arduino=ard
     def run(self):
         #set the starting state
+        self.wrapper.start()
         self.state=TurnAndLook(self.wrapper)
         print "set starting state"
         #in the future, categorize states more sophisticatedly (ex. explore)
