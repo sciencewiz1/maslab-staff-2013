@@ -196,14 +196,14 @@ class VisionSystem(threading.Thread):
     def clearTargets(self):
         self.targets=[]
         print "Targets have been cleared!"
-    def getTargetDistFromCenter(self,target):
+    def getTargetDistFromCenter(self,target="all"):
         if target in self.targetLocations:
             return self.targetLocations[target]
         else:
             if target=="all":
                 return self.bestTargetOverall
         
-    def isClose(self,target):
+    def isClose(self,target="all"):
         if target in self.targetLocations:
             sample=self.targetLocations[target]
         else:
