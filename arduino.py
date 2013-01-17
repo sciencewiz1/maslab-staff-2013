@@ -432,4 +432,3 @@ class IMU:
         self.index = self.arduino.addIMU()
     def getRawValues(self):
         return self.arduino.getIMUVals(self.index)
-

@@ -163,7 +163,7 @@ class StateMachine(threading.Thread):
                 #repeat indefinitely
                 #in the future add a timer, stop when time over threshold
                 #add time.sleep to allow other threads to execute
-                time.sleep(1)
+                time.sleep(0.001)
     def startSM(self):
         if not self.isAlive():
             self.start()
