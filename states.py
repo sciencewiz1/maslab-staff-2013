@@ -99,13 +99,13 @@ class TurnAndLook(State):
                 self.action=TurnLeft
             else:
                 self.action=TurnRight
-        '''Turn in the direction of the ball if the ball is in sight'''
-        elif dist[0][0]>=0:
+        #Turn in the direction of the ball if the ball is in sight
+        elif dist[1][0]>=0:
             if DEBUG:
                 print "dist ",dist
                 print "see ball to right"
             self.action=TurnRight
-        elif dist[0][0]<0:
+        elif dist[1][0]<0:
             if DEBUG:
                 print "dist ",dist
                 print "see ball to left"
