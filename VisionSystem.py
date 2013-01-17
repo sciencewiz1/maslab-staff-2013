@@ -203,7 +203,7 @@ class VisionSystem(threading.Thread):
             if target=="all":
                 return self.bestTargetOverall
         
-    def isClose(self,target):
+    def isClose(self,target="all"):
         if target in self.targetLocations:
             sample=self.targetLocations[target]
         else:
