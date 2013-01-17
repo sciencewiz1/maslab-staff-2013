@@ -58,8 +58,8 @@ PIXELS=250
 SLOPE=-2177.305428
 Y_INTERCEPT=-0.84208
 #regression line for IR to distance
-SLOPE=-2177.305428
-Y_INTERCEPT=-0.84208
+LONG_SLOPE=14757.89
+LONG_Y_INTERCEPT=-11.1283
 
 DEBUG=1
 #set to 1 when debugging, 0 otherwise
