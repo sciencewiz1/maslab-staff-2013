@@ -4,22 +4,48 @@ import sys
 sys.path.append("./Vision System")
 from VisionSystem import *
 import math
+import wx
 
+'''Manual override thread, requires arduino object that it should control!'''
+class ManualOverride(threading.Thread):
+    def __init__(self,wrapper):
+        self.active=True
+        threading.Thread.__init__(self)
+        self.wrapper=wrapper
+    def run(self):
+        while self.active:
+            print self.active
+            cmd=raw_input("Enter command:")
+            self.manualOverride(str(cmd))
+            time.sleep(0)
+    def stop(self):
+        self.active=False
+    def manualOverride(self,cmd):
+        cmds={"l":(LEFT_TURN,-LEFT_TURN,"Left"),"r":(-RIGHT_TURN,RIGHT_TURN,"Right"),"f":(LEFT_FORWARD,RIGHT_FORWARD,"Forward"),"b":(-LEFT_BACK,-RIGHT_BACK,"Backward"),"s":(0,0,"Stop")}
+        if cmd in cmds:
+            leftSpeed,rightSpeed,cmdName=cmds[cmd]
+            time.sleep(0)
+            self.wrapper.left_motor.setSpeed(leftSpeed)
+            self.wrapper.right_motor.setSpeed(rightSpeed)
+            print "Moving "+cmdName
+        else:
+            print "Invalid command!"
 '''Contains all the information and arduino I/O that needs to be passed
 between states'''
 class Wrapper:
     def __init__(self):
+        self.manualControl=False
         self.ard=arduino.Arduino()
         print "creating wrapper"
         #Syntax for motors: arduino, currentPic, directionPin, pwmPin
         #Left motor
-        self.left_motor = arduino.Motor(self.ard, 7, 53, 13)
+        self.left_motor = arduino.Motor(self.ard, 3, 51, 9)
         print "L motor"
         #Right motor
-        self.right_motor = arduino.Motor(self.ard, 6, 52, 12)
+        self.right_motor = arduino.Motor(self.ard, 4, 50, 10)
         print "R motor"
         '''!!!!!!!'''
-        self.roller_motor = arduino.Motor(self.ard, 5, 51, 11)
+        self.roller_motor = arduino.Motor(self.ard, 2, 53, 8)
         #IR sensor
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
         #Add this when we add more IR modules
@@ -68,8 +94,33 @@ class Wrapper:
     '''return array of coordinates of balls'''
     def ballCoordinates(self):
         return self.vs.getTargetDistFromCenter()
+    def turnMotorsOff(self):
+        self.left_motor.setSpeed(0)
+        self.right_motor.setSpeed(0)
+        self.roller_motor.setSpeed(0)
+    def resetRoller(self):
+        self.roller_motor.setSpeed(ROLLER_SIGN*126)
+    def changeCameraNumber(self,index):
+        self.vs.changeCameraNumber(index)
+    def manualControlCheck(self):
+        return self.manualControl
     def connected(self):
         return (self.ard.portOpened, self.ard.port)
+    def manualOverride(self):
+        self.manualControl=True
+        #remove constraints on camera
+        self.vs.override=True
+        self.manualControl=ManualOverride(self)
+        self.manualControl.start()
+    def returnToSMMode(self):
+        #print "return to sm mode called"
+        self.vs.override=False
+        self.manualControl.stop()
+        #print "trying to stop manual mode"
+        #wait for manual control thread to terminate
+        self.manualControl.join()
+        self.manualControl=False
+        #print "sm mode restored"
     def stop(self):
         self.ard.stop()
         self.ir_module.stop()
@@ -92,7 +143,7 @@ class IRModule():#(threading.Thread):
             self.f.write(str(self.ir_val))
             self.f.write('\n')
             #print self.ir_val
-            time.sleep(0.1)
+            time.sleep(0)
             #get one measurement every .1 second
         #self.read=False
     #def reset(self):

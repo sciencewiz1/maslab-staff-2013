@@ -4,10 +4,26 @@ from wrapper import *
 from actions import *
 from states import *
 from wx import *
-log=[]
+import sys
+import pickle
+
+'''This object replaces the standard stdout object so that we can write print statements
+to the console and to a file.'''
+class Tee(object):
+    def __init__(self, *files):
+        self.files = files
+    def write(self, obj):
+        for f in self.files:
+            f.write(obj)
+'''
+Main GUI class used to control the robot.
+'''
 class RobotControllerApp(Frame, threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
+        self.sm=None
+        self.wrapper=None
+        self.writeLog()
         self.start()
     def run(self):
         self.buildGUI()
@@ -15,29 +31,37 @@ class RobotControllerApp(Frame, threading.Thread):
         self.master=App(False)
         Frame.__init__(self,None,title="Robot Control System",size=(500,500))
         #self.control = TextCtrl(self, style=TE_MULTILINE)
+        self.mainLabel="MASLAB 2013 Team 12 Robot Control System"
         self.createWidgets()
         self.loadMainObjects()
         self.Show(True)
         self.master.MainLoop()
     def createWidgets(self):
-        #create file menu
+        #create menus
         self.filemenu=Menu()
+        self.options=Menu()
         #add items to file menu
-        self.aboutMenuItem=self.filemenu.Append(ID_ABOUT,"&About","Info About this program")
         self.runSMMenuItem=self.filemenu.Append(ID_ANY,"&Run SM","Run the StateMachine")
         self.stopSMMenuItem=self.filemenu.Append(ID_ANY,"&Pause SM","Pause the StateMachine Execution")
-        self.manualControl=self.filemenu.Append(ID_ANY,"&Manual Control","Manually Control the Robot")
+        self.manualControlMenuItem=self.filemenu.Append(ID_ANY,"&Manual Control","Manually Control the Robot")
+        self.aboutMenuItem=self.filemenu.Append(ID_ABOUT,"&About","Info About this program")
+        #add items to options
+        self.changeCameraMenuItem=self.options.Append(ID_ANY,"&Change Camera","Change which camera the Vision System uses.")
         #create method button bindings for menu items
         #bind method->menuItem
         #method requires arg:(self,event)
         self.Bind(EVT_MENU, self.about, self.aboutMenuItem)
         self.Bind(EVT_MENU,self.startSM,self.runSMMenuItem)
         self.Bind(EVT_MENU,self.pauseSM,self.stopSMMenuItem)
+        self.Bind(EVT_MENU,self.activateManualControl,self.manualControlMenuItem)
+        self.Bind(EVT_MENU,self.changeCameraNumber,self.changeCameraMenuItem)
         self.Bind(EVT_CLOSE, self.OnClose)
         #create menubar
         self.menuBar=MenuBar()
         #add file menu to menubar
         self.menuBar.Append(self.filemenu,"&File")
+        self.menuBar.Append(self.options,"&Options")
+        #set status bar
         self.SetMenuBar(self.menuBar)
         self.status=self.CreateStatusBar(style=0)
         self.status.SetFieldsCount(2)
@@ -54,18 +78,50 @@ class RobotControllerApp(Frame, threading.Thread):
             self.SetStatusText("Failed to connect, please plug in the Arduino!",1)
         self.status.SetStatusText("System Ready...",0)
     def about(self,event):
-        mainLabel="MASLAB 2013 Team 12 Robot Control System"
         msg="This is the GUI for the main control system of the robot for the MASLAB 2013 Competition.\n The project team included: Holden Lee, David Goehring, Melody Liu, and Roxana Mata"
-        dlg=MessageDialog( self, msg,mainLabel,wx.OK)
+        dlg=MessageDialog( self, msg,self.mainLabel,wx.OK)
         dlg.ShowModal()
         dlg.Destroy()
+    def changeCameraNumber(self,event):
+        cameraNumDialog = TextEntryDialog(None, "Please enter the camera index.", 'Vision System: Change Camera Number', '')
+        if cameraNumDialog.ShowModal() == wx.ID_OK:
+            cameraNum=cameraNumDialog.GetValue()
+            try:
+                cameraNum=int(cameraNum)
+                self.wrapper.changeCameraNumber(cameraNum)
+                msg="Camera Number changed to: "+str(cameraNum)
+                dlg=MessageDialog(self,msg,self.mainLabel,wx.OK)
+                dlg.ShowModal()
+            except:
+                msg="Invalid Camera Number"
+                dlg=MessageDialog( self, msg,self.mainLabel,wx.OK)
+                dlg.ShowModal()
+    def activateManualControl(self,event):
+        if not self.wrapper.manualControlCheck():
+            self.pauseSM(event)
+            self.wrapper.manualOverride()
+            msg="Manual override started!"
+            dlg=MessageDialog(self,msg,self.mainLabel,wx.OK)
+            dlg.ShowModal()
+        else:
+            msg="You are already in manual override mode!"
+            dlg=MessageDialog(self,msg,self.mainLavel,wx.OK)
+            dlg.ShowModal()
     def startSM(self,event):
+        if self.wrapper.manualControlCheck():
+            self.wrapper.returnToSMMode()
         self.status.SetStatusText("Running SM...",0)
+        self.wrapper.resetRoller()
         self.sm.startSM()
     def pauseSM(self,event):
         self.status.SetStatusText("Pausing SM...",0)
         self.sm.pauseSM()
+        self.wrapper.turnMotorsOff()
         self.status.SetStatusText("SM Paused...",0)
+    def writeLog(self):
+        self.original=sys.stdout
+        self.fsock=open("log.txt",'w')
+        sys.stdout=sys.stdout = Tee(sys.stdout, self.fsock)
     def OnClose(self,event):
         #stops all threads and destroys all objects
         self.sm.stopSM()
@@ -73,10 +129,12 @@ class RobotControllerApp(Frame, threading.Thread):
         #delete objects
         del(self.sm)
         del(self.wrapper)
+        #write log
+        sys.stdout=self.original
+        self.fsock.close()
         #destroy GUI
         #instance is a frame
         self.master.ExitMainLoop() #self.master.Exit()   # or wx.GetApp().ExitMainLoop()
-        
         
         
 

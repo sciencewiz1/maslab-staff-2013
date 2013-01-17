@@ -6,7 +6,6 @@ import time
 import threading
 import time
 from Tkinter import *
-CAMERA_NUM=0
 TEMPLATE_MATCH_THRESHOLD=200
 CLOSE_THRESHOLD=20000.0
 VALUE_THRESHOLD=200
@@ -17,13 +16,17 @@ HUE_THRESHOLD=25
 #saturation-how much mixed with white
 #value-how much mixed with black
 #NOTE: This code is still in development stages and commenting has not been completed.
+'''
+GUI for working with the Vision System. With this GUI you are easily able to fine tune the HSV ranges for the desired
+color of the object you want to detect using a slider based calibration mechanism.
+'''
 class VisionSystemApp(Frame,threading.Thread):
-    def __init__(self,target):
+    def __init__(self):
         #set main instance variables
         self.active=True
-        self.target=target
-        self.vision=VisionSystem(target)
-        self.default=self.vision.targets.copy()
+        self.vision=VisionSystem()
+        self.default=self.vision.targetColorProfiles.copy()
+        self.selectedTarget="redBall"
         #call super class methods
         threading.Thread.__init__(self)
         #start the threads and the application mainloop
@@ -45,6 +48,15 @@ class VisionSystemApp(Frame,threading.Thread):
         self.mainLabel=Label(self, text="Ball Detection Callibration")
         self.lowerLabel=Label(self, text="HSV Lower Bound")
         self.upperLabel=Label(self, text="HSV Upper Bound")
+        self.targetLabel1=Label(self,text="Choose Target 1")
+        self.targetLabel2=Label(self,text="Choose Target 2")
+        self.cameraLabel=Label(self,text="Change Camera Number")
+        self.targetString1 = StringVar(self.master)
+        self.targetString1.set("redBall")
+        self.selectTarget1=OptionMenu(self, self.targetString1, "redBall","greenBall","blueWall",command=self.switchTargetScales)
+        self.cameraString=StringVar(self.master)
+        self.cameraString.set("0")
+        self.selectCamera=OptionMenu(self, self.cameraString,"0","1","2",command=self.changeCameraNumber)
         self.hueLowerScale=Scale(self,from_=0,to=180, orient=HORIZONTAL,command=self.updateSliders, length=200)
         self.satLowerScale=Scale(self,from_=0,to=255, orient=HORIZONTAL, command=self.updateSliders,length=200)
         self.valueLowerScale=Scale(self,from_=0,to=255,orient=HORIZONTAL, command=self.updateSliders,length=200)
@@ -56,6 +68,10 @@ class VisionSystemApp(Frame,threading.Thread):
         self.defaults.pack()
         self.override.pack()
         self.mainLabel.pack()
+        self.cameraLabel.pack()
+        self.selectCamera.pack()
+        self.targetLabel1.pack()
+        self.selectTarget1.pack()
         self.lowerLabel.pack()
         self.hueLowerScale.pack()
         self.satLowerScale.pack()
@@ -64,13 +80,21 @@ class VisionSystemApp(Frame,threading.Thread):
         self.hueUpperScale.pack()
         self.satUpperScale.pack()
         self.valueUpperScale.pack()
+    def changeCameraNumber(self,val):
+        self.vision.changeCameraNumber(val)
+    def switchTargetScales(self,val):
+        targetStr=val
+        self.vision.removeTarget(self.selectedTarget)
+        self.selectedTarget=targetStr
+        self.vision.addTarget(targetStr)
+        self.reset()
     def getVisionSystem(self):
         return self.vision
     def override(self):
         self.vision.override=True
     def reset(self):
-        (lower,upper)=self.default[self.target]
-        self.vision.targets[self.target]=(lower,upper)
+        (lower,upper)=self.default[self.selectedTarget]
+        self.vision.targetColorProfiles[self.selectedTarget]=(lower,upper)
         (lH,lS,lV)=lower
         self.hueLowerScale.set(lH)
         self.satLowerScale.set(lS)
@@ -107,36 +131,50 @@ class VisionSystemApp(Frame,threading.Thread):
     def setValLower(self,val):
     def setValUpper(self,val):'''
     def getBounds(self):
-        return self.vision.targets[self.vision.target]
+        return self.vision.targetColorProfiles[self.selectedTarget]
     def changeLowerBound(self,lower):
         lowerOld,upper=self.getBounds()
-        self.vision.targets[self.vision.target]=(lower,upper)
+        self.vision.targetColorProfiles[self.selectedTarget]=(lower,upper)
     def changeUpperBound(self,upper):
         lower,upperOld=self.getBounds()
-        self.vision.targets[self.vision.target]=(lower,upper)
+        self.vision.targetColorProfiles[self.selectedTarget]=(lower,upper)
     def stop(self):
         self.active=False
         self.vision.active=False
         self.vision.join()
         self.master.quit()
-        self.join()
 '''Team 12 MASLAB 2013 Vision System API designed to locate certain objects
 and command the robot to move towards them'''
 class VisionSystem(threading.Thread):
     '''Initialization method that creates the
         camera object and initializes Thread data'''
-    def __init__(self,target):
-        self.capture = cv.CaptureFromCAM(CAMERA_NUM) #camera object
-        self.target=target
+    def __init__(self):
+        self.capture = cv.CaptureFromCAM(0) #camera object
+        self.targets=[]
         self.active=True
-        self.targets={"redBall":((0, 128, 153), (15, 255, 255)),"greenBall":((45, 150, 36), (90, 255, 255))}
+        self.targetColorProfiles={"redBall":((0, 128, 153), (15, 255, 255)),"greenBall":((45, 150, 36), (90, 255, 255)),
+                      "blueWall":((104, 141, 94), (109, 255, 255))}
         self.calibrated=False
-        self.targetLocations={"redBall":None,"greenBall":None,"pyramidTopTemplate":None}
+        self.targetLocations={"redBall":None,"greenBall":None,"blueWall":None}
+        self.bestTargetOverall=None #will be (target,distFromCenter,absolute coordinates,area)
         self.detectionThreshold=TEMPLATE_MATCH_THRESHOLD
         self.run_counter=1
         self.override=False
+        self.pause=False
+        self.lock=threading.Lock()
         #call super class init method and bind to instance
         threading.Thread.__init__(self)
+        print "Tracking no targets!"
+    def changeCameraNumber(self,index):
+        with self.lock:
+            self.pause=True
+            del(self.capture)
+            try:
+                index=int(index)
+                self.capture=cv.CaptureFromCAM(index)
+            except:
+                print "Invalid camera number!"
+            self.pause=False
     def smIntegrate(self):
         self.override=False
     def letmerun(self):
@@ -145,6 +183,42 @@ class VisionSystem(threading.Thread):
         self.calibrated=True
         self.active=True
         print "calibrated"
+    def addTarget(self,targetStr):
+        if targetStr in self.targetColorProfiles:
+            self.targets.append(targetStr)
+        else:
+            print "Target: "+str(targetStr)+" is not a valid target!"
+    def removeTarget(self,targetStr):
+        if targetStr in self.targets:
+            self.targets.remove(targetStr)
+        else:
+            print "Target: "+str(targetStr)+" is currently not being tracked!"
+    def clearTargets(self):
+        self.targets=[]
+        print "Targets have been cleared!"
+    def getTargetDistFromCenter(self,target):
+        if target in self.targetLocations:
+            return self.targetLocations[target]
+        else:
+            if target=="all":
+                return self.bestTargetOverall
+        
+    def isClose(self,target):
+        if target in self.targetLocations:
+            sample=self.targetLocations[target]
+        else:
+            if target=="all":
+                sample=self.bestTargetOverall
+        if sample==None:
+            return False
+        else:
+            targetStr,(xDiff,yDiff),(xAbs,yAbs),area=sample
+            (x1,y1)=left
+            if area>=CLOSE_THRESHOLD or yAbs>=(y1/float(2)):
+                #print "isClose"
+                return True
+            else:
+                return False
     def processImage(self,image):
         #clone image so that we do not tamper with original
         clone=cv.CloneImage(image)
@@ -154,12 +228,56 @@ class VisionSystem(threading.Thread):
         #converts image to hsv
         hsv=cv.CreateImage(cv.GetSize(clone),8,3)
         cv.CvtColor(clone,hsv,cv.CV_BGR2HSV)
-        #threshold image to get only color we want
-        thresholded=cv.CreateImage(cv.GetSize(hsv),8,1)
-        lowerBound,upperBound=self.targets[self.target]
-        cv.InRangeS(hsv,lowerBound,upperBound,thresholded)
         #cv.Erode(thresholded, thresholded, None, 5)
-        return thresholded   
+        return hsv
+    def processImagePhase2(self,processedImage,colorProfile):
+        lowerBound,upperBound=colorProfile
+        #threshold image to get only color we want
+        thresholded=cv.CreateImage(cv.GetSize(processedImage),8,1)
+        cv.InRangeS(processedImage,lowerBound,upperBound,thresholded)
+        return thresholded
+    def findTargets(self,image):
+        initialProcessedImage=self.processImage(image) 
+        targetLocations=[]
+        processedImages=[]
+        maxTargetArea=0
+        maxTargetY=0
+        maxTargetLocation=None
+        if len(self.targets)!=0:
+            for target in self.targets:
+                (targetsData,processedImagePhase2)=self.findTarget(initialProcessedImage,target)
+                processedImages.append(processedImagePhase2)
+                if targetsData==None:
+                    continue
+                (xdist,ydist),(x,y),areat,centers=targetsData
+                if areat>maxTargetArea and y>maxTargetY:
+                    maxTargetArea=areat
+                    maxTargetY=y
+                    maxTargetLocation=(target,(xdist,ydist),(x,y),areat)
+                targetLocations.extend(centers)
+            self.bestTargetOverall=maxTargetLocation
+        else:
+            (targetsData,processedImagePhase2)= self.findTarget(initialProcessedImage,None)
+            processedImages.append(processedImagePhase2)
+        self.renderImages(image,processedImages,targetLocations)
+    def renderImages(self,original,processedImages,allTargetLocations):
+        #cv.ShowImage('Ball Tracker Original',original)
+        ((center,centerEnd),leftExtreme,rightExtreme)=self.findCenterOfImageAndExtremes(original)
+        cv.Rectangle(original,center,centerEnd,(0,0,255),1,0)
+        overlay = cv.CloneImage(original)
+        completeProcessedImage=processedImages[0]
+        for i in range(1,len(processedImages)):
+            cv.Add(completeProcessedImage,processedImages[i],completeProcessedImage)
+        cv.ShowImage("Ball Tracker Computer Vision",completeProcessedImage)
+        for targetLocation in allTargetLocations:
+            (area1,(x1,y1))=targetLocation
+            cv.Circle(overlay, (x1, y1), 2, (0, 255,0), 50)
+        if self.bestTargetOverall!=None:
+            (target,(xdist,ydist),(x,y),areat)=self.bestTargetOverall
+            cv.Circle(overlay, (x,y), 2, (0, 0, 255), 20)
+        cv.Add(original, overlay, original)
+        #cv.Merge(completeProcessedImage, None, None, None, original)
+        cv.ShowImage('Ball Tracker Processed',original)
     def findMomentsAndArea(self,image):
         mat=cv.GetMat(image)
         moments=cv.Moments(mat)
@@ -177,19 +295,7 @@ class VisionSystem(threading.Thread):
         if area>self.detectionThreshold and (x,y)!=(None,None):
             return True
         return False
-    '''
-    This method locates a desired target in an image.
-    @param image- an cv image file, ascertained by doing cv.LoadImage("example.jpg")
-    @return a cv image file with a box drawn around the located object and a box drawn
-    around the center of the image
-    '''
-    def findTarget(self,image):
-         #3 in away=3386655.0 pixel area
-        image=cv.CloneImage(image)
-        #process image
-        processedImage=self.processImage(image)
-        moments,area=self.findMomentsAndArea(processedImage)
-        (x,y)=self.findCenterOfMass(moments,area)
+    def findCenterOfImageAndExtremes(self,image):
         #find center of image
         length=10
         centerX,centerY=(int(image.width/float(2)),int(image.height/float(2)))
@@ -198,14 +304,25 @@ class VisionSystem(threading.Thread):
         #find left and right extremems of image
         leftExtreme=(0,int(image.height/float(2)))
         rightExtreme=(image.width,int(image.height/float(2)))
-        #place center marker
-        cv.Rectangle(image,center,centerEnd,(0,0,255),1,0)
-        cv.ShowImage("Ball Tracker Computer Vision",processedImage)
+        return ((center,centerEnd),leftExtreme,rightExtreme)
+    def findTarget(self,processedImage,target):
+         #3 in away=3386655.0 pixel area
+        image=cv.CloneImage(processedImage)
+        #process image
+        if target==None or target not in self.targetColorProfiles:
+            colorProfile=((256,256,256),(256,256,256))
+        else:
+            colorProfile=self.targetColorProfiles[target]
+        processedImagePhase2=self.processImagePhase2(processedImage,colorProfile)
+        moments,area=self.findMomentsAndArea(processedImagePhase2)
+        (x,y)=self.findCenterOfMass(moments,area)
+        data=(None,processedImagePhase2)
+        savedData=None
         if self.updateCheck((x,y),area):
             #create target find overlay
-            overlay = cv.CreateImage(cv.GetSize(image), 8, 3)
             h=cv.CreateMemStorage(0)
-            contours= cv.FindContours(processedImage,h ,cv.CV_RETR_LIST, cv.CV_CHAIN_APPROX_SIMPLE)
+            cloneForContour=cv.CloneImage(processedImagePhase2)
+            contours= cv.FindContours(cloneForContour,h ,cv.CV_RETR_LIST, cv.CV_CHAIN_APPROX_SIMPLE)
             centers=[]
             while contours:
                 area1=cv.ContourArea (contours)
@@ -214,7 +331,6 @@ class VisionSystem(threading.Thread):
                     #print list(contours)
                     x1 = int(cv.GetSpatialMoment(moments1, 1, 0)/area1) 
                     y1 = int(cv.GetSpatialMoment(moments1, 0, 1)/area1)
-                    cv.Circle(overlay, (x1, y1), 2, (0, 255,0), 50) 
                     #cv.DrawContours(image,contours,(0,255,0),(0,255,0),1,20,1)
                     centers.append((area1,(x1,y1)))
                 contours=contours.h_next()
@@ -224,33 +340,10 @@ class VisionSystem(threading.Thread):
                 #print areat
                 xdist=x-image.width/float(2)
                 ydist=image.height/float(2)-y
-                self.targetLocations[self.target]=((xdist,ydist),(x,y), leftExtreme,rightExtreme,areat)
-                cv.Circle(overlay, (x,y), 2, (0, 0, 255), 20)
-                cv.Add(image, overlay, image)
-                cv.Merge(processedImage, None, None, None, image)
-            else:
-                self.targetLocations[self.target]=None
-        return image
-    def getTargetDistFromCenter(self):
-        return self.targetLocations[self.target]
-    def isClose(self):
-        sample=self.targetLocations[self.target]
-        if sample==None:
-            return False
-        else:
-            (xDiff,yDiff),(xAbs,yAbs), left,right,area=sample
-            (x1,y1)=left
-            #print  (xAbs,yAbs)
-            #print  (x1,y1)
-            if area>=CLOSE_THRESHOLD or yAbs>=(y1/float(2)):
-                #print "isClose"
-                return True
-            else:
-                return False
-    def changeTarget(self,target):
-        self.target=target
-        image=cv.QueryFrame(self.capture)
-        self.calibrate(image)
+                data=(((xdist,ydist),(x,y),areat,centers),processedImagePhase2)
+                savedData=(target,(xdist,ydist),(x,y),areat)
+        self.targetLocations[target]=savedData
+        return data
     def stop(self):
         self.active=False
         print "Stopping Vision System"
@@ -260,16 +353,14 @@ class VisionSystem(threading.Thread):
             self.stop()
             return "Camera Init Failed!"
         while self.active:
-            if self.run_counter>=1 or self.override:
+            if self.run_counter>=1 or self.override and not self.pause:
                 #print self.targets[self.target]
                 #print self.getTargetDistFromCenter()
                 image=cv.QueryFrame(self.capture)
                 #print "captured image"
                 #print time.time()
-                image1=self.findTarget(image)
+                self.findTargets(image)
                 #print "found targets"
-                cv.ShowImage('Ball Tracker Original',image)
-                cv.ShowImage('Ball Tracker Processed',image1)
                 if not self.override:
                     self.run_counter-=1
                 cv.WaitKey(1)
@@ -279,5 +370,5 @@ class VisionSystem(threading.Thread):
         cv.DestroyWindow("Tracker")
 
 if __name__=="__main__":
-    t=VisionSystemApp("redBall")
+    t=VisionSystemApp()
 

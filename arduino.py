@@ -35,6 +35,7 @@ class Arduino(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         self.portOpened = False
+        self.port=None
         self.killReceived = False
 
     # Start the connection and the thread that communicates with the arduino
@@ -49,7 +50,10 @@ class Arduino(threading.Thread):
     def stop(self):
         # This should tell the thread to finish
         self.killReceived = True
-        self.readWriteThread.join()
+        try:
+            self.readWriteThread.join()
+        except:
+            print "Arduino not connected so there is no comm thread to join."
 
     # Create the serial connection to the arduino
     def connect(self):
@@ -159,9 +163,7 @@ class Arduino(threading.Thread):
                 x = ord(self.serialRead())
                 y = ord(self.serialRead())
                 z = ord(self.serialRead())
-                print "read IMU values"#added
                 self.imuVals[0] = (compass, x, y, z)
-                #time.sleep(0)#added
             # End of packet
             elif (mode == ';'):
                 done = True
@@ -430,4 +432,3 @@ class IMU:
         self.index = self.arduino.addIMU()
     def getRawValues(self):
         return self.arduino.getIMUVals(self.index)
-
