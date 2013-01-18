@@ -2,4 +2,6 @@ import arduino, time, threading
 from constants import *
 
 class Mapper:
-    pass
+    def __init__(self):
+        self.map=[]
+    def add
