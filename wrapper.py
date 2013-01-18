@@ -52,8 +52,8 @@ class Wrapper:
         #self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 1))
         #self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 2))
         print "IR module"
-        self.left_bump=arduino.DigitalInput(self.ard,1)
-        self.right_bump=arduino.DigitalInput(self.ard,2)
+        self.left_bump=arduino.DigitalInput(self.ard,49)
+        self.right_bump=arduino.DigitalInput(self.ard,46)
         print "Bump sensors"
         self.ard.run()
         self.roller_motor.setSpeed(ROLLER_SIGN*126)
