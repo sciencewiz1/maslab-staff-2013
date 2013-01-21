@@ -17,19 +17,18 @@ class ManualOverride(threading.Thread):
         self.wrapper=wrapper
     def run(self):
         while self.active:
-            print self.active
             cmd=raw_input("Enter command:")
             self.manualOverride(str(cmd))
-            time.sleep(0)
     def stop(self):
         self.active=False
     def manualOverride(self,cmd):
         cmds={"l":(LEFT_TURN,-LEFT_TURN,"Left"),"r":(-RIGHT_TURN,RIGHT_TURN,"Right"),"f":(LEFT_FORWARD,RIGHT_FORWARD,"Forward"),"b":(-LEFT_BACK,-RIGHT_BACK,"Backward"),"s":(0,0,"Stop")}
         if cmd in cmds:
             leftSpeed,rightSpeed,cmdName=cmds[cmd]
-            time.sleep(0)
             self.wrapper.left_motor.setSpeed(leftSpeed)
+            print "changed left motor to:"+str(leftSpeed)
             self.wrapper.right_motor.setSpeed(rightSpeed)
+            print "changed right motor to:"+str(rightSpeed)
             print "Moving "+cmdName
         else:
             print "Invalid command!"
@@ -41,10 +40,10 @@ class Wrapper:
         self.ard=arduino.Arduino()
         print "creating wrapper"
         #Syntax for motors: arduino, currentPic, directionPin, pwmPin
-        self.left_motor = arduino.Motor(self.ard, 3, 51, 9)
-        print "Left motor"
-        self.right_motor = arduino.Motor(self.ard, 4, 50, 10)
+        self.right_motor = arduino.Motor(self.ard, 3, 51, 9)
         print "Right motor"
+        self.left_motor = arduino.Motor(self.ard, 4, 50, 10)
+        print "Left motor"
         self.roller_motor = arduino.Motor(self.ard, 2, 53, 8)
         print "Roller motor"
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
@@ -52,8 +51,8 @@ class Wrapper:
         #self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 1))
         #self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 2))
         print "IR module"
-        self.left_bump=arduino.DigitalInput(self.ard,1)
-        self.right_bump=arduino.DigitalInput(self.ard,2)
+        self.left_bump=arduino.DigitalInput(self.ard,49)
+        self.right_bump=arduino.DigitalInput(self.ard,46)
         print "Bump sensors"
         self.ard.run()
         self.roller_motor.setSpeed(ROLLER_SIGN*126)
