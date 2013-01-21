@@ -24,7 +24,9 @@ class ManualOverride(threading.Thread):
     def stop(self):
         self.active=False
     def manualOverride(self,cmd):
-        cmds={"l":(-LEFT_TURN,RIGHT_TURN,"Left"),"r":(LEFT_TURN,-RIGHT_TURN,"Right"),"f":(LEFT_FORWARD,RIGHT_FORWARD,"Forward"),"b":(LEFT_BACK,RIGHT_BACK,"Backward"),"s":(0,0,"Stop")}
+        cmds={"l":(-LEFT_TURN,RIGHT_TURN,"Left"),"r":(LEFT_TURN,-RIGHT_TURN,"Right"),
+              "f":(LEFT_FORWARD,RIGHT_FORWARD,"Forward"),"b":(LEFT_BACK,RIGHT_BACK,"Backward"),
+              "s":(0,0,"Stop"),"lo":(LEFT_FORWARD,0,"Left On"),"ro":(0,RIGHT_FORWARD,"Right On")}
         if cmd in cmds:
             leftSpeed,rightSpeed,cmdName=cmds[cmd]
             time.sleep(0)
