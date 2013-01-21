@@ -41,11 +41,11 @@ class Wrapper:
         self.ard=arduino.Arduino()
         print "creating wrapper"
         #Syntax for motors: arduino, currentPic, directionPin, pwmPin
-        self.left_motor = arduino.Motor(self.ard, 3, 51, 9)
+        self.left_motor = arduino.Motor(self.ard, 13, 23, 12)
         print "Left motor"
-        self.right_motor = arduino.Motor(self.ard, 4, 50, 10)
+        self.right_motor = arduino.Motor(self.ard,10, 27, 9)
         print "Right motor"
-        self.roller_motor = arduino.Motor(self.ard, 2, 53, 8)
+        self.roller_motor = arduino.Motor(self.ard, 7, 31, 6)
         print "Roller motor"
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
         '''Add this when we add more IR modules'''
