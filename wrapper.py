@@ -17,10 +17,8 @@ class ManualOverride(threading.Thread):
         self.wrapper=wrapper
     def run(self):
         while self.active:
-            print self.active
             cmd=raw_input("Enter command:")
             self.manualOverride(str(cmd))
-            time.sleep(0)
     def stop(self):
         self.active=False
     def manualOverride(self,cmd):
@@ -29,9 +27,10 @@ class ManualOverride(threading.Thread):
               "s":(0,0,"Stop"),"lo":(LEFT_FORWARD,0,"Left On"),"ro":(0,RIGHT_FORWARD,"Right On")}
         if cmd in cmds:
             leftSpeed,rightSpeed,cmdName=cmds[cmd]
-            time.sleep(0)
             self.wrapper.left_motor.setSpeed(leftSpeed)
+            print "changed left motor to:"+str(leftSpeed)
             self.wrapper.right_motor.setSpeed(rightSpeed)
+            print "changed right motor to:"+str(rightSpeed)
             self.wrapper.roller_motor.setSpeed(126)
             print "Moving "+cmdName
         else:
