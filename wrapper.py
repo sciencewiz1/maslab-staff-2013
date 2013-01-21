@@ -24,12 +24,13 @@ class ManualOverride(threading.Thread):
     def stop(self):
         self.active=False
     def manualOverride(self,cmd):
-        cmds={"l":(LEFT_TURN,-LEFT_TURN,"Left"),"r":(-RIGHT_TURN,RIGHT_TURN,"Right"),"f":(LEFT_FORWARD,RIGHT_FORWARD,"Forward"),"b":(-LEFT_BACK,-RIGHT_BACK,"Backward"),"s":(0,0,"Stop")}
+        cmds={"l":(-LEFT_TURN,RIGHT_TURN,"Left"),"r":(LEFT_TURN,-RIGHT_TURN,"Right"),"f":(LEFT_FORWARD,RIGHT_FORWARD,"Forward"),"b":(LEFT_BACK,RIGHT_BACK,"Backward"),"s":(0,0,"Stop")}
         if cmd in cmds:
             leftSpeed,rightSpeed,cmdName=cmds[cmd]
             time.sleep(0)
             self.wrapper.left_motor.setSpeed(leftSpeed)
             self.wrapper.right_motor.setSpeed(rightSpeed)
+            self.wrapper.roller_motor.setSpeed(126)
             print "Moving "+cmdName
         else:
             print "Invalid command!"
@@ -43,7 +44,7 @@ class Wrapper:
         #Syntax for motors: arduino, currentPic, directionPin, pwmPin
         self.left_motor = arduino.Motor(self.ard, 13, 23, 12)
         print "Left motor"
-        self.right_motor = arduino.Motor(self.ard,10, 27, 9)
+        self.right_motor = arduino.Motor(self.ard, 10, 27, 9)
         print "Right motor"
         self.roller_motor = arduino.Motor(self.ard, 7, 31, 6)
         print "Roller motor"
