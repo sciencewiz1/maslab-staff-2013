@@ -8,7 +8,7 @@ import arduino
 # control a servo.
 
 ard = arduino.Arduino()
-servo = arduino.Servo(ard, 7)  # Create a Servo object
+servo = arduino.Servo(ard, 42)  # Create a Servo object
 ard.run()  # Run the Arduino communication thread
 
 while True:

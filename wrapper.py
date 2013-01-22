@@ -31,7 +31,7 @@ class ManualOverride(threading.Thread):
             print "changed left motor to:"+str(leftSpeed)
             self.wrapper.right_motor.setSpeed(rightSpeed)
             print "changed right motor to:"+str(rightSpeed)
-            self.wrapper.roller_motor.setSpeed(126)
+            self.wrapper.roller_motor.setAngle(90)
             print "Moving "+cmdName
         else:
             print "Invalid command!"
@@ -43,22 +43,23 @@ class Wrapper:
         self.ard=arduino.Arduino()
         print "creating wrapper"
         #Syntax for motors: arduino, currentPic, directionPin, pwmPin
-        self.left_motor = arduino.Motor(self.ard, 13, 23, 12)
+        self.left_motor = arduino.Motor(self.ard, 10, 27, 9)
         print "Left motor"
-        self.right_motor = arduino.Motor(self.ard, 10, 27, 9)
+        self.right_motor = arduino.Motor(self.ard, 13, 23, 12)
         print "Right motor"
-        self.roller_motor = arduino.Motor(self.ard, 7, 31, 6)
+        #self.roller_motor = arduino.Motor(self.ard, 7, 31, 6)
+        self.roller_motor=arduino.Servo(self.ard, 42) 
         print "Roller motor"
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
         '''Add this when we add more IR modules'''
-        #self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 1))
-        #self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 2))
+        self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 1))
+        self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 2))
         print "IR module"
         self.left_bump=arduino.DigitalInput(self.ard,49)
         self.right_bump=arduino.DigitalInput(self.ard,46)
         print "Bump sensors"
         self.ard.run()
-        self.roller_motor.setSpeed(ROLLER_SIGN*126)
+        self.roller_motor.setAngle(ROLLER_SIGN*90)
         self.mode=BALL_MODE
         self.color=RED#change this when change color!!!
         #last time logged
@@ -81,7 +82,7 @@ class Wrapper:
 #        self.active=True
     def start(self):
         #start a thread that takes IR readings
-        self.ir_module.start()
+        #self.ir_module.start()
         self.start_time=time.time()
         self.time=self.start_time
         self.wt.start()
@@ -105,7 +106,7 @@ class Wrapper:
     
     def __setitem__(self,index,value):
         if index==ROLLER_MOTOR:
-            self.roller_motor.setSpeed(value)
+            self.roller_motor.setAngle(value)
         elif index==LEFT_MOTOR:
             self.left_motor.setSpeed(value)
         elif index==RIGHT_MOTOR:
@@ -126,9 +127,9 @@ class Wrapper:
     def turnMotorsOff(self):
         self.left_motor.setSpeed(0)
         self.right_motor.setSpeed(0)
-        self.roller_motor.setSpeed(0)
+        self.roller_motor.setAngle(ROLLER_SIGN*90)
     def resetRoller(self):
-        self.roller_motor.setSpeed(ROLLER_SIGN*126)
+        self.roller_motor.setAngle(ROLLER_SIGN*90)
     def changeCameraNumber(self,index):
         self.vs.changeCameraNumber(index)
     def manualControlCheck(self):
@@ -189,7 +190,8 @@ class IRModule(threading.Thread):
             time.sleep(0.01)
     '''Get IR values. If filtered, gives a weighted average for noise reduction'''
     def getIRVal(self):
-        return self.ir_list[-1]
+        #return self.ir_list[-1]
+        return 100
     def __corrected(self,x):
         #given distance, return x+10000 if it's too large
         #then when anything is too large, remember it's an invalid distance

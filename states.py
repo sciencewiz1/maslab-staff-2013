@@ -197,7 +197,7 @@ class CaptureBall(State):
         #keep capturing
 
 class Pause(State):
-    def __init__(self, wrap,next_state=TurnAndLook):
+    def __init__(self, wrap,next_state=ApproachBall):
         State.__init__(self,wrap)
         self.action=DoNothing
         self.next_state=next_state

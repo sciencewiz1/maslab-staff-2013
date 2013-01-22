@@ -8,8 +8,8 @@ WALL_TIME = 120
 STOP_TIME = 180
 #for testing
 #check these signs
-LEFT_SIGN=-1
-RIGHT_SIGN=1
+LEFT_SIGN=1
+RIGHT_SIGN=-1
 ROLLER_SIGN=1
 '''!!!!!!!!!!'''
 LEFT_TURN=LEFT_SIGN*48

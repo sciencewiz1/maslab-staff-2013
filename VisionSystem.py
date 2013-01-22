@@ -166,6 +166,7 @@ class VisionSystem(threading.Thread):
         self.run_counter=1
         self.override=False
         self.pause=False
+        self.imageParams=None
         self.lock=threading.Lock()
         #call super class init method and bind to instance
         threading.Thread.__init__(self)
@@ -218,7 +219,10 @@ class VisionSystem(threading.Thread):
             return False
         else:
             targetStr,(xDiff,yDiff),(xAbs,yAbs),area=sample
-            (x1,y1)=left
+            imageData=self.imageParams
+            if imageData==None:
+                return False
+            (x1,y1),center,leftExt,rightExt=imageData
             if area>=CLOSE_THRESHOLD or yAbs>=(y1/float(2)):
                 #print "isClose"
                 return True
@@ -274,7 +278,7 @@ class VisionSystem(threading.Thread):
         self.renderImages(image,processedImages,targetLocations)
     def renderImages(self,original,processedImages,allTargetLocations):
         #cv.ShowImage('Ball Tracker Original',original)
-        ((center,centerEnd),leftExtreme,rightExtreme)=self.findCenterOfImageAndExtremes(original)
+        ((width,height),(center,centerEnd),leftExtreme,rightExtreme)=self.findCenterOfImageAndExtremes(original)
         cv.Rectangle(original,center,centerEnd,(0,0,255),1,0)
         overlay = cv.CloneImage(original)
         completeProcessedImage=processedImages[0]
@@ -320,7 +324,7 @@ class VisionSystem(threading.Thread):
         #find left and right extremems of image
         leftExtreme=(0,int(image.height/float(2)))
         rightExtreme=(image.width,int(image.height/float(2)))
-        return ((center,centerEnd),leftExtreme,rightExtreme)
+        return ((image.width,image.height),(center,centerEnd),leftExtreme,rightExtreme)
     def findTarget(self,processedImage,target,ignoreRegion=None):
          #3 in away=3386655.0 pixel area
         image=cv.CloneImage(processedImage)
@@ -388,6 +392,7 @@ class VisionSystem(threading.Thread):
                 cv.Resize(image,downSampledImage)
                 #print "captured image"
                 #print time.time()
+                self.imageParams=self.findCenterOfImageAndExtremes(downSampledImage)
                 self.findTargets(downSampledImage)
                 #print "found targets"
                 if not self.override:
