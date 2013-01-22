@@ -432,7 +432,7 @@ class VisionSystem(threading.Thread):
         while self.active:
             if self.run_counter>=1 or self.override and not self.pause:
                 #print self.targets[self.target]
-                print self.getTargetDistFromCenter()
+                #print self.getTargetDistFromCenter()
                 image=self.captureImage()
                 #self.findWall(image)
                 self.findTargets(image)
