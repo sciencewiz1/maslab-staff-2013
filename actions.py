@@ -128,7 +128,7 @@ class ForwardToTarget(Action):#or GoForward
         #self.wrapper.left_motor.setSpeed(0)
     def loop(self):
         print "looping ",self.__class__.__name__
-        dist=self.wrapper.vs.getTargetDistFromCenter(target)
+        dist=self.wrapper.vs.getTargetDistFromCenter(self.target)
         if dist==None:
             return
             #this will exit the ApproachBallState: lost the ball:`(
@@ -180,7 +180,7 @@ class State:
     def run(self):
         if DEBUG:
             print "Running ",self.__class__.__name__
-            print "Init action ",self.action.__name__
+            #print "Init action ",self.action.__name__
         if isinstance(self.action,tuple):
             action_class=self.action[0]
             action_args=self.action[1]

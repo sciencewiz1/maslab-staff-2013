@@ -239,7 +239,7 @@ class Charge(State):
             self.button=True
     def stopfunction(self):
         if time.time() > self.wrapper.time+2:
-            if self.button=True:
+            if self.button==True:
                 self.wrapper.hitButton()
             return TurnAndLook
         return 0
