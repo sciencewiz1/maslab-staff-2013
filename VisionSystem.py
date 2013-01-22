@@ -55,7 +55,7 @@ class VisionSystemApp(Frame,threading.Thread):
         self.cameraLabel=Label(self,text="Change Camera Number")
         self.targetString1 = StringVar(self.master)
         self.targetString1.set("redBall")
-        self.selectTarget1=OptionMenu(self, self.targetString1, "redBall","greenBall","blueWall","yellowWall","purpleWall","yellowWall2",command=self.switchTargetScales)
+        self.selectTarget1=OptionMenu(self, self.targetString1, "redBall","greenBall","blueWall","yellowWall","purpleWall","yellowWall2","cyanButton",command=self.switchTargetScales)
         self.cameraString=StringVar(self.master)
         self.cameraString.set("0")
         self.selectCamera=OptionMenu(self, self.cameraString,"0","1","2",command=self.changeCameraNumber)
@@ -157,12 +157,12 @@ class VisionSystem(threading.Thread):
         self.targetColorProfiles={"redBall":[((0, 147, 73), (15, 255, 255)),((165, 58, 36), (180, 255, 255))],"greenBall":[((45, 150, 36), (90, 255, 255))],
                       "blueWall":[((103, 141, 94), (115, 255, 255))],"yellowWall":[((29, 150, 36), (64, 255, 255))],
                                   "purpleWall":[((119, 117, 52), (129, 255, 255))],"yellowWall2":[((26, 53,117), (32, 255, 255))],
-                                  "blackButton":[((1),(1))]}
+                                  "cyanButton":[((95,176,115),(108,255,255))]}
         self.targetShapeProfiles={"redBall":self.detectCircle,"greenBall":self.detectCircle,
                       "blueWall":self.detectRectangle,"yellowWall":self.detectRectangle,"purpleWall":self.detectRectangle,
-                                  "yellowWall2":self.detectRectangle,"blackButton":self.detectRectangle}
+                                  "yellowWall2":self.detectRectangle,"cyanButton":self.detectRectangle}
         self.default= copy.deepcopy(self.targetColorProfiles)
-        self.targetLocations={"redBall":None,"greenBall":None,"blueWall":None,"yellowWall":None,"purpleWall":None,"yellowWall2":None,"blackButton":None}
+        self.targetLocations={"redBall":None,"greenBall":None,"blueWall":None,"yellowWall":None,"purpleWall":None,"yellowWall2":None,"cyanButton":None}
         self.bestTargetOverall=None #will be (target,distFromCenter,absolute coordinates,area)
         self.detectionThreshold=TEMPLATE_MATCH_THRESHOLD
         self.run_counter=1
@@ -212,11 +212,18 @@ class VisionSystem(threading.Thread):
         self.targets=[]
         print "Targets have been cleared!"
     def getTargetDistFromCenter(self,target="all"):
+        data=None
         if target in self.targetLocations:
-            return self.targetLocations[target]
+            data = self.targetLocations[target]
         else:
             if target=="all":
-                return self.bestTargetOverall
+                data = self.bestTargetOverall
+        if data!=None:
+            (target,(xdist,ydist),(xClosest,yClosest),areat,(xCOM,yCOM))=data
+            return (xdist,ydist)
+        else:
+            return None
+                
         
     def isClose(self,target="all"):
         if target in self.targetLocations:
@@ -425,7 +432,7 @@ class VisionSystem(threading.Thread):
         while self.active:
             if self.run_counter>=1 or self.override and not self.pause:
                 #print self.targets[self.target]
-                #print self.getTargetDistFromCenter()
+                print self.getTargetDistFromCenter()
                 image=self.captureImage()
                 #self.findWall(image)
                 self.findTargets(image)
