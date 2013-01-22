@@ -29,8 +29,8 @@ WALL_MODE=1
 #later, preferably change this to dynamic control
 TURN_SPEED=50.0
 #color
-RED=0
-GREEN=1
+RED="redBall"
+GREEN="greenBall"
 #direction
 LEFT=-1
 RIGHT=1

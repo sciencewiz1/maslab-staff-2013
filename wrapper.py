@@ -75,6 +75,7 @@ class Wrapper:
         self.vsApp=VisionSystemApp()
         self.vs=self.vsApp.getVisionSystem()
         self.vs.addTarget(string)
+        #self.vs.addTarget("blackWall")
         print "starting vs"
         #start timer
         self.wt=WallTimer(self)
@@ -85,6 +86,8 @@ class Wrapper:
         #self.ir_module.start()
         self.start_time=time.time()
         self.time=self.start_time
+        self.last_button_time=0#last time it pressed the black button
+        self.button_presses=0
         self.wt.start()
     def __getitem__(self,index):
         if index==FRONT_DIST:
@@ -112,15 +115,24 @@ class Wrapper:
         elif index==RIGHT_MOTOR:
             self.right_motor.setSpeed(value)
     #does it see a ball?
+
+    def goForButton(self):
+        return (time.time()>=self.last_button_time) and self.button_presses<4
     
-    def see(self):
-        print "see ball at ",self.vs.getTargetDistFromCenter()
-        return self.vs.getTargetDistFromCenter() != None
+    def hitButton(self):
+        self.last_button_time=time.time()
+        self.button_presses+=1
+    
+    def seeBall(self):
+        print "see ball at ",self.vs.getTargetDistFromCenter(self.color)
+        return self.vs.getTargetDistFromCenter(self.color) != None
+    def seeButton(self):
+        return self.vs.getTargetDistFromCenter("blackButton") != None
     def ballCentered(self):
-        dist=self.vs.getTargetDistFromCenter()
+        dist=self.vs.getTargetDistFromCenter(self.color)
         if dist== None:
             return 0
-        return (math.fabs(dist[1][0])<=CENTER_THRESHOLD)
+        return (math.fabs(dist[0])<=CENTER_THRESHOLD)
     '''return array of coordinates of balls'''
     def ballCoordinates(self):
         return self.vs.getTargetDistFromCenter()

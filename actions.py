@@ -114,21 +114,25 @@ class MaxTurnRight(Action):
     def loop(self):
         print "looping ",self.__class__.__name__
 
-class ForwardToBall(Action):#or GoForward
-    def __init__(self,wrapper):
+class ForwardToTarget(Action):#or GoForward
+    def __init__(self,wrapper,target=None):
         Action.__init__(self,wrapper)
         self.controller=PIDController(TURN_KP,TURN_KI,TURN_KD)
+        if target==None:
+            self.target=wrapper.color
+        else:
+            self.target=target
     def run(self):
         pass
         #self.wrapper.right_motor.setSpeed(0)
         #self.wrapper.left_motor.setSpeed(0)
     def loop(self):
         print "looping ",self.__class__.__name__
-        dist=self.wrapper.vs.getTargetDistFromCenter()
+        dist=self.wrapper.vs.getTargetDistFromCenter(target)
         if dist==None:
             return
             #this will exit the ApproachBallState: lost the ball:`(
-        adjust=self.controller.adjust(dist[1][0]/8)
+        adjust=self.controller.adjust(dist[0]/8)
         new_left_speed=LEFT_FORWARD+LEFT_SIGN*adjust
         #do I want to subtract from right motor too?
         #scale so speeds <=126
@@ -177,12 +181,21 @@ class State:
         if DEBUG:
             print "Running ",self.__class__.__name__
             print "Init action ",self.action.__name__
-        #check if there's an obstacle. If so, avoid it
-        action_instance=self.action(self.wrapper)
+        if isinstance(self.action,tuple):
+            action_class=self.action[0]
+            action_args=self.action[1]
+            action_instance=action_class(self.wrapper,action_args)
+        else:
+            action_instance=self.action(self.wrapper)
         self.wrapper.time=time.time()
         #stopfunction returns the transition
-        next_state = action_instance.start(self.stopfunction)
-        return next_state(self.wrapper)     
+        next_state_info=action_instance.start(self.stopfunction)
+        if isinstance(next_state_info,tuple):
+            next_state = next_state_info[0]
+            next_arg = next_state_info[1]
+            return next_state(self.wrapper,next_arg)
+        #next_state_info is a classname; return an object of that class
+        return next_state_info(self.wrapper)     
 
     
 class Stop(State):
