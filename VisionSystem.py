@@ -430,6 +430,7 @@ class VisionSystem(threading.Thread):
             self.stop()
             return "Camera Init Failed!"
         while self.active:
+            print "in vision thread"
             if self.run_counter>=1 or self.override and not self.pause:
                 #print self.targets[self.target]
                 #print self.getTargetDistFromCenter()
@@ -440,6 +441,7 @@ class VisionSystem(threading.Thread):
                 if not self.override:
                     self.run_counter-=1
                 cv.WaitKey(1)
+            time.sleep(0.1)
         print "Stopping Vision System"
         #destroy capture 
         del(self.capture)

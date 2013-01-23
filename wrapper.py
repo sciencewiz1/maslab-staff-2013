@@ -191,6 +191,7 @@ class IRModule(threading.Thread):
         self.f=open('ir_log.txt','w')
         self.active=True
         self.ir_list=[]
+        self.run_counter=2
         '''set whether this is short or long range'''
         #distance= m*(1/ir)+b
         if long_range:
@@ -201,23 +202,32 @@ class IRModule(threading.Thread):
             self.b=Y_INTERCEPT
             self.m=SLOPE
             self.too_far=12
+    def letmerun(self):
+        self.run_counter=2
     '''Continuously get IR values and log them in IR list'''
     def run(self):
         while self.active:
-            ir_val=self.ir.getValue()
-            if self.too_far==25:
-                print "long"
-            else:
-                print "short"
-            print "IR=",ir_val
-            self.ir_list.append(ir_val)
-            self.f.write(str(ir_val))
-            self.f.write('\n')
-            #print self.ir_val
+            print "in ir thread"
+            if self.run_counter>0:
+                #fix threading issue
+                ir_val=self.ir.getValue()
+                if self.too_far==25:
+                    print "long"
+                else:
+                    print "short"
+                print "IR=",ir_val
+                self.ir_list.append(ir_val)
+                self.f.write(str(ir_val))
+                self.f.write('\n')
+                #print self.ir_val
+                self.run_counter-=1#fix threading issue
             time.sleep(0.001)
     '''Get IR values. If filtered, gives a weighted average for noise reduction'''
     def getIRVal(self):
-        return self.ir_list[-1]
+        ir_val=self.ir_list[-1]
+        if ir_val==None:
+            return 50
+        return ir_val
     def __corrected(self,x):
         #given distance, return x+10000 if it's too large
         #then when anything is too large, remember it's an invalid distance

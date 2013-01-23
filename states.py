@@ -172,6 +172,7 @@ class ApproachBall(State):
             #WARNING: after it gets unstuck it might go towards the same ball again!
             #Need to prevent this!
         if self.wrapper.vs.isClose():
+            print "charging b/c ball close"
             return Charge
         if self.wrapper.ballCentered():
             return 0
