@@ -24,7 +24,8 @@ class Wander(State):
         if self.wrapper[LEFT_BUMP] or self.wrapper[RIGHT_BUMP]:
             return Stuck
 
-        dist=self.wrapper[FRONT_DIST]
+        #slightly ad hoc right now
+        dist=min(self.wrapper[FRONT_DIST],self.wrapper[FRONT_DIST2])
         
         if dist <= TOO_CLOSE:
         #way too close, back up
@@ -70,7 +71,7 @@ class AvoidWall(State):
         '''
         if self.wrapper[LEFT_BUMP] or self.wrapper[RIGHT_BUMP]:
             return Stuck
-        dist=self.wrapper[FRONT_DIST]
+        dist=min(self.wrapper[FRONT_DIST],self.wrapper[FRONT_DIST2])
         #I'm not too sure about this.
         #Be careful of robot trying to get an inaccessible ball
         if self.wrapper.seeBall():

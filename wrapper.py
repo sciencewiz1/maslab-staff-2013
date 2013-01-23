@@ -51,12 +51,14 @@ class Wrapper:
         self.roller_motor=arduino.Servo(self.ard, 42) 
         print "Roller motor"
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
+        #this one is long-range
+        self.ir_module2=IRModule(arduino.AnalogInput(self.ard, 1),True)
         '''Add this when we add more IR modules'''
-        self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 1))
-        self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 2))
+        #self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 2))
+        #self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 3))
         print "IR module"
-        self.left_bump=arduino.DigitalInput(self.ard,49)
-        self.right_bump=arduino.DigitalInput(self.ard,46)
+        self.left_bump=arduino.DigitalInput(self.ard,23)
+        self.right_bump=arduino.DigitalInput(self.ard,29)
         print "Bump sensors"
         self.ard.run()
         self.roller_motor.setAngle(ROLLER_SIGN*90)
@@ -84,6 +86,7 @@ class Wrapper:
     def start(self):
         #start a thread that takes IR readings
         self.ir_module.start()
+        self.ir_module2.start()
         self.start_time=time.time()
         self.time=self.start_time
         self.last_button_time=0#last time it pressed the black button
@@ -96,6 +99,8 @@ class Wrapper:
 ##            return self.left_ir_module.distance()
 ##        if index==RIGHT_DIST:
 ##            return self.right_ir_module.distance()
+        if index==FRONT_DIST2:
+            return self.ir_module2.distance()
         if index==LEFT_BUMP:
             return self.left_bump.getValue()
         if index==RIGHT_BUMP:
