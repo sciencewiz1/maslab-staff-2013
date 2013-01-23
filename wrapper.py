@@ -31,8 +31,8 @@ class ManualOverride(threading.Thread):
             print "changed left motor to:"+str(leftSpeed)
             self.wrapper.right_motor.setSpeed(rightSpeed)
             print "changed right motor to:"+str(rightSpeed)
-            #self.wrapper.roller_motor.setAngle(90)
-            self.wrapper.roller_motor.setValue(1)
+            self.wrapper.roller_motor.setAngle(ROLLER_ANGLE)
+            #self.wrapper.roller_motor.setValue(1)
             print "Moving "+cmdName
         else:
             print "Invalid command!"
@@ -49,8 +49,8 @@ class Wrapper:
         self.right_motor = arduino.Motor(self.ard, 10, 27, 9)
         print "Right motor"
         #self.roller_motor = arduino.Motor(self.ard, 7, 31, 6)
-        #self.roller_motor=arduino.Servo(self.ard, 42)
-        self.roller_motor=arduino.DigitalOutput(self.ard,42)
+        self.roller_motor=arduino.Servo(self.ard, 42)
+        #self.roller_override=arduino.DigitalOutput(self.ard,42)
         print "Roller motor"
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
         #this one is long-range
@@ -63,10 +63,10 @@ class Wrapper:
         self.right_bump=arduino.DigitalInput(self.ard,33)
         print "Bump sensors"
         self.ard.run()
-        #self.roller_motor.setAngle(ROLLER_SIGN*90)
-        self.roller_motor.setValue(1)
+        self.roller_motor.setAngle(ROLLER_ANGLE)
+        #self.roller_motor.setValue(1)
         self.mode=BALL_MODE
-        self.color=RED#change this when change color!!!
+        self.color=GREEN#change this when change color!!!
         #last time logged
         self.start_time=time.time()
         self.time=self.start_time
@@ -117,8 +117,8 @@ class Wrapper:
     
     def __setitem__(self,index,value):
         if index==ROLLER_MOTOR:
-            #self.roller_motor.setAngle(value)
-            self.roller_motor.setValue(1)
+            self.roller_motor.setAngle(value)
+            #self.roller_motor.setValue(1)
         elif index==LEFT_MOTOR:
             self.left_motor.setSpeed(value)
         elif index==RIGHT_MOTOR:
@@ -148,11 +148,11 @@ class Wrapper:
     def turnMotorsOff(self):
         self.left_motor.setSpeed(0)
         self.right_motor.setSpeed(0)
-        #self.roller_motor.setAngle(ROLLER_SIGN*90)
-        self.roller_motor.setValue(0)
+        self.roller_motor.setAngle(ROLLER_STOP)
+        #self.roller_override.setValue(0)
     def resetRoller(self):
-        #self.roller_motor.setAngle(ROLLER_SIGN*90)
-        self.roller_motor.setValue(1)
+        self.roller_motor.setAngle(ROLLER_ANGLE)
+        #self.roller_motor.setValue(1)
     def changeCameraNumber(self,index):
         self.vs.changeCameraNumber(index)
     def manualControlCheck(self):
@@ -205,6 +205,10 @@ class IRModule(threading.Thread):
     def run(self):
         while self.active:
             ir_val=self.ir.getValue()
+            if self.too_far==25:
+                print "long"
+            else:
+                print "short"
             print "IR=",ir_val
             self.ir_list.append(ir_val)
             self.f.write(str(ir_val))
@@ -236,6 +240,7 @@ class IRModule(threading.Thread):
         if dist>self.too_far:
             #return an absurdly large number, to indicate out of range
             return 10000
+        print "dist=",dist
         return dist
 
 '''PID controller

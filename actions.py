@@ -62,9 +62,9 @@ class GoForward(Action):
 
 class GoBack(Action):
     def run(self):
-        self.wrapper[LEFT_MOTOR]=LEFT_BACK
+        self.wrapper[LEFT_MOTOR]=-LEFT_MAX
         #tell right motor to go forward
-        self.wrapper[RIGHT_MOTOR]=RIGHT_BACK
+        self.wrapper[RIGHT_MOTOR]=-MAX_RIGHT
     def loop(self):
         print "looping ",self.__class__.__name__
 

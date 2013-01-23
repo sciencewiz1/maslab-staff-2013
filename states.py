@@ -57,7 +57,10 @@ class Wander(State):
 class AvoidWall(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
-        self.action=TurnLeft
+        if randint(0,1)==0:
+            self.action=TurnLeft
+        else:
+            self.action=TurnRight
         #Maybe change to *randomly* (or intelligently choose between)
         #turn left or right
     def stopfunction(self):
@@ -226,8 +229,8 @@ class Stuck(State):
         State.__init__(self,wrap)
         self.action=GoBack
     def stopfunction(self):
-        if time.time() > self.wrapper.time+1:
-            return Wander
+        if time.time() > self.wrapper.time+2:
+            return TurnAndLook
         return 0
         #keep turning
     

@@ -186,7 +186,20 @@ wrapper=Wrapper(ard)
 sm=StateMachine(wrapper)
 sm.runSM()'''
 system=RobotControllerApp()
-    
+'''wrapper=Wrapper()
+for i in xrange(100,111,1):
+    time.sleep(3)
+    print i
+    wrapper[ROLLER_MOTOR]=i
+print "done"
+wrapper.ard.stop()'''
+#print "back?"
+#wrapper[ROLLER_MOTOR]=-90
+#time.sleep(5)
+#print "stop"
+#wrapper[ROLLER_MOTOR]=0
+#print "stop try 2"
+#wrapper.roller_motor.setAngle(0)
 '''wrapper=Wrapper()
 print "forward"
 wrapper.left_motor.setSpeed(126)
