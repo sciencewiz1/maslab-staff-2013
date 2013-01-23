@@ -239,7 +239,7 @@ class VisionSystem(threading.Thread):
             if imageData==None:
                 return False
             (x1,y1),center,leftExt,rightExt=imageData
-            if area>=CLOSE_THRESHOLD or yAbs>=(y1/float(2)):
+            if area>=CLOSE_THRESHOLD or yAbs>=(y1*float(3/4)):
                 #print "isClose"
                 return True
             else:

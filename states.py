@@ -18,15 +18,15 @@ class Wander(State):
         2. If see ball, turn to ball.
         3. If too close to wall, back up.
         4. If close to wall, swerve to avoid.
-        '''
-        
+        ''' 
         #if either bump sensor is pressed, we are stuck!
+
         if self.wrapper[LEFT_BUMP] or self.wrapper[RIGHT_BUMP]:
             return Stuck
 
         dist=self.wrapper[FRONT_DIST]
         
-        if dist >= TOO_CLOSE:
+        if dist <= TOO_CLOSE:
         #way too close, back up
             return Stuck
         #should change to bump sensor
@@ -39,10 +39,10 @@ class Wander(State):
         #see button, stop wandering
         if self.wrapper.seeButton() and self.wrapper.goForButton():
             print "saw button!"
-            return (TurnAndLook,"blackButton")
+            return (TurnAndLook,"cyanButton")
         
         #close, turn left before you get way too close
-        if dist >= CLOSE:
+        if dist <= CLOSE:
             return AvoidWall
 
         #timeout
@@ -185,7 +185,7 @@ class ApproachBall(State):
 class ApproachButton(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
-        self.action=(ForwardToTarget, "blackButton")
+        self.action=(ForwardToTarget, "cyanButton")
     def stopfunction(self):
         '''
         Priority:
@@ -203,7 +203,7 @@ class ApproachButton(State):
             return Stuck
         #if within 4 inches
         if self.wrapper[FRONT_DIST]<4:
-            return (Charge,"blackButton")
+            return (Charge,"cyanButton")
         if self.wrapper.seeButton():
             return 0
             #still going after button
@@ -235,12 +235,13 @@ class Charge(State):
         State.__init__(self,wrap)
         self.action=GoForward
         self.button=False
-        if target=="blackButton":
+        if target=="cyanButton":
             self.button=True
     def stopfunction(self):
         if time.time() > self.wrapper.time+2:
             if self.button==True:
                 self.wrapper.hitButton()
+                return Stuck
             return TurnAndLook
         return 0
         #keep capturing

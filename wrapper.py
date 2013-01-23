@@ -75,7 +75,7 @@ class Wrapper:
         self.vsApp=VisionSystemApp()
         self.vs=self.vsApp.getVisionSystem()
         self.vs.addTarget(string)
-        #self.vs.addTarget("blackWall")
+        self.vs.addTarget("cyanButton")
         print "starting vs"
         #start timer
         self.wt=WallTimer(self)
@@ -83,7 +83,7 @@ class Wrapper:
 #        self.active=True
     def start(self):
         #start a thread that takes IR readings
-        #self.ir_module.start()
+        self.ir_module.start()
         self.start_time=time.time()
         self.time=self.start_time
         self.last_button_time=0#last time it pressed the black button
@@ -127,7 +127,7 @@ class Wrapper:
         print "see ball at ",self.vs.getTargetDistFromCenter(self.color)
         return self.vs.getTargetDistFromCenter(self.color) != None
     def seeButton(self):
-        return self.vs.getTargetDistFromCenter("blackButton") != None
+        return self.vs.getTargetDistFromCenter("cyanButton") != None
     def ballCentered(self):
         dist=self.vs.getTargetDistFromCenter(self.color)
         if dist== None:
@@ -199,11 +199,10 @@ class IRModule(threading.Thread):
             self.f.write(str(ir_val))
             self.f.write('\n')
             #print self.ir_val
-            time.sleep(0.01)
+            time.sleep(0.001)
     '''Get IR values. If filtered, gives a weighted average for noise reduction'''
     def getIRVal(self):
-        #return self.ir_list[-1]
-        return 100
+        return self.ir_list[-1]
     def __corrected(self,x):
         #given distance, return x+10000 if it's too large
         #then when anything is too large, remember it's an invalid distance
