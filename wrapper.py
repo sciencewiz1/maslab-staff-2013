@@ -31,7 +31,8 @@ class ManualOverride(threading.Thread):
             print "changed left motor to:"+str(leftSpeed)
             self.wrapper.right_motor.setSpeed(rightSpeed)
             print "changed right motor to:"+str(rightSpeed)
-            self.wrapper.roller_motor.setAngle(90)
+            #self.wrapper.roller_motor.setAngle(90)
+            self.wrapper.roller_motor.setValue(1)
             print "Moving "+cmdName
         else:
             print "Invalid command!"
@@ -42,13 +43,14 @@ class Wrapper:
         self.manualControl=False
         self.ard=arduino.Arduino()
         print "creating wrapper"
-        #Syntax for motors: arduino, currentPic, directionPin, pwmPin
-        self.left_motor = arduino.Motor(self.ard, 10, 27, 9)
+        #Syntax for motors: arduino, currentPin, directionPin, pwmPin
+        self.left_motor = arduino.Motor(self.ard, 13, 23, 12)
         print "Left motor"
-        self.right_motor = arduino.Motor(self.ard, 13, 23, 12)
+        self.right_motor = arduino.Motor(self.ard, 10, 27, 9)
         print "Right motor"
         #self.roller_motor = arduino.Motor(self.ard, 7, 31, 6)
-        self.roller_motor=arduino.Servo(self.ard, 42) 
+        #self.roller_motor=arduino.Servo(self.ard, 42)
+        self.roller_motor=arduino.DigitalOutput(self.ard,42)
         print "Roller motor"
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
         #this one is long-range
@@ -57,11 +59,12 @@ class Wrapper:
         #self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 2))
         #self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 3))
         print "IR module"
-        self.left_bump=arduino.DigitalInput(self.ard,23)
-        self.right_bump=arduino.DigitalInput(self.ard,29)
+        self.left_bump=arduino.DigitalInput(self.ard,31)
+        self.right_bump=arduino.DigitalInput(self.ard,33)
         print "Bump sensors"
         self.ard.run()
-        self.roller_motor.setAngle(ROLLER_SIGN*90)
+        #self.roller_motor.setAngle(ROLLER_SIGN*90)
+        self.roller_motor.setValue(1)
         self.mode=BALL_MODE
         self.color=RED#change this when change color!!!
         #last time logged
@@ -114,7 +117,8 @@ class Wrapper:
     
     def __setitem__(self,index,value):
         if index==ROLLER_MOTOR:
-            self.roller_motor.setAngle(value)
+            #self.roller_motor.setAngle(value)
+            self.roller_motor.setValue(1)
         elif index==LEFT_MOTOR:
             self.left_motor.setSpeed(value)
         elif index==RIGHT_MOTOR:
@@ -144,9 +148,11 @@ class Wrapper:
     def turnMotorsOff(self):
         self.left_motor.setSpeed(0)
         self.right_motor.setSpeed(0)
-        self.roller_motor.setAngle(ROLLER_SIGN*90)
+        #self.roller_motor.setAngle(ROLLER_SIGN*90)
+        self.roller_motor.setValue(0)
     def resetRoller(self):
-        self.roller_motor.setAngle(ROLLER_SIGN*90)
+        #self.roller_motor.setAngle(ROLLER_SIGN*90)
+        self.roller_motor.setValue(1)
     def changeCameraNumber(self,index):
         self.vs.changeCameraNumber(index)
     def manualControlCheck(self):

@@ -189,10 +189,10 @@ system=RobotControllerApp()
     
 '''wrapper=Wrapper()
 print "forward"
-wrapper.roller_motor.setSpeed(126)
+wrapper.left_motor.setSpeed(126)
 time.sleep(5)
 print "stop"
-wrapper.roller_motor.setSpeed(0)
+wrapper.left_motor.setSpeed(0)
 time.sleep(5)
 print "back"
-wrapper.roller_motor.setSpeed(-126)'''
+wrapper.left_motor.setSpeed(-126)'''
