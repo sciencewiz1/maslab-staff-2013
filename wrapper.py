@@ -216,11 +216,14 @@ class IRModule(threading.Thread):
             self.f.write(str(ir_val))
             self.f.write('\n')
             #print self.ir_val
-            time.sleep(0.01)
+            time.sleep(0.1)
 
     '''Get IR values. If filtered, gives a weighted average for noise reduction'''
     def getIRVal(self):
-        return self.ir_list[-1]
+        if self.ir_list[-1]==None:
+            return 50
+        else:
+            return self.ir_list[-1]
     def __corrected(self,x):
         #given distance, return x+10000 if it's too large
         #then when anything is too large, remember it's an invalid distance
