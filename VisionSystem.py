@@ -482,8 +482,8 @@ class VisionSystem(threading.Thread):
                 if not self.cmdQueue.empty():
                     self.parseCMD(self.cmdQueue.get())
                 image=self.captureImage()
-                self.findWall(image)
-                #self.findTargets(image)
+                #self.findWall(image)
+                self.findTargets(image)
                 #print "found targets"
                 cv.WaitKey(1)
         print "Stopping Vision System"
