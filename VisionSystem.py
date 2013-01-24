@@ -4,9 +4,11 @@ import serial
 import scipy
 import time
 import threading
+from multiprocessing import Process,Pipe,Queue
 import time
 import math
 import copy
+import json
 from Tkinter import *
 TEMPLATE_MATCH_THRESHOLD=200/2.7 #depends on image size
 CLOSE_THRESHOLD=20000.0/2.7
@@ -23,19 +25,21 @@ MAXRANGE=50
 GUI for working with the Vision System. With this GUI you are easily able to fine tune the HSV ranges for the desired
 color of the object you want to detect using a slider based calibration mechanism.
 '''
-class VisionSystemApp(Frame,threading.Thread):
-    def __init__(self):
+class VisionSystemApp(Frame,Process):
+    def __init__(self,cmdQueue,dataQueue):
+         #call super class methods
+        Process.__init__(self)
         #set main instance variables
         self.active=True
-        self.vision=VisionSystem()
         self.selectedTarget="redBall"
-        #call super class methods
-        threading.Thread.__init__(self)
         #start the threads and the application mainloop
         #start threads BEFORE mainloop
-        self.vision.start()
+        self.cmdQueue=cmdQueue
+        self.dataQueue=dataQueue
         self.start()
     def run(self):
+        self.vision=VisionSystem(self.cmdQueue,self.dataQueue)
+        self.vision.start()
         self.buildGUI()
     def buildGUI(self):
         self.master=Tk()
@@ -91,7 +95,7 @@ class VisionSystemApp(Frame,threading.Thread):
         self.vision.addTarget(targetStr)
         self.reset()
     def getVisionSystem(self):
-        return self.vision
+        return self.vision.getData()
     def override(self):
         self.vision.override=True
     def reset(self):
@@ -150,7 +154,7 @@ and command the robot to move towards them'''
 class VisionSystem(threading.Thread):
     '''Initialization method that creates the
         camera object and initializes Thread data'''
-    def __init__(self):
+    def __init__(self,cmdQueue,dataQueue):
         self.capture = cv.CaptureFromCAM(0) #camera object
         self.targets=[]
         self.active=True
@@ -169,6 +173,8 @@ class VisionSystem(threading.Thread):
         self.override=False
         self.pause=False
         self.imageParams=None
+        self.cmdQueue=cmdQueue
+        self.dataQueue=dataQueue
         self.lock=threading.Lock()
         #call super class init method and bind to instance
         threading.Thread.__init__(self)
@@ -192,8 +198,6 @@ class VisionSystem(threading.Thread):
             self.pause=False
     def smIntegrate(self):
         self.override=False
-    def letmerun(self):
-        self.run_counter+=1
     def activate(self):
         self.calibrated=True
         self.active=True
@@ -220,11 +224,12 @@ class VisionSystem(threading.Thread):
                 data = self.bestTargetOverall
         if data!=None:
             (target,(xdist,ydist),(xClosest,yClosest),areat,(xCOM,yCOM))=data
+            self.dataQueue.put((xdist,ydist))
             return (xdist,ydist)
         else:
+            self.dataQueue.put(None)
             return None
                 
-        
     def isClose(self,target="all"):
         if target in self.targetLocations:
             sample=self.targetLocations[target]
@@ -232,17 +237,20 @@ class VisionSystem(threading.Thread):
             if target=="all":
                 sample=self.bestTargetOverall
         if sample==None:
+            self.dataQueue.put(False)
             return False
         else:
             targetStr,(xDiff,yDiff),(xAbs,yAbs),area,(xCOM,yCOM)=sample
             imageData=self.imageParams
             if imageData==None:
+                self.dataQueue.put(False)
                 return False
             (x1,y1),center,leftExt,rightExt=imageData
             if area>=CLOSE_THRESHOLD or yAbs>=(y1*float(3/4)):
-                #print "isClose"
+                self.dataQueue.put(True)
                 return True
             else:
+                self.dataQueue.put(False)
                 return False
     def captureImage(self):
         image=cv.QueryFrame(self.capture)
@@ -421,32 +429,64 @@ class VisionSystem(threading.Thread):
             contours=contours.h_next()
         cv.ShowImage("t",new)
         cv.ShowImage("cont",image)
+    def parseCMD(self,cmd):
+        method,args=cmd
+        func=getattr(self,method)
+        func(*args)
     def stop(self):
         self.active=False
         print "Stopping Vision System"
     def run(self):
         print "Starting Vision System"
-        if self.capture=="None":
+        if self.capture==None:
             self.stop()
             return "Camera Init Failed!"
         while self.active:
-            print "in vision thread"
-            if self.run_counter>=1 or self.override and not self.pause:
+            if not self.pause:
                 #print self.targets[self.target]
                 #print self.getTargetDistFromCenter()
+                if not self.cmdQueue.empty():
+                    self.parseCMD(self.cmdQueue.get())
                 image=self.captureImage()
                 #self.findWall(image)
                 self.findTargets(image)
                 #print "found targets"
-                if not self.override:
-                    self.run_counter-=1
                 cv.WaitKey(1)
-            time.sleep(0.1)
         print "Stopping Vision System"
         #destroy capture 
         del(self.capture)
         cv.DestroyWindow("Tracker")
-
+class VisionSystemWrapper:
+    def __init__(self):
+        self.cmdQueue=Queue(1000)
+        self.dataQueue=Queue(1000)
+        self.VisionSystem=VisionSystemApp(self.cmdQueue,self.dataQueue)
+    def addTarget(self,targetStr):
+        cmd=("addTarget",(targetStr,))
+        self.cmdQueue.put(cmd)
+    def removeTarget(self,targetStr):
+        cmd=("removeTarget",(targetStr,))
+        self.cmdQueue.put(cmd)
+    def clearTargets(self):
+        cmd=("clearTargets",())
+        self.cmdQueue.put(cmd)
+    def getTargetDistFromCenter(self,target="all"):
+        cmd=("getTargetDistFromCenter",(target,))
+        self.cmdQueue.put(cmd)
+        return self.dataQueue.get()
+    def isClose(self,target="all"):
+        cmd=("isClose",(target,))
+        self.cmdQueue.put(cmd)
+        return self.dataQueue.get()
+    def activate(self):
+        cmd=("activate",())
+        self.cmdQueue.put(cmd)
+    def smIntegrate(self):
+        cmd=("smIntegrate",())
+        self.cmdQueue.put(cmd)
+    def changeCameraNumber(self,index):
+        cmd=("changeCameraNumber",(index,))
+        self.cmdQueue.put(cmd)
 if __name__=="__main__":
-    t=VisionSystemApp()
+    pass
 
