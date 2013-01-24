@@ -123,7 +123,7 @@ class RobotControllerApp(Frame, threading.Thread):
     def writeLog(self):
         self.original=sys.stdout
         self.fsock=open("log.txt",'w')
-        sys.stdout=sys.stdout = Tee(sys.stdout, self.fsock)
+        sys.stdout = Tee(sys.stdout, self.fsock)
     def OnClose(self,event):
         #stops all threads and destroys all objects
         self.sm.stopSM()
@@ -185,7 +185,8 @@ wrapper=Wrapper(ard)
 #wrapper.right_motor.setSpeed(RIGHT_FORWARD)
 sm=StateMachine(wrapper)
 sm.runSM()'''
-system=RobotControllerApp()
+if __name__=="__main__":
+    system=RobotControllerApp()
 '''wrapper=Wrapper()
 for i in xrange(100,111,1):
     time.sleep(3)

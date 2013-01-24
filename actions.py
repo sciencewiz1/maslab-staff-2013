@@ -22,8 +22,6 @@ class Action:
         while not b:
             '''Holden: this prevents vision code
             from hogging time'''
-            #@David: do we still need this?
-            self.wrapper.vs.letmerun()
             #print "time in action: ",time.time()
             #ir_read=False#
             #ir_read=self.wrapper.ir_module.reset()#
