@@ -22,10 +22,8 @@ class Action:
         while not b:
             '''Holden: this prevents vision code
             from hogging time'''
+            #@David: do we still need this?
             self.wrapper.vs.letmerun()
-            #Fix threading issue
-            self.wrapper.ir_module.letmerun()
-            self.wrapper.ir_module2.letmerun()
             #print "time in action: ",time.time()
             #ir_read=False#
             #ir_read=self.wrapper.ir_module.reset()#
@@ -64,9 +62,9 @@ class GoForward(Action):
 
 class GoBack(Action):
     def run(self):
-        self.wrapper[LEFT_MOTOR]=-LEFT_MAX
+        self.wrapper[LEFT_MOTOR]=LEFT_BACK
         #tell right motor to go forward
-        self.wrapper[RIGHT_MOTOR]=-MAX_RIGHT
+        self.wrapper[RIGHT_MOTOR]=RIGHT_BACK
     def loop(self):
         print "looping ",self.__class__.__name__
 

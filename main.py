@@ -166,12 +166,7 @@ class StateMachine(threading.Thread):
                 #repeat indefinitely
                 #in the future add a timer, stop when time over threshold
                 #add time.sleep to allow other threads to execute
-                #fix threading issue
-                while self.wrapper.ir_module.run_counter>0 or self.wrapper.ir_module2.run_counter>0 or\
-                      self.wrapper.vs.run_counter>0:
-                    print "waiting... ",self.wrapper.ir_module.run_counter, self.wrapper.ir_module2.run_counter,\
-                          self.wrapper.vs.run_counter
-                    time.sleep(0.001)
+                time.sleep(0.001)
     def startSM(self):
         if not self.isAlive():
             self.start()
