@@ -21,6 +21,40 @@ MAXRANGE=50
 #saturation-how much mixed with white
 #value-how much mixed with black
 #NOTE: This code is still in development stages and commenting has not been completed.
+class VisionSystemWrapper:
+    def __init__(self):
+        self.cmdQueue=Queue(1000)
+        self.dataQueue=Queue(1000)
+        self.VisionSystem=VisionSystemApp(self.cmdQueue,self.dataQueue)
+    def addTarget(self,targetStr):
+        cmd=("addTarget",(targetStr,))
+        self.cmdQueue.put(cmd)
+    def removeTarget(self,targetStr):
+        cmd=("removeTarget",(targetStr,))
+        self.cmdQueue.put(cmd)
+    def clearTargets(self):
+        cmd=("clearTargets",())
+        self.cmdQueue.put(cmd)
+    def getTargetDistFromCenter(self,target="all"):
+        cmd=("getTargetDistFromCenter",(target,))
+        self.cmdQueue.put(cmd)
+        return self.dataQueue.get()
+    def isClose(self,target="all"):
+        cmd=("isClose",(target,))
+        self.cmdQueue.put(cmd)
+        return self.dataQueue.get()
+    def activate(self):
+        cmd=("activate",())
+        self.cmdQueue.put(cmd)
+    def smIntegrate(self):
+        cmd=("smIntegrate",())
+        self.cmdQueue.put(cmd)
+    def changeCameraNumber(self,index):
+        cmd=("changeCameraNumber",(index,))
+        self.cmdQueue.put(cmd)
+    def stop(self):
+        cmd=("stop",())
+        self.cmdQueue.put(cmd)
 '''
 GUI for working with the Vision System. With this GUI you are easily able to fine tune the HSV ranges for the desired
 color of the object you want to detect using a slider based calibration mechanism.
@@ -456,37 +490,6 @@ class VisionSystem(threading.Thread):
         #destroy capture 
         del(self.capture)
         cv.DestroyWindow("Tracker")
-class VisionSystemWrapper:
-    def __init__(self):
-        self.cmdQueue=Queue(1000)
-        self.dataQueue=Queue(1000)
-        self.VisionSystem=VisionSystemApp(self.cmdQueue,self.dataQueue)
-    def addTarget(self,targetStr):
-        cmd=("addTarget",(targetStr,))
-        self.cmdQueue.put(cmd)
-    def removeTarget(self,targetStr):
-        cmd=("removeTarget",(targetStr,))
-        self.cmdQueue.put(cmd)
-    def clearTargets(self):
-        cmd=("clearTargets",())
-        self.cmdQueue.put(cmd)
-    def getTargetDistFromCenter(self,target="all"):
-        cmd=("getTargetDistFromCenter",(target,))
-        self.cmdQueue.put(cmd)
-        return self.dataQueue.get()
-    def isClose(self,target="all"):
-        cmd=("isClose",(target,))
-        self.cmdQueue.put(cmd)
-        return self.dataQueue.get()
-    def activate(self):
-        cmd=("activate",())
-        self.cmdQueue.put(cmd)
-    def smIntegrate(self):
-        cmd=("smIntegrate",())
-        self.cmdQueue.put(cmd)
-    def changeCameraNumber(self,index):
-        cmd=("changeCameraNumber",(index,))
-        self.cmdQueue.put(cmd)
 if __name__=="__main__":
     pass
 

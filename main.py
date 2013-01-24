@@ -123,7 +123,7 @@ class RobotControllerApp(Frame, threading.Thread):
     def writeLog(self):
         self.original=sys.stdout
         self.fsock=open("log.txt",'w')
-        sys.stdout=sys.stdout = Tee(sys.stdout, self.fsock)
+        sys.stdout = Tee(sys.stdout, self.fsock)
     def OnClose(self,event):
         #stops all threads and destroys all objects
         self.sm.stopSM()
@@ -167,11 +167,6 @@ class StateMachine(threading.Thread):
                 #in the future add a timer, stop when time over threshold
                 #add time.sleep to allow other threads to execute
                 #fix threading issue
-                while self.wrapper.ir_module.run_counter>0 or self.wrapper.ir_module2.run_counter>0 or\
-                      self.wrapper.vs.run_counter>0:
-                    print "waiting... ",self.wrapper.ir_module.run_counter, self.wrapper.ir_module2.run_counter,\
-                          self.wrapper.vs.run_counter
-                    time.sleep(0.001)
     def startSM(self):
         if not self.isAlive():
             self.start()
@@ -190,7 +185,8 @@ wrapper=Wrapper(ard)
 #wrapper.right_motor.setSpeed(RIGHT_FORWARD)
 sm=StateMachine(wrapper)
 sm.runSM()'''
-system=RobotControllerApp()
+if __name__=="__main__":
+    system=RobotControllerApp()
 '''wrapper=Wrapper()
 for i in xrange(100,111,1):
     time.sleep(3)

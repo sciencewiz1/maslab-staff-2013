@@ -3,6 +3,7 @@ from constants import *
 import sys
 sys.path.append("./Vision System")
 from VisionSystem import *
+from multiprocessing import Process, Queue
 import math
 import wx
 
@@ -77,8 +78,7 @@ class Wrapper:
         if self.color==GREEN:
             string="greenBall"
         print string
-        self.vsApp=VisionSystemApp()
-        self.vs=self.vsApp.getVisionSystem()
+        self.vs=VisionSystemWrapper()
         self.vs.addTarget(string)
         self.vs.addTarget("cyanButton")
         print "starting vs"
@@ -178,7 +178,7 @@ class Wrapper:
         self.ard.stop()
         self.ir_module.stop()
         self.wt.stop()
-        self.vsApp.stop()
+        self.vs.stop()
 
 '''Module that records IR measurements'''
 class IRModule(threading.Thread):
@@ -187,11 +187,9 @@ class IRModule(threading.Thread):
         #IR value
         threading.Thread.__init__(self)
         #self.ir_val=0
-        self.ir=ir2
         self.f=open('ir_log.txt','w')
         self.active=True
         self.ir_list=[]
-        self.run_counter=2
         '''set whether this is short or long range'''
         #distance= m*(1/ir)+b
         if long_range:
@@ -202,26 +200,21 @@ class IRModule(threading.Thread):
             self.b=Y_INTERCEPT
             self.m=SLOPE
             self.too_far=12
-    def letmerun(self):
-        self.run_counter=2
+        self.ir=ir2
     '''Continuously get IR values and log them in IR list'''
     def run(self):
         while self.active:
-            print "in ir thread"
-            if self.run_counter>0:
-                #fix threading issue
-                ir_val=self.ir.getValue()
-                if self.too_far==25:
-                    print "long"
-                else:
-                    print "short"
-                print "IR=",ir_val
-                self.ir_list.append(ir_val)
-                self.f.write(str(ir_val))
-                self.f.write('\n')
-                #print self.ir_val
-                self.run_counter-=1#fix threading issue
-            time.sleep(0.001)
+            #fix threading issue
+            ir_val=self.ir.getValue()
+            if self.too_far==25:
+                print "long"
+            else:
+                print "short"
+            print "IR=",ir_val
+            self.ir_list.append(ir_val)
+            self.f.write(str(ir_val))
+            self.f.write('\n')
+            #print self.ir_val
     '''Get IR values. If filtered, gives a weighted average for noise reduction'''
     def getIRVal(self):
         ir_val=self.ir_list[-1]
@@ -238,18 +231,21 @@ class IRModule(threading.Thread):
     def distance(self, filtered=False):
         #if not filtered, just use last ir value
         if not filtered:
-            return self.__corrected(self.m*1/self.getIRVal()+self.b)
+            ans=self.__corrected(self.m*1/self.getIRVal()+self.b)
+            return ans
         #if filtered but not enough data points yet (because just started)
         #use the first ir value
         if len(self.ir_list)< F_LEN:
-            return self.__corrected(self.m*1/self.ir_list[0]+self.b)
+            ans=self.__corrected(self.m*1/self.ir_list[0]+self.b)
+            return ans
         #if filtered, take the last F_LEN ir values and calculate the distances 
         recent_dist=[self.__corrected(self.m*1/ir+self.b) for ir in ir_list[-F_LEN:]]
         #now take a weighted average of the distances
         dist = sum([weight*d for (weight, d) in zip(FILTER,recent_dist)])
         if dist>self.too_far:
             #return an absurdly large number, to indicate out of range
-            return 10000
+            ans=10000
+            return ans
         print "dist=",dist
         return dist
 

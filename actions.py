@@ -22,10 +22,7 @@ class Action:
         while not b:
             '''Holden: this prevents vision code
             from hogging time'''
-            self.wrapper.vs.letmerun()
             #Fix threading issue
-            self.wrapper.ir_module.letmerun()
-            self.wrapper.ir_module2.letmerun()
             #print "time in action: ",time.time()
             #ir_read=False#
             #ir_read=self.wrapper.ir_module.reset()#
