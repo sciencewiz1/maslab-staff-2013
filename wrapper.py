@@ -216,7 +216,7 @@ class IRModule(threading.Thread):
             self.f.write(str(ir_val))
             self.f.write('\n')
             #print self.ir_val
-            time.sleep(0.1)
+            time.sleep(0.2)
 
     '''Get IR values. If filtered, gives a weighted average for noise reduction'''
     def getIRVal(self):
