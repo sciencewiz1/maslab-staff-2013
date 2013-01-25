@@ -25,7 +25,7 @@ class ManualOverride(threading.Thread):
     def manualOverride(self,cmd):
         cmds={"l":(-LEFT_TURN,RIGHT_TURN,0,"Left"),"r":(LEFT_TURN,-RIGHT_TURN,0,"Right"),
               "f":(LEFT_FORWARD,RIGHT_FORWARD,0,"Forward"),"b":(LEFT_BACK,RIGHT_BACK,0,"Backward"),
-              "s":(0,0,0,"Stop"),"lo":(LEFT_FORWARD,0,0,"Left On"),"ro":(0,RIGHT_FORWARD,0,"Right On"),
+              "s":(0,0,ROLLER_STOP,"Stop"),"lo":(LEFT_FORWARD,0,0,"Left On"),"ro":(0,RIGHT_FORWARD,0,"Right On"),
               "ro1":(0,0,ROLLER_ANGLE,"Roller On Forward"),"rb1":(0,0,-ROLLER_ANGLE,"Roller On Backwards")}
         if cmd in cmds:
             leftSpeed,rightSpeed,rollerSpeed,cmdName=cmds[cmd]
