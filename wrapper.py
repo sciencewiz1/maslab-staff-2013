@@ -221,7 +221,7 @@ class IRModule(threading.Thread):
 
     '''Get IR values. If filtered, gives a weighted average for noise reduction'''
     def getIRVal(self):
-        if self.ir_list[-1]==None:
+        if len(self.ir_list)==0 or self.ir_list[-1]==None:
             return 50
         else:
             return self.ir_list[-1]
