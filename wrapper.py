@@ -23,16 +23,17 @@ class ManualOverride(threading.Thread):
     def stop(self):
         self.active=False
     def manualOverride(self,cmd):
-        cmds={"l":(-LEFT_TURN,RIGHT_TURN,"Left"),"r":(LEFT_TURN,-RIGHT_TURN,"Right"),
-              "f":(LEFT_FORWARD,RIGHT_FORWARD,"Forward"),"b":(LEFT_BACK,RIGHT_BACK,"Backward"),
-              "s":(0,0,"Stop"),"lo":(LEFT_FORWARD,0,"Left On"),"ro":(0,RIGHT_FORWARD,"Right On")}
+        cmds={"l":(-LEFT_TURN,RIGHT_TURN,0,"Left"),"r":(LEFT_TURN,-RIGHT_TURN,0,"Right"),
+              "f":(LEFT_FORWARD,RIGHT_FORWARD,0,"Forward"),"b":(LEFT_BACK,RIGHT_BACK,0,"Backward"),
+              "s":(0,0,ROLLER_STOP,"Stop"),"lo":(LEFT_FORWARD,0,0,"Left On"),"ro":(0,RIGHT_FORWARD,0,"Right On"),
+              "ro1":(0,0,ROLLER_ANGLE,"Roller On Forward"),"rb1":(0,0,-ROLLER_ANGLE,"Roller On Backwards")}
         if cmd in cmds:
-            leftSpeed,rightSpeed,cmdName=cmds[cmd]
+            leftSpeed,rightSpeed,rollerSpeed,cmdName=cmds[cmd]
             self.wrapper.left_motor.setSpeed(leftSpeed)
             print "changed left motor to:"+str(leftSpeed)
             self.wrapper.right_motor.setSpeed(rightSpeed)
             print "changed right motor to:"+str(rightSpeed)
-            self.wrapper.roller_motor.setAngle(ROLLER_ANGLE)
+            self.wrapper.roller_motor.setAngle(rollerSpeed)
             #self.wrapper.roller_motor.setValue(1)
             print "Moving "+cmdName
         else:
@@ -216,11 +217,11 @@ class IRModule(threading.Thread):
             self.f.write(str(ir_val))
             self.f.write('\n')
             #print self.ir_val
-            time.sleep(0.1)
+            time.sleep(0.2)
 
     '''Get IR values. If filtered, gives a weighted average for noise reduction'''
     def getIRVal(self):
-        if self.ir_list[-1]==None:
+        if len(self.ir_list)==0 or self.ir_list[-1]==None:
             return 50
         else:
             return self.ir_list[-1]

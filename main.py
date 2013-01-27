@@ -15,6 +15,9 @@ class Tee(object):
     def write(self, obj):
         for f in self.files:
             f.write(obj)
+    def flush(self):
+        for f in self.files:
+            f.flush()
 '''
 Main GUI class used to control the robot.
 '''
