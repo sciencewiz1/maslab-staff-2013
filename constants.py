@@ -53,7 +53,8 @@ TURN_KD = .1
 #angle in degrees between straight forward and furthest right the camera can see
 CAMERA_HALF_WIDTH=31
 #half the number of pixels horizontally
-PIXELS=250
+PIXELS=240
+Y_PIXELS=120
 
 #regression line for IR to distance
 #obstacle distance = Y_INTERCEPT+SLOPE*1/self.getIRVal()

@@ -146,6 +146,36 @@ class Wrapper:
     '''return array of coordinates of balls'''
     def ballCoordinates(self):
         return self.vs.getTargetDistFromCenter()
+
+    '''return information about whether the bot is stuck.
+    returns (a,b) where a gives the condition of the left side and b the right side.
+    0=fine
+    1=close to wall
+    2=very close to wall
+    3=bumped against wall
+    '''
+    def stuck(self):
+        #left side
+        l=0
+        r=0
+        if self[LEFT_BUMP]:
+            l=3
+        else:
+            l_dist=self[FRONT_DIST2]
+            if l_dist<=TOO_CLOSE:
+                l=2
+            elif l_dist<=CLOSE:
+                l=1
+        if self[RIGHT_BUMP]:
+            r=3
+        else:
+            r_dist=self[FRONT_DIST]
+            if r_dist<=TOO_CLOSE:
+                r=2
+            elif l_dist<=CLOSE:
+                r=1
+        return (l,r)
+    
     def turnMotorsOff(self):
         self.left_motor.setSpeed(0)
         self.right_motor.setSpeed(0)

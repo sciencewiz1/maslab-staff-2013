@@ -1,6 +1,7 @@
 from constants import *
 import pygame
 import math
+from huff import *
 
 #pass in ABSOLUTE when specifying absolute coordinates
 ABSOLUTE=0
@@ -12,6 +13,7 @@ RELATIVE=1
 #warning: can't be too dependent on initial data
 #how far away is the nearest thing it can see?
 BOTTOM_DIST=4
+BOTTOM_WIDTH=4
 Y_INFINITY=0
 #camera height
 CAM_H=6
@@ -27,7 +29,6 @@ OVERLAP_THRESHOLD=.1
 class Feature:
     def __init__(self):
         self.neighbors={}
-        self.coordinates=()
     def getError(self):
         raise NotImplementedError
     def getNeighbors(self,avoid=[]):
@@ -38,8 +39,8 @@ class Feature:
         return newNeighbors
     def addNeighbor(self,other,side):
         self.neighbors[side]=other
-    def coordinates(self):
-        return self.coordinates
+    def __setitem__(self,side,other):
+        self.neighbors[side]=other
     def draw(self,window):
         raise NotImplementedError
 
@@ -56,7 +57,10 @@ class Node(Feature):
         for ((feature,side),angle) in zip(arg,arg2):
             self[angle]=feature
             feature.addNeighbor(self,side)
+    def __str__(self):
+        return "Node at "+str(self.coordinates())
     def draw(self, window):
+        print "drawing ",self.coordinates()
         window.point(self.coordinates())
     def coordinates(self):
         return (self.x,self.y)
@@ -66,7 +70,7 @@ class Wall(Feature):
     arg is length when specifying relative,
     coordinates of endpoints when specifying relative
     '''
-    def __init__(self,mode,arg=None,error=0,left=None,right=None,angles=[]):
+    def __init__(self,mode,arg=None,error=0,left=None,right=None):
         #arg is distance in relative mode, and coordinates (x1,x2,y1,y2)
         #in absolute mode
         #if mode==RELATIVE:
@@ -84,15 +88,17 @@ class Wall(Feature):
         if mode==RELATIVE:
             self.distance=arg
         if mode==ABSOLUTE:
-            if len(arg)>=2:
+            if arg!=None and len(arg)>=2:
                 self.pt1=(arg[0],arg[1])
-            if len(arg)>=4:
+            if arg!=None and len(arg)>=4:
                 self.pt2=(arg[3],arg[4])
-            self.distance=dist(arg)
+            #self.distance=dist(arg)
             #self.pts=[]
             #for i in xrange(0,(len(arg)+1)/2):
             #    self.pts.append(arg[2*i],arg[2*i+1])           
-            self.length=dist(arg)
+            #self.length=dist(arg)
+    def __str__(self):
+        return "Segment at "+str(self.coordinates())
     def endpoints(self):
         return [self.pt1,self.pt2]
     def coordinates(self):
@@ -102,7 +108,13 @@ class Wall(Feature):
 #    def bind(self):
 #        pass
     def draw(self,window):
-        window.line(self.coordinates)
+        print "drawing ",self.coordinates()
+        window.line(self.coordinates())
+    def recalc(self):
+        self.length=dist(self.neighbors[0].x,self.neighbors[0].y,\
+                           self.neighbors[1].x,self.neighbors[1].y)
+        self.pt1=(self.neighbors[0].x,self.neighbors[0].y)
+        self.pt2=(self.neighbors[1].x,self.neighbors[1].y)
         
 #warning: need to deal with floating endpoints
 
@@ -126,8 +138,8 @@ class ReferencePoint:
 '''given the y-pixel, approximate the y-distance and error'''
 def yDist(x,y):
     #approximate the error with the derivative
-    error=-1.0*BOTTOM_DIST*Y_PIXELS/((Y_INFINITY-y)*(Y_INFINITY-y))
-    return [1.0*BOTTOM_DIST*Y_PIXELS/(Y_INFINITY-y),error]
+    error=-1.0*BOTTOM_DIST*2*Y_PIXELS/((Y_INFINITY-y)*(Y_INFINITY-y))
+    return [1.0*BOTTOM_DIST*2*Y_PIXELS/(y-Y_INFINITY),error]
 
 def xDist(x,y):
     error=math.sqrt(math.pow(1/PIXELS*BOTTOM_WIDTH*Y_PIXELS/(Y_INFINITY-y),2)+\
@@ -139,10 +151,12 @@ def xDist(x,y):
 for now, assume that 
 '''
 def pixelToPosition(x,y):
+    print "(x,y)=",(x,y)
     xd=xDist(x,y)
     yd=yDist(x,y)
-    error=math.sqrt(xd[1]*xd[1]+yd[1]*yd[1])
-    return [(xd[1],yd[1]),error]
+    error=math.sqrt(xd[0]*xd[0]+yd[0]*yd[0])
+    print "position=",(xd[0],yd[0])
+    return [(xd[0],yd[0]),error]
 
 '''helps choose lowermost edges in each edge pic'''
 class SegmentList:
@@ -150,105 +164,202 @@ class SegmentList:
     def __init__(self,li):
         #the list of line segments
         self.li=li
+        #if in reverse order, switch.
+        print "self.li:",self.li
+        for (i,(x1,y1,x2,y2)) in enumerate(self.li):
+            if x1>x2:
+                li[i]=(x2,y2,x1,y1)
+        #the indices of the elements in li that we actually want to consider
+        self.li2=xrange(0,len(li))
+        self.xsorted={}
+        self.keylist=[]
+        self.votes=[]
+        self.accepted=[]
         #remove segments that are close to vertical, because these are probably vertical edges
         #(they might be bottom/tops of walls, but we ignore this because there's too much
         #error associated to almost-vertical lines.)
-        li=self.removeVerts(li)
-        xsort={}
-        for (i,(x1,y1,x2,y2)) in enumerate(li):
-            if x1>x2:
-                li[i]=(x2,y2,x1,y1)
-            #if x1 not in li.keys():
-            #    xsort[x1]=[]
-            #if x2 not in li.keys():
-            #    xsort[x2]=[]
-            xsort[x1]=[]#.append(i)
-            xsort[x2]=[]#.append(i)
-        for k in xsort:
-            for (i,(x1,y1,x2,y2)) in enumerate(li):
-                if x1==k:
-                    
-                #if x1<=k and k<x2:
-                #    xsort[k].append(i)
-        self.xsort=xsort
-        votes=[0 for i in li]
-        keylist=xsort.keys()
-        keylist.sort()
-        for i in xrange(1,len(keylist)):
+        #self.li2=self.removeVerts(li)
+    def removeVerts(self):
+        horiz=[]
+        vert=[]
+        self.li2=[]
+        for (i,(x1,y1,x2,y2)) in enumerate(self.li):
+            if math.fabs(slope(x1,y1,x2,y2))<2:
+                horiz.append((x1,y1,x2,y2))
+                self.li2.append(i)
+                self.xsorted[x1]=[]
+                self.xsorted[x2]=[]
+            else:
+                vert.append((x1,y1,x2,y2))
+        return (horiz,vert)
+    '''after calling xsort, self.xsorted will contain a dictionary.
+    keys: x-values of segments represented by indices in li2
+    values: the index into li and whether it is left/right endpoint or in the
+    middle of segment
+    keylist is the sorted x-values (sorted keys)'''
+    def xsort(self):
+        for k in self.xsorted:
+            #remember, li2 contains the indices of the accepted segments
+            for j in self.li2:
+                x1,y1,x2,y2=self.li[j]
+                if x1==k and k==x2:
+                    self.xsorted[k].append((j,'A'))#segment j is a vertical line
+                elif x1==k:
+                    self.xsorted[k].append((j,'L'))#k is the left endpt of seg j
+                elif x1<k and k<x2:
+                    self.xsorted[k].append((j,'M'))#k is in middle of segment j
+                elif k==x2:
+                    self.xsorted[k].append((j,'R'))#k is the right endpt of j
+        self.keylist=self.xsorted.keys()
+        self.keylist.sort()
+    '''
+    stores the indices of the low horizontal segments into self.accepted
+    '''
+    def low_horiz(self):
+        self.votes=[0 for i in self.li]
+        for i in xrange(1,len(self.keylist)):
             #loop through all the segments that have the x-value keylist[i]
             #somewhere in the interior.
             maxj=0
             maxy=-10000
             #remember, y goes downwards in camera coordinates
-            for j in xsort[keylist[i]]:
-                ym=ymidpt(li[j],keylist[i-1],keylist[i])
-                if ym>maxy:
-                    maxj=j
-                    maxy=ym
-            votes[maxj]+=(keylist[i]-keylist[i-1])
-        self.votes=votes
+            for (j,char) in self.xsorted[self.keylist[i]]:
+                #(j,char) are the indices of segments that contain the ith x-value
+                #and char says whether the x-value is in the left, middle, or right
+                if char!='L' and char!='A':
+                #(need to make sure it's not leftmost
+                    ym=ymidpt(self.li[j],self.keylist[i-1],self.keylist[i])
+                    if ym>maxy:
+                        maxj=j
+                        maxy=ym
+            self.votes[maxj]+=(self.keylist[i]-self.keylist[i-1])
         #now see which ones got the most votes
         self.accepted=[]
-        for (i,v) in enumerate(votes):
+        for (i,v) in enumerate(self.votes):
             #if v>=70:
-            if v/float(li[2]-li[0])>2.0/3:
-                self.accepted.append((li[i],i))
-    def removeVerts(self,segment_list):
-        horiz=[]
-        vert=[]
-        for (x1,y1,x2,y2) in segment_list:
-            if math.fabs(slope(x1,y1,x2,y2))<2:
-                #ignore walls that are <=30 pixels long:they're probably bogus
-                horiz.append((x1,y1,x2,y2))
-            else:
-                vert.append((x1,y1,x2,y2))
-            return (horiz,vert)
-    def endptList(self,indexed=False):
-        elist=[]
-        for (i,(x1,y1,x2,y2)) in enumerate(self.li):
-            if indexed:
-                elist.append((x1,y1,i))
-                elist.append((x2,y2,i))
-            else:
-                elist.append((x1,y1))
-                elist.append((x2,y2))
+            if v/float(self.li[i][2]-self.li[i][0])>2.0/3:
+                self.accepted.append(i)
+        return self.accepted
+    #overloaded.
+    #pass in int i to get ith segment
+    #pass in tuple (i,j) to get the jth endpoint of ith segment (j=0 or 1)
+    #pass in list to get list of segments
+    def __getitem__(self,i):
+        if i.__class__==list:
+            li=[]
+            for j in i:
+                li.append(self.li[j])
+            return li
+        if i.__class__==tuple:
+            print i
+            return self.endpt(self.li[i[0]],i[1])
+        return self.li[i]
+    #assume it's a tuple
+    def __setitem__(self,i,v):
+        if i[1]==0:
+            self.li[i]=(v[0],v[1],self.li[i][2],self.li[i][3])
+        if i[1]==1:
+            self.li[i]=(self.li[i][0],self.li[i][1],v[0],v[1])
+    def endpt(self,seg,side):
+        if side==0:
+            return (seg[0],seg[1])
+        if side==1:
+            return (seg[2],seg[3])
+#    def endptList(self,indexed=False):
+#        elist=[]
+#        for (i,(x1,y1,x2,y2)) in enumerate(self.li):
+#            if indexed:
+#                elist.append((x1,y1,i))
+#                elist.append((x2,y2,i))
+#            else:
+#                elist.append((x1,y1))
+#                elist.append((x2,y2))
     #find all segments with endpoints close to a given point
-    #t is line, side
-    def closePoints(self,t,radius=80):
-        elist=self.endptList(True)
-        closeList=[]
-        for (x1,y1,i) in elist:
-            if t!= (x1,y1,i) and dist(t[0],t[1],x1,y1)<=radius:
-                closeList.append((x1,y1,i))
-        return closeList
+    #t is (index into li,side)
+    #note we exclude t
+    def closePoints(self,t,radius=80,double_sided=False):
+        close_list=[]
+        if double_sided:
+            for i in xrange(0,len(self.li)):
+                for side in [0,1]:
+                    pt1=self[(i,side)]
+                    pt2=self[t]
+                    if t!=(i,side) and dist(pt1[0],pt1[1],pt2[0],pt2[1])<=radius:
+                        close_list.append((i,side))
+            return close_list
+        if not double_sided:
+            for i in xrange(0,len(self.li)):
+                pt1=self[(i,0)]
+                pt2=self[t]
+                if t!=(i,0) and dist(pt1[0],pt1[1],pt2[0],pt2[1])<=radius:
+                    close_list.append((i,0))
+            return close_list
+                
+#        elist=self.endptList(True)
+#        closeList=[]
+#        for (x1,y1,i) in elist:
+#            if t!= (x1,y1,i) and dist(t[0],t[1],x1,y1)<=radius:
+#                closeList.append((x1,y1,i))
+#        return closeList
     def xClosePoints(self,t,radius=20):
-        elist=self.endptList(True)
-        closeList=[]
-        for (x1,y1,i) in elist:
-            if t!= (x1,y1,i) and math.fabs(x1-t[0])<=radius:
-                closeList.append((x1,y1,i))
+        for i in self.li:
+            for side in [0,1]:
+                pt1=self[(i,side)]
+                pt2=self[t]
+                if t!=(i,side) and math.fabs(pt1[0]-pt2[0])<=radius:
+                    closeList.append((i,side))
         return closeList
+        
+#        elist=self.endptList(True)
+#        closeList=[]
+#        for (x1,y1,i) in elist:
+#            if t!= (x1,y1,i) and math.fabs(x1-t[0])<=radius:
+#                closeList.append((x1,y1,i))
+#        return closeList
     '''find all segments with endpoint close to given point
     and with close intersection'''
-    def closeIntersections(self,t,radius=80,allowed_error=20):
-        closeList=self.closePoints(t,radius)
-        closeIntList=[]
-        for (x1,y1,i) in closeList:
-            ix,iy=intersection(segment,self.li[i])
-            if ix>=min(x1,segment[0])-allowed_error and ix<=max(x1,segment[0])+allowed_error:
-                if i not in closeIntList:
-                    closeIntList.append((ix,iy,i))
-        return closeIntList
+    def closeIntersections(self,t,radius=80,allowed_error=20,double_sided=False):
+        closeList=self.closePoints(t,radius,double_sided)
+        i_list=[]#list of (index, side) of segments that intersect segment t
+        int_list=[]#list of intersections
+        #tup is (index,side)
+        for (i,s) in closeList:
+            given=self[t[0]]
+            current=self[i]
+            x0=self[t]
+            xcur=self[(i,s)]
+            ix,iy=intersection(given, current)
+            #!!!potential problem: this might recognize a covering
+            #wall as splitting up the covered wall
+            if ix>=min(x0,xcur)-allowed_error and ix<=max(x0,xcur)+allowed_error:
+                #if (i,s) not in closeIntList:
+                i_list.append((i,s))
+                int_list.append((ix,iy))
+        return (i_list,int_list)
+    #which side of the segment is the point on?
+    #assume seg has x1<x2, and not vertical
+    def side(self,seg,pt):
+        if pt[0]<=float(seg[0]+seg[2])/2:
+            return 0
+            #left side
+        if pt[0]> float(seg[0]+seg[2])/2:
+            return 1
+            #right side
+        
     '''for a given line #i and endpoint, do there exist lines approximately
     parallel to that line?
     If so, then there is good evidence the endpoint is a node
     becuase walls are made of 2 parallel lines'''
-    def existParallels(self,segment,radius=20):
-        closeList=self.xClosePoints(segment,radius)
-        for (x,y,i) in closeList:
-            if mod180dist(angle(self.li[i]),segment)<10:
-                return True
-        return False
+    #EDIT: no, this is not good evidence.
+#    def existParallels(self,segment,radius=20):
+#        #note segment is (i,s)
+#        if self[segment]<=radius or self[segment]>=PIXELS-radius:
+#            return False #too close to edge.
+#        closeList=self.xClosePoints(segment,radius)
+#        for (x,y,i) in closeList:
+#            if mod180dist(angle(self.li[i]),segment)<10:
+#                return True
+#        return False
     def lowlines(self):
         return self.accepted
 #    def midpt(self,li):
@@ -259,13 +370,14 @@ def ymidpt(li,c1,c2):
         return (y2-y1)/float(x2-x1)*(float(c1+c2)/2-x1)+y1
 
 class MapperWindow:
-    def __init__(self):
+    def __init__(self,mp):
         self.window=pygame.display.set_mode((1280,960))
         self.offset=(640,480)
+        self.m=mp
     #1 inch = 10 pixels
     def line(self,coord):
         x1,x2,y1,y2=coord
-        pygame.draw.line(window,pygame.Color(255,255,255),\
+        pygame.draw.line(self.window,pygame.Color(255,255,255),\
                          self.conv(x1,y1),\
                          self.conv(x2,y2),1)
         pygame.display.flip()
@@ -276,71 +388,114 @@ class MapperWindow:
         return (self.offset[0]+int(PPI*x),self.offset[1]-int(PPI*y))
     def point(self,coord):
         x,y=coord
-        pygame.draw.circle(window, pygame.Color(255,255,255),\
+        pygame.draw.circle(self.window, pygame.Color(255,255,255),\
                            self.conv(x,y), 2, 0)
+    def draw(self):
+        for f in self.m.feature_list:
+            f.draw(self)
+        #absolute coordinates necessary here. Should not be, though.
     
 
 class Map:
-    def __init__():
+    def __init__(self):
         self.feature_list=[]
-        self.table={}
     def add(self,obst):
         self.feature_list.append(obst)
-        for (i,pt) in enumerate(obst.endpoints()):
-            if pt not in self.table.keys():
-                self.table[pt]=[]
-            self.table[pt].append((obst,i))
-            #makes a dictionary, mapping each point to the Feature it's in.
-    #identify matching
-    def bind(self,dist=1):
-        for li in self.table:
-            if len(li)>1:
-                pass
-                #note: if need to deal with length 3, this would be troublesome.
-    
+    def __str__(self):
+        s=""
+        for f in self.feature_list:
+            s=s+str(f)+"\n"
+        return s
 
 class Mapper:
     #note: need to match walls! here turn data (compass, accelerometer)
     #idea: can convert ir data to map and use hough?
     #be nice
+
+    def __init__(self):
+        self.local_map=Map()
     
-    '''given a list of segments, generates a map (returns a Map object)'''
+    '''given a list of segments, generates a local map (returns a Map object)
+    It is local in the sense that it only uses data from one moment in time.
+    '''
     #segment_list comes from HoughLines
     def graphToLocalMap(self,segment_list):
         low_horiz=[]
 #        horiz,vert=self.removeVerts(segment_list)
         iv=SegmentList(segment_list)
-        low_horiz=iv.lowlines()
+        iv2=SegmentList(segment_list)
+        iv.removeVerts()
+        iv.xsort()
+        low_horiz=iv.low_horiz()
+        #low_horiz=iv.lowlines()
         #these are the low walls.
         #now make them into edges and connect them with nodes.
-        nodeList=[]
-        #low_horiz looks like ((x1,y1,x2,y2),i)
-        for (x1,y1,i) in low_horiz:
-            closeIntList=iv.close((x1,y1,i))
-            c=centroid(closeIntList)[0:1]
-            #ignore
-            nodeList.append((closeIntList,c))
-        for (x1,y1,i) in low_horiz:
-            
-        
-#            flag=0
-#            #-1=delete
-#            for (i,p) in enumerate(horiz):
-#                for (j,q) in enumerate(horiz):
-#                    if i !=j and overlapRatio([p,q])>=OVERLAP_THRESHOLD and\
-#                       yCenter(p)>yCenter(q):
-#                        flag=1
-#                        break
-#                if not flag:
-#                    low_horiz.append(p)
-
-#    def createLocalMap(self,segment_list):
-#        #be careful with edges!
-#        #identify close edges?
-#        #identify wall behind another wall.
-#        if averageIn:
-#            return
-#            #need to average in previous measurements...
+        bound_list=frozenset([])
+        #bound_list will contain all bound vertex coordinates
+        #hypothesized to be nodes (rather than "floating" nodes)
+        node_list=[]
+        #low_horiz contains indices of low horizontal segments
+        #try to bind the right endpoints first
+        for i in low_horiz:
+            x1,y1,x2,y2=iv[i]
+            close_i_list,close_int_list=iv.closeIntersections((i,1))
+            #(i,1)=right endpt of segment i
+            #first list contains indices pointing to intersecting segments
+            #second list contains intersections
+            #if there are other segments that intersect our segment
+            #near the right endpoint, then it's probably a vertex
+            if close_int_list!=[]:
+                #average over intersections
+                c=centroid(close_int_list)[0:1]
+                close_int_list.append((i,1))
+                node_list.append((close_i_list,c))
+                bound_list.add(c)
+            #if there aren't other segments that intersect our segment
+            #near the right endpoint, but there is a parallel segments that
+            #ends near, then it's probably a vertex (because walls are
+            #made of 2 parallels
+#            elif existParallels((i,1)):
+#                node_list.append(([(i,1)],iv[(i,1)]))
+#                bound_list.add((i,1))
+        #try to find nodes for the left endpoints
+#        for i in low_horiz:
+#            if (i,0) not in bound_list and existParallels((i,0)):
+#                node_list.append(([],iv[(i,1)]))
+#                bound_list.add((i,1))
+        for (close_i_list,c) in node_list:
+            #bind close vertices to c.
+            for t in close_i_list:
+                iv[t]=c
+        print [iv2[(i,0)] for i in low_horiz]
+        print [iv2[(i,1)] for i in low_horiz]
+        print [iv2[(i,0)] for i in low_horiz]+[iv2[(i,1)] for i in low_horiz]
+        node_set=frozenset([iv2[(i,0)] for i in low_horiz]+[iv2[(i,1)] for i in low_horiz])
+        node_dict={}
+        for pt in node_set:
+            actual_pt=pixelToPosition(pt[0],pt[1])[0]#what about error?
+            if pt in bound_list:
+                n=Node(ABSOLUTE,arg3=actual_pt,floating=False)
+            else:
+                n=Node(ABSOLUTE,arg3=actual_pt,floating=True)
+            node_dict[pt]=n
+            self.local_map.add(n)
+        for i in low_horiz:
+            lnp=iv2[(i,0)]
+            rnp=iv2[(i,1)]
+            ln=node_dict[lnp]
+            rn=node_dict[rnp]
+            w=Wall(ABSOLUTE,arg=None,error=0,left=ln,right=rn)
+            self.local_map.add(w)
+            #set the wall's neighbors
+            w[0]=ln
+            w[1]=rn
+            angle1=math.atan2(rnp[1]-lnp[1],rnp[0]-lnp[0])*180/math.pi
+            angle2=(angle1+180)%360
+            #set the nodes' neighbors
+            ln[angle1]=w
+            rn[angle2]=w
+            w.recalc()
+                
 '''
 def overlapRatio(li):
     x1=min(li[0][0],li[0][2])
@@ -361,16 +516,19 @@ def tupleToArg(t):
         return t
 
 def slope(x,y1=None,x2=None,y2=None):
+    x1=0
     x1,y1,x2,y2==tupleToArg((x,y1,x2,y2))
     if x1==x2:
         return 1000
-    return float(y2-x2)/(y1-x1)
+    return float(y2-y1)/(x2-x1)
 
 def extrapolate(x3,x,y1=None,x2=None,y2=None):
+    x1=0
     x1,y1,x2,y2==tupleToArg((x,y1,x2,y2))
     return slope(x1,y1,x2,y2)*(x3-x1)+y1
     
 def dist(x,y1=None,x2=None,y2=None):
+    x1=0
     x1,y1,x2,y2==tupleToArg((x,y1,x2,y2))
     return math.hypot(x2-x1,y2-y1)
 
@@ -409,8 +567,22 @@ def centroid(li):
 Things to think about: when are two walls close enough to be the same?
 '''
 
+'''this works.
+print "hello"
 #SegmentList test
-#iv=SegmentList([(0,0,200,100),(50,100,100,100)])
-#print iv.xsort
-#print iv.votes
-#print iv.accepted
+iv=SegmentList([(0,0,200,100),(50,100,100,100)])
+print iv.removeVerts()
+iv.xsort()
+iv.low_horiz()
+print iv.xsorted
+print iv.votes
+print iv.accepted
+'''
+
+h=Huff("wall.jpg")
+lines=h.huff()[0]
+mpr=Mapper()
+mpr.graphToLocalMap(lines)
+mw=MapperWindow(mpr.local_map)
+mw.draw()
+print str(mpr.local_map)
