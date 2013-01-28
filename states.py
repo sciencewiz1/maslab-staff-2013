@@ -18,20 +18,22 @@ class Wander(State):
         2. If see ball, turn to ball.
         3. If too close to wall, back up.
         4. If close to wall, swerve to avoid.
-        ''' 
+        '''
+
+        if DEBUG:
+            print "Current state: ", self.__class__.__name__
+        
         #if either bump sensor is pressed, we are stuck!
 
-        if self.wrapper[LEFT_BUMP] or self.wrapper[RIGHT_BUMP]:
-            return Stuck
+        #0 is fine, 3 is very stuck
+        stuck_info=self.wrapper.stuck()
+        if DEBUG:
+            print "Stuckness: ",stuck_info
 
-        #slightly ad hoc right now
-        dist=min(self.wrapper[FRONT_DIST],self.wrapper[FRONT_DIST2])
-        
-        if dist <= TOO_CLOSE:
-        #way too close, back up
+        #0 is left, 1 is right
+        if stuck_info[0]>=2 or stuck_info[1]>=2:
             return Stuck
-        #should change to bump sensor
-        
+                        
         #see ball, stop wandering
         if self.wrapper.seeBall():
             print "saw ball!"
@@ -43,7 +45,7 @@ class Wander(State):
             return (TurnAndLook,"cyanButton")
         
         #close, turn left before you get way too close
-        if dist <= CLOSE:
+        if stuck_info[0]>=1 or stuck_info[0]>=1:
             return AvoidWall
 
         #timeout
@@ -57,12 +59,19 @@ class Wander(State):
 class AvoidWall(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
-        if randint(0,1)==0:
-            self.action=TurnLeft
-        else:
+        stuck_info=self.wrapper.stuck()
+        #if more stuck on the LHS
+        if stuck_info[0]> stuck_info[1]:
             self.action=TurnRight
-        #Maybe change to *randomly* (or intelligently choose between)
-        #turn left or right
+        #if more stuck on the RHS
+        elif stuck_info[0]< stuck_info[1]:
+            self.action=TurnLeft
+        #if equally stuck on both sides
+        else:
+            if randint(0,1)==0:
+                self.action=TurnLeft
+            else:
+                self.action=TurnRight
     def stopfunction(self):
         '''
         In order of priority:
@@ -72,16 +81,23 @@ class AvoidWall(State):
         4. If no longer close to wall, stop turning and move forwards. (Wander)
         5. If turned 180 degrees and still close to wall, assume it's stuck. (Stuck)
         '''
-        if self.wrapper[LEFT_BUMP] or self.wrapper[RIGHT_BUMP]:
+        if DEBUG:
+            print "Current state: ", self.__class__.__name__
+        
+        #0 is fine, 3 is very stuck
+        stuck_info=self.wrapper.stuck()
+        if DEBUG:
+            print "Stuckness: ",stuck_info
+        
+        if stuck_info[0]==3 or stuck_info[1]==3:
             return Stuck
-        dist=min(self.wrapper[FRONT_DIST],self.wrapper[FRONT_DIST2])
         #I'm not too sure about this.
         #Be careful of robot trying to get an inaccessible ball
         if self.wrapper.seeBall():
             return TurnAndLook
-        if dist>=TOO_CLOSE:
+        if stuck_info[0]>=2 or stuck_info[1]>=2:
             return Stuck
-        if dist <CLOSE:
+        if stuck_info[0]==0 and stuck_info[1]==0:
             return Wander
             #far enough away, stop turning
         #REPLACE THIS WITH COMPASS READING
@@ -122,12 +138,26 @@ class TurnAndLook(State):
         #Maybe change to *randomly* (or intelligently choose between)
         #turn left or right
     def stopfunction(self):
+        '''
+        Priority:
+        1. If sensors bumped, back up (Stuck)
+        2. If ball is centered, approach (Pause, then ApproachBall)
+        3. If see button, and time is appropriate, go for button (Pause, then
+        ApproachButton
+        4. If turned too long, time out, go wander. (Wander)
+        '''
         if DEBUG:
-            print "looping in (stopfunction of) ", self.__class__.__name__
+            print "Current state: ", self.__class__.__name__
+        stuck_info=self.wrapper.stuck()
+        if DEBUG:
+            print "Stuckness: ",stuck_info
+        if stuck_info[0]==3 or stuck_info[1]==3:
+            return Stuck
         if self.wrapper.ballCentered():
             if DEBUG:
                 print "centered ball, approach!"
             return (Pause, ApproachBall)
+            #i.e., first pause and then approach ball
             #return ApproachBall
             #return Stop
             #found ball
@@ -143,7 +173,7 @@ class TurnAndLook(State):
             #turned 360, no balls in sight
             #log the IR readings during turning.
             #in the future, should probably change direction
-            #for instance, have a TurnTowardsOpen state.
+            #NEED TO DETECT WHICH PLACES ARE MORE OPEN!
         else:
             print "keep turning"
             return 0
@@ -161,13 +191,19 @@ class ApproachBall(State):
         3. If ball no longer centered, turn to face the ball. (TurnAndLook)
         4. If lose track of ball, wander. (Wander)
         '''
+        if DEBUG:
+            print "Current state: ", self.__class__.__name__
+        stuck_info=self.wrapper.stuck()
+        if DEBUG:
+            print "Stuckness: ",stuck_info
         #note presence of AND here: give up when both sensors bumped,
         #or when one sensor bumped and time too long, or too long
-        if (self.wrapper[LEFT_BUMP] and self.wrapper[RIGHT_BUMP]) or\
-           ((self.wrapper[LEFT_BUMP] or self.wrapper[RIGHT_BUMP]) and\
+        if (stuck_info[0]==3 and stuck_info[0]==3) or\
+           ((stuck_info[0]==3 or stuck_info[0]==3) and\
             time.time()>=self.wrapper.time+5) or\
            time.time()>=self.wrapper.time+10:
             return Stuck
+        #maybe turn in direction *opposite* from that which got it stuck?
             '''!!!'''
             #WARNING: after it gets unstuck it might go towards the same ball again!
             #Need to prevent this!
@@ -199,12 +235,20 @@ class ApproachButton(State):
         3. If button no longer centered, turn to face the button. (TurnAndLook)
         4. If lose track of button, wander. (Wander)
         '''
+        if DEBUG:
+            print "Current state: ", self.__class__.__name__
+        
+        stuck_info=self.wrapper.stuck()
+        if DEBUG:
+            print "Stuckness: ",stuck_info
         #note presence of AND here: give up when both sensors bumped,
         #or when one sensor bumped and time too long, or too long
-        if (self.wrapper[LEFT_BUMP] and self.wrapper[RIGHT_BUMP]) or\
-           ((self.wrapper[LEFT_BUMP] or self.wrapper[RIGHT_BUMP]) and\
+        if (stuck_info[0]==3 and stuck_info[1]==3) or\
+           ((stuck_info[0]==3 or stuck_info[1]==3) and\
             time.time()>=self.wrapper.time+5) or\
            time.time()>=self.wrapper.time+10:
+            if stuck_info[0]==3 and stuck_info[1]==3:
+                self.wrapper.hitButton()
             return Stuck
         #if within 4 inches
         if self.wrapper[FRONT_DIST]<4:
@@ -212,7 +256,7 @@ class ApproachButton(State):
         if self.wrapper.seeButton():
             return 0
             #still going after button
-        print "ball not centered!"
+        print "button not centered!"
         if self.wrapper.seeButton():
             print "still see button, turn to face."
             return TurnAndLook
@@ -230,6 +274,8 @@ class Stuck(State):
         State.__init__(self,wrap)
         self.action=GoBack
     def stopfunction(self):
+        if DEBUG:
+            print "Current state: ", self.__class__.__name__
         if time.time() > self.wrapper.time+2:
             return TurnAndLook
         return 0
@@ -243,6 +289,8 @@ class Charge(State):
         if target=="cyanButton":
             self.button=True
     def stopfunction(self):
+        if DEBUG:
+            print "Current state: ", self.__class__.__name__
         if time.time() > self.wrapper.time+2:
             if self.button==True:
                 self.wrapper.hitButton()
@@ -257,6 +305,8 @@ class Pause(State):
         self.action=DoNothing
         self.next_state=next_state
     def stopfunction(self):
+        if DEBUG:
+            print "Current state: ", self.__class__.__name__
         if time.time()>self.wrapper.time+0.5:
             print "transition to...", self.next_state.__name__
             return self.next_state
@@ -274,6 +324,8 @@ class MaxRandom(State):
             self.action=GoBack
         self.next_state=next_state
     def stopfunction(self):
+        if DEBUG:
+            print "Current state: ", self.__class__.__name__
         if time.time()> self.wrapper.time+2:
             return self.next_state
         return 0
