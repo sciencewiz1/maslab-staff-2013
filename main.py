@@ -174,8 +174,6 @@ class StateMachine(threading.Thread):
                 #add time.sleep to allow other threads to execute
                 time.sleep(0.001)
     def startSM(self):
-        if result==False:
-            return False
         if not self.isAlive():
             self.start()
         self.active=True

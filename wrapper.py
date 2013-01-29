@@ -64,6 +64,7 @@ class ManualOverride(wx.Frame):
             self.wrapper.right_motor.setSpeed(rightSpeed)
             print "changed right motor to:"+str(rightSpeed)
             self.wrapper.roller_motor.setAngle(rollerSpeed)
+            self.wrapper[RELEASE_MOTOR]=0
             #self.wrapper.roller_motor.setValue(1)
             print "Moving "+cmdName
         else:
@@ -79,13 +80,14 @@ class Wrapper:
         self.smSwitchOverride=False
         print "creating wrapper"
         #Syntax for motors: arduino, currentPin, directionPin, pwmPin
-        self.left_motor = arduino.Motor(self.ard, 13, 23, 12)
+        self.left_motor = arduino.Motor(self.ard, 12, 23, 11)
         print "Left motor"
-        self.right_motor = arduino.Motor(self.ard, 10, 27, 9)
+        self.right_motor = arduino.Motor(self.ard, 9, 27, 8)
         print "Right motor"
         #self.roller_motor = arduino.Motor(self.ard, 7, 31, 6)
         self.roller_motor=arduino.Servo(self.ard, 42)
         #self.roller_override=arduino.DigitalOutput(self.ard,42)
+        self.release_motor=arduino.Servo(self.ard,43)
         print "Roller motor"
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
         #this one is long-range
@@ -94,13 +96,14 @@ class Wrapper:
         #self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 2))
         #self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 3))
         print "IR module"
-        self.left_bump=arduino.DigitalInput(self.ard,31)
-        self.right_bump=arduino.DigitalInput(self.ard,33)
+        self.left_bump=arduino.DigitalInput(self.ard,50)
+        self.right_bump=arduino.DigitalInput(self.ard,52)
         print "Bump sensors"
         #self.imu=IMU(arduino.IMU(self.ard))
         print "imu"
         self.ard.run()
         self.roller_motor.setAngle(ROLLER_ANGLE)
+        self.release_motor.setAngle(0)
         #self.roller_motor.setValue(1)
         self.mode=BALL_MODE
         self.color=GREEN#change this when change color!!!
@@ -170,6 +173,8 @@ class Wrapper:
             #to be done
     
     def __setitem__(self,index,value):
+        if index==RELEASE_MOTOR:
+            self.release_motor.setAngle(value)
         if index==ROLLER_MOTOR:
             self.roller_motor.setAngle(value)
             #self.roller_motor.setValue(1)
@@ -225,7 +230,7 @@ class Wrapper:
             r_dist=self[FRONT_DIST]
             if r_dist<=TOO_CLOSE:
                 r=2
-            elif l_dist<=CLOSE:
+            elif r_dist<=CLOSE:
                 r=1
         return (l,r)
     

@@ -17,7 +17,7 @@ ard.run()  # Start the thread which communicates with the Arduino
 # Main loop -- check the sensor and update the digital output
 start_time=time.time()
 while time.time()-start_time<=10:
-    ir_val = a0.getValue() # Note -- the higher value, the *closer* the dist
+    ir_val = a0.getValue() # Note -- the higher0 value, the *closer* the dist
     #print time.time()-start_time
     print ir_val#, ir_val >= THRESH
     time.sleep(0.1)
