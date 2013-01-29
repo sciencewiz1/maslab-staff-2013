@@ -46,6 +46,8 @@ class RobotControllerApp(Frame, threading.Thread):
         self.changeTarget=Menu()
         #add items to file menu
         self.connectMenuItem=self.filemenu.Append(ID_ANY,"&Connect","Connect to the Arduino")
+        self.startVSMenuItem=self.filemenu.Append(ID_ANY,"&Start Vision System","Start Vision System")
+        self.setSystemSMMenuItem=self.filemenu.Append(ID_ANY,"&Setup System","Run Neccessary Procedures for Manual and SM Mode!")
         self.runSMMenuItem=self.filemenu.Append(ID_ANY,"&Run SM","Run the StateMachine")
         self.stopSMMenuItem=self.filemenu.Append(ID_ANY,"&Pause SM","Pause the StateMachine Execution")
         self.manualControlMenuItem=self.filemenu.Append(ID_ANY,"&Manual Control","Manually Control the Robot")
@@ -59,6 +61,8 @@ class RobotControllerApp(Frame, threading.Thread):
         #method requires arg:(self,event)
         self.Bind(EVT_MENU, self.about, self.aboutMenuItem)
         self.Bind(EVT_MENU, self.connect, self.connectMenuItem)
+        self.Bind(EVT_MENU, self.startVS, self.startVSMenuItem)
+        self.Bind(EVT_MENU,self.setSystem,self.setSystemSMMenuItem)
         self.Bind(EVT_MENU,self.startSM,self.runSMMenuItem)
         self.Bind(EVT_MENU,self.pauseSM,self.stopSMMenuItem)
         self.Bind(EVT_MENU,self.activateManualControl,self.manualControlMenuItem)
@@ -93,6 +97,11 @@ class RobotControllerApp(Frame, threading.Thread):
             self.status.SetStatusText("Connected to Arduino on port: "+str(port),1)
         else:
             self.status.SetStatusText("Failed to connect, please plug in the Arduino!",1)
+    def startVS(self,event):
+        self.wrapper.startVS()
+    def setSystem(self,event):
+        self.connect(event)
+        self.startVS(event)
     def changeCameraNumber(self,event):
         cameraNumDialog = TextEntryDialog(None, "Please enter the camera index.", 'Vision System: Change Camera Number', '')
         if cameraNumDialog.ShowModal() == wx.ID_OK:

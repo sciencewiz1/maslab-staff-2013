@@ -112,9 +112,6 @@ class Wrapper:
         self.start_time=time.time()
         self.time=self.start_time
         #image processor here
-        print "init vision system"
-        self.vs=VisionSystemWrapper()
-        print "starting vs"
         #start timer
         self.wt=WallTimer(self)
 #        self.active=True
@@ -124,6 +121,10 @@ class Wrapper:
             self.connectedToArduino=True
         else:
             print "Already connected!"
+    def startVS(self):
+        print "init vision system"
+        self.vs=VisionSystemWrapper()
+        print "starting vs"
     def start(self):
         if not self.connected:
             print "Not connected to arduino! Please connect and then try again!"

@@ -7,12 +7,12 @@ release motor
 IR module
 Bump sensors
 imu
-init vision system
-starting vs
 Connecting
 Arduino not connected on ACM0
 Arduino not connected on ACM1
 Arduino not connected on ACM2
 Arduino not connected on ACM3
 Failed to connect
+init vision system
+starting vs
 Arduino not connected so there is no comm thread to join.
