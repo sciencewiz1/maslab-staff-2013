@@ -1,7 +1,7 @@
 #IR threshold: what counts as "close"?
-CLOSE = 6.0
+CLOSE = 8.0
 #IR threshold: what counts as "too close"?
-TOO_CLOSE = 3.0
+TOO_CLOSE = 4.0
 #when to go for the wall
 WALL_TIME = 120
 #when to stop (seconds)
@@ -59,11 +59,13 @@ Y_PIXELS=120
 
 #regression line for IR to distance
 #obstacle distance = Y_INTERCEPT+SLOPE*1/self.getIRVal()
-SLOPE=7611.1
-Y_INTERCEPT=-6.95122
+SLOPE=2374.38
+Y_INTERCEPT=-1.09524
 #regression line for IR to distance
-LONG_SLOPE=14757.89
-LONG_Y_INTERCEPT=-11.1283
+#LONG_SLOPE=14757.89
+#LONG_Y_INTERCEPT=-11.1283
+LONG_SLOPE=6722.69
+LONG_Y_INTERCEPT=-5.88067
 
 DEBUG=1
 #set to 1 when debugging, 0 otherwise
@@ -87,3 +89,5 @@ LEFT_MOTOR=21
 RIGHT_MOTOR=22
 RELEASE_MOTOR=23
 HELIX_MOTOR=24
+#amount of time to back up
+BACK_UP_TIME=1

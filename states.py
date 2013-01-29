@@ -276,7 +276,7 @@ class Stuck(State):
     def stopfunction(self):
         if DEBUG:
             print "Current state: ", self.__class__.__name__
-        if time.time() > self.wrapper.time+2:
+        if time.time() > self.wrapper.time+BACK_UP_TIME:
             return TurnAndLook
         return 0
         #keep turning

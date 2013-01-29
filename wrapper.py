@@ -164,13 +164,13 @@ class Wrapper:
         self.button_presses=0
         self.wt.start()
     def __getitem__(self,index):
-        if index==FRONT_DIST:
+        if index==FRONT_DIST:#right
             return self.ir_module.distance()
 ##        if index==LEFT_DIST:
 ##            return self.left_ir_module.distance()
 ##        if index==RIGHT_DIST:
 ##            return self.right_ir_module.distance()
-        if index==FRONT_DIST2:
+        if index==FRONT_DIST2:#left
             return self.ir_module2.distance()
         if index==LEFT_BUMP:
             return self.left_bump.getValue()
