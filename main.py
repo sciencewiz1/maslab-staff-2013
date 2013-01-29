@@ -45,6 +45,7 @@ class RobotControllerApp(Frame, threading.Thread):
         self.options=Menu()
         self.changeTarget=Menu()
         #add items to file menu
+        self.connectMenuItem=self.filemenu.Append(ID_ANY,"&Connect","Connect to the Arduino")
         self.runSMMenuItem=self.filemenu.Append(ID_ANY,"&Run SM","Run the StateMachine")
         self.stopSMMenuItem=self.filemenu.Append(ID_ANY,"&Pause SM","Pause the StateMachine Execution")
         self.manualControlMenuItem=self.filemenu.Append(ID_ANY,"&Manual Control","Manually Control the Robot")
@@ -57,6 +58,7 @@ class RobotControllerApp(Frame, threading.Thread):
         #bind method->menuItem
         #method requires arg:(self,event)
         self.Bind(EVT_MENU, self.about, self.aboutMenuItem)
+        self.Bind(EVT_MENU, self.connect, self.connectMenuItem)
         self.Bind(EVT_MENU,self.startSM,self.runSMMenuItem)
         self.Bind(EVT_MENU,self.pauseSM,self.stopSMMenuItem)
         self.Bind(EVT_MENU,self.activateManualControl,self.manualControlMenuItem)
@@ -77,17 +79,20 @@ class RobotControllerApp(Frame, threading.Thread):
         self.wrapper=Wrapper()
         self.status.SetStatusText("Loading StateMachine...",0)
         self.sm=StateMachine(self.wrapper)
-        portOpened,port=self.wrapper.connected()
-        if portOpened:
-            self.SetStatusText("Connected to Arduino on port: "+str(port),1)
-        else:
-            self.SetStatusText("Failed to connect, please plug in the Arduino!",1)
+        self.status.SetStatusText("Arduino Not Connected!",1)
         self.status.SetStatusText("System Ready...",0)
     def about(self,event):
         msg="This is the GUI for the main control system of the robot for the MASLAB 2013 Competition.\n The project team included: Holden Lee, David Goehring, Melody Liu, and Roxana Mata"
         dlg=MessageDialog( self, msg,self.mainLabel,wx.OK)
         dlg.ShowModal()
         dlg.Destroy()
+    def connect(self,event):
+        self.wrapper.connect()
+        portOpened,port=self.wrapper.connected()
+        if portOpened:
+            self.status.SetStatusText("Connected to Arduino on port: "+str(port),1)
+        else:
+            self.status.SetStatusText("Failed to connect, please plug in the Arduino!",1)
     def changeCameraNumber(self,event):
         cameraNumDialog = TextEntryDialog(None, "Please enter the camera index.", 'Vision System: Change Camera Number', '')
         if cameraNumDialog.ShowModal() == wx.ID_OK:

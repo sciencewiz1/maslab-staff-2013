@@ -74,6 +74,7 @@ between states'''
 class Wrapper:
     def __init__(self):
         self.manualControl=False
+        self.connectedToArduino=False
         self.ard=arduino.Arduino()
         self.startSwitch=arduino.DigitalInput(self.ard,53)
         self.targetSwitch=arduino.DigitalInput(self.ard,52)
@@ -84,11 +85,14 @@ class Wrapper:
         print "Left motor"
         self.right_motor = arduino.Motor(self.ard, 9, 27, 8)
         print "Right motor"
+        #self.helix_motor=arduino.Motor(self.ard, 9, 27, 8)
+        print "helix motor"
         #self.roller_motor = arduino.Motor(self.ard, 7, 31, 6)
         self.roller_motor=arduino.Servo(self.ard, 42)
+        print "Roller motor"
         #self.roller_override=arduino.DigitalOutput(self.ard,42)
         self.release_motor=arduino.Servo(self.ard,43)
-        print "Roller motor"
+        print "release motor"
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
         #this one is long-range
         self.ir_module2=IRModule(arduino.AnalogInput(self.ard, 1),True)
@@ -101,9 +105,6 @@ class Wrapper:
         print "Bump sensors"
         #self.imu=IMU(arduino.IMU(self.ard))
         print "imu"
-        self.ard.run()
-        self.roller_motor.setAngle(ROLLER_ANGLE)
-        self.release_motor.setAngle(0)
         #self.roller_motor.setValue(1)
         self.mode=BALL_MODE
         self.color=GREEN#change this when change color!!!
@@ -117,7 +118,18 @@ class Wrapper:
         #start timer
         self.wt=WallTimer(self)
 #        self.active=True
+    def connect(self):
+        if not self.ard.isAlive():
+            self.ard.run()
+            self.connectedToArduino=True
+        else:
+            print "Already connected!"
     def start(self):
+        if not self.connected:
+            print "Not connected to arduino! Please connect and then try again!"
+            return False
+        self.roller_motor.setAngle(ROLLER_ANGLE)
+        self.release_motor.setAngle(0)
         on=self[START]
         print on
         while not on and not self.smSwitchOverride:
