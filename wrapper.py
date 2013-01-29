@@ -77,7 +77,7 @@ class Wrapper:
         self.connectedToArduino=False
         self.ard=arduino.Arduino()
         self.startSwitch=arduino.DigitalInput(self.ard,53)
-        self.targetSwitch=arduino.DigitalInput(self.ard,52)
+        self.targetSwitch=arduino.DigitalInput(self.ard,51)
         self.smSwitchOverride=False
         print "creating wrapper"
         #Syntax for motors: arduino, currentPin, directionPin, pwmPin
@@ -141,6 +141,7 @@ class Wrapper:
                 print "did not start SM, entering manual override!"
                 return False
         target=self[TARGET]
+        print target
         if target==True:
             self.color=RED
         else:
@@ -193,7 +194,8 @@ class Wrapper:
             self.roller_motor.setAngle(value)
             #self.roller_motor.setValue(1)
         if index==HELIX_MOTOR:
-            self.helix_motor.setSpeed(value)
+            pass
+            #self.helix_motor.setSpeed(value)
         if index==LEFT_MOTOR:
             self.left_motor.setSpeed(value)
         if index==RIGHT_MOTOR:
@@ -273,6 +275,7 @@ class Wrapper:
     def stop(self):
         self.ard.stop()
         self.ir_module.stop()
+        self.ir_module2.stop()
         self.wt.stop()
         self.vs.stop()
 class IMU(threading.Thread):
@@ -342,7 +345,10 @@ class IRModule(threading.Thread):
     def distance(self, filtered=False):
         #if not filtered, just use last ir value
         if not filtered:
-            ans=self.__corrected(self.m*1/self.getIRVal()+self.b)
+            ir=self.getIRVal()
+            if ir==0:
+                ir=1
+            ans=self.__corrected(self.m*1/ir+self.b)
             return ans
         #if filtered but not enough data points yet (because just started)
         #use the first ir value
