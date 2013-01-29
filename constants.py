@@ -1,7 +1,7 @@
 #IR threshold: what counts as "close"?
 CLOSE = 8.0
 #IR threshold: what counts as "too close"?
-TOO_CLOSE = 4.0
+TOO_CLOSE = 6.0
 #when to go for the wall
 WALL_TIME = 120
 #when to stop (seconds)

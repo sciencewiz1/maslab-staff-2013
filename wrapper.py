@@ -234,14 +234,6 @@ class Wrapper:
         #left side
         l=0
         r=0
-        if self[LEFT_BUMP]:
-            l=3
-        else:
-            l_dist=self[FRONT_DIST2]
-            if l_dist<=TOO_CLOSE:
-                l=2
-            elif l_dist<=CLOSE:
-                l=1
         if self[RIGHT_BUMP]:
             r=3
         else:
@@ -250,6 +242,15 @@ class Wrapper:
                 r=2
             elif r_dist<=CLOSE:
                 r=1
+        if self[LEFT_BUMP]:
+            l=3
+        else:
+            l_dist=self[FRONT_DIST2]
+            #left IR can't detect close distances well, so supplement it.
+            if l_dist<=TOO_CLOSE or (l_dist<=CLOSE and r>=2) :
+                l=2
+            elif l_dist<=CLOSE:
+                l=1
         return (l,r)
     
     def turnMotorsOff(self):
@@ -273,7 +274,11 @@ class Wrapper:
     def returnToSMMode(self):
         self.manualControl=False
     def stop(self):
-        self.ard.stop()
+        self[LEFT_MOTOR]=0
+        self[RIGHT_MOTOR]=0
+        self[HELIX_MOTOR]=0
+        self[ROLLER_MOTOR]=ROLLER_STOP
+        #self.ard.stop()
         self.ir_module.stop()
         self.ir_module2.stop()
         self.wt.stop()
