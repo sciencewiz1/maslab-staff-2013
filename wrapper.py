@@ -34,6 +34,10 @@ class ManualOverride(wx.Frame):
             self.onKeyLeft(event)
         if key==wx.WXK_RIGHT:
             self.onKeyRight(event)
+        if key==83:#stop
+            self.manualOverride("s")
+        if key==82:#roller on
+            self.manualOverride("ro1")
     def onKeyDown(self,event):
         self.manualOverride("b")
     def onKeyUp(self,event):
