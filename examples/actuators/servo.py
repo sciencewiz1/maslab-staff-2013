@@ -1,3 +1,4 @@
+import sys
 sys.path.append("../..")
 import time
 
@@ -7,17 +8,17 @@ import arduino
 # control a servo.
 
 ard = arduino.Arduino()
-servo = arduino.Servo(ard, 7)  # Create a Servo object
+servo = arduino.Servo(ard, 42)  # Create a Servo object
 ard.run()  # Run the Arduino communication thread
 
-while True:
-    # Sweep the servo back and forth
-    for i in range(0, 180, 10):
-        servo.setAngle(i)
-        print "Angle", i
-        time.sleep(0.1)
-    for i in range(180, 0, -10):
-        servo.setAngle(i)
-        print "Angle", i
-        time.sleep(0.1)
-    
+#while True:
+# Sweep the servo back and forth
+for i in range(0, 180, 10):
+    servo.setAngle(i)
+    print "Angle", i
+    time.sleep(5)
+for i in range(180, 0, -10):
+    servo.setAngle(i)
+    print "Angle", i
+    time.sleep(5)
+
