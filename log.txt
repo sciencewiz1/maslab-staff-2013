@@ -21,42 +21,6 @@ changed right motor to:0
 Moving Stop
 changed left motor to:0
 changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Stop
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
 Moving Stop
 changed left motor to:0
 changed right motor to:0
@@ -67,51 +31,18 @@ Moving Roller On Forward
 changed left motor to:0
 changed right motor to:0
 Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Stop
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
+changed left motor to:-80
+changed right motor to:-80
+Moving Forward
+changed left motor to:-20
+changed right motor to:20
+Moving Right
+changed left motor to:-80
+changed right motor to:-80
+Moving Forward
+changed left motor to:80
+changed right motor to:80
+Moving Backward
 changed left motor to:0
 changed right motor to:0
 Moving Stop
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Stop
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Stop
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Stop
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
-changed left motor to:0
-changed right motor to:0
-Moving Stop
-changed left motor to:0
-changed right motor to:0
-Moving Roller On Forward
