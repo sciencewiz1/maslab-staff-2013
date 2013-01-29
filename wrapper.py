@@ -65,7 +65,7 @@ class ManualOverride(wx.Frame):
             print "changed right motor to:"+str(rightSpeed)
             self.wrapper.roller_motor.setAngle(rollerSpeed)
             self.wrapper[RELEASE_MOTOR]=0
-            #self.wrapper.roller_motor.setValue(1)
+            self.wrapper[HELIX_MOTOR]=126
             print "Moving "+cmdName
         else:
             print "Invalid command!"
@@ -85,7 +85,7 @@ class Wrapper:
         print "Left motor"
         self.right_motor = arduino.Motor(self.ard, 9, 27, 8)
         print "Right motor"
-        #self.helix_motor=arduino.Motor(self.ard, 9, 27, 8)
+        self.helix_motor=arduino.Motor(self.ard, 7, 38, 6)
         print "helix motor"
         #self.roller_motor = arduino.Motor(self.ard, 7, 31, 6)
         self.roller_motor=arduino.Servo(self.ard, 42)
@@ -128,8 +128,9 @@ class Wrapper:
         if not self.connected:
             print "Not connected to arduino! Please connect and then try again!"
             return False
-        self.roller_motor.setAngle(ROLLER_ANGLE)
-        self.release_motor.setAngle(0)
+        self[HELIX_MOTOR]=126
+        self[ROLLER_MOTOR]=ROLLER_ANGLE
+        self[RELEASE_MOTOR]=0
         on=self[START]
         print on
         while not on and not self.smSwitchOverride:
@@ -190,9 +191,11 @@ class Wrapper:
         if index==ROLLER_MOTOR:
             self.roller_motor.setAngle(value)
             #self.roller_motor.setValue(1)
-        elif index==LEFT_MOTOR:
+        if index==HELIX_MOTOR:
+            self.helix_motor.setSpeed(value)
+        if index==LEFT_MOTOR:
             self.left_motor.setSpeed(value)
-        elif index==RIGHT_MOTOR:
+        if index==RIGHT_MOTOR:
             self.right_motor.setSpeed(value)
     #does it see a ball?
 

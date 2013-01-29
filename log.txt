@@ -15,3 +15,7 @@ Arduino not connected on ACM1
 Arduino not connected on ACM2
 Arduino not connected on ACM3
 Failed to connect
+<<<<<<< HEAD
+=======
+Arduino not connected so there is no comm thread to join.
+>>>>>>> added helix motor info
