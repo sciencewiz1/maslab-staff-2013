@@ -65,7 +65,7 @@ class ManualOverride(wx.Frame):
             print "changed right motor to:"+str(rightSpeed)
             self.wrapper.roller_motor.setAngle(rollerSpeed)
             self.wrapper[RELEASE_MOTOR]=0
-            self.wrapper[HELIX_MOTOR]=126
+            self.wrapper.helix_motor.setSpeed(126)
             print "Moving "+cmdName
         else:
             print "Invalid command!"
