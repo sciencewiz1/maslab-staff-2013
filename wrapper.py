@@ -11,17 +11,43 @@ FILTER=[.0625, .25, .375, .25, .0625]
 F_LEN=len(FILTER)
 
 '''Manual override thread, requires arduino object that it should control!'''
-class ManualOverride(threading.Thread):
+class ManualOverride(wx.Frame):
+    title = "Manual Override"
     def __init__(self,wrapper):
         self.active=True
-        threading.Thread.__init__(self)
+        wx.Frame.__init__(self, wx.GetApp().TopWindow, title=self.title)
         self.wrapper=wrapper
-    def run(self):
-        while self.active:
-            cmd=raw_input("Enter command:")
-            self.manualOverride(str(cmd))
+        self.buildGUI()
+        self.Show()
+    def buildGUI(self):
+        self.createWidgets()
+    def createWidgets(self):
+        self.Bind(wx.EVT_CHAR_HOOK, self.onKey)
+        self.Bind(wx.EVT_CLOSE, self.onClose)
+    def onKey(self,event):
+        key=event.GetKeyCode()
+        if key==wx.WXK_DOWN:
+            self.onKeyDown(event)
+        if key==wx.WXK_UP:
+            self.onKeyUp(event)
+        if key==wx.WXK_LEFT:
+            self.onKeyLeft(event)
+        if key==wx.WXK_RIGHT:
+            self.onKeyRight(event)
+    def onKeyDown(self,event):
+        self.manualOverride("b")
+    def onKeyUp(self,event):
+        self.manualOverride("f")
+    def onKeyLeft(self,event):
+        self.manualOverride("l")
+    def onKeyRight(self,event):
+        self.manualOverride("r")
+    def onClose(self,event):
+        self.stop()
     def stop(self):
+        self.wrapper.returnToSMMode()
         self.active=False
+        self.Destroy()
     def manualOverride(self,cmd):
         cmds={"l":(-LEFT_TURN,RIGHT_TURN,0,"Left"),"r":(LEFT_TURN,-RIGHT_TURN,0,"Right"),
               "f":(LEFT_FORWARD,RIGHT_FORWARD,0,"Forward"),"b":(LEFT_BACK,RIGHT_BACK,0,"Backward"),
@@ -44,6 +70,9 @@ class Wrapper:
     def __init__(self):
         self.manualControl=False
         self.ard=arduino.Arduino()
+        self.startSwitch=arduino.DigitalInput(self.ard,53)
+        self.targetSwitch=arduino.DigitalInput(self.ard,52)
+        self.smSwitchOverride=False
         print "creating wrapper"
         #Syntax for motors: arduino, currentPin, directionPin, pwmPin
         self.left_motor = arduino.Motor(self.ard, 13, 23, 12)
@@ -64,6 +93,8 @@ class Wrapper:
         self.left_bump=arduino.DigitalInput(self.ard,31)
         self.right_bump=arduino.DigitalInput(self.ard,33)
         print "Bump sensors"
+        #self.imu=IMU(arduino.IMU(self.ard))
+        print "imu"
         self.ard.run()
         self.roller_motor.setAngle(ROLLER_ANGLE)
         #self.roller_motor.setValue(1)
@@ -74,23 +105,37 @@ class Wrapper:
         self.time=self.start_time
         #image processor here
         print "init vision system"
+        self.vs=VisionSystemWrapper()
+        print "starting vs"
+        #start timer
+        self.wt=WallTimer(self)
+#        self.active=True
+    def start(self):
+        on=self[START]
+        print on
+        while not on and not self.smSwitchOverride:
+            on=self[START]
+            print "waiting..."
+            if self.manualControlCheck():
+                print "did not start SM, entering manual override!"
+                return False
+        target=self[TARGET]
+        if target==True:
+            self.color=RED
+        else:
+            self.color=GREEN
         if self.color==RED:
             string="redBall"
         if self.color==GREEN:
             string="greenBall"
-        print string
-        self.vs=VisionSystemWrapper()
+        print "target acquired..."+str(string)
         self.vs.addTarget(string)
         self.vs.addTarget("cyanButton")
-        print "starting vs"
-        #start timer
-        self.wt=WallTimer(self)
-
-#        self.active=True
-    def start(self):
+        print "vision system set"
         #start a thread that takes IR readings
         self.ir_module.start()
         self.ir_module2.start()
+        #self.imu.start()
         self.start_time=time.time()
         self.time=self.start_time
         self.last_button_time=0#last time it pressed the black button
@@ -109,6 +154,10 @@ class Wrapper:
             return self.left_bump.getValue()
         if index==RIGHT_BUMP:
             return self.right_bump.getValue()
+        if index==START:
+            return self.startSwitch.getValue()
+        if index==TARGET:
+            return self.targetSwitch.getValue()
         if index==COMPASS:
             return
             #need to return compass value
@@ -186,31 +235,34 @@ class Wrapper:
         #self.roller_motor.setValue(1)
     def changeCameraNumber(self,index):
         self.vs.changeCameraNumber(index)
-    def manualControlCheck(self):
-        return self.manualControl
     def connected(self):
         return (self.ard.portOpened, self.ard.port)
+    def manualControlCheck(self):
+        return self.manualControl
     def manualOverride(self):
         self.manualControl=True
         #remove constraints on camera
-        self.vs.override=True
         self.manualControl=ManualOverride(self)
-        self.manualControl.start()
     def returnToSMMode(self):
-        #print "return to sm mode called"
-        self.vs.override=False
-        self.manualControl.stop()
-        #print "trying to stop manual mode"
-        #wait for manual control thread to terminate
-        self.manualControl.join()
         self.manualControl=False
-        #print "sm mode restored"
     def stop(self):
         self.ard.stop()
         self.ir_module.stop()
         self.wt.stop()
         self.vs.stop()
-
+class IMU(threading.Thread):
+    def __init__(self,imu):
+        self.imu=imu
+        self.currentValue=None
+        self.active=True
+        threading.Thread.__init__(self)
+    def getIMUData(self):
+        return self.currentValue
+    def run(self):
+        while self.active:
+            self.currentValue=self.imu.getRawValues()
+            print self.currentValue
+        
 '''Module that records IR measurements'''
 class IRModule(threading.Thread):
     '''Starts IR thread with an empty list of logged IR values'''

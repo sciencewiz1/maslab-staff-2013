@@ -43,6 +43,7 @@ class RobotControllerApp(Frame, threading.Thread):
         #create menus
         self.filemenu=Menu()
         self.options=Menu()
+        self.changeTarget=Menu()
         #add items to file menu
         self.runSMMenuItem=self.filemenu.Append(ID_ANY,"&Run SM","Run the StateMachine")
         self.stopSMMenuItem=self.filemenu.Append(ID_ANY,"&Pause SM","Pause the StateMachine Execution")
@@ -50,6 +51,8 @@ class RobotControllerApp(Frame, threading.Thread):
         self.aboutMenuItem=self.filemenu.Append(ID_ABOUT,"&About","Info About this program")
         #add items to options
         self.changeCameraMenuItem=self.options.Append(ID_ANY,"&Change Camera","Change which camera the Vision System uses.")
+        #add items to changeTarget
+        self.changeTargetItem=self.changeTarget.Append(ID_ANY,"&Change Target","Change the target of the robot.")
         #create method button bindings for menu items
         #bind method->menuItem
         #method requires arg:(self,event)
@@ -157,7 +160,7 @@ class StateMachine(threading.Thread):
         #self.arduino=ard
     def run(self):
         #set the starting state
-        self.wrapper.start()
+        result=self.wrapper.start()
         self.state=TurnAndLook(self.wrapper)
         print "set starting state"
         #in the future, categorize states more sophisticatedly (ex. explore)
@@ -171,6 +174,8 @@ class StateMachine(threading.Thread):
                 #add time.sleep to allow other threads to execute
                 time.sleep(0.001)
     def startSM(self):
+        if result==False:
+            return False
         if not self.isAlive():
             self.start()
         self.active=True
