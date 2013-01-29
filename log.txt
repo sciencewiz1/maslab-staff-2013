@@ -13,5 +13,105 @@ Arduino not connected on ACM3
 Failed to connect
 init vision system
 starting vs
-83
-82
+changed left motor to:0
+changed right motor to:0
+Moving Stop
+changed left motor to:0
+changed right motor to:0
+Moving Stop
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Stop
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Stop
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Stop
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Stop
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Stop
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Stop
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Stop
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
+changed left motor to:0
+changed right motor to:0
+Moving Stop
+changed left motor to:0
+changed right motor to:0
+Moving Roller On Forward
