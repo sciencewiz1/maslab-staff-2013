@@ -13,6 +13,23 @@ Arduino not connected on ACM1
 Arduino not connected on ACM2
 Arduino not connected on ACM3
 Failed to connect
-init vision system
-starting vs
+changed left motor to:-80
+changed right motor to:-80
+Moving Forward
+changed left motor to:80
+changed right motor to:80
+Moving Backward
+changed left motor to:80
+changed right motor to:80
+Moving Backward
+changed left motor to:-20
+changed right motor to:20
+Moving Right
+changed left motor to:20
+changed right motor to:-20
+Moving Left
+changed left motor to:0
+changed right motor to:0
+Moving Stop
+Arduino not connected so there is no comm thread to join.
 Arduino not connected so there is no comm thread to join.

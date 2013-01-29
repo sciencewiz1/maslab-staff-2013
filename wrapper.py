@@ -83,7 +83,7 @@ class Wrapper:
         #Syntax for motors: arduino, currentPin, directionPin, pwmPin
         self.left_motor = arduino.Motor(self.ard, 12, 23, 11)
         print "Left motor"
-        self.right_motor = arduino.Motor(self.ard, 9, 27, 8)
+        self.right_motor = arduino.Motor(self.ard, 9, 32, 8)
         print "Right motor"
         self.helix_motor=arduino.Motor(self.ard, 7, 38, 6)
         print "helix motor"
