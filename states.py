@@ -165,7 +165,7 @@ class TurnAndLook(State):
         #get ir data and record max
         irData=self.wrapper[FRONT_DIST]
         current=self.openSpaceTime
-        if current==None or (irData<current and 90<=irData<=120): #we found an open space
+        if (current==None or irData<current) and 90<=irData<=120: #we found an open space
             self.openSpaceTime=time.time()-self.startTime
         #########################################
         if DEBUG:
