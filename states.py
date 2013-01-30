@@ -110,7 +110,9 @@ class AvoidWall(State):
             #keep turning
 
 class TurnAndLook(State):
-    def __init__(self,wrap,target="all",turnTime=0):
+    def __init__(self,wrap,target="all",data=()):
+        self.tu
+        
         #print "init turn and look"
         State.__init__(self,wrap)
         #if ball is to the right
@@ -118,8 +120,9 @@ class TurnAndLook(State):
         #########################################
         #David
         #controlled turn and look variables
-        #turnTime=0
+        self.turnTime=0
         self.openSpaceTime=None
+        self.startTime=time.time()
         #########################################
         dist=wrap.vs.getTargetDistFromCenter(target)
         print "dist ",dist
@@ -158,7 +161,7 @@ class TurnAndLook(State):
         irData=self.wrapper[FRONT_DIST2]
         current=self.openSpaceTime
         if current==None or irData<current: #we found an open space
-            self.openSpaceTime=irData
+            self.openSpaceTime=time.time()-self.startTime
         #########################################
         if DEBUG:
             print "Current state: ", self.__class__.__name__
@@ -181,10 +184,13 @@ class TurnAndLook(State):
             return (Pause, ApproachButton)
         '''Replace with compass heading'''
         #########################################
-        #David 
-        if turnTime!=0 and turnTime-.5<=time.time()<=turnTime+.5:
+        #David
+        turnTime1=self.turnTime
+        print turnTime1
+        if turnTime1!=0 and self.startTime+turnTime1<=time.time():
             #turn time was set and so when we reach this turn time
             #we are heading to open space and so just wander
+            print "wandering after turn time"
             return Wander
         #########################################
         if time.time() > self.wrapper.time+360/TURN_SPEED:
@@ -204,7 +210,7 @@ class TurnAndLook(State):
                 else:
                     action=TurnRight
                     print "turning right toward open space"
-                return (TurnAndLook(turnTime=current),action)
+                return (TurnAndLook,action)
             else:
             #########################################
                 return Wander
