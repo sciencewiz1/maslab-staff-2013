@@ -111,8 +111,11 @@ class AvoidWall(State):
 
 class TurnAndLook(State):
     def __init__(self,wrap,target="all",data=()):
-        self.tu
-        
+        if len(data)==0:
+            self.turnTime=0
+            self.action=None
+        else:
+            self.action,self.turnTime=data
         #print "init turn and look"
         State.__init__(self,wrap)
         #if ball is to the right
@@ -129,10 +132,11 @@ class TurnAndLook(State):
         if dist==None:
             if DEBUG:
                 print "don't see ball"
-            if randint(0,1)==0:
-                self.action=TurnLeft
-            else:
-                self.action=TurnRight
+            if self.action==None:
+                if randint(0,1)==0:
+                    self.action=TurnLeft
+                else:
+                    self.action=TurnRight
         #Turn in the direction of the ball (or button) if the ball is in sight
         elif dist[0]>=0:
             if DEBUG:
@@ -210,7 +214,7 @@ class TurnAndLook(State):
                 else:
                     action=TurnRight
                     print "turning right toward open space"
-                return (TurnAndLook,action)
+                return (TurnAndLook,(action,current))
             else:
             #########################################
                 return Wander
