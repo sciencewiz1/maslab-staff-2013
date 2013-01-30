@@ -112,11 +112,11 @@ class AvoidWall(State):
 class TurnAndLook(State):
     def __init__(self,wrap,target="all",data=()):
         if len(data)==0:
-            self.turnTime=0
+            self.desiredIR=0
             self.action=None
             self.goToOpen=True
         else:
-            self.action,self.turnTime,self.goToOpen=data
+            self.action,self.desiredIR,self.goToOpen=data
         #print "init turn and look"
         State.__init__(self,wrap)
         #if ball is to the right
@@ -124,9 +124,7 @@ class TurnAndLook(State):
         #########################################
         #David
         #controlled turn and look variables
-        self.turnTime=0
-        self.openSpaceTime=None
-        self.startTime=time.time()
+        self.openSpaceIR=None
         #########################################
         dist=wrap.vs.getTargetDistFromCenter(target)
         print "dist ",dist
@@ -164,9 +162,9 @@ class TurnAndLook(State):
         #David
         #get ir data and record max
         irData=self.wrapper[FRONT_DIST]
-        current=self.openSpaceTime
-        if (current==None or irData<current) and 90<=irData<=120: #we found an open space
-            self.openSpaceTime=time.time()-self.startTime
+        current=self.openSpaceIR
+        if (current==None or irData<current) and irData<=180 and self.goToOpen: #we found an open space
+            self.openSpaceIR=irData
         #########################################
         if DEBUG:
             print "Current state: ", self.__class__.__name__
@@ -190,8 +188,9 @@ class TurnAndLook(State):
         '''Replace with compass heading'''
         #########################################
         #David
-        turnTime1=self.turnTime
-        if turnTime1!=0 and time.time()>=self.startTime+turnTime1:
+        desiredIR=self.desiredIR
+        irData1=self.wrapper[FRONT_DIST]
+        if desiredIR!=0 and irData1<=desiredIR:
             #turn time was set and so when we reach this turn time
             #we are heading to open space and so just wander
             print "WANDERING..............."
@@ -205,7 +204,7 @@ class TurnAndLook(State):
             #if self.openSpaceTime is not none rotate in the opposite direction
             #for total rotate time-self.openSpaceTime to get to open space
             #self.openSpaceTime is guaranteed to be <=TIMEOUT
-            current=self.openSpaceTime
+            current=self.desiredIR
             if current!=None:
                 print "found open space"
                 action=None
