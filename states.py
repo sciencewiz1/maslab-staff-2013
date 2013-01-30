@@ -114,8 +114,9 @@ class TurnAndLook(State):
         if len(data)==0:
             self.turnTime=0
             self.action=None
+            self.goToOpen=True
         else:
-            self.action,self.turnTime=data
+            self.action,self.turnTime,self.goToOpen=data
         #print "init turn and look"
         State.__init__(self,wrap)
         #if ball is to the right
@@ -132,7 +133,7 @@ class TurnAndLook(State):
         if dist==None:
             if DEBUG:
                 print "don't see ball"
-            if self.action==None:
+            if self.action==None or not self.goToOpen:
                 if randint(0,1)==0:
                     self.action=TurnLeft
                 else:
@@ -162,9 +163,9 @@ class TurnAndLook(State):
         #########################################
         #David
         #get ir data and record max
-        irData=self.wrapper[FRONT_DIST2]
+        irData=self.wrapper[FRONT_DIST]
         current=self.openSpaceTime
-        if current==None or (irData<current and irData<100): #we found an open space
+        if current==None or (irData<current and 90<=irData<=120): #we found an open space
             self.openSpaceTime=time.time()-self.startTime
         #########################################
         if DEBUG:
@@ -190,10 +191,10 @@ class TurnAndLook(State):
         #########################################
         #David
         turnTime1=self.turnTime
-        print turnTime1
-        if turnTime1!=0 and self.startTime+turnTime1<=time.time():
+        if turnTime1!=0 and time.time()>=self.startTime+turnTime1:
             #turn time was set and so when we reach this turn time
             #we are heading to open space and so just wander
+            print "WANDERING..............."
             print "wandering after turn time"
             return Wander
         #########################################
@@ -214,7 +215,7 @@ class TurnAndLook(State):
                 else:
                     action=TurnRight
                     print "turning right toward open space"
-                return (TurnAndLook,(action,current))
+                return (TurnAndLook,(action,current,False))
             else:
             #########################################
                 return Wander
