@@ -110,11 +110,17 @@ class AvoidWall(State):
             #keep turning
 
 class TurnAndLook(State):
-    def __init__(self,wrap,target="all"):
+    def __init__(self,wrap,target="all",turnTime=0):
         #print "init turn and look"
         State.__init__(self,wrap)
         #if ball is to the right
         #also wall
+        #########################################
+        #David
+        #controlled turn and look variables
+        #turnTime=0
+        self.openSpaceTime=None
+        #########################################
         dist=wrap.vs.getTargetDistFromCenter(target)
         print "dist ",dist
         if dist==None:
@@ -146,6 +152,14 @@ class TurnAndLook(State):
         ApproachButton
         4. If turned too long, time out, go wander. (Wander)
         '''
+        #########################################
+        #David
+        #get ir data and record max
+        irData=self.wrapper[FRONT_DIST2]
+        current=self.openSpaceTime
+        if current==None or irData<current: #we found an open space
+            self.openSpaceTime=irData
+        #########################################
         if DEBUG:
             print "Current state: ", self.__class__.__name__
         stuck_info=self.wrapper.stuck()
@@ -166,9 +180,34 @@ class TurnAndLook(State):
            self.wrapper.goForButton():
             return (Pause, ApproachButton)
         '''Replace with compass heading'''
+        #########################################
+        #David 
+        if turnTime!=0 and turnTime-.5<=time.time()<=turnTime+.5:
+            #turn time was set and so when we reach this turn time
+            #we are heading to open space and so just wander
+            return Wander
+        #########################################
         if time.time() > self.wrapper.time+360/TURN_SPEED:
             print "now go wander"
-            return Wander
+            #########################################
+            #David 
+            #if self.openSpaceTime is not none rotate in the opposite direction
+            #for total rotate time-self.openSpaceTime to get to open space
+            #self.openSpaceTime is guaranteed to be <=TIMEOUT
+            current=self.openSpaceTime
+            if current!=None:
+                print "found open space"
+                action=None
+                if isinstance(self.action,TurnRight):
+                    action=TurnLeft
+                    print "turning left toward open space"
+                else:
+                    action=TurnRight
+                    print "turning right toward open space"
+                return (TurnAndLook(turnTime=current),action)
+            else:
+            #########################################
+                return Wander
             #return TurnAndLook
             #turned 360, no balls in sight
             #log the IR readings during turning.
@@ -178,7 +217,7 @@ class TurnAndLook(State):
             print "keep turning"
             return 0
             #keep turning
-
+        
 class ApproachBall(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
