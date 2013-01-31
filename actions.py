@@ -151,6 +151,12 @@ class DoNothing(Action):
     def loop(self):
         print "looping ",self.__class__.__name__, time.time()
 
+class ReleaseBalls(Action):
+    def run(self):
+        self.wrapper[RELEASE_MOTOR]=OPEN
+    def loop(self):
+        print "looping ",self.__class__.__name__, time.time()
+
 """A state of the state machine.
 wrapper: States ALWAYS pass the wrapper on to the next state. The wrapper
 includes the arduino I/O and any other miscellaneous bits of data.

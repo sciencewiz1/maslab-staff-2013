@@ -82,23 +82,22 @@ class Wrapper:
         print "creating wrapper"
         #Syntax for motors: arduino, currentPin, directionPin, pwmPin
         self.left_motor = arduino.Motor(self.ard, 12, 23, 11)
-        print "Left motor"
+        #print "Left motor"
         self.right_motor = arduino.Motor(self.ard, 9, 32, 8)
-        print "Right motor"
+        #print "Right motor"
         self.helix_motor=arduino.Motor(self.ard, 7, 38, 6)
-        print "helix motor"
+        #print "helix motor"
         #self.roller_motor = arduino.Motor(self.ard, 7, 31, 6)
         self.roller_motor=arduino.Servo(self.ard, 42)
-        print "Roller motor"
-        #self.roller_override=arduino.DigitalOutput(self.ard,42)
+        #print "Roller servo"
         self.release_motor=arduino.Servo(self.ard,43)
-        print "release motor"
+        #print "release motor"
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
         #this one is long-range
-        self.ir_module2=IRModule(arduino.AnalogInput(self.ard, 1),True)
+        self.ir_module2=IRModule(arduino.AnalogInput(self.ard, 1),offset=.375)
         '''Add this when we add more IR modules'''
-        #self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 2))
-        #self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 3))
+        self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 4))
+        self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 3))
         print "IR module"
         self.left_bump=arduino.DigitalInput(self.ard,50)
         self.right_bump=arduino.DigitalInput(self.ard,52)
@@ -146,17 +145,15 @@ class Wrapper:
             self.color=RED
         else:
             self.color=GREEN
-        if self.color==RED:
-            string="redBall"
-        if self.color==GREEN:
-            string="greenBall"
-        print "target acquired..."+str(string)
-        self.vs.addTarget(string)
+        print "going for target..."+str(self.color)
+        self.vs.addTarget(color)
         self.vs.addTarget("cyanButton")
         print "vision system set"
         #start a thread that takes IR readings
         self.ir_module.start()
         self.ir_module2.start()
+        self.left_ir_module.start()
+        self.right_ir_module.start()
         #self.imu.start()
         self.start_time=time.time()
         self.time=self.start_time
@@ -164,13 +161,13 @@ class Wrapper:
         self.button_presses=0
         self.wt.start()
     def __getitem__(self,index):
-        if index==FRONT_DIST:#right
+        if index==FRONT_DIST:#right front
             return self.ir_module.distance()
-##        if index==LEFT_DIST:
-##            return self.left_ir_module.distance()
-##        if index==RIGHT_DIST:
-##            return self.right_ir_module.distance()
-        if index==FRONT_DIST2:#left
+        if index==LEFT_DIST:
+            return self.left_ir_module.distance()
+        if index==RIGHT_DIST:
+            return self.right_ir_module.distance()
+        if index==FRONT_DIST2:#left front
             return self.ir_module2.distance()
         if index==LEFT_BUMP:
             return self.left_bump.getValue()
@@ -203,12 +200,26 @@ class Wrapper:
     #does it see a ball?
 
     def goForButton(self):
-        return (time.time()>=self.last_button_time) and self.button_presses<4
+        return self.mode != WALL_MODE and (time.time()>=self.last_button_time) and self.button_presses<4
     
     def hitButton(self):
         self.last_button_time=time.time()
         self.button_presses+=1
-    
+    def seeTarget(self):
+        if self.seeBall() and self.mode!=WALL_MODE:
+            return self.color
+            #right now, if in wall mode, then ignore all balls
+        if self.goForButton() and self.seeButton():
+            return "cyanButton"
+        if self.vs.getTargetDistFromCenter("purplePyramid")!=None:
+            return "purplePyramid"
+        if self.seeWall() and time.time()-start_time>=160:
+            return "yellowWall"
+        #if sees wall and time is short
+        return None
+    def seeWall(self):
+        print "see wall at ",self.vs.getTargetDistFromCenter(self.color)
+        return self.vs.getTargetDistFromCenter("yellowWall") != None
     def seeBall(self):
         print "see ball at ",self.vs.getTargetDistFromCenter(self.color)
         return self.vs.getTargetDistFromCenter(self.color) != None
@@ -219,7 +230,22 @@ class Wrapper:
         if dist== None:
             return 0
         return (math.fabs(dist[0])<=CENTER_THRESHOLD)
+    def targetCentered(self,target=None):
+        if target==None:
+            target=self.seeTarget()
+        if target==None:
+            return 0
+        dist=self.vs.getTargetDistFromCenter(target)
+        if dist== None:
+            return 0
+        return (math.fabs(dist[0])<=CENTER_THRESHOLD)
     '''return array of coordinates of balls'''
+    def targetClose(self,target=None):
+        if target==None:
+            target=self.seeTarget()
+        if target==None:
+            return None
+        return self.vs.isClose(target)
     def ballCoordinates(self):
         return self.vs.getTargetDistFromCenter()
 
@@ -242,6 +268,9 @@ class Wrapper:
                 r=2
             elif r_dist<=CLOSE:
                 r=1
+            #take into account side sensors.
+            if self[RIGHT_DIST]<=SIDE_CLOSE:
+                r+=1
         if self[LEFT_BUMP]:
             l=3
         else:
@@ -251,6 +280,8 @@ class Wrapper:
                 l=2
             elif l_dist<=CLOSE:
                 l=1
+            if self[LEFT_DIST]<=SIDE_CLOSE:
+                l+=1
         return (l,r)
     
     def turnMotorsOff(self):
@@ -299,13 +330,14 @@ class IMU(threading.Thread):
 '''Module that records IR measurements'''
 class IRModule(threading.Thread):
     '''Starts IR thread with an empty list of logged IR values'''
-    def __init__(self,ir2,long_range=False):
+    def __init__(self,ir2,long_range=False,filtering=False,offset=0):
         #IR value
         threading.Thread.__init__(self)
         #self.ir_val=0
         self.f=open('ir_log.txt','w')
         self.active=True
         self.ir_list=[]
+        self.offset=0
         '''set whether this is short or long range'''
         #distance= m*(1/ir)+b
         if long_range:
@@ -317,22 +349,41 @@ class IRModule(threading.Thread):
             self.m=SLOPE
             self.too_far=12
         self.ir=ir2
+        self.filtering=filtering
         
     '''Continuously get IR values and log them in IR list'''
     def run(self):
-        while self.active:
-            #fix threading issue
-            ir_val=self.ir.getValue()
-            if self.too_far==25:
-                print "long"
-            else:
-                print "short"
-            print "IR=",ir_val
-            self.ir_list.append(ir_val)
-            self.f.write(str(ir_val))
-            self.f.write('\n')
-            #print self.ir_val
-            time.sleep(0.3)
+        if not self.filtering:
+            while self.active:
+                #fix threading issue
+                ir_val=self.ir.getValue()
+                if self.too_far==25:
+                    print "long"
+                else:
+                    print "short"
+                print "IR=",ir_val
+                self.ir_list.append(ir_val)
+                self.f.write(str(ir_val))
+                self.f.write('\n')
+                #print self.ir_val
+                time.sleep(0.2)
+        if self.filtering:
+            li=[]
+            while self.active:
+                for i in xrange(0,3):
+                    #fix threading issue
+                    ir_val=self.ir.getValue()
+                    if self.too_far==25:
+                        print "long"
+                    else:
+                        print "short"
+                    print "IR=",ir_val
+                    self.li.append(ir_val)
+                ir_val=sum(li)/3.0
+                self.f.write(str(ir_val))
+                self.f.write('\n')
+                #print self.ir_val
+                time.sleep(0.2)
 
     '''Get IR values. If filtered, gives a weighted average for noise reduction'''
     def getIRVal(self):
@@ -353,7 +404,7 @@ class IRModule(threading.Thread):
             ir=self.getIRVal()
             if ir==0:
                 ir=1
-            ans=self.__corrected(self.m*1/ir+self.b)
+            ans=self.__corrected(self.m*1/ir+self.b+self.offset)
             return ans
         #if filtered but not enough data points yet (because just started)
         #use the first ir value
@@ -405,17 +456,19 @@ class PIDController:
 (If there are other flags to be raised at certain times, I can abstractify this more.
 '''
 class WallTimer(threading.Thread):
-    def __init__(self,wrapper):
+    def __init__(self,wrapper,s=WALL_TIME):
         #IR value
         super(WallTimer, self).__init__()
         self.wrapper=wrapper
         self.active=True
+        self.s=s
     def run(self):
-        while time.time()<self.wrapper.start_time+WALL_TIME and self.active:
+        while time.time()<self.wrapper.start_time+self.s and self.active:
             print "walltimer: ",time.time()-self.wrapper.start_time
             time.sleep(1)
         self.wrapper.mode=WALL_MODE
+        self.wrapper.vs.clearTargets()
+        self.wrapper.vs.addTarget("yellowWall")
         #Update this once David puts in code to look for walls.
-        #self.wrapper.cv.changeTarget("wall")
     def stop(self):
         self.active=False

@@ -34,15 +34,11 @@ class Wander(State):
         if stuck_info[0]>=2 or stuck_info[1]>=2:
             return Stuck
                         
-        #see ball, stop wandering
-        if self.wrapper.seeBall():
-            print "saw ball!"
-            return (TurnAndLook,self.wrapper.color)
-
-        #see button, stop wandering
-        if self.wrapper.seeButton() and self.wrapper.goForButton():
-            print "saw button!"
-            return (TurnAndLook,"cyanButton")
+        #see target, stop wandering
+        target_seen=self.wrapper.seeTarget()
+        if target_seen:
+            print "saw ",target_seen
+            return (TurnAndLook,target_seen)
         
         #close, turn left before you get way too close
         if stuck_info[0]>=1 or stuck_info[0]>=1:
@@ -91,17 +87,20 @@ class AvoidWall(State):
         
         if stuck_info[0]==3 or stuck_info[1]==3:
             return Stuck
-        #I'm not too sure about this.
         #Be careful of robot trying to get an inaccessible ball
-        if self.wrapper.seeBall():
-            return TurnAndLook
+        #see ball, stop wandering
+        target_seen=self.wrapper.seeTarget()
+        if target_seen:
+            print "saw ",target_seen
+            return (TurnAndLook,target_seen)
+        
         if stuck_info[0]>=2 or stuck_info[1]>=2:
             return Stuck
         if stuck_info[0]==0 and stuck_info[1]==0:
             return Wander
             #far enough away, stop turning
         #REPLACE THIS WITH COMPASS READING
-        elif time.time() > self.wrapper.time+180*TURN_SPEED:
+        if time.time() > self.wrapper.time+180*TURN_SPEED:
             #return Wander
             return Stuck
             #timeout, stop turning
@@ -132,7 +131,7 @@ class TurnAndLook(State):
         print "dist ",dist
         if dist==None:
             if DEBUG:
-                print "don't see ball"
+                print "don't see target"
             if self.action==None or not self.goToOpen:
                 if randint(0,1)==0:
                     self.action=TurnLeft
@@ -142,22 +141,20 @@ class TurnAndLook(State):
         elif dist[0]>=0:
             if DEBUG:
                 print "dist ",dist
-                print "see ball to right"
+                print "see target to right"
             self.action=TurnRight
         elif dist[0]<0:
             if DEBUG:
                 print "dist ",dist
-                print "see ball to left"
+                print "see target to left"
             self.action=TurnLeft
-        #Maybe change to *randomly* (or intelligently choose between)
-        #turn left or right
     def stopfunction(self):
         '''
         Priority:
         1. If sensors bumped, back up (Stuck)
         2. If ball is centered, approach (Pause, then ApproachBall)
         3. If see button, and time is appropriate, go for button (Pause, then
-        ApproachButton
+        ApproachButton)
         4. If turned too long, time out, go wander. (Wander)
         '''
         #########################################
@@ -165,7 +162,7 @@ class TurnAndLook(State):
         #get ir data and record max
         irData=self.wrapper[FRONT_DIST]
         current=self.openSpaceTime
-        if (current==None or irData<current) and 90<=irData<=120: #we found an open space
+        if (current==None or irData<current) and irData<=120: #we found an open space
             self.openSpaceTime=time.time()-self.startTime
         #########################################
         if DEBUG:
@@ -175,18 +172,25 @@ class TurnAndLook(State):
             print "Stuckness: ",stuck_info
         if stuck_info[0]==3 or stuck_info[1]==3:
             return Stuck
-        if self.wrapper.ballCentered():
-            if DEBUG:
+        target_seen=self.wrapper.seeTarget()
+        if self.wrapper.targetCentered(target):
+            if target_seen==self.wrapper.color:
                 print "centered ball, approach!"
-            return (Pause, ApproachBall)
+                return (Pause, ApproachBall)
             #i.e., first pause and then approach ball
             #return ApproachBall
             #return Stop
             #found ball
         #maybe it should be buttonCentered()?
-        if (not self.wrapper.seeBall()) and self.wrapper.seeButton() and\
-           self.wrapper.goForButton():
-            return (Pause, ApproachButton)
+            if target_seen=="cyanButton":
+                print "centered button, approach!"
+                return (Pause, ApproachButton)
+            if target_seen=="yellowWall":
+                print "centered wall, approach!"
+                return ApproachWall
+            if target_seen=="purplePyramid":
+                print "centered pyramid, approach!"
+                return ApproachPyramid
         '''Replace with compass heading'''
         #########################################
         #David
@@ -248,10 +252,10 @@ class ApproachBall(State):
             print "Stuckness: ",stuck_info
         #note presence of AND here: give up when both sensors bumped,
         #or when one sensor bumped and time too long, or too long
-        if (stuck_info[0]==3 and stuck_info[0]==3) or\
-           ((stuck_info[0]==3 or stuck_info[0]==3) and\
-            time.time()>=self.wrapper.time+5) or\
-           time.time()>=self.wrapper.time+10:
+        if (stuck_info[0]==3 and stuck_info[1]==3) or\
+           ((stuck_info[0]==3 or stuck_info[1]==3) and\
+            time.time()>=self.wrapper.time+3) or\
+           time.time()>=self.wrapper.time+6:
             return Stuck
         #maybe turn in direction *opposite* from that which got it stuck?
             '''!!!'''
@@ -269,7 +273,7 @@ class ApproachBall(State):
             return TurnAndLook
             #if you see the ball and it's not centered
         #if lose track of ball
-        return Wander
+        return TurnAndLook
 #Note: need to do something about inaccessible balls?
 
 #note this is very similar to ApproachBall
@@ -295,24 +299,24 @@ class ApproachButton(State):
         #or when one sensor bumped and time too long, or too long
         if (stuck_info[0]==3 and stuck_info[1]==3) or\
            ((stuck_info[0]==3 or stuck_info[1]==3) and\
-            time.time()>=self.wrapper.time+5) or\
-           time.time()>=self.wrapper.time+10:
+            time.time()>=self.wrapper.time+3) or\
+           time.time()>=self.wrapper.time+6:
             if stuck_info[0]==3 and stuck_info[1]==3:
                 self.wrapper.hitButton()
             return Stuck
         #if within 4 inches
-        if self.wrapper[FRONT_DIST]<4:
+        if self.wrapper[FRONT_DIST]<4 or self.wrapper[FRONT_DIST2]<4:
             return (Charge,"cyanButton")
-        if self.wrapper.seeButton():
+        if self.wrapper.targetCentered("cyanButton"):
             return 0
             #still going after button
         print "button not centered!"
         if self.wrapper.seeButton():
             print "still see button, turn to face."
             return TurnAndLook
-            #if you see the ball and it's not centered
-        #if lose track of ball
-        return Wander
+            #if you see the button and it's not centered
+        #if lose track of button
+        return TurnAndLook
 #Note: need to do something about inaccessible balls
 #optimally, it wouldn't go for balls over walls.
 
@@ -336,16 +340,22 @@ class Charge(State):
         State.__init__(self,wrap)
         self.action=GoForward
         self.button=False
-        if target=="cyanButton":
-            self.button=True
+        self.target=target
     def stopfunction(self):
         if DEBUG:
             print "Current state: ", self.__class__.__name__
-        if time.time() > self.wrapper.time+2:
-            if self.button==True:
-                self.wrapper.hitButton()
+        stuck_info=self.wrapper.stuck()
+        if self.target=="cyanButton":
+            if time.time>self.wrapper.time+2 or (stuck_info[0]==3 and stuck_info[1]==3):
                 return Stuck
-            return TurnAndLook
+        if self.target in ["redBall","greenBall"]:
+            if time.time()>self.wrapper.time+2:
+                return TurnAndLook
+            if (stuck_info[0]==3 and stuck_info[1]==3):
+                return Stuck
+        if self.target=="yellowWall":
+            if time.time()>self.wrapper.time+5 or (stuck_info[0]==3 and stuck_info[1]==3):
+                return Score
         return 0
         #keep capturing
 
@@ -397,22 +407,101 @@ class MaxRandom(State):
 ##            return Stuck
 ##        return 0
 ##
-##class Score(State)
-##    def __init__(self,wrap):
-##        State.__init(self,wrap)
-##        self.action=ReleaseBalls
-##    def stopfunction(self):
-##        if time.time()>self.wrapper.time+3:
-##            self.wrapper.mode=BALL_MODE
-##            #go collect balls (if time remains)
-##            return Stuck
-##        return 0
+class Score(State):
+    def __init__(self,wrap):
+        State.__init__(self,wrap)
+        self.action=ReleaseBalls
+    def stopfunction(self):
+        if time.time()>self.wrapper.time+5:
+            self.wrapper[RELEASE_MOTOR]=CLOSED
+            self.wrapper.mode=BALL_MODE
+            a=165
+            if time.time()>=wrapper.start_time+150:
+                a=180
+            self.wrapper.wt=WallTimer(a)
+            self.wrapper.wt.start()
+            self.wrapper.vs.clearTargets()
+            self.wrapper.vs.addTarget("redBall")
+            self.wrapper.vs.addTarget("greenBall")
+            #might as well gulp up everything after it's emptied
+            #balls and there's <1 minute left.
+            #go collect balls (if time remains)
+            return Stuck
+        return 0
 
 #not yet implemented
-class HitPyramidWall(State):
-    pass
+#class HitPyramidWall(State):
+#    pass
 
 #not yet implemented
-class RealignPyramid(State):
-    pass
+#class RealignPyramid(State):
+#    pass
 
+class ApproachWall(State):
+    def __init__(self,wrap):
+        State.__init__(self,wrap)
+        self.action=(ForwardToTarget, "yellowWall")
+    def stopfunction(self):
+        if DEBUG:
+            print "Current state: ", self.__class__.__name__
+        
+        stuck_info=self.wrapper.stuck()
+        if DEBUG:
+            print "Stuckness: ",stuck_info
+        #note presence of AND here: give up when both sensors bumped,
+        #or when one sensor bumped and time too long, or too long
+        if (stuck_info[0]==3 and stuck_info[1]==3) or\
+           ((stuck_info[0]==3 or stuck_info[1]==3) and\
+            time.time()>=self.wrapper.time+3) or\
+           time.time()>=self.wrapper.time+6:
+            #if stuck_info[0]==3 and stuck_info[1]==3:
+            #    self.wrapper.hitButton()
+            return Stuck
+        #if within 4 inches
+        if self.wrapper.targetClose("yellowWall"):#self.wrapper[FRONT_DIST]<4 or self.wrapper[FRONT_DIST2]<4:
+            return ChargeWall
+        if self.wrapper.targetCentered("yellowWall")!=None:
+            return 0
+            #still going after button
+        print "button not centered!"
+        if self.wrapper.seeWall():
+            print "still see wall, turn to face."
+            return TurnAndLook
+            #if you see the ball and it's not centered
+        #if lose track of ball
+        return TurnAndLook
+
+class ApproachPyramid(State):
+    def __init__(self,wrap):
+        State.__init__(self,wrap)
+        self.action=(ForwardToTarget, "purplePyramid")
+    def stopfunction(self):
+        if DEBUG:
+            print "Current state: ", self.__class__.__name__
+        
+        stuck_info=self.wrapper.stuck()
+        if DEBUG:
+            print "Stuckness: ",stuck_info
+        #note presence of AND here: give up when both sensors bumped,
+        #or when one sensor bumped and time too long, or too long
+        if (stuck_info[0]==3 and stuck_info[1]==3) or\
+           ((stuck_info[0]==3 or stuck_info[1]==3) and\
+            time.time()>=self.wrapper.time+3) or\
+           time.time()>=self.wrapper.time+6:
+            #if stuck_info[0]==3 and stuck_info[1]==3:
+            #    self.wrapper.hitButton()
+            return Stuck
+        #if within 4 inches
+        if self.wrapper.targetClose("purplePyramid"):#self.wrapper[FRONT_DIST]<4 or self.wrapper[FRONT_DIST2]<4:
+            return ChargeWall
+        if self.wrapper.targetCentered("purplePyramid")!=None:
+            return 0
+            #still going after button
+        print "button not centered!"
+        if self.wrapper.seeWall():
+            print "still see wall, turn to face."
+            return TurnAndLook
+            #if you see the ball and it's not centered
+        #if lose track of ball
+        return TurnAndLook
+        

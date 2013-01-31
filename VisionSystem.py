@@ -198,7 +198,7 @@ class VisionSystem(threading.Thread):
         self.capture = cv.CaptureFromCAM(0) #camera object
         self.targets=[]
         self.ballTargets=["redBall","greenBall"]
-        self.wallTargets=["blueWall","purpleWall"]
+        self.wallTargets=["purpleWall"]
         self.wallCoordinates=[]
         self.active=True
         self.targetColorProfiles={"redBall":[((0, 147, 73), (15, 255, 255)),((165, 58, 36), (180, 255, 255))],"greenBall":[((45, 150, 36), (90, 255, 255))],
@@ -296,7 +296,9 @@ class VisionSystem(threading.Thread):
                 self.dataQueue.put(False)
                 return False
             (x1,y1),center,leftExt,rightExt=imageData
-            if area>=CLOSE_THRESHOLD or yAbs>=(y1*float(3/4)):
+            #WHAT IS CLOSE_THRESHOLD?
+            #area>=CLOSE_THRESHOLD or 
+            if yAbs>=(y1*float(3/4)):
                 self.dataQueue.put(True)
                 return True
             else:

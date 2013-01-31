@@ -1,7 +1,9 @@
 #IR threshold: what counts as "close"?
-CLOSE = 8.0
+CLOSE = 9.0
 #IR threshold: what counts as "too close"?
 TOO_CLOSE = 6.0
+#what's too close when talking about the L/R sides
+SIDE_CLOSE = 4.0
 #when to go for the wall
 WALL_TIME = 120
 #when to stop (seconds)
@@ -13,6 +15,8 @@ RIGHT_SIGN=-1
 ROLLER_SIGN=1
 ROLLER_ANGLE=180
 ROLLER_STOP=106
+CLOSED=0
+OPEN=90#check these angles
 '''!!!!!!!!!!'''
 LEFT_TURN=LEFT_SIGN*20
 RIGHT_TURN=RIGHT_SIGN*20
@@ -37,7 +41,7 @@ GREEN="greenBall"
 LEFT=-1
 RIGHT=1
 
-CENTER_THRESHOLD=200
+CENTER_THRESHOLD=100
 
 #Right now I randomly estimate 1 degree/4 pixels, change this to something more
 #exact later
@@ -53,8 +57,7 @@ TURN_KD = .1
 #angle in degrees between straight forward and furthest right the camera can see
 CAMERA_HALF_WIDTH=31
 #half the number of pixels horizontally
-#PIXELS=240
-PIXELS=200
+PIXELS=240
 Y_PIXELS=120
 
 #regression line for IR to distance
