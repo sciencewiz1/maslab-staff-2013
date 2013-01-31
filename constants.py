@@ -1,7 +1,7 @@
 #IR threshold: what counts as "close"?
 CLOSE = 9.0
 #IR threshold: what counts as "too close"?
-TOO_CLOSE = 6.0
+TOO_CLOSE = 6.5
 #what's too close when talking about the L/R sides
 SIDE_CLOSE = 4.0
 #when to go for the wall
@@ -15,7 +15,7 @@ RIGHT_SIGN=-1
 ROLLER_SIGN=1
 ROLLER_ANGLE=180
 ROLLER_STOP=106
-CLOSED=0
+CLOSED=165
 OPEN=90#check these angles
 '''!!!!!!!!!!'''
 LEFT_TURN=LEFT_SIGN*25
@@ -63,13 +63,13 @@ Y_PIXELS=120
 
 #regression line for IR to distance
 #obstacle distance = Y_INTERCEPT+SLOPE*1/self.getIRVal()
-SLOPE=2374.38
-Y_INTERCEPT=-1.09524
+SLOPE=2441.851
+Y_INTERCEPT=-.52707
 #regression line for IR to distance
 #LONG_SLOPE=14757.89
 #LONG_Y_INTERCEPT=-11.1283
-LONG_SLOPE=6722.69
-LONG_Y_INTERCEPT=-5.88067
+LONG_SLOPE=5390.526
+LONG_Y_INTERCEPT=-1.90948
 
 DEBUG=1
 #set to 1 when debugging, 0 otherwise

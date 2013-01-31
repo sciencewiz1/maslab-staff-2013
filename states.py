@@ -157,17 +157,18 @@ class TurnAndLook(State):
         ApproachButton)
         4. If turned too long, time out, go wander. (Wander)
         '''
-        #########################################
-        #David
-        #get ir data and record max
-        irData=self.wrapper[FRONT_DIST]
-        current=self.openSpaceIR
-        if (current==None or irData<current) and irData<=180 and self.goToOpen: #we found an open space
-            self.openSpaceIR=irData
-        #########################################
         if DEBUG:
             print "Current state: ", self.__class__.__name__
         stuck_info=self.wrapper.stuck()
+        #########################################
+        #David
+        #get ir data and record max
+        irData=self.wrapper[FRONT_DIST2]
+        current=self.openSpaceIR
+        if (current==None or irData>current) and irData>=20 and self.goToOpen and stuck_info==(0,0): #we found an open space
+            self.openSpaceIR=irData
+        #########################################
+
         if DEBUG:
             print "Stuckness: ",stuck_info
         if stuck_info[0]==3 or stuck_info[1]==3:
@@ -195,12 +196,11 @@ class TurnAndLook(State):
         #########################################
         #David
         desiredIR=self.desiredIR
-        irData1=self.wrapper[FRONT_DIST]
-        if desiredIR!=0 and irData1<=desiredIR+20:
+        irData1=self.wrapper[FRONT_DIST2]
+        if desiredIR!=0 and irData1>=desiredIR-2 and stuck_info==(0,0):
             #turn time was set and so when we reach this turn time
             #we are heading to open space and so just wander
-            print "WANDERING..............."
-            print "wandering after turn time"
+            print "we re-found the open space"
             return Wander
         #########################################
         if time.time() > self.wrapper.time+360/TURN_SPEED:
@@ -355,8 +355,10 @@ class Charge(State):
                 return Stuck
         if self.target in ["redBall","greenBall"]:
             if time.time()>self.wrapper.time+2:
+                self.wrapper.balls_collected+=1
                 return TurnAndLook
             if (stuck_info[0]==3 and stuck_info[1]==3):
+                self.wrapper.balls_collected+=1
                 return Stuck
         if self.target in ["yellowWall","purplePyramid"]:
             if time.time()>self.wrapper.time+5 or (stuck_info[0]==3 and stuck_info[1]==3):

@@ -94,7 +94,8 @@ class Wrapper:
         #print "release motor"
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
         #this one is long-range
-        self.ir_module2=IRModule(arduino.AnalogInput(self.ard, 1),offset=.375)
+        #self.ir_module2=IRModule(arduino.AnalogInput(self.ard, 1),offset=.375)
+        self.ir_module2=IRModule(arduino.AnalogInput(self.ard, 1),True)
         '''Add this when we add more IR modules'''
         self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 4))
         self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 3))
@@ -113,6 +114,7 @@ class Wrapper:
         #image processor here
         #start timer
         self.wt=WallTimer(self)
+        self.balls_collected=0
 #        self.active=True
     def connect(self):
         if not self.ard.isAlive():
@@ -346,7 +348,7 @@ class IRModule(threading.Thread):
         else:
             self.b=Y_INTERCEPT
             self.m=SLOPE
-            self.too_far=12
+            self.too_far=15
         self.ir=ir2
         self.filtering=filtering
         
@@ -391,9 +393,9 @@ class IRModule(threading.Thread):
         else:
             return self.ir_list[-1]
     def __corrected(self,x):
-        #given distance, return x+10000 if it's too large
+        #given distance, return self.too_far if it's too large
         #then when anything is too large, remember it's an invalid distance
-        return (x>self.too_far)*10000+x
+        return (x>self.too_far)*self.too_far+x*(x<=self.too_far)#10000+x
     def stop(self):
         self.active=False
     '''distance to obstacle using dist=m*(1/ir)+b'''

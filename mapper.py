@@ -166,7 +166,8 @@ class SegmentList:
     #li consists of (x1,y1,x2,y2)'s in camera pixel space
     def __init__(self,li):
         #the list of line segments
-        self.li=li.tolist()
+        #self.li=li.tolist()
+        self.li=list(li)
         #if in reverse order, switch.
         #print "self.li:",self.li
         for (i,(x1,y1,x2,y2)) in enumerate(self.li):
