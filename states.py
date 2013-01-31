@@ -5,6 +5,7 @@ from wrapper import *
 from random import *
 import math
 from distance_calculations import *
+from mapper import *
 
 
 class Wander(State):
@@ -100,7 +101,7 @@ class AvoidWall(State):
             return Wander
             #far enough away, stop turning
         #REPLACE THIS WITH COMPASS READING
-        if time.time() > self.wrapper.time+180*TURN_SPEED:
+        if time.time() > self.wrapper.time+180/TURN_SPEED:
             #return Wander
             return Stuck
             #timeout, stop turning
@@ -432,10 +433,6 @@ class Score(State):
 #class HitPyramidWall(State):
 #    pass
 
-#not yet implemented
-#class RealignPyramid(State):
-#    pass
-
 class ApproachWall(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
@@ -473,11 +470,14 @@ class ApproachWall(State):
 class ApproachPyramid(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
-        self.action=(ForwardToTarget, "purplePyramid")
+        self.action=(ForwardToTarget, "yellowWall2")
+        wrap.vs.activateEdgeDetection()
+        self.mpr=Mapper()
     def stopfunction(self):
+        lines=self.wrapper.vs.getWallCoordinates()
+        self.mpr.graphToLocalMap(lines)
         if DEBUG:
             print "Current state: ", self.__class__.__name__
-        
         stuck_info=self.wrapper.stuck()
         if DEBUG:
             print "Stuckness: ",stuck_info
@@ -489,9 +489,14 @@ class ApproachPyramid(State):
            time.time()>=self.wrapper.time+6:
             #if stuck_info[0]==3 and stuck_info[1]==3:
             #    self.wrapper.hitButton()
+            wrap.vs.deactivateEdgeDetection()
             return Stuck
+        #query mapper:
+        if self.mpr.pyramidCorner():
+            return RealignPyramid
         #if within 4 inches
         if self.wrapper.targetClose("purplePyramid"):#self.wrapper[FRONT_DIST]<4 or self.wrapper[FRONT_DIST2]<4:
+            wrap.vs.deactivateEdgeDetection()            
             return ChargeWall
         if self.wrapper.targetCentered("purplePyramid")!=None:
             return 0
@@ -499,8 +504,56 @@ class ApproachPyramid(State):
         print "button not centered!"
         if self.wrapper.seeWall():
             print "still see wall, turn to face."
+            self.wrapper.vs.deactivateEdgeDetection()
             return TurnAndLook
             #if you see the ball and it's not centered
         #if lose track of ball
+        self.wrapper.vs.deactivateEdgeDetection()
         return TurnAndLook
         
+class RealignPyramid(State):
+    def __init__(self,wrap):
+        State.__init__(self,wrap)
+        self.action=None
+    #override run method: this is like planning.
+    def run(self):
+        if DEBUG:
+            print "Running ",self.__class__.__name__
+            #print "Init action ",self.action.__name__
+        self.wrapper[LEFT_MOTOR]=0
+        self.wrapper[RIGHT_MOTOR]=0
+        time.sleep(0.1)
+        self.mpr=Mapper()
+        lines=self.wrapper.vs.getWallCoordinates()
+        self.mpr.graphToLocalMap(lines)
+        corner=self.mpr.pyramidCorner()
+        if corner==None:
+            return ApproachPyramid
+        #calculate how much to turn
+        x=corner[0][0]
+        y=corner[0][1]
+        a=corner[1]
+        print "x,y,a: ",x,y,a
+        t1=(atan2(y,x)-a)/TURN_SPEED
+        t2=((6.5+math.hypot(x,y))*math.sin(math.atan2(y,-x)+a*math.PI/180)+\
+           .5*PYRAMID_SIDE)/SPEED
+        print "t1,t2: ",t1,t2
+        start_time=time.time()
+        self.wrapper[LEFT_MOTOR]=LEFT_TURN
+        self.wrapper[RIGHT_MOTOR]=-RIGHT_TURN
+        while time.time()<=start_time+t:
+            pass
+        start_time=time.time()
+        self.wrapper[LEFT_MOTOR]=LEFT_FORWARD
+        self.wrapper[RIGHT_MOTOR]=RIGHT_FORWARD
+        start_time=time.time()
+        while time.time()<=start_time+t2:
+            pass
+        start_time=time.time()
+        self.wrapper[LEFT_MOTOR]=-LEFT_TURN
+        self.wrapper[RIGHT_MOTOR]=RIGHT_TURN
+        while time.time()<=start_time+90/TURN_SPEED:
+            pass
+        self.wrapper[LEFT_MOTOR]=-LEFT_TURN
+        self.wrapper[RIGHT_MOTOR]=RIGHT_TURN
+        return ApproachPyramid

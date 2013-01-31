@@ -20,10 +20,6 @@ class Action:
         self.run()
         b=method()
         while not b:
-            print "not"+str(b)
-            print "Hello"+str(self.__class__.__name__)
-            '''Holden: this prevents vision code
-            from hogging time'''
             #print "time in action: ",time.time()
             #ir_read=False#
             #ir_read=self.wrapper.ir_module.reset()#
