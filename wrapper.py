@@ -112,7 +112,7 @@ class Wrapper:
         #self.roller_motor = arduino.Motor(self.ard, 7, 31, 6)
         self.roller_motor=arduino.Servo(self.ard, 42)
         #print "Roller servo"
-        self.release_motor=arduino.Servo(self.ard,43)
+        self.release_motor=arduino.Servo(self.ard,49)
         #print "release motor"
         self.ir_module=IRModule(arduino.AnalogInput(self.ard, 0))
         #this one is long-range
@@ -154,7 +154,7 @@ class Wrapper:
             return False
         self[HELIX_MOTOR]=126
         self[ROLLER_MOTOR]=ROLLER_ANGLE
-        self[RELEASE_MOTOR]=0
+        self[RELEASE_MOTOR]=CLOSED
         on=self[START]
         print on
         while not on and not self.smSwitchOverride:
@@ -233,8 +233,10 @@ class Wrapper:
         self.last_button_time=time.time()
         self.button_presses+=1
     def seeTarget(self):
+        print "called see target"
         if self.seeBall() and self.mode!=WALL_MODE:
             return self.color
+        print "failed to see ball"
             #right now, if in wall mode, then ignore all balls
         if self.goForButton() and self.seeButton():
             return "cyanButton"
@@ -245,13 +247,17 @@ class Wrapper:
         #if sees wall and time is short
         return None
     def seeWall(self):
-        print "see wall at ",self.vs.getTargetDistFromCenter(self.color)
-        return self.vs.getTargetDistFromCenter("yellowWall") != None
+        t=self.vs.getTargetDistFromCenter("yellowWall")
+        print "see wall at ",t
+        return t != None
     def seeBall(self):
-        print "see ball at ",self.vs.getTargetDistFromCenter(self.color)
-        return self.vs.getTargetDistFromCenter(self.color) != None
+        t=self.vs.getTargetDistFromCenter(self.color)
+        print "see ball at ",t
+        return t != None
     def seeButton(self):
-        return self.vs.getTargetDistFromCenter("cyanButton") != None
+        t=self.vs.getTargetDistFromCenter("cyanButton")
+        print "see ball at ",t
+        return t != None
     def ballCentered(self):
         dist=self.vs.getTargetDistFromCenter(self.color)
         if dist== None:
@@ -384,14 +390,14 @@ class IRModule(threading.Thread):
             while self.active:
                 #fix threading issue
                 ir_val=self.ir.getValue()
-                if self.too_far==25:
-                    print "long"
-                else:
-                    print "short"
-                print "IR=",ir_val
-                self.ir_list.append(ir_val)
-                self.f.write(str(ir_val))
-                self.f.write('\n')
+                #if self.too_far==25:
+                    #print "long"
+                #else:
+                    #print "short"
+                #print "IR=",ir_val
+                #self.ir_list.append(ir_val)
+                #self.f.write(str(ir_val))
+                #self.f.write('\n')
                 #print self.ir_val
                 time.sleep(0.2)
         if self.filtering:
@@ -400,15 +406,15 @@ class IRModule(threading.Thread):
                 for i in xrange(0,3):
                     #fix threading issue
                     ir_val=self.ir.getValue()
-                    if self.too_far==25:
-                        print "long"
-                    else:
-                        print "short"
-                    print "IR=",ir_val
+                    #if self.too_far==25:
+                    #    print "long"
+                    #else:
+                    #    print "short"
+                    #print "IR=",ir_val
                     self.li.append(ir_val)
                 ir_val=sum(li)/3.0
-                self.f.write(str(ir_val))
-                self.f.write('\n')
+                #self.f.write(str(ir_val))
+                #self.f.write('\n')
                 #print self.ir_val
                 time.sleep(0.2)
 
@@ -437,7 +443,7 @@ class IRModule(threading.Thread):
         #use the first ir value
         if len(self.ir_list)< F_LEN:
             ans=self.__corrected(self.m*1/self.ir_list[0]+self.b)
-            return ans
+            return ansI
         #if filtered, take the last F_LEN ir values and calculate the distances 
         recent_dist=[self.__corrected(self.m*1/ir+self.b) for ir in ir_list[-F_LEN:]]
         #now take a weighted average of the distances

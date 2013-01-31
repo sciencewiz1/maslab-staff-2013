@@ -117,6 +117,7 @@ class AvoidWall(State):
 
 class TurnAndLook(State):
     def __init__(self,wrap,target="all",data=()):
+        print "starting turn and look with target ",target," and data ",data
         self.target=target
         if len(data)==0:
             self.desiredIR=0
@@ -154,6 +155,7 @@ class TurnAndLook(State):
                 print "dist ",dist
                 print "see target to left"
             self.action=TurnLeft
+        print "started turn and look with target, ",self.target
     def stopfunction(self):
         '''
         Priority:
@@ -180,7 +182,9 @@ class TurnAndLook(State):
         if stuck_info[0]==3 or stuck_info[1]==3:
             return Stuck
         target_seen=self.wrapper.seeTarget()
-        if self.wrapper.targetCentered(self.target):
+        print "target seen: ",target_seen
+        target_cent=self.wrapper.targetCentered(target_seen)
+        if target_cent:
             if target_seen==self.wrapper.color:
                 print "centered ball, approach!"
                 return (Pause, ApproachBall)
@@ -227,7 +231,8 @@ class TurnAndLook(State):
                     else:
                         action=TurnRight
                         print "turning right toward open space"
-                    return (TurnAndLook,(action,current,False))
+                    return Wander
+#                    return (TurnAndLook,(action,current,False))
                 else:
                     return Wander
             else:
