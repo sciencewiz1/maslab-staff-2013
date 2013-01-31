@@ -12,15 +12,13 @@ RELATIVE=1
 #maybe on-the-go calibration?
 #warning: can't be too dependent on initial data
 #how far away is the nearest thing it can see?
-BOTTOM_DIST=4
-BOTTOM_WIDTH=4
-Y_INFINITY=0
-#camera height
-CAM_H=6
-
+BOTTOM_DIST=6
 #find the closest horizontal line on the ground that the camera can see.
 #measure how much of it the camera can see and divide by 2
-WIDTH=4
+BOTTOM_WIDTH=5.5
+Y_INFINITY=0
+#camera height
+CAM_H=7
 
 #anything with slope of >2 is considered vertical
 SLOPE_THRESHOLD=2
