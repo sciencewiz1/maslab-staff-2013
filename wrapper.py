@@ -164,7 +164,9 @@ class Wrapper:
                 print "did not start SM, entering manual override!"
                 return False
         target=self[TARGET]
+        print "activating vision"
         self.vs.activate()
+        print "activated vision"
         print target
         if target==True:
             self.color=RED
@@ -185,6 +187,7 @@ class Wrapper:
         self.last_button_time=0#last time it pressed the black button
         self.button_presses=0
         self.wt.start()
+
     def __getitem__(self,index):
         if index==FRONT_DIST:#right front
             return self.ir_module.distance()

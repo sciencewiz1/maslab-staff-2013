@@ -175,6 +175,7 @@ class StateMachine(threading.Thread):
     def run(self):
         #set the starting state
         result=self.wrapper.start()
+        print "started wrapper"
         self.state=TurnAndLook(self.wrapper)
         print "set starting state"
         #in the future, categorize states more sophisticatedly (ex. explore)
