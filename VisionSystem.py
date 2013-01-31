@@ -637,8 +637,8 @@ class VisionSystem(threading.Thread):
         if self.capture==None:
             self.stop()
             return "Camera Init Failed!"
-        while self.active:
-            if not self.pause:
+        while self.active or self.override:
+            if not self.pause or self.override:
                 try:#try to execute target find
                     #print self.targets[self.target]
                     #print self.getTargetDistFromCenter()
