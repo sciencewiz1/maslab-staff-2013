@@ -6,12 +6,18 @@ from random import *
 import math
 from distance_calculations import *
 from mapper import *
-
-
+import pyglet
+def playSound(number):
+    relativePath="./audio/"
+    soundList=["Beeping and whistling.mp3","Excited R2D2.mp3","Proud R2D2.mp3"]
+    fileName=soundList[number]
+    sound = pyglet.media.load(relativePath+fileName, streaming=False)
+    sound.play()
 class Wander(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
         self.action=GoForward
+        playSound(0)
     def stopfunction(self):
         '''
         In order of priority:
@@ -346,6 +352,7 @@ class Charge(State):
         self.action=GoForward
         self.button=False
         self.target=target
+        playSound(1)
     def stopfunction(self):
         if DEBUG:
             print "Current state: ", self.__class__.__name__
@@ -418,6 +425,7 @@ class Score(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
         self.action=ReleaseBalls
+        playSound(2)
     def stopfunction(self):
         if time.time()>self.wrapper.time+5:
             self.wrapper[RELEASE_MOTOR]=CLOSED
