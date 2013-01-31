@@ -286,6 +286,7 @@ class VisionSystem(threading.Thread):
         self.override=False
     def activate(self):
         self.pause=False
+        print "unpaused"
     def activateEdgeDetection(self):
         self.detectEdges=True
     def deactivateEdgeDetection(self):
@@ -657,12 +658,13 @@ class VisionSystem(threading.Thread):
             self.stop()
             return "Camera Init Failed!"
         while self.active or self.override:
+            #get command
+            if not self.cmdQueue.empty():
+                self.parseCMD(self.cmdQueue.get())
             if not self.pause or self.override:
                 try:#try to execute target find
                     #print self.targets[self.target]
                     #print self.getTargetDistFromCenter()
-                    if not self.cmdQueue.empty():
-                        self.parseCMD(self.cmdQueue.get())
                     if self.still==None:
                         image=self.captureImage()
                     else:
@@ -686,3 +688,4 @@ class VisionSystem(threading.Thread):
         cv.DestroyWindow("Tracker")
 if __name__=="__main__":
     run=VisionSystemWrapper()
+    run.activate()
