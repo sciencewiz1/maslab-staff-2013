@@ -36,7 +36,7 @@ class VisionSystemWrapper:
     def clearWallTargets(self):
         cmd=("clearWallTargets",(targetStr,))
         self.cmdQueue.put(cmd)
-    def addTarget(self,targetStr):
+    def addTarget(self,):
         cmd=("addTarget",(targetStr,))
         self.cmdQueue.put(cmd)
     def removeTarget(self,targetStr):
@@ -215,6 +215,7 @@ class VisionSystem(threading.Thread):
         self.ballTargets=["redBall","greenBall"]
         self.wallTargets=["purpleWall"]
         self.wallCoordinates=[]
+        self.frameWriter=None
         self.active=True
         self.detectEdges=False
         self.targetColorProfiles={"redBall":[((0, 147, 73), (15, 255, 255)),((165, 58, 36), (180, 255, 255))],"greenBall":[((45, 150, 36), (90, 255, 255))],
@@ -238,6 +239,7 @@ class VisionSystem(threading.Thread):
         self.cmdQueue=cmdQueue
         self.dataQueue=dataQueue
         self.lock=threading.Lock()
+        self.count=0
         #call super class init method and bind to instance
         threading.Thread.__init__(self)
         print "Tracking no targets!"
@@ -328,14 +330,21 @@ class VisionSystem(threading.Thread):
                 self.dataQueue.put(False)
                 return False
             (x1,y1),center,leftExt,rightExt=imageData
-            #WHAT IS CLOSE_THRESHOLD?
-            #area>=CLOSE_THRESHOLD or 
-            if yAbs>=(y1*float(3/4)):
+            if area>=CLOSE_THRESHOLD or yAbs>=(y1*float(3/4)):
                 self.dataQueue.put(True)
                 return True
             else:
                 self.dataQueue.put(False)
                 return False
+    def saveVideo(self,image):
+        self.count+=1
+        '''if self.frameWriter==None:
+            ((width,height),(center,centerEnd),leftExtreme,rightExtreme)=self.findCenterOfImageAndExtremes(image)
+            fps = cv.GetCaptureProperty(self.capture,cv.CV_CAP_PROP_FPS);
+            fourcc = cv.CV_FOURCC('M','J','P','G')
+            self.frameWriter = cv.CreateVideoWriter('out.avi', fourcc, fps, (width, height), 1)
+        cv.WriteFrame(self.frameWriter, image)'''
+        cv.SaveImage("saved"+str(self.count)+".jpg",image)
     #uses images
     def captureImage(self):
         image=cv.QueryFrame(self.capture)
@@ -578,6 +587,7 @@ class VisionSystem(threading.Thread):
         func(*args)
     def stop(self):
         self.active=False
+        cv.ReleaseVideoWriter(self.frameWriter);
         print "Stopping Vision System"
     def run(self):
         print "Starting Vision System"
@@ -586,23 +596,24 @@ class VisionSystem(threading.Thread):
             return "Camera Init Failed!"
         while self.active:
             if not self.pause:
-                try:#try to execute target find
-                    #print self.targets[self.target]
-                    #print self.getTargetDistFromCenter()
-                    if not self.cmdQueue.empty():
-                        self.parseCMD(self.cmdQueue.get())
-                    image=self.captureImage()
-                    #self.findTargets(image)
-                    #self.findWalls(image,filt="main")
-                    self.explore(image)
-                    del(image)
-                    #print "found targets"
-                    cv.WaitKey(1)
-                except:
-                    #if an exception occurs, to prevent the program from terminating
-                    #we just skip this loop and try again
-                    print "Error occurred, but program is continuing!"
-                    continue
+            #try:#try to execute target find
+                #print self.targets[self.target]
+                #print self.getTargetDistFromCenter()
+                if not self.cmdQueue.empty():
+                    self.parseCMD(self.cmdQueue.get())
+                image=self.captureImage()
+                #self.findTargets(image)
+                #self.findWalls(image,filt="main")
+                self.explore(image)
+                self.saveVideo(image)
+                del(image)
+                #print "found targets"
+                cv.WaitKey(1)
+            #except:
+                #if an exception occurs, to prevent the program from terminating
+                #we just skip this loop and try again
+                #print "Error occurred, but program is continuing!"
+                #continue
         print "Stopping Vision System"
         #destroy capture 
         del(self.capture)
