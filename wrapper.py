@@ -15,6 +15,7 @@ class ManualOverride(wx.Frame):
     title = "Manual Override"
     def __init__(self,wrapper):
         self.active=True
+        self.open=False
         wx.Frame.__init__(self, wx.GetApp().TopWindow, title=self.title)
         self.wrapper=wrapper
         self.buildGUI()
@@ -38,6 +39,15 @@ class ManualOverride(wx.Frame):
             self.manualOverride("s")
         if key==wx.WXK_ALT:#roller on
             self.manualOverride("ro1")
+        if key==wx.WXK_SHIFT: #helix motor
+            self.manualOverride("ho")
+        if key==wx.WXK_CONTROL: #servo
+            if self.open==False:
+                self.manualOverride("rlo")
+                self.open=True
+            else:
+                self.manualOverride("rlc")
+                self.open=False
     def onKeyDown(self,event):
         self.manualOverride("b")
     def onKeyUp(self,event):
@@ -53,19 +63,31 @@ class ManualOverride(wx.Frame):
         self.active=False
         self.Destroy()
     def manualOverride(self,cmd):
-        cmds={"l":(-LEFT_TURN,RIGHT_TURN,0,"Left"),"r":(LEFT_TURN,-RIGHT_TURN,0,"Right"),
-              "f":(LEFT_FORWARD,RIGHT_FORWARD,0,"Forward"),"b":(LEFT_BACK,RIGHT_BACK,0,"Backward"),
-              "s":(0,0,ROLLER_STOP,"Stop"),"lo":(LEFT_FORWARD,0,0,"Left On"),"ro":(0,RIGHT_FORWARD,0,"Right On"),
-              "ro1":(0,0,ROLLER_ANGLE,"Roller On Forward"),"rb1":(0,0,-ROLLER_ANGLE,"Roller On Backwards")}
+        cmds={"l":(-LEFT_TURN,RIGHT_TURN,ROLLER_STOP,0,CLOSED,"Left"),
+              "r":(LEFT_TURN,-RIGHT_TURN,ROLLER_STOP,0,CLOSED,"Right"),
+              "f":(LEFT_FORWARD,RIGHT_FORWARD,ROLLER_STOP,0,CLOSED,"Forward"),
+              "b":(LEFT_BACK,RIGHT_BACK,ROLLER_STOP,0,CLOSED,"Backward"),
+              "s":(0,0,ROLLER_STOP,0,CLOSED,"Stop"),
+              "lo":(LEFT_FORWARD,0,ROLLER_STOP,0,CLOSED,"Left On"),
+              "ro":(0,RIGHT_FORWARD,ROLLER_STOP,0,CLOSED,"Right On"),
+              "ro1":(0,0,ROLLER_ANGLE,0,CLOSED,"Roller On Forward"),
+              "rb1":(0,0,-ROLLER_ANGLE,0,CLOSED,"Roller On Backwards"),
+              "ho":(0,0,ROLLER_STOP,HELIX_SPEED,CLOSED,"Helix On Forwards"),
+              "hb":(0,0,ROLLER_STOP,-HELIX_SPEED,CLOSED,"Helix On Backwards"),
+              "rlo":(0,0,ROLLER_STOP,0,OPEN,"Ball Release Open"),
+              "rlc":(0,0,ROLLER_STOP,0,CLOSED,"Ball Release Closed")}
         if cmd in cmds:
-            leftSpeed,rightSpeed,rollerSpeed,cmdName=cmds[cmd]
-            self.wrapper.left_motor.setSpeed(leftSpeed)
+            leftSpeed,rightSpeed,rollerSpeed,helixSpeed,releaseMotorSpeed,cmdName=cmds[cmd]
+            self.wrapper[LEFT_MOTOR]=leftSpeed
             print "changed left motor to:"+str(leftSpeed)
-            self.wrapper.right_motor.setSpeed(rightSpeed)
+            self.wrapper[RIGHT_MOTOR]=rightSpeed
             print "changed right motor to:"+str(rightSpeed)
-            self.wrapper.roller_motor.setAngle(rollerSpeed)
-            self.wrapper[RELEASE_MOTOR]=0
-            self.wrapper.helix_motor.setSpeed(126)
+            self.wrapper[ROLLER_MOTOR]=rollerSpeed
+            print "changed roller motor to:"+str(rollerSpeed)
+            self.wrapper[HELIX_MOTOR]=helixSpeed
+            print "changed helix motor to:"+str(helixSpeed)
+            self.wrapper[RELEASE_MOTOR]=releaseMotorSpeed
+            print "changed release motor to:"+str(releaseMotorSpeed)
             print "Moving "+cmdName
         else:
             print "Invalid command!"
@@ -142,6 +164,7 @@ class Wrapper:
                 print "did not start SM, entering manual override!"
                 return False
         target=self[TARGET]
+        self.vs.activate()
         print target
         if target==True:
             self.color=RED
