@@ -1,21 +1,19 @@
-starting vs
+
 Tracking no targets!
 Starting Vision System
-Connecting
 waiting...
 activating vision
-activated vision
+activated visionunpaused
+
 False
 going for target...greenBall
 vision system set
-unpaused
-walltimer: started wrapper 
-0.018000125885got here
-got here 1234
-0 None True all
+walltimer: got here 
+0.029000043869got here 1234
 
-dist  (94.0, -84.0)
-dist  (94.0, -84.0)
+0 None True all
+dist  (41.0, -89.0)
+dist  (41.0, -89.0)
 see target to right
 started turn and look with target,  all
 set starting state
@@ -25,67 +23,47 @@ got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
 called see target
-see ball at  (93.0, -83.0)
+see ball at  (45.0, -85.0)
 target seen:  greenBall
 centered ball, approach!
 SM next state
 Running  Pause
 Running  DoNothing
 Current state:  Pause
-looping  DoNothing 1359673561.43
+looping  DoNothing 1359674566.2
 Current state:  Pause
-looping  DoNothing 1359673561.44
+looping  DoNothing 1359674566.21
 Current state:  Pause
-looping  DoNothing 1359673561.46
+looping  DoNothing 1359674566.23
 Current state:  Pause
-looping  DoNothing 1359673561.48
+looping  DoNothing 1359674566.24
 Current state:  Pause
-looping  DoNothing 1359673561.48
+looping  DoNothing 1359674566.3
 Current state:  Pause
-looping  DoNothing 1359673561.52
+looping  DoNothing 1359674566.31
 Current state:  Pause
-looping  DoNothing 1359673561.54
+looping  DoNothing 1359674566.34
 Current state:  Pause
-looping  DoNothing 1359673561.56
+looping  DoNothing 1359674566.39
 Current state:  Pause
-looping  DoNothing 1359673561.56
+looping  DoNothing 1359674566.4
 Current state:  Pause
-looping  DoNothing 1359673561.57
+looping  DoNothing 1359674566.42
 Current state:  Pause
-looping  DoNothing 1359673561.57
+looping  DoNothing 1359674566.43
 Current state:  Pause
-looping  DoNothing 1359673561.58
+looping  DoNothing 1359674566.45
 Current state:  Pause
-looping  DoNothing 1359673561.62
+looping  DoNothing 1359674566.52
 Current state:  Pause
-looping  DoNothing 1359673561.64
+looping  DoNothing 1359674566.53
 Current state:  Pause
-looping  DoNothing 1359673561.65
+looping  DoNothing 1359674566.55
+walltimer: Current state:  2.47099995613 
+Pause
+looping  DoNothing 1359674566.6
 Current state:  Pause
-looping  DoNothing 1359673561.66
-Current state:  Pause
-looping  DoNothing 1359673561.66
-Current state:  Pause
-looping  DoNothing 1359673561.67
-walltimer: Current state:  Pause
-looping  DoNothing  1359673561.682.47600007057
-Current state: 
- Pause
-looping  DoNothing 1359673561.76
-Current state:  Pause
-looping  DoNothing 1359673561.77
-Current state:  Pause
-looping  DoNothing 1359673561.78
-Current state:  Pause
-looping  DoNothing 1359673561.81
-Current state:  Pause
-looping  DoNothing 1359673561.84
-Current state:  Pause
-looping  DoNothing 1359673561.86
-Current state:  Pause
-looping  DoNothing 1359673561.87
-Current state:  Pause
-looping  DoNothing 1359673561.9
+looping  DoNothing 1359674566.63
 Current state:  Pause
 transition to... ApproachBall
 SM next state
@@ -94,13 +72,35 @@ Running  ForwardToTarget
 Current state:  ApproachBall
 Stuckness:  (0, 0)
 charging b/c ball close
-walltimer:  3.53800010681
-walltimer:  4.56500005722
-walltimer:  5.59900021553
-walltimer:  6.67800021172
+walltimer:  3.54099988937
+walltimer:  4.57800006866
+walltimer:  5.63499999046
 SM next state
-Running  Charge
+walltimer: Running   Charge
 Running  GoForward
+6.6970000267Current state:  Charge
+
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
 Current state:  Charge
 looping  GoForward
 Current state:  Charge
@@ -124,53 +124,90 @@ looping  GoForward
 Current state:  Charge
 looping  GoForward
 Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+ looping walltimer:  GoForward7.77600002289
+
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+got here
+got here 1234
+0 walltimer: None 8.81900000572 
+True all
+dist  None
+don't see target
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see targetwalltimer: 
+ 9.86199998856
+ see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 3)
 SM next state
 Running  Stuck
 Running  GoBack
 Current state:  Stuck
 looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBack
-Current state:  Stuck
-looping  GoBackwalltimer: 
-Current state:   7.73100018501Stuck
+ Current state: walltimer:   10.9119999409Stuck
 
+looping  GoBack
+Current state:  Stuck
 looping  GoBack
 Current state:  Stuck
 looping  GoBack
@@ -205,7 +242,8 @@ looping  GoBack
 Current state:  Stuck
 got here
 got here 1234
-0 None True all
+0 None True walltimer: all
+ 11.9200000763
 dist  None
 don't see target
 started turn and look with target,  all
@@ -219,10 +257,26 @@ called see target
 see ball at  None
 failed to see ball
 see ball at  None
-see wall at  Nonewalltimer: 
- target seen:  None
+see wall at  None
+target seen:  None
 called see target
-8.73900008202
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ballwalltimer: 
+ 12.9749999046
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
 see ball at  None
 failed to see ball
 see ball at  None
@@ -242,73 +296,7 @@ called see target
 see ball at  None
 failed to see ball
 see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
- walltimer:  9.79200005531
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
- target seen: walltimer:   None10.8790001869
-called see target
-
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-walltimer: see ball at   11.9300000668None
-
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
+walltimer:  14.0369999409
 see wall at  None
 keep turning
 looping  TurnRight
@@ -335,12 +323,12 @@ called see target
 see ball at  None
 failed to see ball
 see ball at  None
-walltimer:  12.9639999866
 see wall at  None
 target seen:  None
 called see target
 see ball at  None
 failed to see ball
+walltimer:  15.0460000038
 see ball at  None
 see wall at  None
 keep turning
@@ -355,105 +343,14 @@ see ball at  None
 see wall at  None
 target seen:  None
 called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
+see ball at  (197.0, -15.0)
 keep turning
 looping  TurnRight
 got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
 called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  13.9710001945
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-walltimer: got to stop 
-14.9940001965Current state: 
- TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-now go wander
-SM next state
-Running  Wander
-Running  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  16.0270001888
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  (225.0, -85.0)
-saw  greenBall
-got here 1234
-0 None True greenBall
-dist  (225.0, -88.0)
-dist  (225.0, -88.0)
-see target to right
-started turn and look with target,  greenBall
-SM next state
-Running  TurnAndLook
-Running  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  (227.0, -83.0)
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  (174.0, -91.0)
+see ball at  (164.0, -14.0)
 target seen:  greenBall
 keep turning
 looping  TurnRight
@@ -461,87 +358,61 @@ got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
 called see target
-see ball at  (111.0, -104.0)
+see ball at  (121.0, -14.0)
+target seen:  greenBall
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (80.0, -14.0)
 target seen:  greenBall
 centered ball, approach!
 SM next state
-Running  Pause
-Running  DoNothing
+ Running walltimer:  Pause 
+16.0629999638Running 
+ DoNothing
 Current state:  Pause
-looping  DoNothing 1359673576.23
+looping  DoNothing 1359674580.26
 Current state:  Pause
-looping  walltimer: DoNothing  1359673576.2517.0500001907
-
+looping  DoNothing 1359674580.36
 Current state:  Pause
-looping  DoNothing 1359673576.28
+looping  DoNothing 1359674580.42
 Current state:  Pause
-looping  DoNothing 1359673576.3
+looping  DoNothing 1359674580.48
 Current state:  Pause
-looping  DoNothing 1359673576.31
+looping  DoNothing 1359674580.53
 Current state:  Pause
-looping  DoNothing 1359673576.31
+looping  DoNothing 1359674580.53
 Current state:  Pause
-looping  DoNothing 1359673576.35
+looping  DoNothing 1359674580.54
 Current state:  Pause
-looping  DoNothing 1359673576.36
+looping  DoNothing 1359674580.54
 Current state:  Pause
-looping  DoNothing 1359673576.38
+looping  DoNothing 1359674580.57
 Current state:  Pause
-looping  DoNothing 1359673576.38
+looping  DoNothing 1359674580.57
 Current state:  Pause
-looping  DoNothing 1359673576.38
+looping  DoNothing 1359674580.57
 Current state:  Pause
-looping  DoNothing 1359673576.38
+looping  DoNothing 1359674580.62
 Current state:  Pause
-looping  DoNothing 1359673576.44
+looping  DoNothing 1359674580.62
 Current state:  Pause
-looping  DoNothing 1359673576.44
+looping  DoNothing 1359674580.63
 Current state:  Pause
-looping  DoNothing 1359673576.46
+looping  DoNothing 1359674580.64
 Current state:  Pause
-looping  DoNothing 1359673576.47
+looping  DoNothing 1359674580.64
 Current state:  Pause
-looping  DoNothing 1359673576.47
+looping  DoNothing 1359674580.66
 Current state:  Pause
-looping  DoNothing 1359673576.47
+looping  DoNothing 1359674580.66
 Current state:  Pause
-looping  DoNothing 1359673576.47
+looping  DoNothing 1359674580.67
 Current state:  Pause
-looping  DoNothing 1359673576.53
-Current state:  Pause
-looping  DoNothing 1359673576.53
-Current state:  Pause
-looping  DoNothing 1359673576.54
-Current state:  Pause
-looping  DoNothing 1359673576.54
-Current state:  Pause
-looping  DoNothing 1359673576.6
-Current state:  Pause
-looping  DoNothing 1359673576.6
-Current state:  Pause
-looping  DoNothing 1359673576.6
-Current state:  Pause
-looping  DoNothing 1359673576.61
-Current state:  Pause
-looping  DoNothing 1359673576.62
-Current state:  Pause
-looping  DoNothing 1359673576.62
-Current state:  Pause
-looping  DoNothing 1359673576.63
-Current state:  Pause
-looping  DoNothing 1359673576.65
-Current state:  Pause
-looping  DoNothing 1359673576.68
-Current state:  Pause
-looping  DoNothing 1359673576.7
-Current state:  Pause
-looping  DoNothing 1359673576.71
-Current state:  Pause
-looping  DoNothing 1359673576.72
-Current state:  Pause
-looping  DoNothing 1359673576.72
-Current state:  Pause
-looping  DoNothing 1359673576.73
+looping  DoNothing 1359674580.67
 Current state:  Pause
 transition to... ApproachBall
 SM next state
@@ -590,12 +461,8 @@ looping  GoForward
 Current state:  Charge
 looping  GoForward
 Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping   walltimer: GoForward 
-18.0720000267Current state: 
+looping  walltimer: GoForward 
+17.1059999466Current state: 
  Charge
 looping  GoForward
 Current state:  Charge
@@ -740,9 +607,6 @@ Current state:  Charge
 looping  GoForward
 Current state:  Charge
 looping  GoForward
-walltimer: Current state:   19.0830001831Charge
-
-looping  GoForward
 Current state:  Charge
 looping  GoForward
 Current state:  Charge
@@ -773,16 +637,9 @@ Current state:  Charge
 looping  GoForward
 Current state:  Charge
 looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
+Current state:  Chargewalltimer: 
+ 18.1319999695looping 
+ GoForward
 Current state:  Charge
 looping  GoForward
 Current state:  Charge
@@ -837,41 +694,8 @@ Stuckness:  (0, 0)
 called see target
 see ball at  None
 failed to see ball
-see ball at  Nonewalltimer: 
- 20.128000021
-see wall at  None
-target seen:  None
-called see target
 see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
- called see targetwalltimer: 
- 21.1830000877
-see ball at  None
-failed to see ball
-see ball at  None
+walltimer:  19.1789999008
 see wall at  None
 target seen:  None
 called see target
@@ -903,8 +727,8 @@ Stuckness:  (0, 0)
 called see target
 see ball at  None
 failed to see ball
-walltimer:  22.2020001411
- see ball at  None
+see ball at  None
+walltimer:  20.1900000572
 see wall at  None
 target seen:  None
 called see target
@@ -934,13 +758,13 @@ got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
 called see target
-see ball at walltimer:   None
-23.2440001965
+see ball at  None
 failed to see ball
 see ball at  None
 see wall at  None
-target seen:  None
+target seen: walltimer:   None
 called see target
+21.2060000896
 see ball at  None
 failed to see ball
 see ball at  None
@@ -960,16 +784,7 @@ called see target
 see ball at  None
 failed to see ball
 see ball at  None
-walltimer:  24.2850000858
 see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  (-147.0, -85.0)
-target seen:  greenBall
 keep turning
 looping  TurnLeft
 got to stop
@@ -978,481 +793,8 @@ Stuckness:  (0, 0)
 called see target
 see ball at  None
 failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  (0.0, -75.0)
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  (39.0, -73.0)
-target seen:  greenBall
-centered ball, approach!
-SM next state
-Running  Pause
-Running  DoNothing
-Current state:  Pause
-looping  DoNothing 1359673584.43
-Current state:  Pause
-looping  DoNothing 1359673584.44
-Current state:  Pause
-looping  DoNothing 1359673584.47
-Current state:  Pause
-looping  DoNothing 1359673584.47
-Current state:  Pause
-looping  DoNothing 1359673584.48
-Current state:  walltimer: Pause 
-25.3059999943looping 
- DoNothing 1359673584.51
-Current state:  Pause
-looping  DoNothing 1359673584.53
-Current state:  Pause
-looping  DoNothing 1359673584.53
-Current state:  Pause
-looping  DoNothing 1359673584.54
-Current state:  Pause
-looping  DoNothing 1359673584.57
-Current state:  Pause
-looping  DoNothing 1359673584.6
-Current state:  Pause
-looping  DoNothing 1359673584.63
-Current state:  Pause
-looping  DoNothing 1359673584.63
-Current state:  Pause
-looping  DoNothing 1359673584.63
-Current state:  Pause
-looping  DoNothing 1359673584.63
-Current state:  Pause
-looping  DoNothing 1359673584.65
-Current state:  Pause
-looping  DoNothing 1359673584.65
-Current state:  Pause
-looping  DoNothing 1359673584.65
-Current state:  Pause
-looping  DoNothing 1359673584.67
-Current state:  Pause
-looping  DoNothing 1359673584.68
-Current state:  Pause
-looping  DoNothing 1359673584.68
-Current state:  Pause
-looping  DoNothing 1359673584.71
-Current state:  Pause
-looping  DoNothing 1359673584.73
-Current state:  Pause
-looping  DoNothing 1359673584.73
-Current state:  Pause
-looping  DoNothing 1359673584.73
-Current state:  Pause
-looping  DoNothing 1359673584.75
-Current state:  Pause
-looping  DoNothing 1359673584.77
-Current state:  Pause
-looping  DoNothing 1359673584.77
-Current state:  Pause
-looping  DoNothing 1359673584.8
-Current state:  Pause
-looping  DoNothing 1359673584.83
-Current state:  Pause
-looping  DoNothing 1359673584.83
-Current state:  Pause
-looping  DoNothing 1359673584.84
-Current state:  Pause
-looping  DoNothing 1359673584.85
-Current state:  Pause
-looping  DoNothing 1359673584.87
-Current state:  Pause
-looping  DoNothing 1359673584.87
-Current state:  Pause
-looping  DoNothing 1359673584.9
-Current state:  Pause
-looping  DoNothing 1359673584.92
-Current state:  Pause
-looping  DoNothing 1359673584.92
-Current state:  Pause
-looping  DoNothing 1359673584.94
-Current state:  Pause
-transition to... ApproachBall
-SM next state
-Running  ApproachBall
-Running  ForwardToTarget
-Current state:  ApproachBall
-Stuckness:  (0, 0)
-charging b/c ball close
-SM next state
-Running  Charge
-Running  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  walltimer: GoForward 
-26.3080000877Current state: 
- Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  walltimer:  Charge27.3289999962
+see ball at walltimer:   22.253000021None
 
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-got here
-got here 1234
-0 None True all
-dist  None
-don't see target
-started turn and look with target,  all
-SM next state
-Running  TurnAndLook
-Running  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  28.3330001831
 see wall at  None
 target seen:  None
 called see target
@@ -1461,7 +803,7 @@ failed to see ball
 see ball at  None
 see wall at  None
 keep turning
-looping  TurnRight
+looping  TurnLeft
 got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
@@ -1477,74 +819,24 @@ failed to see ball
 see ball at  None
 see wall at  None
 keep turning
-looping  TurnRight
+looping  TurnLeft
 got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
 called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  29.3519999981
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)walltimer: 
- called see target
-30.373000145
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer: see wall at   None
-keep turning31.4510002136
+see ball at walltimer:   None23.2669999599
 
-looping  TurnRight
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
 got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
@@ -1560,24 +852,41 @@ failed to see ball
 see ball at  None
 see wall at  None
 keep turning
-looping  TurnRight
+looping walltimer:   TurnLeft24.3250000477
 got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at walltimer:  None 
-32.4990000725keep turning
 
-looping  TurnRight
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ballwalltimer: 
+ 25.3759999275
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
 got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
@@ -1593,7 +902,7 @@ failed to see ball
 see ball at  None
 see wall at  None
 keep turning
-looping  TurnRight
+looping  TurnLeft
 got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
@@ -1601,73 +910,7 @@ called see target
 see ball at  None
 failed to see ball
 see ball at  None
-see wall at  None
-target seen:  None
-called see target
-walltimer: see ball at   None33.5470001698
-failed to see ball
-
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  34.5850000381
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  35.5960001945
+walltimer:  26.3880000114
 see wall at  None
 target seen:  None
 called see target
@@ -1690,15 +933,7 @@ looping  GoForward
 Current state:  Wander
 Stuckness:  (0, 0)
 called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  36.614000082
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
+walltimer:  27.4119999409
 see ball at  None
 failed to see ball
 see ball at  None
@@ -1707,137 +942,450 @@ looping  GoForward
 Current state:  Wander
 Stuckness:  (0, 0)
 called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
+see ball at  (-187.0, 0.0)
+saw  greenBall
+got here 1234
+0 None True greenBall
+dist  (-190.0, -2.0)
+dist  (-190.0, -2.0)
+see target to left
+started turn and look with target,  greenBall
+SM next state
+Running  TurnAndLook
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
 Stuckness:  (0, 0)
 called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  walltimer: GoForward 
-37.6290001869Current state: 
- Wander
+see ball at  (-199.0, -9.0)
+target seen:  greenBall
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
 Stuckness:  (0, 0)
 called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
+see ball at  (-207.0, -12.0)
+target seen:  greenBall
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
 Stuckness:  (0, 0)
 called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  38.6420001984
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer: see wall at   39.6750001907None
+see ball at  (-185.0, -7.0)
+target seen:  greenBall
+keep turning
+looping walltimer:   TurnLeft28.4189999104
 
-looping  GoForward
-Current state:  Wander
+got to stop
+Current state:  TurnAndLook
 Stuckness:  (0, 0)
 called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
+see ball at  (-87.0, -11.0)
+target seen:  greenBall
+centered ball, approach!
+SM next state
+Running  Pause
+Running  DoNothing
+Current state:  Pause
+looping  DoNothing 1359674592.73
+Current state:  Pause
+looping  DoNothing 1359674592.78
+Current state:  Pause
+looping  DoNothing 1359674592.79
+Current state:  Pause
+looping  DoNothing 1359674592.79
+Current state:  Pause
+looping  DoNothing 1359674592.85
+Current state:  Pause
+looping  DoNothing 1359674592.88
+Current state:  Pause
+looping  DoNothing 1359674592.89
+Current state:  Pause
+looping  DoNothing 1359674592.94
+Current state:  Pause
+looping  DoNothing 1359674592.96
+Current state:  Pause
+looping  DoNothing 1359674592.96
+Current state:  Pause
+looping  DoNothing 1359674592.97
+Current state:  Pause
+looping  DoNothing 1359674592.97
+Current state:  Pause
+looping  DoNothing 1359674592.97
+Current state:  Pause
+looping  DoNothing 1359674593.0
+Current state:  Pause
+looping  DoNothing 1359674593.0
+Current state:  Pause
+looping  DoNothing 1359674593.0
+Current state:  Pause
+looping  DoNothing 1359674593.01
+Current state:  Pause
+looping  DoNothing 1359674593.06
+Current state:  Pause
+looping  DoNothing 1359674593.06
+Current state:  Pause
+looping  DoNothing 1359674593.07
+Current state:  Pause
+looping  DoNothing 1359674593.07
+Current state:  Pause
+looping  DoNothing 1359674593.08
+Current state:  Pause
+looping  DoNothing 1359674593.09
+Current state:  Pause
+looping  DoNothing 1359674593.09
+Current state:  Pause
+looping  DoNothing 1359674593.1
+Current state:  Pause
+looping  DoNothing 1359674593.13
+Current state:  Pause
+looping  DoNothing 1359674593.16
+Current state:  Pause
+looping  DoNothing 1359674593.16
+Current state:  Pause
+looping  DoNothing 1359674593.18
+Current state:  Pause
+looping  DoNothing 1359674593.18
+Current state:  Pause
+looping  DoNothing 1359674593.19
+Current state:  Pause
+looping  DoNothing 1359674593.19
+Current state:  Pause
+looping  DoNothing 1359674593.21
+Current state:  Pause
+transition to... ApproachBall
+SM next state
+Running  ApproachBall
+Running  ForwardToTarget
+Current state:  ApproachBall
 Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
+charging b/c ball close
+SM next state
+Running  Charge
+Running  GoForward
+Current state:  Charge
+walltimer: looping   29.4400000572GoForward
+
+Current state:  Charge
 looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
+Current state:  Charge
 looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
+Current state:  Charge
 looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-walltimer:  40.6980001926
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
+Current state:  Charge
 looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping walltimer:   GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+30.489000082looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  
+Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
 got here
 got here 1234
 0 None True all
+walltimer:  31.5290000439
 dist  None
 don't see target
 started turn and look with target,  all
@@ -1857,7 +1405,23 @@ called see target
 see ball at  None
 failed to see ball
 see ball at  None
-walltimer:  41.7010002136
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  walltimer: None
+ 32.5499999523
 see wall at  None
 keep turning
 looping  TurnRight
@@ -1884,14 +1448,19 @@ called see target
 see ball at  None
 failed to see ball
 see ball at  None
+walltimer:  33.5529999733
 see wall at  None
 target seen:  None
 called see target
-see ball at  None
-failed to see ball
-see ball at  None
- walltimer:  42.756000042
-see wall at  None
+see ball at  (-15.0, 47.0)
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (-108.0, 42.0)
+target seen:  greenBall
 keep turning
 looping  TurnRight
 got to stop
@@ -1907,24 +1476,8 @@ called see target
 see ball at  None
 failed to see ball
 see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  walltimer: None 
-43.7760000229failed to see ball
+walltimer: see wall at   34.5939998627None
 
-see ball at  None
-see wall at  None
 keep turning
 looping  TurnRight
 got to stop
@@ -1950,76 +1503,10 @@ called see target
 see ball at  None
 failed to see ball
 see ball at  None
-see wall at  None
-target seen:  None
+see wall at  walltimer: None 
+35.618999958target seen: 
+ None
 called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  44.7790000439
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ballwalltimer: 
- 45.7990000248
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-walltimer:  46.8000001907
 see ball at  None
 failed to see ball
 see ball at  None
@@ -2048,14 +1535,80 @@ Stuckness:  (0, 0)
 called see target
 see ball at  None
 failed to see ball
-see ball at  None
+see ball at walltimer:   None
+36.6549999714
 see wall at  None
- target seen:  walltimer: None 
-47.8080000877called see target
-
+target seen:  None
+called see target
 see ball at  None
 failed to see ball
 see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer:  37.7030000687
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer:  38.7460000515
 see wall at  None
 keep turning
 looping  TurnRight
@@ -2075,401 +1628,97 @@ see ball at  None
 see wall at  None
 now go wander
 SM next state
-Running walltimer:   Wander48.8460001945
-
+Running  Wander
 Running  GoForward
 Current state:  Wander
 Stuckness:  (0, 0)
 called see target
 see ball at  None
 failed to see ball
-see ball at  (172.0, -26.0)
-saw  cyanButton
+walltimer:  see ball at 39.754999876 None
+
+see wall at  None
+looping  GoForward
+Current state:  Wander
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+looping  GoForward
+Current state:  Wander
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+looping  GoForward
+Current state:  Wander
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+looping  GoForward
+Current state:  Wander
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+walltimer:  40.7879998684
+see ball at  None
+see wall at  None
+looping  GoForward
+Current state:  Wander
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+looping  GoForward
+Current state:  Wander
+Stuckness:  (0, 0)
+called see target
+see ball at  (-157.0, -21.0)
+saw  greenBall
 got here 1234
-0 None True cyanButton
-dist  (151.0, -27.0)
-dist  (151.0, -27.0)
-see target to right
-started turn and look with target,  cyanButton
+0 None True greenBall
+dist  (-183.0, -23.0)
+dist  (-183.0, -23.0)
+see target to left
+started turn and look with target,  greenBall
 SM next state
 Running  TurnAndLook
-Running  TurnRight
+Running  TurnLeft
 got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
 called see target
-see ball at  None
-failed to see ball
-see ball at  (115.0, -33.0)
-target seen:  cyanButton
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  (97.0, -21.0)
-target seen:  cyanButton
-centered button, approach!
-SM next state
-Running  Pause
-Running  DoNothing
-Current state:  Pause
-looping  DoNothing 1359673608.76
-Current state:  Pause
-looping  DoNothing 1359673608.82
-Current state:  Pause
-looping  DoNothing 1359673608.83
-Current state:  Pause
-looping  DoNothing 1359673608.83
-Current state:  Pause
-looping  DoNothing 1359673608.86
-Current state:  Pause
-looping  DoNothing 1359673608.89
-Current state:  Pause
-looping  DoNothing 1359673608.89
-Current state:  Pause
-looping  DoNothing 1359673608.95
-Current state:  Pause
-looping  DoNothing 1359673608.95
-Current state:  Pause
-looping  DoNothing 1359673608.95
-Current state:  Pause
-looping  DoNothing 1359673608.98
-Current state:  Pause
-looping  DoNothing 1359673609.01
-Current state:  Pause
-looping  DoNothing 1359673609.01
-Current state:  Pause
-looping  DoNothing 1359673609.02
-Current state:  Pause
-looping  DoNothingwalltimer:  1359673609.07
-Current state:   49.870000124
-Pause
-looping  DoNothing 1359673609.08
-Current state:  Pause
-looping  DoNothing 1359673609.13
-Current state:  Pause
-looping  DoNothing 1359673609.14
-Current state:  Pause
-looping  DoNothing 1359673609.17
-Current state:  Pause
-looping  DoNothing 1359673609.23
-Current state:  Pause
-transition to... ApproachButton
-SM next state
-Running  ApproachButton
-Running  ForwardToTarget
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  -5.0
-integral=  -0.594999790192
-derivative=  0.0
-L/R speeds:  -69 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  -4.75
-integral=  -1.51150077581
-derivative=  0.664892901982
-L/R speeds:  -70 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  -5.75
-integral=  -2.64549994469
-derivative=  -2.31481651138
-L/R speeds:  -64 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  -5.125
-integral=  -3.31975033879
-derivative=  2.52015981726
-L/R speeds:  -70 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-walltimer:  50.875
-ADJUSTING
-error=  -4.25
-integral=  -4.11662569642
-derivative=  2.5735282568
-L/R speeds:  -72 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  -3.5
-integral=  -4.7792507112
-derivative=  2.19298240722
-L/R speeds:  -72 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  -2.75
-integral=  -5.22925013304
-derivative=  2.60417001253
-L/R speeds:  -74 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  -2.25
-integral=  -5.62425011396
-derivative=  1.58227855742
-L/R speeds:  -74 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  -1.875
-integral=  -5.87175036967
-derivative=  1.56249838571
-L/R speeds:  -74 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  -1.5
-integral=  -6.05568781495
-derivative=  1.72018399795
-L/R speeds:  -75 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  -1.125
-integral=  -6.24468788505
-derivative=  1.30208285043
-L/R speeds:  -75 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping walltimer:   ForwardToTarget51.9030001163
-
-ADJUSTING
-error=  -0.625
-integral=  -6.42931285501
-derivative=  1.18483431601
-L/R speeds:  -76 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  -0.25
-integral=  -6.50937539339
-derivative=  1.0245896727
-L/R speeds:  -77 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  0.375
-integral=  -6.49881289899
-derivative=  1.84911340689
-L/R speeds:  -79 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  0.75
-integral=  -6.42793793976
-derivative=  1.4880960941
-L/R speeds:  -79 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  1.375
-integral=  -6.1782502979
-derivative=  1.32978647853
-L/R speeds:  -80 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  1.625
-integral=  -6.04775045812
-derivative=  1.43678337316
-L/R speeds:  -81 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  1.75
-integral=  -5.83006304502 
-walltimer: derivative=   52.91300010680.484496317448
-
-L/R speeds:  -81 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  1.875
-integral=  -5.598063007
-derivative=  0.488281169964
-L/R speeds:  -81 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  2.125
-integral=  -5.36206294596
-derivative=  1.05932175993
-L/R speeds:  -82 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  2.5
-integral=  -5.10537530482
-derivative=  1.68918826036
-L/R speeds:  -84 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  2.125
-integral=  -4.80012537539
-derivative=  -1.42045487385
-L/R speeds:  -80 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  7.75
-integral=  -4.00025066733
-derivative=  17.3611174477
-L/R speeds:  -110 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  3.125
-integral=  -3.36406260729
-derivative=  -19.7649398656
-L/R speeds:  -64 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-looping  ForwardToTarget
-ADJUSTING
-error=  2.875
-integral=  -2.82106262445
-derivative=  -0.690607756639
-L/R speeds:  -83 -80
-Current state:  ApproachButton
-Stuckness:  (0, 0)
-button not centered!
-walltimer:  53.9190001488
-see ball at  None
-got here
-got here 1234
-0 None True all
-dist  None
-don't see target
-started turn and look with target,  all
-SM next state
-Running  TurnAndLook
-Running  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball 
-walltimer:  54.9390001297
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-walltimer: see ball at   55.9570000172None
-
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at walltimer:   (171.0, -57.0)57.0160000324
-
+see ball at  (-221.0, -28.0)
 target seen:  greenBall
 keep turning
-looping  TurnRight
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer:  41.7950000763
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
 got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
@@ -2480,9 +1729,12 @@ see ball at  None
 see wall at  None
 target seen:  None
 called see target
-see ball at  (57.0, -59.0)
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
 keep turning
-looping  TurnRight
+looping  TurnLeft
 got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
@@ -2490,95 +1742,121 @@ called see target
 see ball at  None
 failed to see ball
 see ball at  None
+walltimer:  42.8120000362
 see wall at  None
 target seen:  None
 called see target
-see ball at  (113.0, -95.0)
-walltimer:  58.0420000553
+see ball at  (129.0, 45.0)
 keep turning
-looping  TurnRight
+looping  TurnLeft
 got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
 called see target
-see ball at  (63.0, -95.0)
+see ball at  (87.0, 46.0)
 target seen:  greenBall
 centered ball, approach!
 SM next state
 Running  Pause
 Running  DoNothing
 Current state:  Pause
-looping  DoNothing 1359673617.51
+looping  DoNothing 1359674607.31
 Current state:  Pause
-looping  DoNothing 1359673617.51
+looping  DoNothing 1359674607.31
 Current state:  Pause
-looping  DoNothing 1359673617.51
+looping  DoNothing 1359674607.31
 Current state:  Pause
-looping  DoNothing 1359673617.53
+looping  DoNothing 1359674607.32
 Current state:  Pause
-looping  DoNothing 1359673617.53
+looping  DoNothing 1359674607.32
 Current state:  Pause
-looping  DoNothing 1359673617.58
+looping  DoNothing 1359674607.33
 Current state:  Pause
-looping  DoNothing 1359673617.58
+looping  DoNothing 1359674607.33
 Current state:  Pause
-looping  DoNothing 1359673617.58
+looping  DoNothing 1359674607.33
 Current state:  Pause
-looping  DoNothing 1359673617.59
+looping  DoNothing 1359674607.35
 Current state:  Pause
-looping  DoNothing 1359673617.59
+looping  DoNothing 1359674607.42
 Current state:  Pause
-looping  DoNothing 1359673617.61
+looping  DoNothing 1359674607.42
 Current state:  Pause
-looping  DoNothing 1359673617.62
+looping  DoNothing 1359674607.47
 Current state:  Pause
-looping  DoNothing 1359673617.63
+looping  DoNothing 1359674607.48
 Current state:  Pause
-looping  DoNothing 1359673617.68
+looping  DoNothing 1359674607.51
 Current state:  Pause
-looping  DoNothing 1359673617.68
+looping  DoNothing 1359674607.53
 Current state:  Pause
-looping  DoNothing 1359673617.68
+looping  DoNothing 1359674607.53
 Current state:  Pause
-looping  DoNothing 1359673617.68
+looping  DoNothing 1359674607.53
 Current state:  Pause
-looping  DoNothing 1359673617.68
+looping  DoNothing 1359674607.53
 Current state:  Pause
-looping  DoNothing 1359673617.71
+looping  DoNothing 1359674607.54
 Current state:  Pause
-looping  DoNothing 1359673617.75
+looping  DoNothing 1359674607.54
 Current state:  Pause
-looping  DoNothing 1359673617.75
+looping  DoNothing 1359674607.54
 Current state:  Pause
-looping  DoNothing 1359673617.77
+looping  DoNothing 1359674607.56
 Current state:  Pause
-looping  DoNothing 1359673617.81
+looping  DoNothing 1359674607.56
 Current state:  Pause
-looping  DoNothing 1359673617.81
+looping  DoNothing 1359674607.56
 Current state:  Pause
-looping  DoNothing 1359673617.82
+looping  DoNothing 1359674607.6
 Current state:  Pause
-looping  DoNothing 1359673617.87
+looping  DoNothing 1359674607.6
 Current state:  Pause
-looping  DoNothing 1359673617.87
+looping  DoNothing 1359674607.61
 Current state:  Pause
-looping  DoNothing 1359673617.88
+looping  DoNothing 1359674607.61
 Current state:  Pause
-looping  DoNothing 1359673617.88
+looping  DoNothing 1359674607.61
 Current state:  Pause
-looping  DoNothing 1359673617.89
+looping  DoNothing 1359674607.62
 Current state:  Pause
-looping  DoNothing 1359673617.94
+looping  DoNothing 1359674607.63
 Current state:  Pause
-looping  DoNothing 1359673617.94
+looping  DoNothing 1359674607.63
 Current state:  Pause
-looping  DoNothing 1359673617.96
+looping  DoNothing 1359674607.63
 Current state:  Pause
-looping  DoNothing 1359673617.96
+looping  DoNothing 1359674607.64
 Current state:  Pause
-looping  DoNothing 1359673617.97
+looping  DoNothing 1359674607.65
 Current state:  Pause
-looping  DoNothing 1359673617.99
+looping  DoNothing 1359674607.65
+Current state:  Pause
+looping  DoNothing 1359674607.66
+Current state:  Pause
+looping  DoNothing 1359674607.7
+Current state:  Pause
+looping  DoNothing 1359674607.71
+Current state:  Pause
+looping  DoNothing 1359674607.71
+Current state:  Pause
+looping  DoNothing 1359674607.71
+Current state:  Pause
+looping  DoNothing 1359674607.72
+Current state:  Pause
+looping  DoNothing 1359674607.72
+Current state:  Pause
+looping  DoNothing 1359674607.72
+Current state:  Pause
+looping  DoNothing 1359674607.72
+Current state:  Pause
+looping  DoNothing 1359674607.77
+Current state:  Pause
+looping  DoNothing 1359674607.78
+Current state:  Pause
+looping  DoNothing 1359674607.78
+Current state:  Pause
+looping  DoNothing 1359674607.78
 Current state:  Pause
 transition to... ApproachBall
 SM next state
@@ -2586,101 +1864,11 @@ Running  ApproachBall
 Running  ForwardToTarget
 Current state:  ApproachBall
 Stuckness:  (0, 0)
-charging b/c ball close
+charging b/c ball closewalltimer: 
+ 43.8229999542
 SM next state
 Running  Charge
 Running  GoForward
-Current state:  Charge
-looping  GoForwardwalltimer: 
- Current state:  59.0490000248Charge
-
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
 Current state:  Charge
 looping  GoForward
 Current state:  Charge
@@ -2756,7 +1944,4236 @@ looping  GoForward
 Current state:  Charge
 looping  GoForward
 Current state:  walltimer: Charge 
-60.1070001125looping 
+44.8459999561
+ looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+ Current state:  Charge
+looping walltimer:   GoForward
+45.8759999275Current state: 
+ Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+got here
+got here 1234
+0 None True all
+dist  None
+don't see target
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+walltimer: see ball at   46.9309999943None
+failed to see ball
+
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  Nonewalltimer: 
+ failed to see ball47.9649999142
+
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ballwalltimer: 
+ 49.013999939
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+walltimer:  see ball at 50.0329999924 None
+
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+walltimer:  51.0859999657
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (-169.0, -26.0)walltimer: 
+ target seen: 52.0969998837 
+greenBall
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer: see wall at   53.1169998646None
+
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  (154.0, -107.0)
+now go wander
+SM next state
+Running  Wander
+Running  GoForward
+Current state:  Wander
+Stuckness:  (0, 0)
+called see target
+see ball at  (39.0, 50.0)
+saw  greenBall
+got here 1234
+0 None True greenBall
+walltimer:  54.1370000839
+dist  (-43.0, -106.0)
+dist  (-43.0, -106.0)
+see target to left
+started turn and look with target,  greenBall
+SM next state
+Running  TurnAndLook
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (-88.0, -107.0)
+target seen:  greenBall
+centered ball, approach!
+SM next state
+Running  Pause
+Running  DoNothing
+Current state:  Pause
+looping  DoNothing 1359674618.51
+Current state:  Pause
+looping  DoNothing 1359674618.52
+Current state:  Pause
+looping  DoNothing 1359674618.54
+Current state:  Pause
+looping  DoNothing 1359674618.55
+Current state:  Pause
+looping  DoNothing 1359674618.6
+Current state:  Pause
+looping  DoNothing 1359674618.61
+Current state:  Pause
+looping  DoNothing 1359674618.61
+Current state:  Pause
+looping  DoNothing 1359674618.62
+Current state:  Pause
+looping  DoNothing 1359674618.62
+Current state:  Pause
+looping  DoNothing 1359674618.62
+Current state:  Pause
+looping  DoNothing 1359674618.63
+Current state:  Pause
+looping  DoNothing 1359674618.66
+Current state:  Pause
+looping  DoNothing 1359674618.66
+Current state:  Pause
+looping  DoNothing 1359674618.67
+Current state:  Pause
+looping  DoNothing 1359674618.71
+Current state:  Pause
+looping  DoNothing 1359674618.71
+Current state:  Pause
+looping  DoNothing 1359674618.72
+Current state:  Pause
+looping  DoNothing 1359674618.72
+Current state:  Pause
+looping  DoNothing 1359674618.77
+Current state:  Pause
+looping  DoNothing 1359674618.78
+Current state:  Pause
+looping  DoNothing 1359674618.79
+Current state:  Pause
+looping  DoNothing 1359674618.79
+Current state:  Pause
+looping  DoNothing 1359674618.8
+Current state:  Pause
+looping  DoNothing 1359674618.81
+Current state:  Pause
+looping  DoNothing 1359674618.81
+Current state:  Pause
+looping  DoNothing 1359674618.85
+Current state:  Pause
+looping  DoNothing 1359674618.85
+Current state:  Pause
+looping  DoNothing 1359674618.85
+Current state:  Pause
+looping  DoNothing 1359674618.86
+Current state:  Pause
+looping  DoNothing 1359674618.87
+Current state:  Pause
+looping  DoNothing 1359674618.91
+Current state:  Pause
+looping  DoNothing 1359674618.91
+Current state:  Pause
+looping  DoNothing 1359674618.92
+Current state:  Pause
+looping  DoNothing 1359674618.92
+Current state:  Pause
+looping  DoNothing 1359674618.92
+Current state:  Pause
+looping  DoNothing 1359674618.92
+Current state:  Pause
+looping  DoNothing 1359674618.93
+Current state:  Pause
+looping  DoNothing 1359674618.94
+Current state:  Pause
+looping  DoNothing 1359674618.95
+Current state:  Pause
+looping  DoNothing 1359674618.95
+Current state:  Pause
+looping  DoNothing 1359674618.95
+Current state:  Pause
+looping  DoNothing 1359674619.01
+Current state:  Pause
+transition to... ApproachBall
+SM next state
+Running  ApproachBall
+Running  ForwardToTarget
+Current state:  ApproachBall
+Stuckness:  (0, 0)
+charging b/c ball close
+walltimer:  55.1610000134
+SM next state
+Running  Charge
+Running  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+walltimer: looping   GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state: 56.2019999027 
+Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+ walltimer: got here
+got here 1234
+0 None True  57.2860000134all
+
+dist  None
+don't see target
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer:  58.3029999733
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer: see wall at   None
+keep turning
+looping  TurnRight
+59.3599998951got to stop
+Current state: 
+ TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+ walltimer:  60.382999897
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+walltimer: see ball at   61.4029998779None
+
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (49.0, -11.0)
+target seen:  greenBall
+centered ball, approach!
+SM next state
+Running  Pause
+Running  DoNothing
+Current state:  Pause
+looping  DoNothing 1359674626.11
+Current state:  Pause
+looping  DoNothing 1359674626.16
+Current state:  Pause
+looping  DoNothing 1359674626.17
+Current state:  Pause
+looping  DoNothing 1359674626.23
+Current state:  Pause
+looping  DoNothing 1359674626.23
+Current state:  Pause
+looping  DoNothing 1359674626.25
+Current state:  Pause
+looping  DoNothing 1359674626.25
+Current state:  Pause
+looping  DoNothing 1359674626.29
+Current state:  Pause
+looping  DoNothing 1359674626.29
+Current state:  Pause
+looping  DoNothing 1359674626.29
+Current state:  Pause
+looping  DoNothing 1359674626.29
+Current state:  Pause
+looping  DoNothing 1359674626.3
+Current state:  Pause
+looping  DoNothing 1359674626.31
+Current state:  Pause
+looping  DoNothing 1359674626.35
+Current state:  Pause
+looping  DoNothing 1359674626.35
+Current state:  Pause
+looping  DoNothing 1359674626.35
+Current state:  Pause
+looping  DoNothing 1359674626.36
+Current state:  Pause
+looping  DoNothing 1359674626.37
+Current state:  Pause
+looping  DoNothing 1359674626.37
+Current state:  Pause
+looping  DoNothing 1359674626.38
+Current state:  Pause
+looping  DoNothing 1359674626.47
+Current state:  Pause
+looping  DoNothing 1359674626.47
+Current state:  Pause
+looping  DoNothing 1359674626.47
+Current state:  Pause
+looping  DoNothing 1359674626.49
+Current state:  Pause
+looping  DoNothing 1359674626.5
+Current state:  Pause
+looping  DoNothing 1359674626.5
+Current state:  Pause
+looping  DoNothing 1359674626.5
+Current state:  walltimer: Pause 
+looping  DoNothing 1359674626.55
+Current state:  Pause
+looping  DoNothing 1359674626.55
+Current state:  Pause
+looping 62.4330000877 DoNothing 1359674626.57
+Current state: 
+ Pause
+looping  DoNothing 1359674626.57
+Current state:  Pause
+looping  DoNothing 1359674626.58
+Current state:  Pause
+looping  DoNothing 1359674626.61
+Current state:  Pause
+transition to... ApproachBall
+SM next state
+Running  ApproachBall
+Running  ForwardToTarget
+Current state:  ApproachBall
+Stuckness:  (0, 0)
+charging b/c ball close
+SM next state
+Running  Charge
+Running  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForwardwalltimer: 
+Current state:   Charge63.4790000916
+
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state: walltimer:   Charge64.5
+
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+got here
+got here 1234
+0 None True all
+dist  (-71.0, -105.0)
+dist  (-71.0, -105.0)
+see target to left
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (-114.0, -107.0)
+target seen:  greenBall
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+walltimer: keep turning
+looping   65.5160000324TurnLeft
+
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  (201.0, -45.0)
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (144.0, -42.0)
+target seen:  greenBall
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  (-15.0, -45.0)
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+walltimer:  66.5429999828
+see ball at  (-35.0, -46.0)
+target seen:  greenBall
+centered ball, approach!
+SM next state
+Running  Pause
+Running  DoNothing
+Current state:  Pause
+looping  DoNothing 1359674630.8
+Current state:  Pause
+looping  DoNothing 1359674630.81
+Current state:  Pause
+looping  DoNothing 1359674630.81
+Current state:  Pause
+looping  DoNothing 1359674630.82
+Current state:  Pause
+looping  DoNothing 1359674630.87
+Current state:  Pause
+looping  DoNothing 1359674630.87
+Current state:  Pause
+looping  DoNothing 1359674630.87
+Current state:  Pause
+looping  DoNothing 1359674630.88
+Current state:  Pause
+looping  DoNothing 1359674630.93
+Current state:  Pause
+looping  DoNothing 1359674630.93
+Current state:  Pause
+looping  DoNothing 1359674630.93
+Current state:  Pause
+looping  DoNothing 1359674630.93
+Current state:  Pause
+looping  DoNothing 1359674630.94
+Current state:  Pause
+looping  DoNothing 1359674630.95
+Current state:  Pause
+looping  DoNothing 1359674630.96
+Current state:  Pause
+looping  DoNothing 1359674630.96
+Current state:  Pause
+looping  DoNothing 1359674630.96
+Current state:  Pause
+looping  DoNothing 1359674631.0
+Current state:  Pause
+looping  DoNothing 1359674631.0
+Current state:  Pause
+looping  DoNothing 1359674631.01
+Current state:  Pause
+looping  DoNothing 1359674631.01
+Current state:  Pause
+looping  DoNothing 1359674631.01
+Current state:  Pause
+looping  DoNothing 1359674631.01
+Current state:  Pause
+looping  DoNothing 1359674631.02
+Current state:  Pause
+looping  DoNothing 1359674631.06
+Current state:  Pause
+looping  DoNothing 1359674631.08
+Current state:  Pause
+looping  DoNothing 1359674631.08
+Current state:  Pause
+looping  DoNothing 1359674631.08
+Current state:  Pause
+looping  DoNothing 1359674631.1
+Current state:  Pause
+looping  DoNothing 1359674631.1
+Current state:  Pause
+looping  DoNothing 1359674631.12
+Current state:  Pause
+looping  DoNothing 1359674631.14
+Current state:  Pause
+looping  DoNothing 1359674631.14
+Current state:  Pause
+looping  DoNothing 1359674631.15
+Current state:  Pause
+looping  DoNothing 1359674631.15
+Current state:  Pause
+looping  DoNothing 1359674631.17
+Current state:  Pause
+looping  DoNothing 1359674631.25
+Current state:  Pause
+looping  DoNothing 1359674631.27
+Current state:  Pause
+looping  DoNothing 1359674631.27
+Current state:  Pause
+looping  DoNothing 1359674631.29
+Current state:  Pause
+looping  DoNothing 1359674631.29
+Current state:  Pause
+looping  DoNothing 1359674631.29
+Current state:  Pause
+transition to... ApproachBall
+SM next state
+Running  ApproachBall
+Running  ForwardToTarget
+Current state:  ApproachBall
+Stuckness:  (0, 0)
+ball not centered!
+see ball at  None
+got here
+got here 1234
+0 None True all
+dist  None
+don't see target
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+walltimer: see ball at   67.5680000782None
+
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+walltimer:  68.6419999599
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+walltimer: see ball at   69.6659998894None
+
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer:  70.7239999771
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+walltimer:  71.7249999046
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer:  72.7449998856
+see wall at  None
+target seen:  None
+called see target
+see ball at  (-106.0, -23.0)
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (-144.0, -26.0)
+target seen:  greenBall
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (-185.0, -31.0)
+target seen:  greenBall
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (-228.0, -37.0)
+target seen:  greenBall
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer:  73.7460000515
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (221.0, -101.0)
+target seen:  greenBall
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (175.0, -103.0)
+target seen:  greenBall
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (139.0, -100.0)
+target seen:  greenBall
+now go wanderwalltimer: 
+ 74.7760000229SM next state
+
+Running  Wander
+Running  GoForward
+Current state:  Wander
+Stuckness:  (0, 0)
+called see target
+see ball at  (82.0, -99.0)
+saw  greenBall
+got here 1234
+0 None True greenBall
+dist  (43.0, -99.0)
+dist  (43.0, -99.0)
+see target to right
+started turn and look with target,  greenBall
+SM next state
+Running  TurnAndLook
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (2.0, -100.0)
+target seen:  greenBall
+centered ball, approach!
+SM next state
+Running  Pause
+Running  DoNothing
+Current state:  Pause
+looping  DoNothing 1359674639.38
+Current state:  Pause
+looping  DoNothing 1359674639.38
+Current state:  Pause
+looping  DoNothing 1359674639.38
+Current state:  Pause
+looping  DoNothing 1359674639.44
+Current state:  Pause
+looping  DoNothing 1359674639.45
+Current state:  Pause
+looping  DoNothing 1359674639.46
+Current state:  Pause
+looping  DoNothing 1359674639.5
+Current state:  Pause
+looping  DoNothing 1359674639.51
+Current state:  Pause
+looping  DoNothing 1359674639.51
+Current state:  Pause
+looping  DoNothing 1359674639.51
+Current state:  Pause
+looping  DoNothing 1359674639.55
+Current state:  Pause
+looping  DoNothing 1359674639.57
+Current state:  Pause
+looping  DoNothing 1359674639.59
+Current state:  Pause
+looping  DoNothing 1359674639.59
+Current state:  Pause
+looping  DoNothing 1359674639.61
+Current state:  Pause
+looping  DoNothing 1359674639.62
+Current state:  Pause
+looping  DoNothing 1359674639.62
+Current state:  Pause
+looping  DoNothing 1359674639.62
+Current state:  Pause
+looping  DoNothing 1359674639.64
+Current state:  Pause
+looping  DoNothing 1359674639.68
+Current state:  Pause
+looping  DoNothing 1359674639.69
+Current state:  Pause
+looping  DoNothing 1359674639.69
+Current state:  Pause
+looping  DoNothing 1359674639.69
+Current state:  Pause
+looping  DoNothing 1359674639.69
+Current state:  Pause
+looping  DoNothing 1359674639.7
+Current state:  Pause
+looping  DoNothing 1359674639.72
+Current state:  Pause
+looping  DoNothing 1359674639.73
+Current state:  Pause
+looping  DoNothing 1359674639.78
+Current state:  Pause
+looping  DoNothing 1359674639.78
+Current state:  Pause
+looping  DoNothing 1359674639.79
+Current state:  Pause
+looping  DoNothing 1359674639.8
+Current state:  Pause
+looping  DoNothing 1359674639.88
+Current state:  Pause
+transition to... ApproachBall
+SM next state
+Running  ApproachBall
+Running walltimer:   ForwardToTarget
+75.8350000381Current state: 
+ ApproachBall
+Stuckness:  (0, 0)
+ball not centered!
+see ball at  None
+got here
+got here 1234
+0 None True all
+dist  None
+don't see target
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+ walltimer:  76.9000000954
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer:  77.9019999504
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  (-20.0, 63.0)
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at walltimer:  None 
+78.9259998798
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at walltimer:   None
+80.0099999905target seen: 
+ None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at walltimer:  None
+ 81.0460000038
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer:  82.0499999523
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (26.0, -16.0)
+target seen:  greenBall
+centered ball, approach!
+SM next state
+Running  Pause
+Running  DoNothing
+Current state:  Pause
+looping  DoNothing 1359674646.94
+Current state:  Pause
+looping  DoNothing 1359674646.94
+Current state:  Pause
+looping  DoNothing 1359674646.95
+Current state:  Pause
+looping  DoNothing 1359674646.96
+Current state:  Pause
+looping  DoNothing 1359674646.97
+Current state:  Pause
+looping  DoNothing 1359674647.01
+Current state:  Pause
+looping  DoNothing 1359674647.01
+Current state:  Pause
+looping  DoNothing 1359674647.01
+Current state:  Pause
+looping  DoNothing 1359674647.02
+Current state:  Pause
+looping  DoNothing 1359674647.03
+Current state:  Pause
+looping  DoNothing 1359674647.06
+Current state:  Pause
+looping  DoNothing 1359674647.08
+Current state:  Pause
+looping  DoNothing 1359674647.08
+Current state:  Pause
+looping  DoNothing 1359674647.08
+Current state:  Pause
+looping  DoNothing 1359674647.09
+Current state:  Pause
+looping  DoNothing 1359674647.09
+Current state:  Pause
+looping  DoNothing 1359674647.09
+Current state:  Pause
+looping  DoNothing 1359674647.1
+Current state:  Pause
+looping  DoNothing 1359674647.11
+Current state:  Pause
+looping  DoNothing 1359674647.15
+Current state:  Pause
+ looping walltimer:   DoNothing83.0520000458 
+1359674647.16
+Current state:  Pause
+looping  DoNothing 1359674647.18
+Current state:  Pause
+looping  DoNothing 1359674647.21
+Current state:  Pause
+looping  DoNothing 1359674647.24
+Current state:  Pause
+looping  DoNothing 1359674647.24
+Current state:  Pause
+looping  DoNothing 1359674647.3
+Current state:  Pause
+looping  DoNothing 1359674647.3
+Current state:  Pause
+looping  DoNothing 1359674647.35
+Current state:  Pause
+looping  DoNothing 1359674647.36
+Current state:  Pause
+looping  DoNothing 1359674647.37
+Current state:  Pause
+looping  DoNothing 1359674647.38
+Current state:  Pause
+looping  DoNothing 1359674647.39
+Current state:  Pause
+looping  DoNothing 1359674647.45
+Current state:  Pause
+transition to... ApproachBall
+SM next state
+Running  ApproachBall
+Running  ForwardToTarget
+Current state:  ApproachBall
+Stuckness:  (0, 0)
+charging b/c ball close
+SM next state
+Running  Charge
+Running  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state: walltimer:  Charge
+looping   84.0609998703GoForward
+
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping walltimer:   GoForward85.1180000305
+
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+got here
+got here 1234
+0 None True all
+dist  (-74.0, -100.0)
+dist  (-74.0, -100.0)
+see target to left
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (-102.0, -101.0)
+target seen:  greenBall
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+walltimer: see ball at  86.135999918
+ (-199.0, -106.0)
+target seen:  greenBall
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at walltimer:   None87.1629998684
+failed to see ball
+
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+walltimer: see ball at   None88.1889998913
+
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  (2.0, 65.0)
+target seen:  cyanButton
+centered button, approach!
+SM next state
+Running  Pause
+Running  DoNothing
+Current state:  Pause
+looping  DoNothing 1359674652.93
+Current state:  Pause
+looping  DoNothing 1359674652.97
+Current state:  Pause
+looping  DoNothing 1359674652.97
+Current state:  Pause
+looping  DoNothing 1359674653.02
+Current state:  Pause
+looping  DoNothing 1359674653.02
+Current state:  Pause
+looping  DoNothing 1359674653.06
+Current state:  Pause
+looping  DoNothing 1359674653.07
+Current state:  Pause
+looping  DoNothing 1359674653.1
+Current state:  Pause
+looping  DoNothing 1359674653.12
+Current state:  Pause
+looping  DoNothing 1359674653.15
+Current state:  Pause
+looping  DoNothing 1359674653.16
+Current state:  Pause
+looping  DoNothing 1359674653.25
+Current state:  Pause
+looping  DoNothing 1359674653.25
+Current state:  Pause
+looping  DoNothing 1359674653.3
+Current state:  Pause
+ looping walltimer:   DoNothing89.2760000229 1359674653.39
+
+Current state:  Pause
+transition to... ApproachButton
+SM next state
+Running  ApproachButton
+Running  ForwardToTarget
+Current state:  ApproachButton
+Stuckness:  (0, 0)
+button not centered!
+see ball at  None
+got here
+got here 1234
+0 None True all
+dist  None
+don't see target
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at walltimer:  None
+keep turning
+ looping 90.3320000172 
+TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+walltimer: see ball at   None91.3550000191
+
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+ looping walltimer:   TurnRight92.3759999275
+
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  (-24.0, -22.0)
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness: walltimer:  (0, 0) 
+called see target93.3870000839
+
+see ball at  (-74.0, -26.0)
+target seen:  greenBall
+centered ball, approach!
+SM next state
+Running  Pause
+Running  DoNothing
+Current state:  Pause
+looping  DoNothing 1359674657.68
+Current state:  Pause
+looping  DoNothing 1359674657.7
+Current state:  Pause
+looping  DoNothing 1359674657.74
+Current state:  Pause
+looping  DoNothing 1359674657.74
+Current state:  Pause
+looping  DoNothing 1359674657.74
+Current state:  Pause
+looping  DoNothing 1359674657.74
+Current state:  Pause
+looping  DoNothing 1359674657.76
+Current state:  Pause
+looping  DoNothing 1359674657.76
+Current state:  Pause
+looping  DoNothing 1359674657.79
+Current state:  Pause
+looping  DoNothing 1359674657.81
+Current state:  Pause
+looping  DoNothing 1359674657.81
+Current state:  Pause
+looping  DoNothing 1359674657.81
+Current state:  Pause
+looping  DoNothing 1359674657.82
+Current state:  Pause
+looping  DoNothing 1359674657.87
+Current state:  Pause
+looping  DoNothing 1359674657.87
+Current state:  Pause
+looping  DoNothing 1359674657.88
+Current state:  Pause
+looping  DoNothing 1359674657.88
+Current state:  Pause
+looping  DoNothing 1359674657.88
+Current state:  Pause
+looping  DoNothing 1359674657.9
+Current state:  Pause
+looping  DoNothing 1359674657.9
+Current state:  Pause
+looping  DoNothing 1359674657.9
+Current state:  Pause
+looping  DoNothing 1359674657.9
+Current state:  Pause
+looping  DoNothing 1359674657.94
+Current state:  Pause
+looping  DoNothing 1359674657.95
+Current state:  Pause
+looping  DoNothing 1359674657.95
+Current state:  Pause
+looping  DoNothing 1359674657.97
+Current state:  Pause
+looping  DoNothing 1359674658.0
+Current state:  Pause
+looping  DoNothing 1359674658.01
+Current state:  Pause
+looping  DoNothing 1359674658.01
+Current state:  Pause
+looping  DoNothing 1359674658.01
+Current state:  Pause
+looping  DoNothing 1359674658.03
+Current state:  Pause
+looping  DoNothing 1359674658.06
+Current state:  Pause
+looping  DoNothing 1359674658.07
+Current state:  Pause
+looping  DoNothing 1359674658.08
+Current state:  Pause
+looping  DoNothing 1359674658.12
+Current state:  Pause
+looping  DoNothing 1359674658.14
+Current state:  Pause
+looping  DoNothing 1359674658.18
+Current state:  Pause
+transition to... ApproachBall
+SM next state
+Running  ApproachBall
+Running  ForwardToTarget
+Current state:  ApproachBall
+Stuckness:  (0, 0)
+ball not centered!
+see ball at  None
+got here
+got here 1234
+0 None True all
+dist  None
+ walltimer:  94.4240000248don't see target
+
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (232.0, -91.0)
+target seen:  greenBall
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (202.0, -96.0)
+target seen:  greenBall
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (154.0, -94.0)
+target seen:  greenBall
+walltimer:  95.4479999542
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (95.0, -94.0)
+target seen:  greenBall
+centered ball, approach!
+SM next state
+Running  Pause
+Running  DoNothing
+Current state:  Pause
+looping  DoNothing 1359674659.88
+Current state:  Pause
+looping  DoNothing 1359674659.89
+Current state:  Pause
+looping  DoNothing 1359674659.89
+Current state:  Pause
+looping  DoNothing 1359674659.89
+Current state:  Pause
+looping  DoNothing 1359674659.9
+Current state:  Pause
+looping  DoNothing 1359674659.9
+Current state:  Pause
+looping  DoNothing 1359674659.9
+Current state:  Pause
+looping  DoNothing 1359674659.92
+Current state:  Pause
+looping  DoNothing 1359674659.92
+Current state:  Pause
+looping  DoNothing 1359674659.92
+Current state:  Pause
+looping  DoNothing 1359674659.94
+Current state:  Pause
+looping  DoNothing 1359674659.94
+Current state:  Pause
+looping  DoNothing 1359674659.96
+Current state:  Pause
+looping  DoNothing 1359674659.96
+Current state:  Pause
+looping  DoNothing 1359674660.0
+Current state:  Pause
+looping  DoNothing 1359674660.01
+Current state:  Pause
+looping  DoNothing 1359674660.01
+Current state:  Pause
+looping  DoNothing 1359674660.01
+Current state:  Pause
+looping  DoNothing 1359674660.02
+Current state:  Pause
+looping  DoNothing 1359674660.03
+Current state:  Pause
+looping  DoNothing 1359674660.03
+Current state:  Pause
+looping  DoNothing 1359674660.03
+Current state:  Pause
+looping  DoNothing 1359674660.03
+Current state:  Pause
+looping  DoNothing 1359674660.05
+Current state:  Pause
+looping  DoNothing 1359674660.05
+Current state:  Pause
+looping  DoNothing 1359674660.06
+Current state:  Pause
+looping  DoNothing 1359674660.07
+Current state:  Pause
+looping  DoNothing 1359674660.07
+Current state:  Pause
+looping  DoNothing 1359674660.07
+Current state:  Pause
+looping  DoNothing 1359674660.08
+Current state:  Pause
+looping  DoNothing 1359674660.13
+Current state:  Pause
+looping  DoNothing 1359674660.13
+Current state:  Pause
+looping  DoNothing 1359674660.13
+Current state:  Pause
+looping  DoNothing 1359674660.13
+Current state:  Pause
+looping  DoNothing 1359674660.14
+Current state:  Pause
+looping  DoNothing 1359674660.15
+Current state:  Pause
+looping  DoNothing 1359674660.15
+Current state:  Pause
+looping  DoNothing 1359674660.15
+Current state:  Pause
+looping  DoNothing 1359674660.15
+Current state:  Pause
+looping  DoNothing 1359674660.19
+Current state:  Pause
+looping  DoNothing 1359674660.19
+Current state:  Pause
+looping  DoNothing 1359674660.2
+Current state:  Pause
+looping  DoNothing 1359674660.24
+Current state:  Pause
+looping  DoNothing 1359674660.24
+Current state:  Pause
+looping  DoNothing 1359674660.24
+Current state:  Pause
+looping  DoNothing 1359674660.26
+Current state:  Pause
+looping  DoNothing 1359674660.26
+Current state:  Pause
+looping  DoNothing 1359674660.26
+Current state:  Pause
+looping  DoNothing 1359674660.27
+Current state:  Pause
+looping  DoNothing 1359674660.27
+Current state:  Pause
+looping  DoNothing 1359674660.3
+Current state:  Pause
+looping  DoNothing 1359674660.3
+Current state:  Pause
+looping  DoNothing 1359674660.31
+Current state:  Pause
+looping  DoNothing 1359674660.34
+Current state:  Pause
+looping  DoNothing 1359674660.35
+Current state:  Pause
+looping  DoNothing 1359674660.35
+Current state:  Pause
+looping  DoNothing 1359674660.35
+Current state:  Pause
+looping  DoNothing 1359674660.35
+Current state:  Pause
+looping  DoNothing 1359674660.36
+Current state:  Pause
+looping  DoNothing 1359674660.36
+Current state:  Pause
+looping  DoNothing 1359674660.37
+Current state:  Pause
+looping  DoNothing 1359674660.37
+Current state:  Pause
+transition to... ApproachBall
+SM next state
+Running  ApproachBall
+Running  ForwardToTarget
+Current state:  ApproachBall
+Stuckness:  (0, 0)
+charging b/c ball close
+walltimer:  96.4549999237
+SM next state
+Running  Charge
+Running  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+ Current state: walltimer:   Charge97.4800000191
+
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+got here
+got here 1234
+0 None True all
+dist  None
+don't see target
+started turn and look with target,  all
+walltimer: SM next state 
+98.5390000343
+Running  TurnAndLook
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+ walltimer:  99.5659999847
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer:  100.568000078
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer: see wall at   101.592000008None
+
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer:  102.615999937
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  (43.0, -22.0)
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (5.0, -24.0)
+target seen:  greenBall
+centered ball, approach!
+SM next state
+Running  Pause
+Running  DoNothing
+Current state:  Pause
+looping  DoNothing 1359674667.64
+Current state:  Pause
+looping  DoNothing 1359674667.68
+Current state:  Pause
+looping  DoNothing 1359674667.68
+Current state:  Pause
+looping  DoNothing 1359674667.68
+Current state:  Pause
+looping  DoNothing 1359674667.7
+ Current state:  Pause
+looping  DoNothing 1359674667.74
+Current state:  Pause
+looping  DoNothing 1359674667.74
+Current state:  Pause
+looping  DoNothing 1359674667.75
+Current state:  Pause
+walltimer: looping   103.654999971DoNothing 
+1359674667.76
+Current state:  Pause
+looping  DoNothing 1359674667.8
+Current state:  Pause
+looping  DoNothing 1359674667.81
+Current state:  Pause
+looping  DoNothing 1359674667.81
+Current state:  Pause
+looping  DoNothing 1359674667.85
+Current state:  Pause
+looping  DoNothing 1359674667.87
+Current state:  Pause
+looping  DoNothing 1359674667.87
+Current state:  Pause
+looping  DoNothing 1359674667.91
+Current state:  Pause
+looping  DoNothing 1359674667.95
+Current state:  Pause
+looping  DoNothing 1359674668.0
+Current state:  Pause
+looping  DoNothing 1359674668.01
+Current state:  Pause
+looping  DoNothing 1359674668.01
+Current state:  Pause
+looping  DoNothing 1359674668.03
+Current state:  Pause
+looping  DoNothing 1359674668.07
+Current state:  Pause
+looping  DoNothing 1359674668.07
+Current state:  Pause
+looping  DoNothing 1359674668.08
+Current state:  Pause
+looping  DoNothing 1359674668.08
+Current state:  Pause
+looping  DoNothing 1359674668.13
+Current state:  Pause
+transition to... ApproachBall
+SM next state
+Running  ApproachBall
+Running  ForwardToTarget
+Current state:  ApproachBall
+Stuckness:  (0, 0)
+charging b/c ball close
+SM next state
+Running  Charge
+Running  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+ walltimer: looping   104.66899991GoForward
+
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+ walltimer: looping   105.743999958GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+got here
+got here 1234
+0 None True all
+dist  (-8.0, -92.0)
+dist  (-8.0, -92.0)
+see target to left
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (-47.0, -94.0)
+target seen:  greenBall
+centered ball, approach!
+SM next state
+Running  Pause
+Running  DoNothing
+Current state:  Pause
+looping  DoNothing 1359674670.63
+Current state:  Pause
+looping  DoNothing 1359674670.64
+Current state:  Pause
+looping  DoNothing 1359674670.66
+Current state:  Pause
+looping  DoNothing 1359674670.66
+Current state:  Pause
+looping  DoNothing 1359674670.67
+Current state:  Pause
+looping  DoNothing 1359674670.71
+Current state:  Pause
+looping  DoNothing 1359674670.72
+Current state:  Pause
+looping  DoNothing 1359674670.72
+Current state:  Pause
+looping  DoNothing 1359674670.79
+Current state:  Pause
+looping  DoNothing 1359674670.81
+Current state:  Pause
+looping  DoNothing 1359674670.81
+Current state:  Pause
+looping  DoNothing 1359674670.82
+Current state:  Pause
+looping  DoNothing 1359674670.82
+Current state:  Pause
+looping  DoNothing 1359674670.84
+Current state:  Pause
+looping  DoNothing 1359674670.88
+Current state:  Pause
+looping  DoNothing 1359674670.88
+Current state:  Pause
+looping  DoNothing 1359674670.88
+Current state:  Pause
+looping  DoNothing 1359674670.89walltimer: 
+ Current state: 106.805000067 
+Pause
+looping  DoNothing 1359674670.93
+Current state:  Pause
+looping  DoNothing 1359674670.93
+Current state:  Pause
+looping  DoNothing 1359674670.97
+Current state:  Pause
+looping  DoNothing 1359674670.97
+Current state:  Pause
+looping  DoNothing 1359674670.98
+Current state:  Pause
+looping  DoNothing 1359674670.99
+Current state:  Pause
+looping  DoNothing 1359674671.08
+Current state:  Pause
+looping  DoNothing 1359674671.09
+Current state:  Pause
+looping  DoNothing 1359674671.13
+Current state:  Pause
+transition to... ApproachBall
+SM next state
+Running  ApproachBall
+Running  ForwardToTarget
+Current state:  ApproachBall
+Stuckness:  (0, 0)
+ball not centered!
+see ball at  None
+got here
+got here 1234
+0 None True all
+dist  None
+don't see target
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at walltimer:   None
+107.835999966
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer:  108.881000042
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+walltimer: see ball at   109.928999901None
+
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  walltimer: None
+ 110.957000017
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+walltimer:  111.99000001
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+ called see target
+walltimer:  112.997999907
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  None
+failed to see ball
+see ball at  None
+see wall at  None
+target seen:  None
+called see target
+see ball at  (37.0, -25.0)
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+see ball at  (-14.0, -27.0)
+target seen:  greenBall
+centered ball, approach!
+SM next state
+Running  Pause
+Running  DoNothing
+Current state:  Pause
+looping  DoNothing 1359674677.98
+Current state:  Pause
+looping  DoNothing 1359674678.03
+Current state:  Pause
+looping  DoNothing 1359674678.03
+Current state:  Pause
+looping  DoNothing 1359674678.04
+Current state:  Pause
+looping  DoNothing 1359674678.05
+Current state:  Pause
+looping  DoNothing 1359674678.05
+Current state:  Pause
+looping  DoNothing 1359674678.06
+Current state:  Pause
+looping  DoNothing 1359674678.06
+Current state:  Pause
+looping  DoNothing 1359674678.1
+Current state:  Pause
+looping  DoNothingwalltimer:  1359674678.12 
+Current state: 114.010999918 
+Pause
+looping  DoNothing 1359674678.14
+Current state:  Pause
+looping  DoNothing 1359674678.25
+Current state:  Pause
+looping  DoNothing 1359674678.29
+Current state:  Pause
+looping  DoNothing 1359674678.29
+Current state:  Pause
+looping  DoNothing 1359674678.3
+Current state:  Pause
+looping  DoNothing 1359674678.3
+Current state:  Pause
+looping  DoNothing 1359674678.32
+Current state:  Pause
+looping  DoNothing 1359674678.32
+Current state:  Pause
+looping  DoNothing 1359674678.36
+Current state:  Pause
+looping  DoNothing 1359674678.37
+Current state:  Pause
+looping  DoNothing 1359674678.37
+Current state:  Pause
+looping  DoNothing 1359674678.46
+Current state:  Pause
+looping  DoNothing 1359674678.46
+Current state:  Pause
+looping  DoNothing 1359674678.46
+Current state:  Pause
+transition to... ApproachBall
+SM next state
+Running  ApproachBall
+Running  ForwardToTarget
+Current state:  ApproachBall
+Stuckness:  (0, 0)
+charging b/c ball close
+SM next state
+Running  Charge
+Running  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForward
+Current state:  Charge
+looping  GoForwardwalltimer: 
+ Current state: 115.029999971 Charge
+looping 
  GoForward
 Current state:  Charge
 looping  GoForward
@@ -2885,192 +6302,6 @@ looping  GoForward
 Current state:  Charge
 looping  GoForward
 Current state:  Charge
-got here
-got here 1234
-0 None True all
-dist  walltimer: None 
-61.1180000305don't see target
-
-started turn and look with target,  all
-SM next state
-Running  TurnAndLook
-Running  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at walltimer:   None62.1400001049
-
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  (-105.0, -105.0)
-target seen:  greenBall
-centered ball, approach!
- SM next statewalltimer: 
- 63.1490001678
- Running  Pause
-Running  DoNothing
-Current state:  Pause
-looping  DoNothing 1359673622.36
-Current state:  Pause
-looping  DoNothing 1359673622.36
-Current state:  Pause
-looping  DoNothing 1359673622.36
-Current state:  Pause
-looping  DoNothing 1359673622.38
-Current state:  Pause
-looping  DoNothing 1359673622.38
-Current state:  Pause
-looping  DoNothing 1359673622.42
-Current state:  Pause
-looping  DoNothing 1359673622.44
-Current state:  Pause
-looping  DoNothing 1359673622.44
-Current state:  Pause
-looping  DoNothing 1359673622.45
-Current state:  Pause
-looping  DoNothing 1359673622.46
-Current state:  Pause
-looping  DoNothing 1359673622.49
-Current state:  Pause
-looping  DoNothing 1359673622.51
-Current state:  Pause
-looping  DoNothing 1359673622.51
-Current state:  Pause
-looping  DoNothing 1359673622.54
-Current state:  Pause
-looping  DoNothing 1359673622.55
-Current state:  Pause
-looping  DoNothing 1359673622.55
-Current state:  Pause
-looping  DoNothing 1359673622.56
-Current state:  Pause
-looping  DoNothing 1359673622.6
-Current state:  Pause
-looping  DoNothing 1359673622.61
-Current state:  Pause
-looping  DoNothing 1359673622.61
-Current state:  Pause
-looping  DoNothing 1359673622.61
-Current state:  Pause
-looping  DoNothing 1359673622.63
-Current state:  Pause
-looping  DoNothing 1359673622.63
-Current state:  Pause
-looping  DoNothing 1359673622.67
-Current state:  Pause
-looping  DoNothing 1359673622.68
-Current state:  Pause
-looping  DoNothing 1359673622.68
-Current state:  Pause
-looping  DoNothing 1359673622.68
-Current state:  Pause
-looping  DoNothing 1359673622.73
-Current state:  Pause
-looping  DoNothing 1359673622.75
-Current state:  Pause
-looping  DoNothing 1359673622.75
-Current state:  Pause
-looping  DoNothing 1359673622.75
-Current state:  Pause
-looping  DoNothing 1359673622.76
-Current state:  Pause
-looping  DoNothing 1359673622.76
-Current state:  Pause
-looping  DoNothing 1359673622.82
-Current state:  Pause
-looping  DoNothing 1359673622.82
-Current state:  Pause
-looping  DoNothing 1359673622.84
-Current state:  Pause
-transition to... ApproachBall
-SM next state
-Running  ApproachBall
-Running  ForwardToTarget
-Current state:  ApproachBall
-Stuckness:  (0, 0)
-charging b/c ball close
-SM next state
-Running  Charge
-Running  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
 looping  GoForward
 Current state:  Charge
 looping  GoForward
@@ -3083,9 +6314,6 @@ looping  GoForward
 Current state:  Charge
 looping  GoForward
 Current state:  Charge
-looping  GoForwardwalltimer: 
- Current state:  64.1630001068Charge
-
 looping  GoForward
 Current state:  Charge
 looping  GoForward
@@ -3116,17 +6344,10 @@ looping  GoForward
 Current state:  Charge
 looping  GoForward
 Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
-Current state:  Charge
-looping  GoForward
+looping walltimer:  GoForward
+ Current state:  Charge
+116.09100008looping 
+ GoForward
 Current state:  Charge
 looping  GoForward
 Current state:  Charge
@@ -3246,9 +6467,6 @@ looping  GoForward
 Current state:  Charge
 looping  GoForward
 Current state:  Charge
-looping  walltimer: GoForward 
-65.1720001698Current state: 
- Charge
 looping  GoForward
 Current state:  Charge
 looping  GoForward
@@ -3326,307 +6544,10 @@ Current state:  Charge
 got here
 got here 1234
 0 None True all
-dist  None
-don't see target
-started turn and look with target,  all
-SM next state
-Running  TurnAndLook
-Running  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  66.1800000668
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state: walltimer:   TurnAndLook67.2120001316
-
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at walltimer:   None68.2490000725
-
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at walltimer:   None69.2810001373
-keep turning
-
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  70.3059999943
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer: see wall at   None71.3220000267
-
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer: see wall at   72.3870000839None
-
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  walltimer: None 
-now go wander
-73.4030001163
-SM next state
-Running  Wander
-Running  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at walltimer:  74.4090001583
- None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  75.4110000134
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  (-219.0, -16.0)
-saw  greenBall
-got here 1234
-0 None True greenBall
-dist  (-213.0, -16.0)
-dist  (-213.0, -16.0)
+dist  (-67.0, -94.0)
+dist  (-67.0, -94.0)
 see target to left
-started turn and look with target,  greenBall
+started turn and look with target,  all
 SM next state
 Running  TurnAndLook
 Running  TurnLeft
@@ -3634,7 +6555,7 @@ got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
 called see target
-see ball at  (-213.0, -15.0)
+see ball at  (-122.0, -98.0)
 target seen:  greenBall
 keep turning
 looping  TurnLeft
@@ -3642,32 +6563,8 @@ got to stop
 Current state:  TurnAndLook
 Stuckness:  (0, 0)
 called see target
-see ball at  (-220.0, -13.0)
-target seen:  greenBall
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer: see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
- 76.4409999847
-see ball at  (-39.0, -2.0)
+see ball at  walltimer:  117.122999907
+(-191.0, -103.0)
 target seen:  greenBall
 keep turning
 looping  TurnLeft
@@ -3681,104 +6578,6 @@ see ball at  None
 see wall at  None
 target seen:  None
 called see target
-see ball at  (3.0, 13.0)
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  (54.0, -2.0)
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-walltimer:  77.4530000687
-see ball at  (83.0, -3.0)
-target seen:  greenBall
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  (189.0, -1.0)
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-walltimer:  78.4830000401
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at walltimer:   None79.506000042
-
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
 see ball at  None
 failed to see ball
 see ball at  None
@@ -3798,824 +6597,7 @@ called see target
 see ball at  None
 failed to see ball
 see ball at  None
-walltimer:  80.5460000038
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
- walltimer:  81.5740001202
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnLeft
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  82.5960001945
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-now go wander
-SM next state
-Running  Wander
-Running  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-walltimer:  83.611000061
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-walltimer: see ball at   84.6460001469None
-
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  Nonewalltimer: 
- looping 85.6720001698 
-GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-walltimer: Stuckness:   86.7090001106(0, 0)
-
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer: see wall at   87.7430000305None
-
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-got here
-got here 1234
-0 None True all
-dist  None
-don't see target
-started turn and look with target,  all
-SM next state
-Running  TurnAndLook
-Running  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  walltimer: None 
-88.7550001144failed to see ball
-
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-walltimer:  89.7570002079
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at walltimer:   None90.7710001469
-
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer: see wall at   None91.8180000782
-
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  walltimer: None
- called see target92.8450000286
-
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer: see wall at   93.8550000191None
-
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-walltimer:  94.8570001125
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-now go wander
-SM next state
-Running  walltimer: Wander
- Running 95.8740000725 
-GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-walltimer:  96.8820002079
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-walltimer: see ball at   97.9050002098None
-
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  98.9150002003
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at walltimer:   None99.9290001392
-
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at Timeout 
-None
-failed to see ball
-see ball at  None
-see wall at  None
-looping  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-got here
-got here 1234
-0 None True allwalltimer: 
- 100.963999987
- dist  None
-don't see target
-started turn and look with target,  all
-SM next state
-Running  TurnAndLook
-Running  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-walltimer:  101.996999979
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  103.023000002
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  104.051000118
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-see wall at  None
-target seen:  None
-called see target
-see ball at  None
-failed to see ball
-see ball at  None
-walltimer:  105.903000116see wall at 
+walltimer:  118.13499999see wall at 
  None
 keep turning
-looping  TurnRight
-got to stop
-Current state:  TurnAndLookwalltimer: 
- Stuckness: 108.016000032 (0, 0)
-called see target
-
-walltimer: see ball at   109.077000141None
-
-failed to see ball
-walltimer: see ball at   None
-110.139000177
-walltimer:  111.200000048
-walltimer: see wall at   None
-target seen:  None
-called see target
-112.261000156
-walltimer: see ball at   None113.321000099
-failed to see ball
-
-walltimer: see ball at   114.383000135None
-
-walltimer:  115.442000151
-walltimer: see wall at   116.502000093None
-
-now go wander
-walltimer:  117.56400013
-walltimer:  118.623000145
-Targets have been cleared!
-SM next state
-Running  Wander
-Running  GoForward
-Current state:  Wander
-Stuckness:  (0, 0)
-called see target
-Target: purplePyramid is not a valid target!
-see ball at  None
-failed to see ball
-see wall at  None
-got here
-got here 1234
-0 None True all
-dist  None
-don't see target
-started turn and look with target,  all
-SM next state
-Running  TurnAndLook
-Running  TurnRight
-got to stop
-Current state:  TurnAndLook
-Stuckness:  (0, 0)
-called see target
-see ball at  None
-failed to see ball
+looping  TurnLeft
