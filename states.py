@@ -116,15 +116,21 @@ class AvoidWall(State):
             #keep turning
 
 class TurnAndLook(State):
-    def __init__(self,wrap,target="all",data=()):
+    def __init__(self,wrap,data=()):
         print "starting turn and look with target ",target," and data ",data
-        self.target=target
-        if len(data)==0:
+        if data==None or len(data)==0:
+            self.target="all"
+            otherData=()
+        else:
+            self.target,otherData=data
+        if self.target==None:
+            self.target="all"
+        if len(otherData)==0:
             self.desiredIR=0
             self.action=None
             self.goToOpen=True
         else:
-            self.action,self.desiredIR,self.goToOpen=data
+            self.action,self.desiredIR,self.goToOpen=otherData
         #print "init turn and look"
         State.__init__(self,wrap)
         #if ball is to the right
@@ -231,8 +237,7 @@ class TurnAndLook(State):
                     else:
                         action=TurnRight
                         print "turning right toward open space"
-                    return Wander
-#                    return (TurnAndLook,(action,current,False))
+                    return (TurnAndLook,(self.target,(action,current,False)))
                 else:
                     return Wander
             else:
