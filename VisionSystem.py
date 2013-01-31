@@ -57,6 +57,9 @@ class VisionSystemWrapper:
     def clearTargets(self):
         cmd=("clearTargets",())
         self.cmdQueue.put(cmd)
+    def setEdgeDetectionFilter(self,filt):
+        cmd=("setEdgeDetectionFilter",(filt,))
+        self.cmdQueue.put(cmd)
     def getTargetDistFromCenter(self,target="all"):
         cmd=("getTargetDistFromCenter",(target,))
         self.cmdQueue.put(cmd)
@@ -245,6 +248,8 @@ class VisionSystem(threading.Thread):
                       "blueWall":self.detectRectangle,"yellowWall":self.detectRectangle,"purpleWall":self.detectRectangle,
                                   "yellowWall2":self.detectRectangle,"cyanButton":self.detectRectangle}
         self.edgeDetectionProfiles={"main":(50,200,3,1,.5,2,70,20,90)} #c1,c2,ap,rh,deg,th,min_l,max_d,bwt
+        self.edgeDetectionFilters=["main","thresh"]
+        self.edgeDetectionFilter="main"
         self.default= copy.deepcopy(self.targetColorProfiles)
         self.defaultEdgeDetectionProfiles= copy.deepcopy(self.edgeDetectionProfiles)
         self.targetLocations={"redBall":None,"greenBall":None,"blueWall":None,"yellowWall":None,"purpleWall":None,
@@ -285,6 +290,11 @@ class VisionSystem(threading.Thread):
         self.detectEdges=True
     def deactivateEdgeDetection(self):
         self.detectEdges=False
+    def setEdgeDetectionFilter(self,filt):
+        if filt in  self.edgeDetectionFilters:
+            self.edgeDetectionFilter=filt
+        else:
+            print "Filter does not exist!"
     def addTarget(self,targetStr):
         if targetStr in self.targetColorProfiles and targetStr not in self.targets:
             self.targets.append(targetStr)
@@ -352,13 +362,14 @@ class VisionSystem(threading.Thread):
                 self.dataQueue.put(False)
                 return False
     def saveVideo(self,image):
-        if self.frameWriter==None:
+        '''if self.frameWriter==None:
             ((width,height),(center,centerEnd),leftExtreme,rightExtreme)=self.findCenterOfImageAndExtremes(image)
             fps = cv.GetCaptureProperty(self.capture,cv.CV_CAP_PROP_FPS);
             fourcc = -1
             self.frameWriter = cv2.VideoWriter('out.avi', fourcc, fps, (width, height), True)
             self.frameWriter.write(np.asarray(image[:,:]))
-            self.frameWriter.release()
+            self.frameWriter.release()'''
+        pass
     #uses images
     def captureImage(self):
         image=cv.QueryFrame(self.capture)
@@ -478,7 +489,7 @@ class VisionSystem(threading.Thread):
         (processedImages,targetLocations)=self.findTargets(initialProcessedImage)
         points=[]
         if self.detectEdges:
-            points=self.findWalls(initialProcessedImage)
+            points=self.findWalls(initialProcessedImage,self.edgeDetectionFilter)
         self.renderImages(image,points,processedImages,targetLocations)
         #del(initialProcessedImage)
         #del(image)
@@ -579,20 +590,28 @@ class VisionSystem(threading.Thread):
     #Wall Detection
     ##################################################################################################
     #uses images
+    #main filter-uses color profiling
+    #thresh filter-just uses thresholding
     def findWalls(self,processedImage,filt="main"):
         blurred=cv.CreateImage(cv.GetSize(processedImage),8,3)
         cv.Smooth(processedImage,blurred,cv.CV_GAUSSIAN, 11,11)
         c1,c2,ap,rh,deg,th,min_l,max_d,bwt=self.edgeDetectionProfiles["main"]
-        image2=None
-        for wallTarget in self.wallTargets:
-            colorProfile=self.targetColorProfiles[wallTarget][0]
-            newProcessed=self.processImagePhase2(processedImage,colorProfile)
-            if image2==None:
-                image2=newProcessed
-            else:
-                cv.Add(image2,newProcessed,image2)
-            #del(newProcessed)
-        image2=np.asarray(cv.CloneImage(image2)[:,:])
+        if filt=="main":
+            image2=None
+            for wallTarget in self.wallTargets:
+                colorProfile=self.targetColorProfiles[wallTarget][0]
+                newProcessed=self.processImagePhase2(processedImage,colorProfile)
+                if image2==None:
+                    image2=newProcessed
+                else:
+                    cv.Add(image2,newProcessed,image2)
+                #del(newProcessed)
+            image2=np.asarray(cv.CloneImage(image2)[:,:])
+        if filt=="thresh":
+            blurred=np.asarray(cv.CloneImage(blurred)[:,:])
+            gray = cv2.cvtColor(blurred, cv2.COLOR_BGR2GRAY)
+            (thresh,bw) = cv2.threshold(gray, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+            image2=bw
         cv2.imshow("Edge Detection Computer Vision",image2)
         cv2.imwrite("edge.jpg",image2)
         #(thresh,bw) = cv2.threshold(image2, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
@@ -618,18 +637,18 @@ class VisionSystem(threading.Thread):
     def detectQR(self,processedImage):
         pass
     def writeLog(self):
-        self.fsock=open("vision_log.txt",'w')
-        sys.stdout = StdOut(sys.stdout,self.fsock)
-        self.fsock1 = open('error.log', 'w')               
-        sys.stderr = self.fsock1
+        self.log=open("vision_log.txt",'w')
+        sys.stdout = StdOut(sys.stdout,self.log)
+        self.err_log = open('error.log', 'w')               
+        sys.stderr = self.err_log 
     def parseCMD(self,cmd):
         method,args=cmd
         func=getattr(self,method)
         func(*args)
     def stop(self):
         self.active=False
-        self.fsock1.flush()
-        self.fsock1.close()
+        self.log.close()
+        sself.err_log.close()
         del(self.frameWriter);
         print "Stopping Vision System"
     def run(self):
@@ -659,6 +678,7 @@ class VisionSystem(threading.Thread):
                     #if an exception occurs, to prevent the program from terminating
                     #we just skip this loop and try again
                     print "Error occurred, but program is continuing!"
+                    self.err_log.write(str(err))
                 #continue
         print "Stopping Vision System"
         #destroy capture 
