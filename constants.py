@@ -18,8 +18,8 @@ ROLLER_STOP=106
 CLOSED=165
 OPEN=90#check these angles
 '''!!!!!!!!!!'''
-LEFT_TURN=LEFT_SIGN*20
-RIGHT_TURN=RIGHT_SIGN*20
+LEFT_TURN=LEFT_SIGN*25
+RIGHT_TURN=RIGHT_SIGN*25
 LEFT_FORWARD=LEFT_SIGN*80
 RIGHT_FORWARD=RIGHT_SIGN*80
 LEFT_BACK=-LEFT_SIGN*80
@@ -33,6 +33,7 @@ WALL_MODE=1
 #turn speed (degrees/s)
 #experimentally find this.
 #later, preferably change this to dynamic control
+SPEED=4.0 #inches per second
 TURN_SPEED=50.0
 #color
 RED="redBall"
@@ -94,3 +95,6 @@ RELEASE_MOTOR=23
 HELIX_MOTOR=24
 #amount of time to back up
 BACK_UP_TIME=1
+
+#measurements
+PYRAMID_SIDE=20

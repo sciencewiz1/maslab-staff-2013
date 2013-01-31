@@ -60,7 +60,7 @@ class Node(Feature):
     def __str__(self):
         return "Node at "+str(self.coordinates())
     def draw(self, window):
-        print "drawing ",self.coordinates()
+        #print "drawing ",self.coordinates()
         if self.floating:
             window.point(self.coordinates())
         else:
@@ -111,7 +111,7 @@ class Wall(Feature):
 #    def bind(self):
 #        pass
     def draw(self,window):
-        print "drawing ",self.coordinates()
+        #print "drawing ",self.coordinates()
         window.line(self.coordinates())
     def recalc(self):
         self.length=dist(self.neighbors[0].x,self.neighbors[0].y,\
@@ -154,11 +154,11 @@ def xDist(x,y):
 for now, assume that 
 '''
 def pixelToPosition(x,y):
-    print "(x,y)=",(x,y)
+    #print "(x,y)=",(x,y)
     xd=xDist(x,y)
     yd=yDist(x,y)
     error=math.sqrt(xd[0]*xd[0]+yd[0]*yd[0])
-    print "position=",(xd[0],yd[0])
+    #print "position=",(xd[0],yd[0])
     return [(xd[0],yd[0]),error]
 
 '''helps choose lowermost edges in each edge pic'''
@@ -168,7 +168,7 @@ class SegmentList:
         #the list of line segments
         self.li=li.tolist()
         #if in reverse order, switch.
-        print "self.li:",self.li
+        #print "self.li:",self.li
         for (i,(x1,y1,x2,y2)) in enumerate(self.li):
             if x1>x2:
                 li[i]=(x2,y2,x1,y1)
@@ -254,21 +254,21 @@ class SegmentList:
                 li.append(self.li[j])
             return li
         if i.__class__==tuple:
-            #print i
+            ##print i
             return self.endpt(self.li[i[0]],i[1])
         return self.li[i]
     #assume it's a tuple
     def __setitem__(self,i,v):
-        print "setting: ",(i,v)
+        #print "setting: ",(i,v)
         if i[1]==0:
-            print self.li[i[0]]
+            #print self.li[i[0]]
             self.li[i[0]]=(v[0],v[1],self.li[i[0]][2],self.li[i[0]][3])
-            print self.li[i[0]]
+            #print self.li[i[0]]
         if i[1]==1:
-            print self.li[i[0]]
+            #print self.li[i[0]]
             self.li[i[0]]=(self.li[i[0]][0],self.li[i[0]][1],v[0],v[1])
-            print self.li[i[0]]
-        print self.li
+            #print self.li[i[0]]
+        #print self.li
     def endpt(self,seg,side):
         if side==0:
             return (seg[0],seg[1])
@@ -293,19 +293,19 @@ class SegmentList:
                 for side in [0,1]:
                     pt1=self[(i,side)]
                     pt2=self[t]
-                    print "comparing ",pt1," and ",pt2," in closePoints"
-                    print "dist=",dist(pt1[0],pt1[1],pt2[0],pt2[1])
+                    #print "comparing ",pt1," and ",pt2," in closePoints"
+                    #print "dist=",dist(pt1[0],pt1[1],pt2[0],pt2[1])
                     if t!=(i,side) and dist(pt1[0],pt1[1],pt2[0],pt2[1])<=radius:
-                        print "close!"
+                        #print "close!"
                         close_list.append((i,side))
-            print "close_list:",close_list
+            #print "close_list:",close_list
             return close_list
         if not double_sided:
             for i in xrange(0,len(self.li)):
                 pt1=self[(i,0)]
                 pt2=self[t]
-                print "comparing ",pt1," and ",pt2," in closePoints"
-                print "dist=",dist(pt1[0],pt1[1],pt2[0],pt2[1])
+                #print "comparing ",pt1," and ",pt2," in closePoints"
+                #print "dist=",dist(pt1[0],pt1[1],pt2[0],pt2[1])
                 if t!=(i,0) and dist(pt1[0],pt1[1],pt2[0],pt2[1])<=radius:
                     close_list.append((i,0))
             return close_list
@@ -336,19 +336,19 @@ class SegmentList:
     def closeIntersections(self,t,radius=90,allowed_error=20,double_sided=True):
     #double_sided=False
         close_list=self.closePoints(t,radius,double_sided)
-        print "close points=",close_list
-        print "now filter more to get close *intersections*"
+        #print "close points=",close_list
+        #print "now filter more to get close *intersections*"
         i_list=[]#list of (index, side) of segments that intersect segment t
         int_list=[]#list of intersections
         #tup is (index,side)
         for (i,s) in close_list:
             given=self[t[0]]
             current=self[i]
-            print "try to find intersection of lines:",(given, current)
+            #print "try to find intersection of lines:",(given, current)
             x0=self[t][0]
             xcur=self[(i,s)][0]
             ix,iy=intersection(given, current)
-            print "intersection vs given: ",((ix,iy),given)
+            #print "intersection vs given: ",((ix,iy),given)
             #!!!potential problem: this might recognize a covering
             #wall as splitting up the covered wall
             if ix>=min(x0,xcur)-allowed_error and ix<=max(x0,xcur)+allowed_error:
@@ -463,8 +463,8 @@ class Mapper:
         iv.xsort()
         low_horiz=iv.low_horiz()
         #DEBUG
-        print "iv list: ",iv.li
-        print "low horiz: ", low_horiz
+        #print "iv list: ",iv.li
+        #print "low horiz: ", low_horiz
         #low_horiz=iv.lowlines()
         #these are the low walls.
         #now make them into edges and connect them with nodes.
@@ -477,7 +477,7 @@ class Mapper:
         for i in low_horiz:
             x1,y1,x2,y2=iv[i]
             close_i_list,close_int_list=iv.closeIntersections((i,1))
-            print "low_horiz, i=",i
+            #print "low_horiz, i=",i
             #(i,1)=right endpt of segment i
             #first list contains indices pointing to intersecting segments
             #second list contains intersections
@@ -486,14 +486,14 @@ class Mapper:
             if close_int_list!=[]:
                 #average over intersections
                 c=centroid(close_int_list)[0:2]
-                print "c=",c
+                #print "c=",c
                 close_i_list.append((i,1))
                 node_list.append((close_i_list,c))
                 bound_list.add(tuple(c))
-            print "low_horiz, i=",i
-            print "close lists:\n",close_i_list,"\n",close_int_list
-            print "bound_list: ",bound_list
-            print "node_list: ",node_list
+            #print "low_horiz, i=",i
+            #print "close lists:\n",close_i_list,"\n",close_int_list
+            #print "bound_list: ",bound_list
+            #print "node_list: ",node_list
             #if there aren't other segments that intersect our segment
             #near the right endpoint, but there is a parallel segments that
             #ends near, then it's probably a vertex (because walls are
@@ -510,10 +510,10 @@ class Mapper:
             #bind close vertices to c.
             for t in close_i_list:
                 iv2[t]=c
-        print "iv2=",iv2.li
-#        print [iv2[(i,0)] for i in low_horiz]
-#        print [iv2[(i,1)] for i in low_horiz]
-#        print [iv2[(i,0)] for i in low_horiz]+[iv2[(i,1)] for i in low_horiz]
+        #print "iv2=",iv2.li
+#        #print [iv2[(i,0)] for i in low_horiz]
+#        #print [iv2[(i,1)] for i in low_horiz]
+#        #print [iv2[(i,0)] for i in low_horiz]+[iv2[(i,1)] for i in low_horiz]
         node_set=frozenset([iv2[(i,0)] for i in low_horiz]+[iv2[(i,1)] for i in low_horiz])
         node_dict={}
         for pt in node_set:
@@ -524,7 +524,7 @@ class Mapper:
                 n=Node(ABSOLUTE,arg3=actual_pt,floating=True)
             node_dict[pt]=n
             self.local_map.add(n)
-            print "added node: ",n
+            #print "added node: ",n
         for i in low_horiz:
             lnp=iv2[(i,0)]
             rnp=iv2[(i,1)]
@@ -541,7 +541,24 @@ class Mapper:
             ln[angle1]=w
             rn[angle2]=w
             w.recalc()
-                
+    '''does it look like there's a pyramid corner? If so, what is the distance
+    and angle?'''
+    def pyramidCorner(self):
+        return False
+        for feature in self.local_map:
+            if feature.__class__==Node:
+                l=None
+                r=None
+                for k in feature.neighbors:
+                    if (k+20)%360>=0 and (k+20)%360<110:
+                        r=(k+20)%360-20
+                    if k%360>90 and k%360<200:
+                        l=k%360
+                if l!=None and r!=None:
+                    return ((feature.x,feature.y),l,r)
+                else:
+                    return None
+
 '''
 def overlapRatio(li):
     x1=min(li[0][0],li[0][2])
@@ -604,7 +621,7 @@ def centroid(li):
         for t in li:
             su+=t[j]
         out.append(su/l)
-    print "centroid=:",out
+    #print "centroid=:",out
     return out
 
 '''
@@ -612,21 +629,21 @@ Things to think about: when are two walls close enough to be the same?
 '''
 
 '''this works.
-print "hello"
+#print "hello"
 #SegmentList test
 iv=SegmentList([(0,0,200,100),(50,100,100,100)])
-print iv.removeVerts()
+#print iv.removeVerts()
 iv.xsort()
 iv.low_horiz()
-print iv.xsorted
-print iv.votes
-print iv.accepted
+#print iv.xsorted
+#print iv.votes
+#print iv.accepted
 '''
-
-h=Huff("ex4.jpg")
-lines=h.huff()[0]
-mpr=Mapper()
-mpr.graphToLocalMap(lines)
-mw=MapperWindow(mpr.local_map)
-mw.draw()
-print str(mpr.local_map)
+if __name__=="__main__":
+    h=Huff("ex4.jpg")
+    lines=h.huff()[0]
+    mpr=Mapper()
+    mpr.graphToLocalMap(lines)
+    mw=MapperWindow(mpr.local_map)
+    mw.draw()
+    #print str(mpr.local_map)
