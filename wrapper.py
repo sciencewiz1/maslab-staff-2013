@@ -191,8 +191,7 @@ class Wrapper:
             self.roller_motor.setAngle(value)
             #self.roller_motor.setValue(1)
         if index==HELIX_MOTOR:
-            pass
-            #self.helix_motor.setSpeed(value)
+            self.helix_motor.setSpeed(value)
         if index==LEFT_MOTOR:
             self.left_motor.setSpeed(value)
         if index==RIGHT_MOTOR:

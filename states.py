@@ -209,17 +209,20 @@ class TurnAndLook(State):
             #if self.openSpaceTime is not none rotate in the opposite direction
             #for total rotate time-self.openSpaceTime to get to open space
             #self.openSpaceTime is guaranteed to be <=TIMEOUT
-            current=self.openSpaceIR
-            if current!=None:
-                print "found open space"
-                action=None
-                if isinstance(self.action,TurnRight):
-                    action=TurnLeft
-                    print "turning left toward open space"
+            if self.goToOpen:
+                current=self.openSpaceIR
+                if current!=None:
+                    print "found open space"
+                    action=None
+                    if isinstance(self.action,TurnRight):
+                        action=TurnLeft
+                        print "turning left toward open space"
+                    else:
+                        action=TurnRight
+                        print "turning right toward open space"
+                    return (TurnAndLook,(action,current,False))
                 else:
-                    action=TurnRight
-                    print "turning right toward open space"
-                return (TurnAndLook,(action,current,False))
+                    return Wander
             else:
             #########################################
                 return Wander
