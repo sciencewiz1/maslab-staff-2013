@@ -208,8 +208,7 @@ class Stop(State):
     def __init__(self,wrap):
         State.__init__(self,wrap)
         self.action=DoNothing
-        self.wrapper.vs.stop()
-        self.wrapper[ROLLER_MOTOR]=0
+        self.wrapper.stop()
         self.wrapper.ir_module.f.close()
     def stopfunction(self):
         return 0
