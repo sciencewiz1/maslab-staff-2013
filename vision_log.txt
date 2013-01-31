@@ -21084,3 +21084,7 @@ called see target
 see ball at  None
 failed to see ball
 see wall at  (-23.0, -42.0)
+
+Tracking no targets!
+Starting Vision System
+unpaused
