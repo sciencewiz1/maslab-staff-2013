@@ -363,14 +363,13 @@ class VisionSystem(threading.Thread):
                 self.dataQueue.put(False)
                 return False
     def saveVideo(self,image):
-        '''if self.frameWriter==None:
+        if self.frameWriter==None:
             ((width,height),(center,centerEnd),leftExtreme,rightExtreme)=self.findCenterOfImageAndExtremes(image)
             fps = cv.GetCaptureProperty(self.capture,cv.CV_CAP_PROP_FPS);
-            fourcc = -1
+            #fourcc = cv.GetCaptureProperty(self.capture,cv.CV_CAP_PROP_FORMAT)
+            fourcc=cv.CV_FOURCC('0','0','0','0')
             self.frameWriter = cv2.VideoWriter('out.avi', fourcc, fps, (width, height), True)
-            self.frameWriter.write(np.asarray(image[:,:]))
-            self.frameWriter.release()'''
-        pass
+        self.frameWriter.write(np.asarray(image[:,:]))
     #uses images
     def captureImage(self):
         image=cv.QueryFrame(self.capture)
@@ -670,6 +669,7 @@ class VisionSystem(threading.Thread):
                     else:
                         image=self.still
                     #process image, detect targets, edge detection
+                    self.saveVideo(image)
                     self.explore(image)
                     if self.still!=None:
                         cv.WaitKey(0)
