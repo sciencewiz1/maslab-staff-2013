@@ -10,6 +10,8 @@ import time
 import math
 import copy
 import json
+import sys
+from mapper import *
 from Tkinter import *
 TEMPLATE_MATCH_THRESHOLD=200/2.7 #depends on image size
 CLOSE_THRESHOLD=20000.0/2.7
@@ -22,6 +24,16 @@ MAXRANGE=50
 #saturation-how much mixed with white
 #value-how much mixed with black
 #NOTE: This code is still in development stages and commenting has not been completed.
+
+class StdOut(object):
+    def __init__(self, *files):
+        self.files = files
+    def write(self, obj):
+        for f in self.files:
+            f.write(obj)
+    def flush(self):
+        for f in self.files:
+            f.flush()
 class VisionSystemWrapper:
     def __init__(self):
         self.cmdQueue=Queue(1000)
@@ -36,7 +48,7 @@ class VisionSystemWrapper:
     def clearWallTargets(self):
         cmd=("clearWallTargets",(targetStr,))
         self.cmdQueue.put(cmd)
-    def addTarget(self,):
+    def addTarget(self,targetStr):
         cmd=("addTarget",(targetStr,))
         self.cmdQueue.put(cmd)
     def removeTarget(self,targetStr):
@@ -79,10 +91,11 @@ class VisionSystemWrapper:
 GUI for working with the Vision System. With this GUI you are easily able to fine tune the HSV ranges for the desired
 color of the object you want to detect using a slider based calibration mechanism.
 '''
-class VisionSystemApp(Frame,Process):
+class VisionSystemApp(Frame,threading.Thread):
     def __init__(self,cmdQueue,dataQueue):
          #call super class methods
-        Process.__init__(self)
+        #Process.__init__(self)
+        threading.Thread.__init__(self)
         #set main instance variables
         self.active=True
         self.selectedTarget="redBall"
@@ -201,7 +214,7 @@ class VisionSystemApp(Frame,Process):
         self.vision.setMainColorProfile(self.selectedTarget,(lower,upper))
     def stop(self):
         self.active=False
-        self.vision.active=False
+        self.vision.stop()
         self.vision.join()
         self.master.quit()
 '''Team 12 MASLAB 2013 Vision System API designed to locate certain objects
@@ -209,18 +222,24 @@ and command the robot to move towards them'''
 class VisionSystem(threading.Thread):
     '''Initialization method that creates the
         camera object and initializes Thread data'''
-    def __init__(self,cmdQueue,dataQueue):
+    def __init__(self,cmdQueue,dataQueue,still=None):
+        self.writeLog()
         self.capture = cv.CaptureFromCAM(0) #camera object
         self.targets=[]
         self.ballTargets=["redBall","greenBall"]
         self.wallTargets=["purpleWall"]
         self.wallCoordinates=[]
         self.frameWriter=None
+        if still!=None:
+            self.still=cv.LoadImage(still)
+        else:
+            self.still=None
+        self.mapper=Mapper()
         self.active=True
         self.detectEdges=False
         self.targetColorProfiles={"redBall":[((0, 147, 73), (15, 255, 255)),((165, 58, 36), (180, 255, 255))],"greenBall":[((45, 150, 36), (90, 255, 255))],
                       "blueWall":[((103, 141, 94), (115, 255, 255))],"yellowWall":[((29, 150, 36), (64, 255, 255))],
-                                  "purpleWall":[((119, 117, 52), (129, 255, 255))],"yellowWall2":[((26, 53,117), (32, 255, 255))],
+                                  "purpleWall":[((110, 41, 52), (129, 255, 255))],"yellowWall2":[((26, 53,117), (32, 255, 255))],
                                   "cyanButton":[((95,176,115),(108,255,255))]}
         self.targetShapeProfiles={"redBall":self.detectCircle,"greenBall":self.detectCircle,
                       "blueWall":self.detectRectangle,"yellowWall":self.detectRectangle,"purpleWall":self.detectRectangle,
@@ -232,14 +251,12 @@ class VisionSystem(threading.Thread):
                               "yellowWall2":None,"cyanButton":None}
         self.bestTargetOverall=None #will be (target,distFromCenter,absolute coordinates,area)
         self.detectionThreshold=TEMPLATE_MATCH_THRESHOLD
-        self.run_counter=1
         self.override=False
-        self.pause=False
+        self.pause=True
         self.imageParams=None
         self.cmdQueue=cmdQueue
         self.dataQueue=dataQueue
         self.lock=threading.Lock()
-        self.count=0
         #call super class init method and bind to instance
         threading.Thread.__init__(self)
         print "Tracking no targets!"
@@ -263,9 +280,7 @@ class VisionSystem(threading.Thread):
     def smIntegrate(self):
         self.override=False
     def activate(self):
-        self.calibrated=True
-        self.active=True
-        print "calibrated"
+        self.pause=False
     def activateEdgeDetection(self):
         self.detectEdges=True
     def deactivateEdgeDetection(self):
@@ -337,14 +352,13 @@ class VisionSystem(threading.Thread):
                 self.dataQueue.put(False)
                 return False
     def saveVideo(self,image):
-        self.count+=1
-        '''if self.frameWriter==None:
+        if self.frameWriter==None:
             ((width,height),(center,centerEnd),leftExtreme,rightExtreme)=self.findCenterOfImageAndExtremes(image)
             fps = cv.GetCaptureProperty(self.capture,cv.CV_CAP_PROP_FPS);
-            fourcc = cv.CV_FOURCC('M','J','P','G')
-            self.frameWriter = cv.CreateVideoWriter('out.avi', fourcc, fps, (width, height), 1)
-        cv.WriteFrame(self.frameWriter, image)'''
-        cv.SaveImage("saved"+str(self.count)+".jpg",image)
+            fourcc = -1
+            self.frameWriter = cv2.VideoWriter('out.avi', fourcc, fps, (width, height), True)
+            self.frameWriter.write(np.asarray(image[:,:]))
+            self.frameWriter.release()
     #uses images
     def captureImage(self):
         image=cv.QueryFrame(self.capture)
@@ -352,8 +366,9 @@ class VisionSystem(threading.Thread):
         cv.Resize(image,downSampledImage)
         self.imageParams=self.findCenterOfImageAndExtremes(downSampledImage)
         #clean up
-        del(image)
+        #del(image)
         return downSampledImage
+    #uses images
     def processImage(self,image):
         #clone image so that we do not tamper with original
         clone=cv.CloneImage(image)
@@ -365,15 +380,18 @@ class VisionSystem(threading.Thread):
         cv.CvtColor(clone,hsv,cv.CV_BGR2HSV)
         #cv.Erode(thresholded, thresholded, None, 5)
         #clean up
-        del(clone)
-        del(blurred)
+        #del(clone)
+        #del(blurred)
         return hsv
+    #uses images
     def processImagePhase2(self,processedImage,colorProfile):
         lowerBound,upperBound=colorProfile
         #threshold image to get only color we want
         thresholded=cv.CreateImage(cv.GetSize(processedImage),8,1)
         cv.InRangeS(processedImage,lowerBound,upperBound,thresholded)
+        #del(processedImage)
         return thresholded
+    #uses images
     def detectCircle(self,processedImage,contours,area):
         circ=np.array([[]])
         hough_in=cv.CreateImage(cv.GetSize(processedImage),8,1)
@@ -382,8 +400,8 @@ class VisionSystem(threading.Thread):
         image2=np.asarray(cv.CloneImage(hough_in)[:,:])
         circ=cv2.HoughCircles(image2, cv.CV_HOUGH_GRADIENT, 3, 300, None, 100, 40)
         #clean up
-        del(hough_in)
-        del(image2)
+        #del(hough_in)
+        #del(image2)
         #return data
         if circ==None:
             return False
@@ -392,13 +410,16 @@ class VisionSystem(threading.Thread):
         #    (x,y,radius)=circle
         #   cv2.circle(image2,(x,y), radius,cv.CV_RGB(255, 0, 0), 2, 8, 0)
         return True
+    #uses images
     def detectRectangle(self,processedImage,contours,area):
         #to be completed
         return True
+    #uses images
     def findMomentsAndArea(self,image):
         mat=cv.GetMat(image)
         moments=cv.Moments(mat)
         area=cv.GetCentralMoment(moments,0,0)
+        #del(mat)
         return (moments,area)
     def findCenterOfMass(self,moments,area):
         if area>0:
@@ -412,6 +433,7 @@ class VisionSystem(threading.Thread):
         if area>self.detectionThreshold and (x,y)!=(None,None):
             return True
         return False
+    #uses images
     def findCenterOfImageAndExtremes(self,image):
         #find center of image
         length=10
@@ -431,7 +453,7 @@ class VisionSystem(threading.Thread):
         for i in range(1,len(processedImages)):
             cv.Add(completeProcessedImage,processedImages[i],completeProcessedImage)
             #clean up
-            del(processedImages[i])
+            #del(processedImages[i])
         cv.ShowImage("Ball Tracker Computer Vision",completeProcessedImage)
         for targetLocation in allTargetLocations:
             (area1,(x1,y1))=targetLocation
@@ -444,8 +466,13 @@ class VisionSystem(threading.Thread):
         cv.Add(original, overlay, original)
         #cv.Merge(completeProcessedImage, None, None, None, original)
         cv.ShowImage('Ball Tracker Processed',original)
+        #self.mapper.graphToLocalMap(self.getWallCoordinates())
+        #mw=MapperWindow(self.mapper.local_map)
+        #mw.draw()
         #clean up
-        del(original)
+        #del(completeProcessedImage)
+        #del(overlay)
+        #del(original)
     def explore(self,image):
         initialProcessedImage=self.processImage(image)
         (processedImages,targetLocations)=self.findTargets(initialProcessedImage)
@@ -453,8 +480,8 @@ class VisionSystem(threading.Thread):
         if self.detectEdges:
             points=self.findWalls(initialProcessedImage)
         self.renderImages(image,points,processedImages,targetLocations)
-        del(initialProcessedImage)
-        del(image)
+        #del(initialProcessedImage)
+        #del(image)
     def findTargets(self,initialProcessedImage):
         #remove top of image
         ignoreTargetRegions=self.wallTargets
@@ -465,6 +492,7 @@ class VisionSystem(threading.Thread):
                 ((xdist,ydist),(x,y),areat,(xCOM,yCOM),centers)=data
                 ignoreRegion=y
                 ignoreRegions.append(ignoreRegion)
+            #del(processedImagePhase2)
         targetLocations=[]
         processedImages=[]
         maxTargetArea=0
@@ -500,7 +528,7 @@ class VisionSystem(threading.Thread):
             currentProcessedImagePhase2=self.processImagePhase2(processedImage,colorProfiles[i])
             cv.Add(processedImagePhase2,currentProcessedImagePhase2,processedImagePhase2)
             #clean up
-            del(currentProcessedImagePhase2)
+            #del(currentProcessedImagePhase2)
         moments,area=self.findMomentsAndArea(processedImagePhase2)
         (xCOM,yCOM)=self.findCenterOfMass(moments,area)
         data=(None,processedImagePhase2)
@@ -544,12 +572,16 @@ class VisionSystem(threading.Thread):
                 savedData=(target,(xdist,ydist),(xClosest,yClosest),areat,(xCOM,yCOM))
         self.targetLocations[target]=savedData
         #clean up
-        del(image)
+        #del(cloneForContour)
+        #del(image)
         return data
     ##################################################################################################
     #Wall Detection
     ##################################################################################################
+    #uses images
     def findWalls(self,processedImage,filt="main"):
+        blurred=cv.CreateImage(cv.GetSize(processedImage),8,3)
+        cv.Smooth(processedImage,blurred,cv.CV_GAUSSIAN, 11,11)
         c1,c2,ap,rh,deg,th,min_l,max_d,bwt=self.edgeDetectionProfiles["main"]
         image2=None
         for wallTarget in self.wallTargets:
@@ -559,7 +591,10 @@ class VisionSystem(threading.Thread):
                 image2=newProcessed
             else:
                 cv.Add(image2,newProcessed,image2)
+            #del(newProcessed)
         image2=np.asarray(cv.CloneImage(image2)[:,:])
+        cv2.imshow("Edge Detection Computer Vision",image2)
+        cv2.imwrite("edge.jpg",image2)
         #(thresh,bw) = cv2.threshold(image2, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
         edges = cv2.Canny(image2, c1, c2,apertureSize=ap)
         lines = cv2.HoughLinesP(edges, rh, math.pi/180*deg, th, None, min_l, max_d)
@@ -575,19 +610,27 @@ class VisionSystem(threading.Thread):
         image2=cv.fromarray(image2)
         self.wallCoordinates=points1
         #clean up
-        del(edges)
-        del(lines)
-        del(image2)
+        #del(blurred)
+        #del(edges)
+        #del(lines)
+        #del(image2)
         return points
     def detectQR(self,processedImage):
         pass
+    def writeLog(self):
+        self.fsock=open("vision_log.txt",'w')
+        sys.stdout = StdOut(sys.stdout,self.fsock)
+        self.fsock1 = open('error.log', 'w')               
+        sys.stderr = self.fsock1
     def parseCMD(self,cmd):
         method,args=cmd
         func=getattr(self,method)
         func(*args)
     def stop(self):
         self.active=False
-        cv.ReleaseVideoWriter(self.frameWriter);
+        self.fsock1.flush()
+        self.fsock1.close()
+        del(self.frameWriter);
         print "Stopping Vision System"
     def run(self):
         print "Starting Vision System"
@@ -596,23 +639,26 @@ class VisionSystem(threading.Thread):
             return "Camera Init Failed!"
         while self.active:
             if not self.pause:
-            #try:#try to execute target find
-                #print self.targets[self.target]
-                #print self.getTargetDistFromCenter()
-                if not self.cmdQueue.empty():
-                    self.parseCMD(self.cmdQueue.get())
-                image=self.captureImage()
-                #self.findTargets(image)
-                #self.findWalls(image,filt="main")
-                self.explore(image)
-                self.saveVideo(image)
-                del(image)
-                #print "found targets"
-                cv.WaitKey(1)
-            #except:
-                #if an exception occurs, to prevent the program from terminating
-                #we just skip this loop and try again
-                #print "Error occurred, but program is continuing!"
+                try:#try to execute target find
+                    #print self.targets[self.target]
+                    #print self.getTargetDistFromCenter()
+                    if not self.cmdQueue.empty():
+                        self.parseCMD(self.cmdQueue.get())
+                    if self.still==None:
+                        image=self.captureImage()
+                    else:
+                        image=self.still
+                    #process image, detect targets, edge detection
+                    self.explore(image)
+                    if self.still!=None:
+                        cv.WaitKey(0)
+                    cv.WaitKey(1)
+                    #del(image)
+                except Exception, err:
+                    print err
+                    #if an exception occurs, to prevent the program from terminating
+                    #we just skip this loop and try again
+                    print "Error occurred, but program is continuing!"
                 #continue
         print "Stopping Vision System"
         #destroy capture 
