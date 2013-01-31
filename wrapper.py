@@ -146,7 +146,7 @@ class Wrapper:
         else:
             self.color=GREEN
         print "going for target..."+str(self.color)
-        self.vs.addTarget(color)
+        self.vs.addTarget(self.color)
         self.vs.addTarget("cyanButton")
         print "vision system set"
         #start a thread that takes IR readings
@@ -191,8 +191,7 @@ class Wrapper:
             self.roller_motor.setAngle(value)
             #self.roller_motor.setValue(1)
         if index==HELIX_MOTOR:
-            pass
-            #self.helix_motor.setSpeed(value)
+            self.helix_motor.setSpeed(value)
         if index==LEFT_MOTOR:
             self.left_motor.setSpeed(value)
         if index==RIGHT_MOTOR:
