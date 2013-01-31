@@ -558,8 +558,7 @@ class Mapper:
                     return ((feature.x,feature.y),l,r)
                 else:
                     return None
-                        
-                
+
 '''
 def overlapRatio(li):
     x1=min(li[0][0],li[0][2])
