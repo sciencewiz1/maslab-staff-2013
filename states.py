@@ -110,6 +110,7 @@ class AvoidWall(State):
 
 class TurnAndLook(State):
     def __init__(self,wrap,target="all",data=()):
+        self.target=target
         if len(data)==0:
             self.desiredIR=0
             self.action=None
@@ -171,7 +172,7 @@ class TurnAndLook(State):
         if stuck_info[0]==3 or stuck_info[1]==3:
             return Stuck
         target_seen=self.wrapper.seeTarget()
-        if self.wrapper.targetCentered(target):
+        if self.wrapper.targetCentered(self.target):
             if target_seen==self.wrapper.color:
                 print "centered ball, approach!"
                 return (Pause, ApproachBall)
@@ -194,7 +195,7 @@ class TurnAndLook(State):
         #David
         desiredIR=self.desiredIR
         irData1=self.wrapper[FRONT_DIST]
-        if desiredIR!=0 and irData1<=desiredIR:
+        if desiredIR!=0 and irData1<=desiredIR+20:
             #turn time was set and so when we reach this turn time
             #we are heading to open space and so just wander
             print "WANDERING..............."
@@ -208,7 +209,7 @@ class TurnAndLook(State):
             #if self.openSpaceTime is not none rotate in the opposite direction
             #for total rotate time-self.openSpaceTime to get to open space
             #self.openSpaceTime is guaranteed to be <=TIMEOUT
-            current=self.desiredIR
+            current=self.openSpaceIR
             if current!=None:
                 print "found open space"
                 action=None
@@ -262,7 +263,7 @@ class ApproachBall(State):
             #Need to prevent this!
         if self.wrapper.vs.isClose():
             print "charging b/c ball close"
-            return Charge
+            return (Charge, self.wrapper.color)
         if self.wrapper.ballCentered():
             return 0
             #still going after ball
@@ -305,6 +306,7 @@ class ApproachButton(State):
             return Stuck
         #if within 4 inches
         if self.wrapper[FRONT_DIST]<4 or self.wrapper[FRONT_DIST2]<4:
+            print "charging cyan button"
             return (Charge,"cyanButton")
         if self.wrapper.targetCentered("cyanButton"):
             return 0
@@ -352,7 +354,7 @@ class Charge(State):
                 return TurnAndLook
             if (stuck_info[0]==3 and stuck_info[1]==3):
                 return Stuck
-        if self.target=="yellowWall":
+        if self.target in ["yellowWall","purplePyramid"]:
             if time.time()>self.wrapper.time+5 or (stuck_info[0]==3 and stuck_info[1]==3):
                 return Score
         return 0
@@ -458,7 +460,7 @@ class ApproachWall(State):
             return Stuck
         #if within 4 inches
         if self.wrapper.targetClose("yellowWall"):#self.wrapper[FRONT_DIST]<4 or self.wrapper[FRONT_DIST2]<4:
-            return ChargeWall
+            return (Charge,"yellowWall")
         if self.wrapper.targetCentered("yellowWall")!=None:
             return 0
             #still going after button
@@ -492,7 +494,7 @@ class ApproachPyramid(State):
             return Stuck
         #if within 4 inches
         if self.wrapper.targetClose("purplePyramid"):#self.wrapper[FRONT_DIST]<4 or self.wrapper[FRONT_DIST2]<4:
-            return ChargeWall
+            return (Charge,"purplePyramid")
         if self.wrapper.targetCentered("purplePyramid")!=None:
             return 0
             #still going after button

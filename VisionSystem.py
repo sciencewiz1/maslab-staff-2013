@@ -36,7 +36,7 @@ class VisionSystemWrapper:
     def clearWallTargets(self):
         cmd=("clearWallTargets",(targetStr,))
         self.cmdQueue.put(cmd)
-    def addTarget(self,):
+    def addTarget(self,targetStr):
         cmd=("addTarget",(targetStr,))
         self.cmdQueue.put(cmd)
     def removeTarget(self,targetStr):

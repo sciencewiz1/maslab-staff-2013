@@ -146,7 +146,7 @@ class Wrapper:
         else:
             self.color=GREEN
         print "going for target..."+str(self.color)
-        self.vs.addTarget(color)
+        self.vs.addTarget(self.color)
         self.vs.addTarget("cyanButton")
         print "vision system set"
         #start a thread that takes IR readings
