@@ -140,6 +140,7 @@ class Wrapper:
                 print "did not start SM, entering manual override!"
                 return False
         target=self[TARGET]
+        self.vs.activate()
         print target
         if target==True:
             self.color=RED
