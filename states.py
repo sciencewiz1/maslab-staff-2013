@@ -117,20 +117,28 @@ class AvoidWall(State):
 
 class TurnAndLook(State):
     def __init__(self,wrap,data=()):
-        print "starting turn and look with target ",target," and data ",data
-        if data==None or len(data)==0:
+        if data==None or data==():
+            print "got here"
             self.target="all"
+            otherData=()
+        elif data.__class__==str:
+            self.target=data
             otherData=()
         else:
             self.target,otherData=data
+            print "g12"
         if self.target==None:
             self.target="all"
+            print "d12"
         if len(otherData)==0:
             self.desiredIR=0
             self.action=None
             self.goToOpen=True
+            print "got here 1234"
         else:
             self.action,self.desiredIR,self.goToOpen=otherData
+            print "lol1234"
+        print self.desiredIR,self.action,self.goToOpen,self.target
         #print "init turn and look"
         State.__init__(self,wrap)
         #if ball is to the right
@@ -140,7 +148,7 @@ class TurnAndLook(State):
         #controlled turn and look variables
         self.openSpaceIR=None
         #########################################
-        dist=wrap.vs.getTargetDistFromCenter(target)
+        dist=wrap.vs.getTargetDistFromCenter(self.target)
         print "dist ",dist
         if dist==None:
             if DEBUG:
@@ -163,6 +171,7 @@ class TurnAndLook(State):
             self.action=TurnLeft
         print "started turn and look with target, ",self.target
     def stopfunction(self):
+        print "got to stop"
         '''
         Priority:
         1. If sensors bumped, back up (Stuck)
@@ -227,19 +236,20 @@ class TurnAndLook(State):
             #for total rotate time-self.openSpaceTime to get to open space
             #self.openSpaceTime is guaranteed to be <=TIMEOUT
             if self.goToOpen:
-                current=self.openSpaceIR
-                if current!=None:
-                    print "found open space"
-                    action=None
-                    if isinstance(self.action,TurnRight):
-                        action=TurnLeft
-                        print "turning left toward open space"
-                    else:
-                        action=TurnRight
-                        print "turning right toward open space"
-                    return (TurnAndLook,(self.target,(action,current,False)))
-                else:
-                    return Wander
+                return Wander
+##                current=self.openSpaceIR
+##                if current!=None:
+##                    print "found open space"
+##                    action=None
+##                    if isinstance(self.action,TurnRight):
+##                        action=TurnLeft
+##                        print "turning left toward open space"
+##                    else:
+##                        action=TurnRight
+##                        print "turning right toward open space"
+##                    return (TurnAndLook,(self.target,(action,current,False)))
+##                else:
+##                    return Wander
             else:
             #########################################
                 return Wander

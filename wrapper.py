@@ -156,10 +156,9 @@ class Wrapper:
         self[ROLLER_MOTOR]=ROLLER_ANGLE
         self[RELEASE_MOTOR]=CLOSED
         on=self[START]
-        print on
+        print "waiting..."
         while not on and not self.smSwitchOverride:
             on=self[START]
-            print "waiting..."
             if self.manualControlCheck():
                 print "did not start SM, entering manual override!"
                 return False
@@ -470,6 +469,7 @@ class PIDController:
         #self.input_method=input_method
         #self.wrapper=wrapper
     def adjust(self,error):
+        print "ADJUSTING"
         if self.last_error==None:
             self.last_error=error
         current_time=time.time()
@@ -502,6 +502,7 @@ class WallTimer(threading.Thread):
         self.wrapper.mode=WALL_MODE
         self.wrapper.vs.clearTargets()
         self.wrapper.vs.addTarget("yellowWall")
+        self.wrapper.vs.addTarget("purplePyramid")
         #Update this once David puts in code to look for walls.
     def stop(self):
         self.active=False

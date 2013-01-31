@@ -1,3 +1,13 @@
+Traceback (most recent call last):
+  File "C:\Users\Team 12\Documents\GitHub\maslab-staff-2013\main.py", line 94, in connect
+    self.wrapper.connect()
+  File "C:\Users\Team 12\Documents\GitHub\maslab-staff-2013\wrapper.py", line 143, in connect
+    self.ard.run()
+  File "C:\Users\Team 12\Documents\GitHub\maslab-staff-2013\arduino.py", line 43, in run
+    self.portOpened = self.connect()
+  File "C:\Users\Team 12\Documents\GitHub\maslab-staff-2013\arduino.py", line 61, in connect
+    if self.portOpened: self.close()
+AttributeError: 'Arduino' object has no attribute 'close'
 Exception in thread Thread-9:
 Traceback (most recent call last):
   File "C:\Python27\lib\threading.py", line 551, in __bootstrap_inner
@@ -11,20 +21,4 @@ Traceback (most recent call last):
   File "C:\Python27\lib\site-packages\serial\serialwin32.py", line 270, in write
     raise writeTimeoutError
 SerialTimeoutException: Write timeout
-
-Exception in thread Thread-8:
-Traceback (most recent call last):
-  File "C:\Python27\lib\threading.py", line 551, in __bootstrap_inner
-    self.run()
-  File "C:\Users\Team 12\Documents\GitHub\maslab-staff-2013\main.py", line 185, in run
-    self.state=self.state.run()
-  File "C:\Users\Team 12\Documents\GitHub\maslab-staff-2013\actions.py", line 194, in run
-    next_state_info=action_instance.start(self.stopfunction)
-  File "C:\Users\Team 12\Documents\GitHub\maslab-staff-2013\actions.py", line 21, in start
-    b=method()
-  File "C:\Users\Team 12\Documents\GitHub\maslab-staff-2013\states.py", line 184, in stopfunction
-    target_seen=self.wrapper.seeTarget()
-  File "C:\Users\Team 12\Documents\GitHub\maslab-staff-2013\wrapper.py", line 245, in seeTarget
-    if self.seeWall() and time.time()-start_time>=160:
-NameError: global name 'start_time' is not defined
 
