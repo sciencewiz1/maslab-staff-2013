@@ -246,9 +246,9 @@ class Wrapper:
             #right now, if in wall mode, then ignore all balls
         if self.goForButton() and self.seeButton():
             return "cyanButton"
-        if self.seeWall():
+        if self.seeWall() and self.mode==WALL_MODE:
             return "yellowWall"
-        if self.vs.getTargetDistFromCenter("purplePyramid")!=None and time.time()-self.start_time>=160:
+        if self.vs.getTargetDistFromCenter("purplePyramid")!=None and time.time()-self.start_time>=160 and self.mode==WALL_MODE:
             return "purplePyramid"
         #if sees pyramid and time is short
         return None

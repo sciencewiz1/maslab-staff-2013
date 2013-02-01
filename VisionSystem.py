@@ -761,7 +761,6 @@ class VisionSystem(threading.Thread):
                         image=self.captureImage(self.still)
                     if DEBUG_VISION:
                         print "Loaded Image"
-                    cv.WaitKey(0)
                     #process image, detect targets, edge detection
                     #self.saveVideo(image)
                     self.explore(image)
@@ -796,7 +795,10 @@ def testVS():
     #    print run.isClose(["redBall","greenBall"])
     #    print run.getTargetDistFromCenter("all")
     #    print run.isClose("all")
+def testVS1():
+    run=VisionSystemWrapper()
+    run.activate()
 if __name__=="__main__":
-    testVS()
+    testVS1()
 
         

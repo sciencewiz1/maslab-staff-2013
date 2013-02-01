@@ -171,6 +171,8 @@ class DoNothing(Action):
 
 class ReleaseBalls(Action):
     def run(self):
+        self.wrapper[LEFT_MOTOR]=0
+        self.wrapper[RIGHT_MOTOR]=0
         self.wrapper[RELEASE_MOTOR]=OPEN
     def loop(self):
         print "looping ",self.__class__.__name__, time.time()
