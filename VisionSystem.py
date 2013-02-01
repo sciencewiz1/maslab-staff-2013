@@ -230,7 +230,7 @@ class VisionSystem(threading.Thread):
         self.writeLog()
         self.capture = cv.CaptureFromCAM(0) #camera object
         self.targets=[]
-        self.ballTargets=["redBall","greenBall"]
+        self.ballTargets=["redBall","greenBall","yellowWall"]
         self.wallTargets=["purpleWall","blueWall"]
         self.wallCoordinates=[]
         self.frameWriter=None
