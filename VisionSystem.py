@@ -13,6 +13,7 @@ import json
 import sys
 from mapper import *
 from Tkinter import *
+DEBUG_VISION=0
 TEMPLATE_MATCH_THRESHOLD=200/2.7 #depends on image size
 CLOSE_THRESHOLD=20000.0/2.7
 VALUE_THRESHOLD=200
@@ -228,9 +229,9 @@ class VisionSystem(threading.Thread):
     def __init__(self,cmdQueue,dataQueue,still=None):
         self.writeLog()
         self.capture = cv.CaptureFromCAM(0) #camera object
-        self.targets=["redBall","greenBall"]
-        self.ballTargets=[]
-        self.wallTargets=["purpleWall","blueWall"]
+        self.targets=[]
+        self.ballTargets=["redBall","greenBall"]
+        self.wallTargets=["purpleWall","blueWall","yellowWall"]
         self.wallCoordinates=[]
         self.frameWriter=None
         if still!=None:
@@ -242,7 +243,7 @@ class VisionSystem(threading.Thread):
         self.detectEdges=False
         #old values
         #"redBall":[((0, 147, 73), (15, 255, 255))
-        self.targetColorProfiles={"redBall":[((0, 47, 73), (15, 255, 255)),((165, 58, 36), (180, 255, 255))],"greenBall":[((45, 150, 36), (90, 255, 255))],
+        self.targetColorProfiles={"redBall":[((0, 147, 73), (15, 255, 255)),((165, 58, 36), (180, 255, 255))],"greenBall":[((45, 150, 36), (90, 255, 255))],
                       "blueWall":[((103, 141, 94), (115, 255, 255))],"yellowWall":[((29, 150, 36), (64, 255, 255))],
                                   "purpleWall":[((110, 41, 52), (129, 255, 255))],"yellowWall2":[((26, 53,117), (32, 255, 255))],
                                   "cyanButton":[((95,176,115),(108,255,255))]}
@@ -417,8 +418,10 @@ class VisionSystem(threading.Thread):
             self.frameWriter = cv2.VideoWriter('out.avi', fourcc, fps, (width, height), True)
         self.frameWriter.write(np.asarray(image[:,:]))
     #uses images
-    def captureImage(self):
-        image=cv.QueryFrame(self.capture)
+    def captureImage(self,still=None):
+        image=still
+        if image==None:
+            image=cv.QueryFrame(self.capture)
         downSampledImage=cv.CreateImage((480,240),8,3)
         cv.Resize(image,downSampledImage)
         self.imageParams=self.findCenterOfImageAndExtremes(downSampledImage)
@@ -531,11 +534,19 @@ class VisionSystem(threading.Thread):
         #del(overlay)
         #del(original)
     def explore(self,image):
+        if DEBUG_VISION:
+            print "in explore"
         initialProcessedImage=self.processImage(image)
+        if DEBUG_VISION:
+            print "initial processed"
         (processedImages,targetLocations)=self.findTargets(initialProcessedImage)
+        if DEBUG_VISION:
+            print "found targets"
         points=[]
         if self.detectEdges:
             points=self.findWalls(initialProcessedImage,self.edgeDetectionFilter)
+        if DEBUG_VISION:
+            print "going to render"
         self.renderImages(image,points,processedImages,targetLocations)
         #del(initialProcessedImage)
         #del(image)
@@ -555,9 +566,13 @@ class VisionSystem(threading.Thread):
         maxTargetArea=0
         maxTargetY=0
         maxTargetLocation=None
+        if DEBUG_VISION:
+            print "found boundaries"
         if len(self.targets)!=0:
             for target in self.targets:
                 (targetsData,processedImagePhase2)=self.findTarget(initialProcessedImage,target,ignoreRegions)
+                if DEBUG_VISION:
+                    print "found target"
                 processedImages.append(processedImagePhase2)
                 if targetsData==None:
                     continue
@@ -568,6 +583,8 @@ class VisionSystem(threading.Thread):
                     maxTargetLocation=(target,(xdist,ydist),(x,y),areat,(xCOM,yCOM))
                 targetLocations.extend(centers)
             self.bestTargetOverall=maxTargetLocation
+            if DEBUG_VISION:
+                print "found targets"
         else:
             (targetsData,processedImagePhase2)= self.findTarget(initialProcessedImage,None)
             processedImages.append(processedImagePhase2)
@@ -586,23 +603,38 @@ class VisionSystem(threading.Thread):
             cv.Add(processedImagePhase2,currentProcessedImagePhase2,processedImagePhase2)
             #clean up
             #del(currentProcessedImagePhase2)
+        if DEBUG_VISION:
+            print "processed images round 2"
         moments,area=self.findMomentsAndArea(processedImagePhase2)
         (xCOM,yCOM)=self.findCenterOfMass(moments,area)
+        if DEBUG_VISION:
+            print "got moments"
         data=(None,processedImagePhase2)
         savedData=None
         if self.updateCheck((xCOM,yCOM),area):
+            if DEBUG_VISION:
+                print "updating"
             #create target find overlay
             h=cv.CreateMemStorage(0)
             cloneForContour=cv.CloneImage(processedImagePhase2)
             contours= cv.FindContours(cloneForContour,h ,cv.CV_RETR_LIST, cv.CV_CHAIN_APPROX_SIMPLE)
             centers=[]
-            while contours:
+            timeout=50
+            i=0
+            while contours and i<=timeout:
+                i+=1
                 area1=cv.ContourArea (contours)
                 if area1>=TEMPLATE_MATCH_THRESHOLD:
+                    if DEBUG_VISION:
+                        print "found object above thresh"
                     #see if found contour matches shape description
                     objectMatch=self.targetShapeProfiles[target](processedImagePhase2,contours,area1)
+                    if DEBUG_VISION:
+                        print "object matching"
                     if objectMatch:
                         moments1 = cv.Moments(contours)
+                        if DEBUG_VISION:
+                            print "found object match"
                         #print list(contours)
                         x1 = int(cv.GetSpatialMoment(moments1, 1, 0)/area1) 
                         y1 = int(cv.GetSpatialMoment(moments1, 0, 1)/area1)
@@ -611,22 +643,36 @@ class VisionSystem(threading.Thread):
                         #helps prevent detecting objects from audience
                         #ignore region is essentially the region above the horizontal line that represents the y coordinate
                         #of the center of mass of the blue wall detected
+                        if DEBUG_VISION:
+                            print "ignore regions",ignoreRegions
                         if ignoreRegions!=None and len(ignoreRegions)!=0 and target in self.ballTargets:
+                            if DEBUG_VISION:
+                                print "ignoring"
                             #if the target is a ball we want to remove any ball colors seen above boundaries
                             ignoreRegion=max(ignoreRegions) #get greatest y, lowest region in image where bounding object is at
                             if y1>ignoreRegion:#if the target is below the bounding region then it is acceptable
+                                if DEBUG_VISION:
+                                    print "found ignorable"
                                 centers.append((area1,(x1,y1)))
                         else:
                             centers.append((area1,(x1,y1)))
+                if DEBUG_VISION:
+                    print "next cont"
                 contours=contours.h_next()
+            if DEBUG_VISION:
+                print "explored contours"
             if len(centers)!=0:
                 closest=max(centers)
                 areat,(xClosest,yClosest)=closest
+                if DEBUG_VISION:
+                    print "closest"+str(yClosest)
                 #print areat
                 xdist=xClosest-image.width/float(2)
                 ydist=image.height/float(2)-yClosest
                 data=(((xdist,ydist),(xClosest,yClosest),areat,(xCOM,yCOM),centers),processedImagePhase2)
                 savedData=(target,(xdist,ydist),(xClosest,yClosest),areat,(xCOM,yCOM))
+        if DEBUG_VISION:
+            print "save data"
         self.targetLocations[target]=savedData
         #clean up
         #del(cloneForContour)
@@ -712,10 +758,15 @@ class VisionSystem(threading.Thread):
                     if self.still==None:
                         image=self.captureImage()
                     else:
-                        image=self.still
+                        image=self.captureImage(self.still)
+                    if DEBUG_VISION:
+                        print "Loaded Image"
+                    cv.WaitKey(0)
                     #process image, detect targets, edge detection
-                    self.saveVideo(image)
+                    #self.saveVideo(image)
                     self.explore(image)
+                    if DEBUG_VISION:
+                        print "processed"
                     if self.still!=None:
                         cv.WaitKey(0)
                     cv.WaitKey(1)
@@ -732,15 +783,19 @@ class VisionSystem(threading.Thread):
         del(self.capture)
         cv.DestroyWindow("Tracker")
 def testVS():
-    run=VisionSystemWrapper()
+    cmdQueue=Queue(1000)
+    dataQueue=Queue(1000)
+    run=VisionSystem(cmdQueue,dataQueue,"ex4.jpg")
+    run.addTarget("greenBall")
     run.activate()
-    for i in range(1,100):
-        print run.getTargetDistFromCenter("redBall")
-        print run.isClose("redBall")
-        print run.getTargetDistFromCenter(["redBall","greenBall"])
-        print run.isClose(["redBall","greenBall"])
-        print run.getTargetDistFromCenter("all")
-        print run.isClose("all")
+    run.start()
+    #for i in range(1,100):
+    #    print run.getTargetDistFromCenter("redBall")
+    #    print run.isClose("redBall")
+    #    print run.getTargetDistFromCenter(["redBall","greenBall"])
+    #    print run.isClose(["redBall","greenBall"])
+    #    print run.getTargetDistFromCenter("all")
+    #    print run.isClose("all")
 if __name__=="__main__":
     testVS()
 
