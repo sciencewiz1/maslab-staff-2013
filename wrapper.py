@@ -297,7 +297,7 @@ class Wrapper:
             if t!=0:            
                 return ("yellowWall",t[0],math.fabs(t[0])<=WALL_CENTER_THRESHOLD)
             if time.time()-self.start_time>=160:
-                t=self.vs.getTargetDistFromCenter("purplePyramid")!=None:
+                t=self.vs.getTargetDistFromCenter("purplePyramid")!=None
                 if t!=None:
                     return ("purplePyramid",t[0],math.fabs(t[0])<=WALL_CENTER_THRESHOLD)
         #if sees pyramid and time is short
