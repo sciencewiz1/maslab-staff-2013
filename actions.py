@@ -143,9 +143,10 @@ class ForwardToTarget(Action):#or GoForward
         new_left_speed=LEFT_FORWARD+LEFT_SIGN*adjust
         #do I want to subtract from right motor too?
         #scale so speeds <=126
+        new_right_speed=RIGHT_FORWARD-RIGHT_SIGN*adjust
         multiplier=max(math.fabs(new_left_speed/126.0),1)
         new_left_speed=int(new_left_speed/multiplier)
-        new_right_speed=int(RIGHT_FORWARD/multiplier)
+        new_right_speed=int(new_right_speed/multiplier)
         print "L/R speeds: ",new_left_speed,new_right_speed
         self.wrapper[LEFT_MOTOR]=new_left_speed
         self.wrapper[RIGHT_MOTOR]=new_right_speed
@@ -194,7 +195,7 @@ class State:
         if DEBUG:
             print "Running ",self.__class__.__name__
             #print "Init action ",self.action.__name__
-            threading.Thread(target=playSound(self.__class__.__name__)).start()
+            #threading.Thread(target=playSound(self.__class__.__name__)).start()
         if isinstance(self.action,tuple):
             action_class=self.action[0]
             action_args=self.action[1]

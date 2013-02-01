@@ -16,7 +16,7 @@ ROLLER_SIGN=1
 ROLLER_ANGLE=180
 ROLLER_STOP=107
 CLOSED=165
-OPEN=90#check these angles
+OPEN=30#check these angles
 HELIX_SPEED=126
 '''!!!!!!!!!!'''
 LEFT_TURN=LEFT_SIGN*25
@@ -49,11 +49,11 @@ CENTER_THRESHOLD=100
 #exact later
 #in units of (motor speed)/(angle in degrees).
 #motor speed is -126 to 126
-TURN_KP = 2
+TURN_KP = .5
 #in units of (motor speed)/(angle in degrees*s)
-TURN_KI = .5
+TURN_KI = 0
 #in units of (motor speed s)/(angle in degrees)
-TURN_KD = .5
+TURN_KD = .1
 
 
 #angle in degrees between straight forward and furthest right the camera can see

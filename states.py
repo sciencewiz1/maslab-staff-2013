@@ -583,3 +583,47 @@ class RealignPyramid(State):
         self.wrapper[LEFT_MOTOR]=-LEFT_TURN
         self.wrapper[RIGHT_MOTOR]=RIGHT_TURN
         return ApproachPyramid
+
+#THIS IS A PID TEST
+
+class ApproachBallTest(State):
+    def __init__(self,wrap):
+        State.__init__(self,wrap)
+        self.action=(ForwardToTarget, wrap.color)
+    def stopfunction(self):
+        '''
+        Priority:
+        1. If sensors bumped, or takes too long, give up (Stuck)
+        2. If close to ball, prepare to capture (Charge)
+        3. If ball no longer centered, turn to face the ball. (TurnAndLook)
+        4. If lose track of ball, wander. (Wander)
+        '''
+        if DEBUG:
+            print "Current state: ", self.__class__.__name__
+        stuck_info=self.wrapper.stuck()
+        if DEBUG:
+            print "Stuckness: ",stuck_info
+        #note presence of AND here: give up when both sensors bumped,
+        #or when one sensor bumped and time too long, or too long
+        if (stuck_info[0]==3 and stuck_info[1]==3) or\
+           ((stuck_info[0]==3 or stuck_info[1]==3) and\
+            time.time()>=self.wrapper.time+3) or\
+           time.time()>=self.wrapper.time+100:
+            return Stop
+        #maybe turn in direction *opposite* from that which got it stuck?
+            '''!!!'''
+            #WARNING: after it gets unstuck it might go towards the same ball again!
+            #Need to prevent this!
+        if self.wrapper.vs.isClose():
+            print "charging b/c ball close"
+            return Stop
+        if self.wrapper.ballCentered():
+            return 0
+            #still going after ball
+        print "ball not centered!"
+        if self.wrapper.seeBall():
+            print "still see ball, turn to face."
+            return 0
+            #if you see the ball and it's not centered
+        #if lose track of ball
+        return 0

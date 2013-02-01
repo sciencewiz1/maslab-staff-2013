@@ -61,12 +61,9 @@ class VisionSystemWrapper:
         cmd=("setEdgeDetectionFilter",(filt,))
         self.cmdQueue.put(cmd)
     def getTargetDistFromCenter(self,target="all"):
-        print "gTDFC"
         cmd=("getTargetDistFromCenter",(target,))
         self.cmdQueue.put(cmd)
-        a=self.dataQueue.get()
-        print "gTDFC says ",a
-        return a
+        return self.dataQueue.get()
     def isClose(self,target="all"):
         cmd=("isClose",(target,))
         self.cmdQueue.put(cmd)
@@ -243,7 +240,9 @@ class VisionSystem(threading.Thread):
         self.mapper=Mapper()
         self.active=True
         self.detectEdges=False
-        self.targetColorProfiles={"redBall":[((0, 147, 73), (15, 255, 255)),((165, 58, 36), (180, 255, 255))],"greenBall":[((45, 150, 36), (90, 255, 255))],
+        #old values
+        #"redBall":[((0, 147, 73), (15, 255, 255))
+        self.targetColorProfiles={"redBall":[((0, 47, 73), (15, 255, 255)),((165, 58, 36), (180, 255, 255))],"greenBall":[((45, 150, 36), (90, 255, 255))],
                       "blueWall":[((103, 141, 94), (115, 255, 255))],"yellowWall":[((29, 150, 36), (64, 255, 255))],
                                   "purpleWall":[((110, 41, 52), (129, 255, 255))],"yellowWall2":[((26, 53,117), (32, 255, 255))],
                                   "cyanButton":[((95,176,115),(108,255,255))]}
@@ -391,7 +390,9 @@ class VisionSystem(threading.Thread):
                 self.dataQueue.put(False)
                 return False
             (x1,y1),center,leftExt,rightExt=imageData
-            if area>=CLOSE_THRESHOLD or yAbs>=(y1*float(3/4)):
+            print "ball at:",(xAbs,yAbs)
+            print "image size",(x1,y1)
+            if yAbs>=(y1*5/float(6)):
                 self.dataQueue.put(True)
                 return True
             else:
@@ -682,7 +683,7 @@ class VisionSystem(threading.Thread):
     def stop(self):
         self.active=False
         self.log.close()
-        sself.err_log.close()
+        self.err_log.close()
         del(self.frameWriter);
         print "Stopping Vision System"
     def run(self):
