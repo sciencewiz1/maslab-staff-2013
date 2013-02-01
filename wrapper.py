@@ -290,11 +290,11 @@ class Wrapper:
             #right now, if in wall mode, then ignore all balls
         if self.goForButton():
             t=self.vs.getTargetDistFromCenter("cyanButton")
-            if t!=0:
+            if t!=None:
                 return ("cyanButton",t[0],math.fabs(t[0])<=CENTER_THRESHOLD)
         if self.mode==WALL_MODE:
             t=self.vs.getTargetDistFromCenter("yellowWall")
-            if t!=0:            
+            if t!=None:            
                 return ("yellowWall",t[0],math.fabs(t[0])<=WALL_CENTER_THRESHOLD)
             if time.time()-self.start_time>=160:
                 t=self.vs.getTargetDistFromCenter("purplePyramid")!=None
