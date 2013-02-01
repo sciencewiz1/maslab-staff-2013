@@ -194,7 +194,7 @@ class State:
         if DEBUG:
             print "Running ",self.__class__.__name__
             #print "Init action ",self.action.__name__
-            thread.Thread(target=playSound(self.__class__.__name__)).start()
+            threading.Thread(target=playSound(self.__class__.__name__)).start()
         if isinstance(self.action,tuple):
             action_class=self.action[0]
             action_args=self.action[1]

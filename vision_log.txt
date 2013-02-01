@@ -1,496 +1,1751 @@
+
 Tracking no targets!
 Starting Vision System
-unpaused
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-('redBall', (51.0, 1.0), (291, 119), 71309.5, (291, 121))
-('redBall', (49.0, 4.0), (289, 116), 67219.5, (291, 117))
-('redBall', (80.0, -9.0), (320, 129), 17696.5, (309, 104))
-('redBall', (-232.0, -63.0), (8, 183), 241.5, (189, 144))
-('redBall', (-232.0, -63.0), (8, 183), 224.5, (163, 153))
-('redBall', (-232.0, -63.0), (8, 183), 219.5, (164, 152))
-('redBall', (-232.0, -63.0), (8, 183), 223.0, (152, 153))
-('redBall', (-232.0, -63.0), (8, 183), 233.5, (158, 154))
-('redBall', (-232.0, -63.0), (8, 183), 239.0, (167, 150))
-('redBall', (-232.0, -63.0), (8, 183), 232.0, (152, 154))
-('redBall', (-232.0, -63.0), (8, 183), 227.5, (149, 153))
-('redBall', (-232.0, -63.0), (8, 183), 237.0, (141, 155))
-('redBall', (-232.0, -63.0), (8, 183), 228.5, (148, 153))
-('redBall', (-232.0, -64.0), (8, 184), 232.0, (136, 155))
-('redBall', (-232.0, -64.0), (8, 184), 232.0, (145, 153))
-('redBall', (-232.0, -64.0), (8, 184), 238.5, (131, 155))
-('redBall', (-232.0, -64.0), (8, 184), 238.5, (146, 153))
-('redBall', (-232.0, -64.0), (8, 184), 237.5, (143, 153))
-('redBall', (-232.0, -64.0), (8, 184), 232.5, (148, 150))
-('redBall', (-232.0, -64.0), (8, 184), 227.5, (163, 149))
-('redBall', (-232.0, -64.0), (8, 184), 223.0, (135, 152))
-('redBall', (-232.0, -64.0), (8, 184), 225.0, (131, 152))
-('redBall', (-232.0, -64.0), (8, 184), 217.0, (142, 151))
-('redBall', (-233.0, -64.0), (7, 184), 217.0, (137, 153))
-('redBall', (-233.0, -64.0), (7, 184), 219.5, (140, 152))
-('redBall', (-233.0, -64.0), (7, 184), 210.5, (146, 151))
-('redBall', (-233.0, -64.0), (7, 184), 205.5, (143, 152))
-('redBall', (-233.0, -64.0), (7, 184), 205.0, (143, 153))
-('redBall', (-233.0, -64.0), (7, 184), 206.0, (131, 153))
-('redBall', (-233.0, -64.0), (7, 184), 203.0, (148, 150))
-('redBall', (-233.0, -64.0), (7, 184), 204.5, (146, 150))
-('redBall', (-233.0, -64.0), (7, 184), 193.5, (162, 147))
-('redBall', (-233.0, -64.0), (7, 184), 200.5, (146, 152))
-None
-('redBall', (-233.0, -64.0), (7, 184), 199.0, (159, 148))
-('redBall', (-233.0, -64.0), (7, 184), 196.0, (161, 147))
-('redBall', (-233.0, -64.0), (7, 184), 188.5, (164, 143))
-('redBall', (-233.0, -65.0), (7, 185), 173.0, (168, 140))
-('redBall', (-233.0, -64.0), (7, 184), 151.0, (181, 141))
-('redBall', (-234.0, -64.0), (6, 184), 138.5, (170, 141))
-('redBall', (-235.0, -64.0), (5, 184), 118.5, (191, 138))
-('redBall', (-235.0, -64.0), (5, 184), 100.0, (202, 131))
-('redBall', (-37.0, 42.0), (203, 78), 96.5, (207, 132))
-('redBall', (-37.0, 43.0), (203, 77), 91.5, (232, 129))
-('redBall', (-35.0, 44.0), (205, 76), 96.0, (216, 125))
-('redBall', (-34.0, 45.0), (206, 75), 100.5, (240, 121))
-('redBall', (-32.0, 47.0), (208, 73), 101.5, (258, 122))
-('redBall', (-29.0, 48.0), (211, 72), 110.5, (235, 120))
-('redBall', (-26.0, 50.0), (214, 70), 111.5, (209, 118))
-None
-None
-('redBall', (-15.0, 54.0), (225, 66), 112.5, (214, 117))
-('redBall', (-11.0, 56.0), (229, 64), 109.5, (225, 118))
-('redBall', (-6.0, 57.0), (234, 63), 116.5, (217, 112))
-None
-None
-('redBall', (5.0, 61.0), (245, 59), 120.0, (246, 110))
-('redBall', (8.0, 62.0), (248, 58), 127.5, (274, 111))
-('redBall', (10.0, 62.0), (250, 58), 118.5, (262, 112))
-None
-('redBall', (12.0, 63.0), (252, 57), 126.5, (281, 107))
-('redBall', (13.0, 62.0), (253, 58), 124.0, (281, 105))
-None
-None
-None
-None
-None
-None
-('redBall', (22.0, 65.0), (262, 55), 131.0, (315, 94))
-None
-('redBall', (25.0, 65.0), (265, 55), 128.0, (316, 90))
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-('redBall', (18.0, 63.0), (258, 57), 120.0, (326, 97))
-None
-None
-None
-None
-('redBall', (6.0, 60.0), (246, 60), 118.5, (320, 101))
-None
-None
-None
-None
-None
-None
-None
-('redBall', (-9.0, 56.0), (231, 64), 108.5, (287, 105))
-None
-None
-None
-None
-None
-None
-('redBall', (-17.0, 53.0), (223, 67), 113.5, (241, 105))
-None
-None
-None
-('redBall', (-20.0, 52.0), (220, 68), 114.5, (257, 107))
-('redBall', (-20.0, 52.0), (220, 68), 111.0, (254, 104))
-('redBall', (-21.0, 52.0), (219, 68), 117.5, (264, 105))
-('redBall', (-21.0, 52.0), (219, 68), 109.5, (253, 99))
-('redBall', (-22.0, 52.0), (218, 68), 114.5, (271, 102))
-('redBall', (-22.0, 52.0), (218, 68), 109.5, (261, 102))
-None
-None
-None
-None
-('redBall', (-23.0, 51.0), (217, 69), 114.0, (263, 106))
-('redBall', (-24.0, 51.0), (216, 69), 122.0, (247, 101))
-None
-('redBall', (-24.0, 51.0), (216, 69), 116.0, (243, 107))
-('redBall', (-24.0, 51.0), (216, 69), 118.0, (233, 101))
-('redBall', (-25.0, 51.0), (215, 69), 123.5, (252, 109))
-None
-None
-None
-('redBall', (-25.0, 51.0), (215, 69), 115.0, (254, 106))
-None
-None
-None
-('redBall', (-26.0, 51.0), (214, 69), 114.0, (240, 106))
-('redBall', (-26.0, 51.0), (214, 69), 112.0, (255, 110))
-None
-('redBall', (-26.0, 50.0), (214, 70), 116.5, (247, 108))
-('redBall', (-26.0, 50.0), (214, 70), 120.0, (240, 106))
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-('redBall', (-25.0, 50.0), (215, 70), 111.5, (194, 129))
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-('redBall', (-26.0, 50.0), (214, 70), 113.5, (119, 149))
-('redBall', (-26.0, 49.0), (214, 71), 116.5, (128, 150))
-('redBall', (-26.0, 50.0), (214, 70), 121.5, (137, 150))
-('redBall', (-27.0, 50.0), (213, 70), 115.0, (127, 152))
-('redBall', (-234.0, -62.0), (6, 182), 148.5, (126, 151))
-('redBall', (-27.0, 50.0), (213, 70), 114.0, (125, 152))
-('redBall', (-234.0, -62.0), (6, 182), 169.0, (117, 156))
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-('redBall', (-29.0, 49.0), (211, 71), 115.5, (133, 147))
-None
-('redBall', (-29.0, 49.0), (211, 71), 119.0, (146, 141))
-('redBall', (-29.0, 49.0), (211, 71), 115.5, (134, 142))
-None
-('redBall', (-29.0, 49.0), (211, 71), 117.5, (160, 137))
-('redBall', (-29.0, 49.0), (211, 71), 116.0, (161, 136))
-('redBall', (-29.0, 49.0), (211, 71), 118.5, (168, 134))
-('redBall', (-30.0, 49.0), (210, 71), 120.5, (175, 126))
-('redBall', (-30.0, 49.0), (210, 71), 118.0, (191, 125))
-('redBall', (-29.0, 49.0), (211, 71), 114.0, (200, 124))
-('redBall', (-30.0, 49.0), (210, 71), 114.5, (204, 121))
-('redBall', (-30.0, 49.0), (210, 71), 116.0, (222, 119))
-('redBall', (-30.0, 49.0), (210, 71), 119.0, (225, 115))
-('redBall', (-30.0, 49.0), (210, 71), 109.0, (220, 114))
-None
-None
-None
-('redBall', (-30.0, 48.0), (210, 72), 117.5, (268, 114))
-None
-('redBall', (-30.0, 49.0), (210, 71), 114.0, (245, 112))
-('redBall', (-30.0, 49.0), (210, 71), 109.0, (267, 113))
-('redBall', (-30.0, 49.0), (210, 71), 113.5, (258, 112))
-None
-('redBall', (-31.0, 48.0), (209, 72), 105.5, (241, 119))
-('redBall', (-31.0, 48.0), (209, 72), 112.0, (248, 119))
-None
-None
-('redBall', (-31.0, 49.0), (209, 71), 112.0, (253, 116))
-('redBall', (-31.0, 49.0), (209, 71), 108.0, (267, 114))
-None
-('redBall', (-31.0, 49.0), (209, 71), 110.0, (255, 110))
-('redBall', (-31.0, 48.0), (209, 72), 111.0, (244, 109))
-('redBall', (-31.0, 48.0), (209, 72), 110.0, (268, 110))
-None
-None
-None
-('redBall', (-31.0, 48.0), (209, 72), 109.0, (280, 110))
-('redBall', (-32.0, 48.0), (208, 72), 107.0, (281, 110))
-('redBall', (-32.0, 48.0), (208, 72), 104.5, (288, 110))
-('redBall', (-32.0, 49.0), (208, 71), 108.5, (281, 109))
-('redBall', (-31.0, 49.0), (209, 71), 113.5, (281, 104))
-('redBall', (-32.0, 49.0), (208, 71), 106.5, (280, 107))
-('redBall', (-31.0, 49.0), (209, 71), 112.0, (284, 107))
-('redBall', (-32.0, 48.0), (208, 72), 109.0, (265, 100))
-('redBall', (115.0, -16.0), (355, 136), 114.0, (296, 113))
-('redBall', (-31.0, 49.0), (209, 71), 109.0, (290, 109))
-('redBall', (-31.0, 49.0), (209, 71), 116.0, (282, 109))
-('redBall', (119.0, -18.0), (359, 138), 121.0, (302, 114))
-('redBall', (-31.0, 48.0), (209, 72), 107.5, (275, 105))
-('redBall', (-32.0, 48.0), (208, 72), 104.5, (289, 111))
-None
-('redBall', (-31.0, 49.0), (209, 71), 112.5, (289, 111))
-None
-('redBall', (-32.0, 49.0), (208, 71), 110.0, (288, 107))
-('redBall', (-32.0, 48.0), (208, 72), 105.0, (294, 110))
-('redBall', (-31.0, 49.0), (209, 71), 111.5, (284, 108))
-('redBall', (-32.0, 48.0), (208, 72), 105.5, (292, 111))
-('redBall', (-32.0, 48.0), (208, 72), 110.0, (296, 110))
-('redBall', (-31.0, 48.0), (209, 72), 107.5, (285, 106))
-('redBall', (-31.0, 48.0), (209, 72), 108.0, (296, 110))
-('redBall', (-31.0, 48.0), (209, 72), 106.5, (292, 111))
-('redBall', (-31.0, 48.0), (209, 72), 111.0, (298, 111))
-('redBall', (-31.0, 48.0), (209, 72), 104.5, (292, 110))
-None
-('redBall', (-31.0, 48.0), (209, 72), 107.5, (294, 110))
-('redBall', (-31.0, 48.0), (209, 72), 106.0, (289, 110))
-('redBall', (-31.0, 48.0), (209, 72), 107.0, (288, 108))
-('redBall', (-31.0, 48.0), (209, 72), 105.0, (292, 111))
-('redBall', (-31.0, 48.0), (209, 72), 107.5, (284, 108))
-None
-('redBall', (-31.0, 48.0), (209, 72), 106.0, (288, 109))
-('redBall', (-31.0, 48.0), (209, 72), 109.5, (290, 108))
-('redBall', (-31.0, 49.0), (209, 71), 105.0, (299, 112))
-('redBall', (-31.0, 48.0), (209, 72), 109.5, (296, 113))
-('redBall', (-31.0, 48.0), (209, 72), 108.5, (293, 109))
-('redBall', (-32.0, 48.0), (208, 72), 106.5, (299, 112))
-('redBall', (-32.0, 48.0), (208, 72), 106.5, (286, 111))
-('redBall', (-32.0, 48.0), (208, 72), 109.0, (284, 106))
-('redBall', (-32.0, 48.0), (208, 72), 106.5, (287, 109))
-('redBall', (-32.0, 48.0), (208, 72), 105.5, (292, 109))
-('redBall', (-32.0, 48.0), (208, 72), 105.5, (291, 111))
-('redBall', (-32.0, 48.0), (208, 72), 110.0, (299, 112))
-('redBall', (-32.0, 48.0), (208, 72), 108.5, (284, 107))
-('redBall', (-32.0, 48.0), (208, 72), 104.5, (288, 110))
-('redBall', (-32.0, 48.0), (208, 72), 104.0, (301, 112))
-('redBall', (-33.0, 48.0), (207, 72), 109.0, (281, 105))
-('redBall', (-33.0, 48.0), (207, 72), 105.5, (267, 102))
-('redBall', (-33.0, 48.0), (207, 72), 105.5, (288, 107))
-('redBall', (-33.0, 48.0), (207, 72), 112.0, (273, 108))
-('redBall', (-33.0, 47.0), (207, 73), 110.0, (286, 109))
-('redBall', (-33.0, 48.0), (207, 72), 110.5, (281, 106))
-('redBall', (-33.0, 48.0), (207, 72), 110.5, (288, 112))
-('redBall', (-33.0, 48.0), (207, 72), 107.0, (292, 111))
-None
-('redBall', (-34.0, 47.0), (206, 73), 108.5, (282, 108))
-('redBall', (-34.0, 47.0), (206, 73), 110.0, (284, 109))
-('redBall', (-34.0, 48.0), (206, 72), 117.0, (279, 109))
-('redBall', (-34.0, 48.0), (206, 72), 105.0, (273, 112))
-('redBall', (-34.0, 48.0), (206, 72), 107.5, (253, 111))
-('redBall', (-34.0, 47.0), (206, 73), 107.0, (243, 117))
-None
-('redBall', (-35.0, 48.0), (205, 72), 109.5, (214, 124))
-('redBall', (-35.0, 47.0), (205, 73), 113.5, (214, 130))
-None
-None
-('redBall', (-35.0, 48.0), (205, 72), 102.5, (206, 133))
-('redBall', (-35.0, 48.0), (205, 72), 109.0, (191, 136))
-None
-None
-('redBall', (-35.0, 47.0), (205, 73), 108.0, (168, 142))
-('redBall', (-35.0, 48.0), (205, 72), 107.5, (174, 140))
-('redBall', (-235.0, -62.0), (5, 182), 117.0, (169, 142))
-('redBall', (-234.0, -63.0), (6, 183), 119.5, (145, 146))
-('redBall', (-234.0, -63.0), (6, 183), 127.5, (141, 145))
-('redBall', (-234.0, -63.0), (6, 183), 133.5, (150, 148))
-('redBall', (-234.0, -63.0), (6, 183), 134.0, (139, 151))
-('redBall', (-234.0, -63.0), (6, 183), 131.5, (154, 149))
-('redBall', (-35.0, 48.0), (205, 72), 108.5, (156, 149))
-('redBall', (-35.0, 48.0), (205, 72), 107.0, (149, 151))
-('redBall', (-35.0, 48.0), (205, 72), 112.5, (136, 153))
-('redBall', (-35.0, 48.0), (205, 72), 111.5, (132, 152))
-('redBall', (-35.0, 48.0), (205, 72), 108.0, (157, 151))
-('redBall', (-35.0, 48.0), (205, 72), 111.5, (156, 148))
-('redBall', (-35.0, 48.0), (205, 72), 107.0, (162, 147))
-None
-('redBall', (-35.0, 48.0), (205, 72), 108.5, (183, 143))
-('redBall', (-34.0, 48.0), (206, 72), 111.5, (184, 141))
-('redBall', (-35.0, 47.0), (205, 73), 107.5, (200, 140))
-('redBall', (-35.0, 47.0), (205, 73), 105.5, (209, 137))
-('redBall', (-35.0, 47.0), (205, 73), 106.5, (212, 138))
-('redBall', (-35.0, 48.0), (205, 72), 103.0, (210, 137))
-('redBall', (-34.0, 48.0), (206, 72), 107.5, (218, 132))
-('redBall', (-34.0, 48.0), (206, 72), 110.0, (181, 144))
-('redBall', (-34.0, 48.0), (206, 72), 111.5, (203, 137))
-('redBall', (-35.0, 47.0), (205, 73), 102.5, (184, 149))
-('redBall', (-34.0, 48.0), (206, 72), 110.5, (182, 147))
-('redBall', (-35.0, 48.0), (205, 72), 103.0, (179, 154))
-('redBall', (-35.0, 48.0), (205, 72), 109.0, (154, 158))
-('redBall', (-34.0, 48.0), (206, 72), 109.5, (169, 156))
-('redBall', (-35.0, 48.0), (205, 72), 107.5, (143, 160))
-('redBall', (-35.0, 47.0), (205, 73), 113.5, (160, 157))
-('redBall', (-35.0, 48.0), (205, 72), 107.5, (149, 157))
-('redBall', (-35.0, 48.0), (205, 72), 106.0, (148, 160))
-('redBall', (-35.0, 48.0), (205, 72), 108.0, (159, 159))
-None
-('redBall', (114.0, -21.0), (354, 141), 118.0, (154, 160))
-('redBall', (-36.0, 47.0), (204, 73), 113.5, (149, 157))
-('redBall', (-36.0, 47.0), (204, 73), 112.0, (147, 160))
-('redBall', (-36.0, 47.0), (204, 73), 111.5, (132, 160))
-('redBall', (-36.0, 47.0), (204, 73), 109.5, (125, 163))
-('redBall', (-36.0, 48.0), (204, 72), 112.5, (128, 162))
-('redBall', (-36.0, 47.0), (204, 73), 107.0, (133, 165))
-('redBall', (-36.0, 47.0), (204, 73), 109.5, (134, 164))
-('redBall', (-36.0, 47.0), (204, 73), 109.5, (120, 166))
-('redBall', (-235.0, -61.0), (5, 181), 117.0, (118, 166))
-('redBall', (-234.0, -61.0), (6, 181), 129.5, (121, 164))
-('redBall', (-234.0, -60.0), (6, 180), 139.5, (121, 164))
-('redBall', (-232.0, -65.0), (8, 185), 142.0, (101, 169))
-('redBall', (-234.0, -66.0), (6, 186), 120.5, (108, 169))
-('redBall', (-232.0, -63.0), (8, 183), 236.0, (75, 174))
-('redBall', (-231.0, -61.0), (9, 181), 315.5, (85, 172))
-('redBall', (-230.0, -62.0), (10, 182), 348.5, (64, 175))
-('redBall', (-229.0, -63.0), (11, 183), 433.5, (70, 172))
-('redBall', (-228.0, -62.0), (12, 182), 474.0, (72, 173))
-('redBall', (-226.0, -62.0), (14, 182), 553.0, (62, 177))
-('redBall', (-223.0, -62.0), (17, 182), 593.5, (65, 177))
-('redBall', (-221.0, -61.0), (19, 181), 649.5, (66, 179))
-('redBall', (-219.0, -61.0), (21, 181), 678.0, (57, 182))
-('redBall', (-217.0, -61.0), (23, 181), 1011.0, (55, 183))
-('redBall', (-216.0, -67.0), (24, 187), 1357.5, (57, 184))
-('redBall', (-210.0, -60.0), (30, 180), 1405.5, (54, 183))
-('redBall', (-203.0, -57.0), (37, 177), 1419.0, (49, 184))
-('redBall', (-201.0, -64.0), (39, 184), 1712.0, (51, 184))
-('redBall', (-192.0, -62.0), (48, 182), 1475.5, (52, 184))
-('redBall', (-197.0, -60.0), (43, 180), 2017.0, (52, 185))
-('redBall', (-197.0, -66.0), (43, 186), 2503.5, (51, 185))
-('redBall', (-189.0, -65.0), (51, 185), 2169.0, (53, 185))
-('redBall', (-185.0, -59.0), (55, 179), 1559.5, (53, 185))
-('redBall', (-188.0, -63.0), (52, 183), 2141.5, (54, 185))
-('redBall', (-189.0, -68.0), (51, 188), 2639.0, (54, 186))
-('redBall', (-190.0, -68.0), (50, 188), 2583.0, (54, 185))
-('redBall', (-187.0, -64.0), (53, 184), 2116.5, (52, 186))
-('redBall', (-186.0, -64.0), (54, 184), 2091.0, (53, 186))
-('redBall', (-189.0, -64.0), (51, 184), 1994.5, (53, 185))
-('redBall', (-189.0, -64.0), (51, 184), 1965.0, (51, 185))
-('redBall', (-187.0, -58.0), (53, 178), 1401.0, (52, 184))
-('redBall', (-194.0, -62.0), (46, 182), 1796.0, (53, 183))
-('redBall', (-197.0, -62.0), (43, 182), 1606.0, (51, 183))
-('redBall', (-200.0, -62.0), (40, 182), 1455.0, (53, 181))
-('redBall', (-205.0, -62.0), (35, 182), 1222.5, (46, 180))
-('redBall', (-212.0, -57.0), (28, 177), 660.5, (44, 177))
-('redBall', (-215.0, -58.0), (25, 178), 576.0, (50, 173))
-('redBall', (-219.0, -58.0), (21, 178), 513.0, (54, 170))
-('redBall', (-218.0, -54.0), (22, 174), 265.0, (59, 169))
-('redBall', (-224.0, -57.0), (16, 177), 350.0, (57, 164))
-('redBall', (-223.0, -54.0), (17, 174), 215.0, (66, 161))
-('redBall', (-225.0, -55.0), (15, 175), 183.5, (71, 159))
-None
-('redBall', (-229.0, -56.0), (11, 176), 173.0, (115, 147))
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
-None
+waiting...
+activating vision
+activated visionunpaused
+
+False
+going for target...greenBall
+vision system set
+walltimer: started wrapper 
+0.00100016593933got here
+
+got here 1234
+0 None True all
+finished superclass init
+gTDFC
+walltimer:  1.58200001717
+gTDFC says  (-197.0, -64.0)
+dist  (-197.0, -64.0)
+dist  (-197.0, -64.0)
+see target to left
+started turn and look with target,  all
+set starting state
+Running  TurnAndLook
+walltimer:  2.60000014305
+walltimer:  3.62300014496
+walltimer:  4.6320002079
+walltimer:  5.65500020981
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  None
+see ball at  None
+gTDFC
+gTDFC says  None
+gTDFC
+gTDFC says  None
+see wall at  None
+target seen:  None
+called see target
+gTDFC
+gTDFC says  None
+ see ball at walltimer:   None6.66500020027
+
+failed to see ball
+gTDFC
+gTDFC says  None
+see ball at  None
+gTDFC
+gTDFC says  None
+gTDFC
+gTDFC says  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  None
+see ball at  None
+gTDFC
+walltimer:  7.70700001717
+gTDFC says  None
+gTDFC
+gTDFC says  None
+see wall at  None
+target seen:  None
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+walltimer:  8.71700000763
+ gTDFC says  None
+see ball at  None
+gTDFC
+gTDFC says  None
+gTDFC
+gTDFC says  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  None
+see ball at  None
+gTDFC
+gTDFC says  None
+gTDFC
+walltimer:  9.73700022697
+gTDFC says  None
+see wall at  None
+target seen:  None
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  None
+see ball at  None
+gTDFC
+gTDFC says  None
+gTDFC
+gTDFC says  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+walltimer: gTDFC says   10.7600002289None
+
+see ball at  None
+gTDFC
+gTDFC says  None
+gTDFC
+gTDFC says  None
+see wall at  None
+target seen:  None
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  None
+see ball at  None
+gTDFC
+gTDFC says  None
+gTDFC
+gTDFC says  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+walltimer:  11.7660000324
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  None
+see ball at  None
+gTDFC
+gTDFC says  None
+gTDFC
+gTDFC says  None
+see wall at  None
+target seen:  None
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  None
+see ball at  None
+gTDFC
+walltimer:  12.7740001678gTDFC says 
+ None
+gTDFC
+gTDFC says  None
+see wall at  None
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  None
+see ball at  None
+gTDFC
+gTDFC says  None
+gTDFC
+gTDFC says  None
+see wall at  None
+target seen:  None
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+walltimer:  13.8140001297
+gTDFC says  None
+see ball at  None
+gTDFC
+gTDFC says  None
+gTDFC
+gTDFC says  None
+see wall at  None
+now go wander
+SM next state
+Running  Wander
+Running  GoForward
+Current state:  Wander
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  None
+see ball at  None
+gTDFC
+walltimer: gTDFC says   14.8420000076None
+
+gTDFC
+gTDFC says  None
+see wall at  None
+looping  GoForward
+Current state:  Wander
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  None
+see ball at  None
+gTDFC
+gTDFC says  None
+gTDFC
+gTDFC says  None
+see wall at  None
+looping  GoForward
+Current state:  Wander
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  None
+see ball at  None
+gTDFC
+walltimer:  15.8710000515
+gTDFC says  None
+gTDFC
+gTDFC says  None
+see wall at  None
+looping  GoForward
+Current state:  Wander
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  None
+see ball at  None
+gTDFC
+gTDFC says  None
+gTDFC
+gTDFC says walltimer:  None 
+16.878000021see wall at 
+ None
+looping  GoForward
+Current state:  Wander
+Stuckness:  (0, 3)
+SM next state
+Running  Stuck
+Running  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping   walltimer:  17.9460000992
+GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+got here
+got here 1234
+0 None True all
+finished superclass init
+gTDFC
+gTDFC says  None
+dist  None
+don't see target
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 3)
+SM next state
+Running  Stuck
+Running  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  walltimer: Stuck
+looping  GoBack
+Current state:  Stuck 
+looping  GoBack
+Current state:  Stuck
+looping  GoBack18.9660000801
+
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+got here
+got here 1234
+0 None True all
+finished superclass init
+gTDFC
+gTDFC says  (136.0, 36.0)
+dist  (136.0, 36.0)
+dist  (136.0, 36.0)
+see target to right
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 3)
+SM next state
+Running walltimer:   Stuck20.0410001278
+
+Running  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+ Current state: walltimer:  Stuck
+ looping  GoBack21.1150000095
+Current state:  Stuck
+
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+got here
+got here 1234
+0 None True all
+finished superclass init
+gTDFC
+gTDFC says  (-45.0, 28.0)
+dist  (-45.0, 28.0)
+dist  (-45.0, 28.0)
+see target to left
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 3)
+SM next state
+Running  Stuck
+Running  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+ looping walltimer:  GoBack
+Current state:   22.2000000477Stuck
+
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+got here
+got here 1234
+0 None True all
+finished superclass init
+gTDFC
+gTDFC says  (9.0, 30.0)
+dist  (9.0, 30.0)
+dist  (9.0, 30.0)
+see target to right
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+walltimer:  23.2520000935
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 3)
+SM next state
+Running  Stuck
+Running  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  walltimer: GoBack 
+Current state: 24.3170001507 
+Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+got here
+got here 1234
+0 None True all
+finished superclass init
+gTDFC
+gTDFC says  (-3.0, 27.0)
+dist  (-3.0, 27.0)
+dist  (-3.0, 27.0)
+see target to left
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 3)
+SM next state
+Running  Stuck
+Running  GoBack
+Current state:  Stuck
+looping walltimer:   GoBack25.3630001545
+Current state:  
+Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+got here
+got here 1234
+0 None True all
+finished superclass init
+gTDFC
+walltimer:  26.3850002289
+gTDFC says  (11.0, 18.0)
+dist  (11.0, 18.0)
+dist  (11.0, 18.0)
+see target to right
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 3)
+SM next state
+Running  Stuck
+Running  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping walltimer:   GoBack27.4040000439
+
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+got here
+got here 1234
+0 None True all
+finished superclass init
+gTDFC
+gTDFC says  (-5.0, 13.0)
+dist  (-5.0, 13.0)
+dist  (-5.0, 13.0)
+see target to left
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+walltimer: Running   TurnLeft
+got to stop
+Current state: 28.4380002022 
+TurnAndLook
+Stuckness:  (0, 3)
+SM next state
+Running  Stuck
+Running  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping walltimer:   GoBack29.4880001545
+
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+got here
+got here 1234
+0 None True all
+finished superclass init
+gTDFC
+gTDFC says  (0.0, 14.0)
+dist  (0.0, 14.0)
+dist  (0.0, 14.0)
+see target to right
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 3)
+SM next state
+Running  Stuck
+Running  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck 
+walltimer: looping   GoBack30.5750000477
+
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+got here
+got here 1234
+0 None True all
+finished superclass init
+gTDFC
+gTDFC says  (-31.0, 42.0)
+dist  (-31.0, 42.0)
+dist  (-31.0, 42.0)
+see target to left
+ started turn and look with target, walltimer:   all31.6360001564
+
+SM next state
+Running  TurnAndLook
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 3)
+SM next state
+Running  Stuck
+Running  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+ looping  GoBack
+Current state:  Stuckwalltimer: 
+ looping 32.7150001526 
+GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+got here
+got here 1234
+0 None True all
+finished superclass init
+gTDFC
+gTDFC says  (55.0, 26.0)
+dist  (55.0, 26.0)
+dist  (55.0, 26.0)
+see target to right
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 3)
+SM next state
+Running  Stuck
+walltimer:  33.7820000648
+Running  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state: walltimer:   Stuck34.8380000591
+
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+got here
+got here 1234
+0 None True all
+finished superclass init
+gTDFC
+gTDFC says  (121.0, 6.0)
+dist  (121.0, 6.0)
+dist  (121.0, 6.0)
+see target to right
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 3)
+SM next state
+Running  Stuck
+Running  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  walltimer:  35.8900001049Stuck
+
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+got here
+got here 1234
+0 None True all
+finished superclass init
+ gTDFCwalltimer: 
+ 36.9110000134gTDFC says 
+ None
+dist  None
+don't see target
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 3)
+SM next state
+Running  Stuck
+Running  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+walltimer: looping   37.9850001335GoBack
+
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+looping  GoBack
+Current state:  Stuck
+got here
+got here 1234
+0 None True all
+finished superclass init
+gTDFC
+gTDFC says  None
+dist  None
+don't see target
+started turn and look with target,  all
+SM next state
+Running  TurnAndLook
+walltimer:  39.0510001183
+Running  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (199.0, 31.0)
+see ball at  (199.0, 31.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (211.0, 18.0)
+dist:  (211.0, 18.0)
+dist[0]:  211.0
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (208.0, 18.0)
+see ball at  (208.0, 18.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  walltimer: (208.0, 16.0)
+ dist: 40.106000185 
+(208.0, 16.0)
+dist[0]:  208.0
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (208.0, 18.0)
+see ball at  (208.0, 18.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (208.0, 18.0)
+dist:  (208.0, 18.0)
+dist[0]:  208.0
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (208.0, 16.0)
+see ball at  (208.0, 16.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (208.0, 15.0)
+dist:  (208.0, 15.0)
+dist[0]:  208.0
+keep turning
+looping  TurnLeft
+got to stop
+ Current state:  TurnAndLook
+Stuckness:  (0, 0)
+walltimer: called see target 
+gTDFC41.1940000057
+
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (216.0, 11.0)
+see ball at  (216.0, 11.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (214.0, 12.0)
+dist:  (214.0, 12.0)
+dist[0]:  214.0
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (208.0, 15.0)
+see ball at  (208.0, 15.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (222.0, 13.0)
+dist:  (222.0, 13.0)
+dist[0]:  222.0
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (218.0, 13.0)
+see ball at  (218.0, 13.0)
+target seen:  cyanButton
+gTDFC
+walltimer: gTDFC says   (219.0, 11.0)
+dist:  (219.0, 11.0)
+dist[0]:  219.0
+keep turning
+42.237000227looping 
+ TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 10.0)
+see ball at  (223.0, 10.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (216.0, 13.0)
+dist:  (216.0, 13.0)
+dist[0]:  216.0
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (224.0, 12.0)
+see ball at  (224.0, 12.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (225.0, 9.0)
+dist:  (225.0, 9.0)
+dist[0]:  225.0
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+walltimer:  gTDFC says 43.3430001736
+ None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (222.0, 13.0)
+see ball at  (222.0, 13.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (222.0, 14.0)
+dist:  (222.0, 14.0)
+dist[0]:  222.0
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 13.0)
+see ball at  (223.0, 13.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (223.0, 12.0)
+dist:  (223.0, 12.0)
+dist[0]:  223.0
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 14.0)
+see ball at  (223.0, 14.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (223.0, 14.0)
+dist:  (223.0, 14.0)
+dist[0]:  223.0
+keep turning
+looping  TurnLeft
+walltimer: got to stop 
+44.3990001678Current state: 
+ TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (222.0, 14.0)
+see ball at  (222.0, 14.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (223.0, 13.0)
+dist:  (223.0, 13.0)
+dist[0]:  223.0
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 14.0)
+see ball at  (223.0, 14.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (223.0, 14.0)
+dist:  (223.0, 14.0)
+dist[0]:  223.0
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+walltimer:  45.4560000896
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 13.0)
+see ball at  (223.0, 13.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (223.0, 13.0)
+dist:  (223.0, 13.0)
+dist[0]:  223.0
+keep turning
+looping  TurnLeft
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 13.0)
+see ball at  (223.0, 13.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (223.0, 13.0)
+dist: walltimer:   (223.0, 13.0)46.498000145
+dist[0]:  223.0
+now go wander
+SM next state
+
+Running  Wander
+Running  GoForward
+Current state:  Wander
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 13.0)
+see ball at  (223.0, 13.0)
+saw  cyanButton
+got here 1234
+0 None True cyanButton
+finished superclass init
+gTDFC
+gTDFC says  (222.0, 13.0)
+dist  (222.0, 13.0)
+dist  (222.0, 13.0)
+see target to right
+started turn and look with target,  cyanButton
+SM next state
+Running  TurnAndLook
+walltimer:  47.5650000572
+Running  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 13.0)
+see ball at  (223.0, 13.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (223.0, 13.0)
+dist:  (223.0, 13.0)
+dist[0]:  223.0
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 13.0)
+see ball at  (223.0, 13.0)
+target seen:  cyanButton
+gTDFC
+walltimer: gTDFC says   48.6010000706(223.0, 13.0)
+
+dist:  (223.0, 13.0)
+dist[0]:  223.0
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 13.0)
+see ball at  (223.0, 13.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (223.0, 13.0)
+dist:  (223.0, 13.0)
+dist[0]:  223.0
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 13.0)
+see ball at  (223.0, 13.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (223.0, 13.0)
+dist:  (223.0, 13.0)
+dist[0]:  223.0
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  walltimer: None
+see ball at  None
+failed to see ball
+gTDFC
+ 49.6590001583
+gTDFC says  (223.0, 13.0)
+see ball at  (223.0, 13.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (223.0, 13.0)
+dist:  (223.0, 13.0)
+dist[0]:  223.0
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 13.0)
+see ball at  (223.0, 13.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (223.0, 13.0)
+dist:  (223.0, 13.0)
+dist[0]:  223.0
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 13.0)
+see ball at  (223.0, 13.0)
+target seen:  cyanButton
+gTDFC
+walltimer:  50.7330000401
+gTDFC says  (223.0, 13.0)
+dist:  (223.0, 13.0)
+dist[0]:  223.0
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 13.0)
+see ball at  (223.0, 13.0)
+target seen:  cyanButton
+gTDFC
+gTDFC says  (223.0, 13.0)
+dist:  (223.0, 13.0)
+dist[0]:  223.0
+keep turning
+looping  TurnRight
+got to stop
+Current state:  TurnAndLook
+Stuckness:  (0, 0)
+called see target
+gTDFC
+gTDFC says  None
+see ball at  None
+failed to see ball
+gTDFC
+gTDFC says  (223.0, 13.0)
+see ball at  (223.0, 13.0)
+target seen:  cyanButton
+gTDFC
+ walltimer:  51.7520000935
+gTDFC says  (223.0, 13.0)
+dist:  (223.0, 13.0)
+dist[0]:  223.0

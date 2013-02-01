@@ -133,6 +133,7 @@ class TurnAndLook(State):
         print self.desiredIR,self.action,self.goToOpen,self.target
         #print "init turn and look"
         State.__init__(self,wrap)
+        print "finished superclass init"
         #if ball is to the right
         #also wall
         #########################################

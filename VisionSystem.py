@@ -61,9 +61,12 @@ class VisionSystemWrapper:
         cmd=("setEdgeDetectionFilter",(filt,))
         self.cmdQueue.put(cmd)
     def getTargetDistFromCenter(self,target="all"):
+        print "gTDFC"
         cmd=("getTargetDistFromCenter",(target,))
         self.cmdQueue.put(cmd)
-        return self.dataQueue.get()
+        a=self.dataQueue.get()
+        print "gTDFC says ",a
+        return a
     def isClose(self,target="all"):
         cmd=("isClose",(target,))
         self.cmdQueue.put(cmd)
@@ -297,7 +300,7 @@ class VisionSystem(threading.Thread):
         else:
             print "Filter does not exist!"
     def addTarget(self,targetStr):
-        if targetStr in self.targetColorProfiles and targetStr not in self.targets:
+        if targetStr in self.targetColorProfiles:
             self.targets.append(targetStr)
         else:
             print "Target: "+str(targetStr)+" is not a valid target!"
@@ -307,7 +310,7 @@ class VisionSystem(threading.Thread):
         else:
             print "Target: "+str(targetStr)+" is currently not being tracked!"
     def addWallTarget(self,targetStr):
-        if targetStr in self.targetColorProfiles and targetStr not in self.wallTargets:
+        if targetStr in self.targetColorProfiles:
             self.wallTargets.append(targetStr)
         else:
             print "Target: "+str(targetStr)+" is not a valid wall target!"
@@ -351,12 +354,17 @@ class VisionSystem(threading.Thread):
         if len(closeData)!=0:
             closest=max(closeData)
         if closest==None:
+            self.dataQueue.put(None)
             return None
         yAbs,target=closest
+        if target=="all":
+            target = self.bestTargetOverall[0]
         data=self.targetLocations[target]
-        self.dataQueue.put(data)
+        (target,(xdist,ydist),(xClosest,yClosest),areat,(xCOM,yCOM))=data
+        self.dataQueue.put((xdist,ydist))
         return data
     def closeness(self,target):
+        sample=None
         if target in self.targetLocations:
             sample=self.targetLocations[target]
         else:
@@ -667,7 +675,6 @@ class VisionSystem(threading.Thread):
         self.log=open("vision_log.txt",'w')
         sys.stdout = StdOut(sys.stdout,self.log)
         self.err_log = open('error.log', 'w')               
-        sys.stderr = self.err_log 
     def parseCMD(self,cmd):
         method,args=cmd
         func=getattr(self,method)
@@ -716,3 +723,4 @@ class VisionSystem(threading.Thread):
 if __name__=="__main__":
     run=VisionSystemWrapper()
     run.activate()
+        
