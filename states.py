@@ -274,8 +274,9 @@ class ApproachBall(State):
             print "Stuckness: ",stuck_info
         #note presence of AND here: give up when both sensors bumped,
         #or when one sensor bumped and time too long, or too long
-        if (stuck_info[0]==3 and stuck_info[1]==3) or\
-           ((stuck_info[0]==3 or stuck_info[1]==3) and\
+        if (stuck_info[0]==3 and stuck_info[1]==3):
+            return Score
+        if ((stuck_info[0]==3 or stuck_info[1]==3) and\
             time.time()>=self.wrapper.time+3) or\
            time.time()>=self.wrapper.time+6:
             return Stuck
