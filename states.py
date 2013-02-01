@@ -190,7 +190,7 @@ class TurnAndLook(State):
             print "Stuckness: ",stuck_info
         if stuck_info[0]==3 or stuck_info[1]==3:
             return Stuck
-        target_seen,b,target_cent=self.wrapper.seeTarget()
+        target_seen,b,target_cent=self.wrapper.targetData()
         print "target seen: ",target_seen
         #!current=None
         #!if target_seen!=None:
@@ -394,7 +394,6 @@ class Charge(State):
                 return Score
             if time.time()>self.wrapper.time+5:
                 return Stuck
-
         return 0
         #keep capturing
 
