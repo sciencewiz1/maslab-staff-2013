@@ -2,7 +2,16 @@ from constants import *
 from wrapper import PIDController
 import math
 import time
-
+import pyglet
+def playSound(arg=""):
+    relativePath="./audio/"
+    #if arg="":
+    #   soundList=["Beeping and whistling.mp3","Excited R2D2.mp3","Proud R2D2.mp3"]
+    #    fileName=soundList[number]
+    #else:
+    fileName=arg+".wav"
+    sound = pyglet.media.load(relativePath+fileName, streaming=False)
+    sound.play()
 """An action is a basic movement. It consists of 2 methods:
 run: what to do at the beginning of an action (ex. set the motors to go forward)
 loop: what to do continuously during the action
@@ -17,6 +26,7 @@ class Action:
         self.wrapper=wrapper
     def start(self, method):
         print "Running ",self.__class__.__name__
+        playSound(self.__class__.__name__)
         self.run()
         b=method()
         while not b:
