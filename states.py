@@ -197,6 +197,7 @@ class TurnAndLook(State):
         #!    current=self.wrapper.vs.getTargetDistFromCenter(target_seen)
         target_cent=self.wrapper.targetCentered(target_seen)
         #!s=lambda x: (x<0)*-1+(x>0)*1
+        print "target cent:",target_cent
         if target_cent:
         #!or (current!=None and self.last_loc!=None and s(current)!=s(self.last_loc)):
             if target_seen in ["greenBall","redBall"]:
@@ -517,10 +518,10 @@ class ApproachPyramid(State):
         State.__init__(self,wrap)
         self.action=(ForwardToTarget, "yellowWall2")
         wrap.vs.activateEdgeDetection()
-        self.mpr=Mapper()
+#        self.mpr=Mapper()
     def stopfunction(self):
-        lines=self.wrapper.vs.getWallCoordinates()
-        self.mpr.graphToLocalMap(lines)
+#        lines=self.wrapper.vs.getWallCoordinates()
+#        self.mpr.graphToLocalMap(lines)
         if DEBUG:
             print "Current state: ", self.__class__.__name__
         stuck_info=self.wrapper.stuck()
@@ -537,8 +538,8 @@ class ApproachPyramid(State):
             wrap.vs.deactivateEdgeDetection()
             return Stuck
         #query mapper:
-        if self.mpr.pyramidCorner():
-            return RealignPyramid
+#        if self.mpr.pyramidCorner():
+#            return RealignPyramid
         #if within 4 inches
         if self.wrapper.targetClose("purplePyramid"):#self.wrapper[FRONT_DIST]<4 or self.wrapper[FRONT_DIST2]<4:
             wrap.vs.deactivateEdgeDetection()            

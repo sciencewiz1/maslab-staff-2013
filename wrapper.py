@@ -264,6 +264,7 @@ class Wrapper:
         return t != None
     def ballCentered(self):
         dist=self.vs.getTargetDistFromCenter(self.color)
+        print "ball x value: ",dist
         if dist== None:
             return 0
         return (math.fabs(dist[0])<=CENTER_THRESHOLD)
@@ -273,6 +274,7 @@ class Wrapper:
         if target==None:
             return 0
         dist=self.vs.getTargetDistFromCenter(target)
+        print "is it centered? dist=",dist
         if dist== None:
             return 0
         return (math.fabs(dist[0])<=CENTER_THRESHOLD) or ((target=="yellowWall" or\
