@@ -280,6 +280,28 @@ class Wrapper:
         return (math.fabs(dist[0])<=CENTER_THRESHOLD) or ((target=="yellowWall" or\
                                                            target=="purplePyramid") and\
                                                           math.fabs(dist[0])<=WALL_CENTER_THRESHOLD)
+    def targetData(self):
+        #print "called see target"
+        if self.mode==BALL_MODE:
+            t=self.vs.getTargetDistFromCenter(self.color)
+            if t!=None:
+                return (self.color,t[0],math.fabs(t[0])<=CENTER_THRESHOLD)
+        print "failed to see ball"
+            #right now, if in wall mode, then ignore all balls
+        if self.goForButton():
+            t=self.vs.getTargetDistFromCenter("cyanButton")
+            if t!=0:
+                return ("cyanButton",t[0],math.fabs(t[0])<=CENTER_THRESHOLD)
+        if self.mode==WALL_MODE:
+            t=self.vs.getTargetDistFromCenter("yellowWall")
+            if t!=0:            
+                return ("yellowWall",t[0],math.fabs(t[0])<=WALL_CENTER_THRESHOLD)
+            if time.time()-self.start_time>=160:
+                t=self.vs.getTargetDistFromCenter("purplePyramid")!=None:
+                if t!=None:
+                    return ("purplePyramid",t[0],math.fabs(t[0])<=WALL_CENTER_THRESHOLD)
+        #if sees pyramid and time is short
+        return (None,None,False)
     '''return array of coordinates of balls'''
     def targetClose(self,target=None):
         if target==None:
@@ -373,7 +395,7 @@ class IRModule():
     '''Starts IR thread with an empty list of logged IR values'''
     def __init__(self,ir2,long_range=False,filtering=False,offset=0):
         #IR value
-        threading.Thread.__init__(self)
+        #threading.Thread.__init__(self)
         #self.ir_val=0
         #self.f=open('ir_log.txt','w')
         self.active=True
