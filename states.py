@@ -451,13 +451,13 @@ class Score(State):
         self.action=ReleaseBalls
     def stopfunction(self):
         fl=0
-        f=math.floor(time.time()-self.wrapper.time)
+        f=math.floor((time.time()-self.wrapper.time)/2)
         if f>fl:
             self.wrapper[RELEASE_MOTOR]=CLOSED
-            time.sleep(0.1)
+            time.sleep(1)
             self.wrapper[RELEASE_MOTOR]=OPEN
             fl=f
-        if time.time()>self.wrapper.time+5:
+        if time.time()>self.wrapper.time+6:
             self.wrapper[RELEASE_MOTOR]=CLOSED
             self.wrapper.mode=BALL_MODE
             a=165
