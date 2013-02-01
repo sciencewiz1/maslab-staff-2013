@@ -3,13 +3,15 @@ from wrapper import PIDController
 import math
 import time
 import pyglet
+import sys
+import threading
 def playSound(arg=""):
     relativePath="./audio/"
     #if arg="":
     #   soundList=["Beeping and whistling.mp3","Excited R2D2.mp3","Proud R2D2.mp3"]
     #    fileName=soundList[number]
     #else:
-    fileName=arg+".wav"
+    fileName=arg+".mp3"
     sound = pyglet.media.load(relativePath+fileName, streaming=False)
     sound.play()
 """An action is a basic movement. It consists of 2 methods:
@@ -26,7 +28,6 @@ class Action:
         self.wrapper=wrapper
     def start(self, method):
         print "Running ",self.__class__.__name__
-        playSound(self.__class__.__name__)
         self.run()
         b=method()
         while not b:
@@ -193,6 +194,7 @@ class State:
         if DEBUG:
             print "Running ",self.__class__.__name__
             #print "Init action ",self.action.__name__
+            thread.Thread(target=playSound(self.__class__.__name__)).start()
         if isinstance(self.action,tuple):
             action_class=self.action[0]
             action_args=self.action[1]
@@ -207,7 +209,7 @@ class State:
             next_arg = next_state_info[1]
             return next_state(self.wrapper,next_arg)
         #next_state_info is a classname; return an object of that class
-        return next_state_info(self.wrapper)     
+        return next_state_info(self.wrapper)
 
     
 class Stop(State):
