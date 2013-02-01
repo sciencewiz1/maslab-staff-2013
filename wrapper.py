@@ -122,12 +122,12 @@ class Wrapper:
         '''Add this when we add more IR modules'''
         self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 2))
         self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 7))
-        print "IR module"
+        #print "IR module"
         self.left_bump=arduino.DigitalInput(self.ard,50)
         self.right_bump=arduino.DigitalInput(self.ard,52)
-        print "Bump sensors"
+        #print "Bump sensors"
         #self.imu=IMU(arduino.IMU(self.ard))
-        print "imu"
+        #print "imu"
         #self.roller_motor.setValue(1)
         self.mode=BALL_MODE
         self.color=GREEN#change this when change color!!!
@@ -146,9 +146,9 @@ class Wrapper:
         else:
             print "Already connected!"
     def startVS(self):
-        print "init vision system"
+        #print "init vision system"
         self.vs=VisionSystemWrapper()
-        print "starting vs"
+        #print "starting vs"
     def start(self):
         if not self.connected:
             print "Not connected to arduino! Please connect and then try again!"
@@ -157,18 +157,16 @@ class Wrapper:
         self[ROLLER_MOTOR]=ROLLER_ANGLE
         self[RELEASE_MOTOR]=CLOSED
         on=self[START]
-        print "hi"
-        print "waiting..."
         while not on and not self.smSwitchOverride:
             on=self[START]
             if self.manualControlCheck():
                 print "did not start SM, entering manual override!"
                 return False
         target=self[TARGET]
-        print "activating vision"
+        #print "activating vision"
         self.vs.activate()
-        print "activated vision"
-        print target
+        #print "activated vision"
+        #print target
         if target==True:
             self.color=RED
         else:
@@ -180,6 +178,7 @@ class Wrapper:
         #self.vs.addTarget("redBall")
         #self.vs.addTarget("greenBall")
         self.vs.addTarget("cyanButton")
+        self.vs.addTarget("blueWall")
         #self.color=["redBall","greenBall"]
         print "vision system set"
         #start a thread that takes IR readings
@@ -239,16 +238,16 @@ class Wrapper:
         self.last_button_time=time.time()
         self.button_presses+=1
     def seeTarget(self):
-        print "called see target"
-        if self.seeBall() and self.mode!=WALL_MODE:
+        #print "called see target"
+        if self.seeBall() and self.mode==BALL_MODE:
             return self.color
         print "failed to see ball"
             #right now, if in wall mode, then ignore all balls
         if self.goForButton() and self.seeButton():
             return "cyanButton"
-        if self.seeWall() and self.mode==WALL_MODE:
+        if self.mode==WALL_MODE and self.seeWall():
             return "yellowWall"
-        if self.vs.getTargetDistFromCenter("purplePyramid")!=None and time.time()-self.start_time>=160 and self.mode==WALL_MODE:
+        if self.mode==WALL_MODE and time.time()-self.start_time>=160 and self.vs.getTargetDistFromCenter("purplePyramid")!=None:
             return "purplePyramid"
         #if sees pyramid and time is short
         return None
@@ -479,7 +478,7 @@ class PIDController:
         #self.input_method=input_method
         #self.wrapper=wrapper
     def adjust(self,error):
-        print "ADJUSTING"
+        #print "ADJUSTING"
         if self.last_error==None:
             self.last_error=error
         current_time=time.time()
@@ -513,6 +512,7 @@ class WallTimer(threading.Thread):
         self.wrapper.vs.clearTargets()
         self.wrapper.vs.addTarget("yellowWall")
         self.wrapper.vs.addTarget("purplePyramid")
+        self.wrapper.vs.addTarget("blueWall")
         #Update this once David puts in code to look for walls.
     def stop(self):
         self.active=False

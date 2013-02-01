@@ -468,6 +468,7 @@ class Score(State):
             self.wrapper.vs.clearTargets()
             self.wrapper.vs.addTarget("redBall")
             self.wrapper.vs.addTarget("greenBall")
+            self.wrapper.vs.addTarget("blueWall")
             #might as well gulp up everything after it's emptied
             #balls and there's <1 minute left.
             #go collect balls (if time remains)
