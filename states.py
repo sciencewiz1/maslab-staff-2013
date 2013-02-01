@@ -113,7 +113,7 @@ class TurnAndLook(State):
             print "got here"
             self.target="all"
             otherData=()
-        elif data.__class__==str:
+        elif data.__class__==str or data.__class__==list:
             self.target=data
             otherData=()
         else:
@@ -229,20 +229,19 @@ class TurnAndLook(State):
             #for total rotate time-self.openSpaceTime to get to open space
             #self.openSpaceTime is guaranteed to be <=TIMEOUT
             if self.goToOpen:
-                return Wander
-##                current=self.openSpaceIR
-##                if current!=None:
-##                    print "found open space"
-##                    action=None
-##                    if isinstance(self.action,TurnRight):
-##                        action=TurnLeft
-##                        print "turning left toward open space"
-##                    else:
-##                        action=TurnRight
-##                        print "turning right toward open space"
-##                    return (TurnAndLook,(self.target,(action,current,False)))
-##                else:
-##                    return Wander
+                current=self.openSpaceIR
+                if current!=None:
+                    print "found open space"
+                    action=None
+                    if isinstance(self.action,TurnRight):
+                        action=TurnLeft
+                        print "turning left toward open space"
+                    else:
+                        action=TurnRight
+                        print "turning right toward open space"
+                    return (TurnAndLook,(self.target,(action,current,False)))
+                else:
+                    return Wander
             else:
             #########################################
                 return Wander
@@ -362,7 +361,7 @@ class Stuck(State):
 class Charge(State):
     def __init__(self,wrap,target=None):
         State.__init__(self,wrap)
-        self.action=GoForward
+        self.action=MaxForward
         self.button=False
         self.target=target
     def stopfunction(self):
@@ -372,7 +371,7 @@ class Charge(State):
         if self.target=="cyanButton":
             if time.time>self.wrapper.time+2 or (stuck_info[0]==3 and stuck_info[1]==3):
                 return Stuck
-        if self.target in ["redBall","greenBall"]:
+        if self.target==["redBall","greenBall"] or self.target in ["redBall","greenBall"]:
             if time.time()>self.wrapper.time+2:
                 self.wrapper.balls_collected+=1
                 return TurnAndLook
@@ -380,7 +379,10 @@ class Charge(State):
                 self.wrapper.balls_collected+=1
                 return Stuck
         if self.target in ["yellowWall","purplePyramid"]:
-            if time.time()>self.wrapper.time+5 or (stuck_info[0]==3 and stuck_info[1]==3):
+            if time.time()>self.wrapper.time+5:
+                return Stuck
+            if (stuck_info[0]==3 and stuck_info[1]==3) or\
+               (self.wrapper[FRONT_DIST2]>=250 and self.wrapper[FRONT_DIST2]<=350 and self.wrapper[FRONT_DIST]>=550:
                 return Score
         return 0
         #keep capturing

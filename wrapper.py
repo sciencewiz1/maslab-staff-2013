@@ -180,6 +180,7 @@ class Wrapper:
         self.vs.addTarget("greenBall")
         #self.vs.addTarget(#both colors
         self.vs.addTarget("cyanButton")
+        self.color=["redBall","greenBall"]
         print "vision system set"
         #start a thread that takes IR readings
         self.ir_module.start()
@@ -245,11 +246,11 @@ class Wrapper:
             #right now, if in wall mode, then ignore all balls
         if self.goForButton() and self.seeButton():
             return "cyanButton"
-        if self.vs.getTargetDistFromCenter("purplePyramid")!=None:
-            return "purplePyramid"
-        if self.seeWall() and time.time()-self.start_time>=160:
+        if self.seeWall():
             return "yellowWall"
-        #if sees wall and time is short
+        if self.vs.getTargetDistFromCenter("purplePyramid")!=None and time.time()-self.start_time>=160:
+            return "purplePyramid"
+        #if sees pyramid and time is short
         return None
     def seeWall(self):
         t=self.vs.getTargetDistFromCenter("yellowWall")

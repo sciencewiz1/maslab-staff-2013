@@ -67,6 +67,16 @@ class GoForward(Action):
         #in the future put PID controls to keep it going straight
         print "looping ",self.__class__.__name__
 
+
+class MaxForward(Action):
+    def run(self):
+        self.wrapper[LEFT_MOTOR]=MAX_LEFT
+        #tell right motor to go forward
+        self.wrapper[RIGHT_MOTOR]=MAX_RIGHT
+    def loop(self):
+        #in the future put PID controls to keep it going straight
+        print "looping ",self.__class__.__name__
+
 class GoBack(Action):
     def run(self):
         self.wrapper[LEFT_MOTOR]=LEFT_BACK
