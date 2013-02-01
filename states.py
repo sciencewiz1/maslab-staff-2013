@@ -474,14 +474,15 @@ class ApproachWall(State):
             print "Stuckness: ",stuck_info
         #note presence of AND here: give up when both sensors bumped,
         #or when one sensor bumped and time too long, or too long
-        if (stuck_info[0]==3 and stuck_info[1]==3) or\
-           ((stuck_info[0]==3 or stuck_info[1]==3) and\
+        #if within 4 inches
+        if (stuck_info[0]==3 and stuck_info[1]==3):
+            return Score
+        if ((stuck_info[0]==3 or stuck_info[1]==3) and\
             time.time()>=self.wrapper.time+3) or\
-           time.time()>=self.wrapper.time+6:
+            time.time()>=self.wrapper.time+6:
             #if stuck_info[0]==3 and stuck_info[1]==3:
             #    self.wrapper.hitButton()
             return Stuck
-        #if within 4 inches
         if self.wrapper.targetClose("yellowWall"):#self.wrapper[FRONT_DIST]<4 or self.wrapper[FRONT_DIST2]<4:
             return (Charge,"yellowWall")
         if self.wrapper.targetCentered("yellowWall")!=None:

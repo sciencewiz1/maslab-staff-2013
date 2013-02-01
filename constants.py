@@ -1,7 +1,7 @@
 #IR threshold: what counts as "close"?
-CLOSE = 9.0
+CLOSE = 10.0
 #IR threshold: what counts as "too close"?
-TOO_CLOSE = 6.5
+TOO_CLOSE = 7.0
 #what's too close when talking about the L/R sides
 SIDE_CLOSE = 4.0
 #when to go for the wall

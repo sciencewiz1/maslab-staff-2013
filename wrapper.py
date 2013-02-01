@@ -175,12 +175,12 @@ class Wrapper:
             self.color=GREEN
         print "going for target..."+str(self.color)
         #CHANGED: go for balls of both colors instead.
-        #self.vs.addTarget(self.color)
-        self.vs.addTarget("redBall")
-        self.vs.addTarget("greenBall")
-        #self.vs.addTarget(#both colors
+        self.vs.addTarget(self.color)
+        #uncomment this for 2 colors
+        #self.vs.addTarget("redBall")
+        #self.vs.addTarget("greenBall")
         self.vs.addTarget("cyanButton")
-        self.color=["redBall","greenBall"]
+        #self.color=["redBall","greenBall"]
         print "vision system set"
         #start a thread that takes IR readings
         self.ir_module.start()
