@@ -286,13 +286,13 @@ class ApproachBall(State):
         if self.wrapper.vs.isClose():
             print "charging b/c ball close"
             return (Charge, self.wrapper.color)
-        if self.wrapper.ballCentered():
+        if self.wrapper.seeBall():
             return 0
             #still going after ball
-        print "ball not centered!"
-        if self.wrapper.seeBall():
-            print "still see ball, turn to face."
-            return TurnAndLook
+#        print "ball not centered!"
+#        if self.wrapper.seeBall():
+#            print "still see ball, turn to face."
+#            return TurnAndLook
             #if you see the ball and it's not centered
         #if lose track of ball
         return TurnAndLook
@@ -382,7 +382,7 @@ class Charge(State):
             if time.time()>self.wrapper.time+5:
                 return Stuck
             if (stuck_info[0]==3 and stuck_info[1]==3) or\
-               (self.wrapper[FRONT_DIST2]>=250 and self.wrapper[FRONT_DIST2]<=350 and self.wrapper[FRONT_DIST]>=550:
+               (self.wrapper[FRONT_DIST2]>=250 and self.wrapper[FRONT_DIST2]<=350 and self.wrapper[FRONT_DIST]>=550):
                 return Score
         return 0
         #keep capturing

@@ -11,8 +11,8 @@ import arduino
 #THRESH = 200.0  # Experimentally chosen
 
 ard = arduino.Arduino()  # Create the Arduino object
-a0 = arduino.AnalogInput(ard, 0)  # Create an analog sensor on pin A0
-a1 = arduino.AnalogInput(ard, 1)  
+a0 = arduino.AnalogInput(ard,7)  # Create an analog sensor on pin A0
+a1 = arduino.AnalogInput(ard,2)  
 ard.run()  # Start the thread which communicates with the Arduino
 
 # Main loop -- check the sensor and update the digital output
@@ -27,3 +27,5 @@ while a!=0:
         time.sleep(0.1)
     a=int(raw_input("Inches:"))
 ard.stop()
+#LEFT=2
+#RIGHT=7

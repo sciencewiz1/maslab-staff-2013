@@ -120,8 +120,8 @@ class Wrapper:
         #self.ir_module2=IRModule(arduino.AnalogInput(self.ard, 1),offset=.375)
         self.ir_module2=IRModule(arduino.AnalogInput(self.ard, 1),True)
         '''Add this when we add more IR modules'''
-        self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 4))
-        self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 3))
+        self.left_ir_module=IRModule(arduino.AnalogInput(self.ard, 2))
+        self.right_ir_module=IRModule(arduino.AnalogInput(self.ard, 7))
         print "IR module"
         self.left_bump=arduino.DigitalInput(self.ard,50)
         self.right_bump=arduino.DigitalInput(self.ard,52)
@@ -277,7 +277,9 @@ class Wrapper:
         dist=self.vs.getTargetDistFromCenter(target)
         if dist== None:
             return 0
-        return (math.fabs(dist[0])<=CENTER_THRESHOLD)
+        return (math.fabs(dist[0])<=CENTER_THRESHOLD) or ((target=="yellowWall" or\
+                                                           target=="purplePyramid") and\
+                                                          math.fabs(dist[0])<=WALL_CENTER_THRESHOLD)
     '''return array of coordinates of balls'''
     def targetClose(self,target=None):
         if target==None:
@@ -401,7 +403,7 @@ class IRModule(threading.Thread):
                 #else:
                     #print "short"
                 #print "IR=",ir_val
-                #self.ir_list.append(ir_val)
+                self.ir_list.append(ir_val)
                 #self.f.write(str(ir_val))
                 #self.f.write('\n')
                 #print self.ir_val
@@ -419,6 +421,7 @@ class IRModule(threading.Thread):
                     #print "IR=",ir_val
                     self.li.append(ir_val)
                 ir_val=sum(li)/3.0
+                self.ir_list.append(ir_val)
                 #self.f.write(str(ir_val))
                 #self.f.write('\n')
                 #print self.ir_val
