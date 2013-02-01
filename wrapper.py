@@ -174,7 +174,10 @@ class Wrapper:
         else:
             self.color=GREEN
         print "going for target..."+str(self.color)
-        self.vs.addTarget(self.color)
+        #CHANGED: go for balls of both colors instead.
+        #self.vs.addTarget(self.color)
+        self.vs.addTarget("redBall")
+        self.vs.addTarget("greenBall")
         #self.vs.addTarget(#both colors
         self.vs.addTarget("cyanButton")
         print "vision system set"
