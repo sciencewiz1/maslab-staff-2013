@@ -230,6 +230,6 @@ class Stop(State):
         State.__init__(self,wrap)
         self.action=DoNothing
         self.wrapper.stop()
-        self.wrapper.ir_module.f.close()
+        #self.wrapper.ir_module.f.close()
     def stopfunction(self):
         return 0

@@ -181,10 +181,10 @@ class Wrapper:
         #self.color=["redBall","greenBall"]
         print "vision system set"
         #start a thread that takes IR readings
-        self.ir_module.start()
-        self.ir_module2.start()
-        self.left_ir_module.start()
-        self.right_ir_module.start()
+        #self.ir_module.start()
+        #self.ir_module2.start()
+        #self.left_ir_module.start()
+        #self.right_ir_module.start()
         #self.imu.start()
         self.start_time=time.time()
         self.time=self.start_time
@@ -349,8 +349,8 @@ class Wrapper:
         self[HELIX_MOTOR]=0
         self[ROLLER_MOTOR]=ROLLER_STOP
         #self.ard.stop()
-        self.ir_module.stop()
-        self.ir_module2.stop()
+        #self.ir_module.stop()
+        #self.ir_module2.stop()
         self.wt.stop()
         self.vs.stop()
 class IMU(threading.Thread):
@@ -367,13 +367,13 @@ class IMU(threading.Thread):
             print self.currentValue
         
 '''Module that records IR measurements'''
-class IRModule(threading.Thread):
+class IRModule():
     '''Starts IR thread with an empty list of logged IR values'''
     def __init__(self,ir2,long_range=False,filtering=False,offset=0):
         #IR value
         threading.Thread.__init__(self)
         #self.ir_val=0
-        self.f=open('ir_log.txt','w')
+        #self.f=open('ir_log.txt','w')
         self.active=True
         self.ir_list=[]
         self.offset=0
@@ -389,48 +389,9 @@ class IRModule(threading.Thread):
             self.too_far=15
         self.ir=ir2
         self.filtering=filtering
-        
-    '''Continuously get IR values and log them in IR list'''
-    def run(self):
-        if not self.filtering:
-            while self.active:
-                #fix threading issue
-                ir_val=self.ir.getValue()
-                #if self.too_far==25:
-                    #print "long"
-                #else:
-                    #print "short"
-                #print "IR=",ir_val
-                self.ir_list.append(ir_val)
-                #self.f.write(str(ir_val))
-                #self.f.write('\n')
-                #print self.ir_val
-                time.sleep(0.2)
-        if self.filtering:
-            li=[]
-            while self.active:
-                for i in xrange(0,3):
-                    #fix threading issue
-                    ir_val=self.ir.getValue()
-                    #if self.too_far==25:
-                    #    print "long"
-                    #else:
-                    #    print "short"
-                    #print "IR=",ir_val
-                    self.li.append(ir_val)
-                ir_val=sum(li)/3.0
-                self.ir_list.append(ir_val)
-                #self.f.write(str(ir_val))
-                #self.f.write('\n')
-                #print self.ir_val
-                time.sleep(0.2)
-
     '''Get IR values. If filtered, gives a weighted average for noise reduction'''
     def getIRVal(self):
-        if len(self.ir_list)==0 or self.ir_list[-1]==None:
-            return 50
-        else:
-            return self.ir_list[-1]
+        return self.ir.getValue()
     def __corrected(self,x):
         #given distance, return self.too_far if it's too large
         #then when anything is too large, remember it's an invalid distance
