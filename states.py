@@ -394,7 +394,6 @@ class Charge(State):
                 return Score
             if time.time()>self.wrapper.time+5:
                 return Stuck
-
         return 0
         #keep capturing
 

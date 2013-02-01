@@ -373,7 +373,6 @@ class IRModule():
     '''Starts IR thread with an empty list of logged IR values'''
     def __init__(self,ir2,long_range=False,filtering=False,offset=0):
         #IR value
-        threading.Thread.__init__(self)
         #self.ir_val=0
         #self.f=open('ir_log.txt','w')
         self.active=True
