@@ -178,7 +178,6 @@ class Wrapper:
         #self.vs.addTarget("redBall")
         #self.vs.addTarget("greenBall")
         self.vs.addTarget("cyanButton")
-        self.vs.addTarget("blueWall")
         #self.color=["redBall","greenBall"]
         print "vision system set"
         #start a thread that takes IR readings
@@ -512,7 +511,6 @@ class WallTimer(threading.Thread):
         self.wrapper.vs.clearTargets()
         self.wrapper.vs.addTarget("yellowWall")
         self.wrapper.vs.addTarget("purplePyramid")
-        self.wrapper.vs.addTarget("blueWall")
         #Update this once David puts in code to look for walls.
     def stop(self):
         self.active=False
