@@ -14,7 +14,7 @@ import sys
 from mapper import *
 from Tkinter import *
 DEBUG_VISION=0
-TEMPLATE_MATCH_THRESHOLD=200/2.7 #depends on image size
+TEMPLATE_MATCH_THRESHOLD=1 #depends on image size
 CLOSE_THRESHOLD=20000.0/2.7
 VALUE_THRESHOLD=200
 SAT_THRESHOLD=100
@@ -231,7 +231,7 @@ class VisionSystem(threading.Thread):
         self.capture = cv.CaptureFromCAM(0) #camera object
         self.targets=[]
         self.ballTargets=["redBall","greenBall"]
-        self.wallTargets=["purpleWall","blueWall","yellowWall"]
+        self.wallTargets=["purpleWall","blueWall"]
         self.wallCoordinates=[]
         self.frameWriter=None
         if still!=None:
@@ -244,7 +244,7 @@ class VisionSystem(threading.Thread):
         #old values
         #"redBall":[((0, 147, 73), (15, 255, 255))
         self.targetColorProfiles={"redBall":[((0, 147, 73), (15, 255, 255)),((165, 58, 36), (180, 255, 255))],"greenBall":[((45, 150, 36), (90, 255, 255))],
-                      "blueWall":[((103, 141, 94), (115, 255, 255))],"yellowWall":[((29, 150, 36), (64, 255, 255))],
+                      "blueWall":[((103, 141, 94), (115, 255, 255))],"yellowWall":[((27, 108, 18), (34, 255, 255))],
                                   "purpleWall":[((110, 41, 52), (129, 255, 255))],"yellowWall2":[((26, 53,117), (32, 255, 255))],
                                   "cyanButton":[((95,176,115),(108,255,255))]}
         self.targetShapeProfiles={"redBall":self.detectCircle,"greenBall":self.detectCircle,
@@ -453,22 +453,6 @@ class VisionSystem(threading.Thread):
         return thresholded
     #uses images
     def detectCircle(self,processedImage,contours,area):
-        circ=np.array([[]])
-        hough_in=cv.CreateImage(cv.GetSize(processedImage),8,1)
-        cv.Copy(processedImage,hough_in)
-        cv.Smooth(hough_in, hough_in, cv.CV_GAUSSIAN, 15, 15, 0, 0)
-        image2=np.asarray(cv.CloneImage(hough_in)[:,:])
-        circ=cv2.HoughCircles(image2, cv.CV_HOUGH_GRADIENT, 3, 300, None, 100, 40)
-        #clean up
-        #del(hough_in)
-        #del(image2)
-        #return data
-        if circ==None:
-            return False
-        #drawing procedure for circles, move to main
-        #for circle in circ[0]:
-        #    (x,y,radius)=circle
-        #   cv2.circle(image2,(x,y), radius,cv.CV_RGB(255, 0, 0), 2, 8, 0)
         return True
     #uses images
     def detectRectangle(self,processedImage,contours,area):
@@ -619,10 +603,7 @@ class VisionSystem(threading.Thread):
             cloneForContour=cv.CloneImage(processedImagePhase2)
             contours= cv.FindContours(cloneForContour,h ,cv.CV_RETR_LIST, cv.CV_CHAIN_APPROX_SIMPLE)
             centers=[]
-            timeout=50
-            i=0
-            while contours and i<=timeout:
-                i+=1
+            while contours:
                 area1=cv.ContourArea (contours)
                 if area1>=TEMPLATE_MATCH_THRESHOLD:
                     if DEBUG_VISION:
