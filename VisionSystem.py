@@ -228,7 +228,7 @@ class VisionSystem(threading.Thread):
     def __init__(self,cmdQueue,dataQueue,still=None):
         self.writeLog()
         self.capture = cv.CaptureFromCAM(0) #camera object
-        self.targets=[]
+        self.targets=["redBall","greenBall"]
         self.ballTargets=["redBall","greenBall"]
         self.wallTargets=["purpleWall"]
         self.wallCoordinates=[]
@@ -325,7 +325,7 @@ class VisionSystem(threading.Thread):
         ans=self.wallCoordinates[:]
         self.dataQueue.put(ans)
         return ans
-    def getTargetDistFromCenter(self,target="all"):
+    def getTargetDistFromCenterOld(self,target="all"):
         data=None
         if target in self.targetLocations:
             data = self.targetLocations[target]
@@ -339,7 +339,34 @@ class VisionSystem(threading.Thread):
         else:
             self.dataQueue.put(None)
             return None
-                
+    def getTargetDistFromCenter(self,*targetList):
+        if isinstance(targetList[0],list):
+            targetList=targetList[0]
+        closeData=[]
+        for target in targetList:
+            closeD=self.closeness(target)
+            if closeD!=False:
+                closeData.append(closeD)
+        closest=None
+        if len(closeData)!=0:
+            closest=max(closeData)
+        if closest==None:
+            return None
+        yAbs,target=closest
+        data=self.targetLocations[target]
+        self.dataQueue.put(data)
+        return data
+    def closeness(self,target):
+        if target in self.targetLocations:
+            sample=self.targetLocations[target]
+        else:
+            if target=="all":
+                sample=self.bestTargetOverall
+        if sample==None:
+            return False
+        else:
+            targetStr,(xDiff,yDiff),(xAbs,yAbs),area,(xCOM,yCOM)=sample
+            return (yAbs,target)
     def isClose(self,target="all"):
         if target in self.targetLocations:
             sample=self.targetLocations[target]
