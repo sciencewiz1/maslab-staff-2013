@@ -51,10 +51,10 @@ class Action:
         return b
     #run at beginning
     def run(self):
-        raise NotImplementedError
+        pass
     #loop
     def loop(self):
-        raise NotImplementedError
+        pass
 
 """The following are basic actions."""
 
@@ -171,8 +171,8 @@ class DoNothing(Action):
 
 class ReleaseBalls(Action):
     def run(self):
-        self.wrapper[LEFT_MOTOR]=0
-        self.wrapper[RIGHT_MOTOR]=0
+        self.wrapper[LEFT_MOTOR]=40
+        self.wrapper[RIGHT_MOTOR]=40
         self.wrapper[RELEASE_MOTOR]=OPEN
     def loop(self):
         print "looping ",self.__class__.__name__, time.time()
@@ -207,7 +207,7 @@ class State:
         if DEBUG:
             print "Running ",self.__class__.__name__
             #print "Init action ",self.action.__name__
-            threading.Thread(target=playSound(self.__class__.__name__)).start()
+            #threading.Thread(target=playSound(self.__class__.__name__)).start()
         if isinstance(self.action,tuple):
             action_class=self.action[0]
             action_args=self.action[1]

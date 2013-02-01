@@ -110,7 +110,7 @@ class AvoidWall(State):
 class TurnAndLook(State):
     def __init__(self,wrap,data=()):
         if data==None or data==():
-            print "got here"
+            #print "got here"
             self.target="all"
             otherData=()
         elif data.__class__==str or data.__class__==list:
@@ -118,22 +118,22 @@ class TurnAndLook(State):
             otherData=()
         else:
             self.target,otherData=data
-            print "g12"
+            #print "g12"
         if self.target==None:
             self.target="all"
-            print "d12"
+            #print "d12"
         if len(otherData)==0:
             self.desiredIR=0
             self.action=None
             self.goToOpen=True
-            print "got here 1234"
+            #print "got here 1234"
         else:
             self.action,self.desiredIR,self.goToOpen=otherData
-            print "lol1234"
-        print self.desiredIR,self.action,self.goToOpen,self.target
+            #print "lol1234"
+        #print self.desiredIR,self.action,self.goToOpen,self.target
         #print "init turn and look"
         State.__init__(self,wrap)
-        print "finished superclass init"
+        #print "finished superclass init"
         #if ball is to the right
         #also wall
         #########################################
@@ -163,6 +163,7 @@ class TurnAndLook(State):
                 print "see target to left"
             self.action=TurnLeft
         print "started turn and look with target, ",self.target
+        #self.last_loc=None#!
     def stopfunction(self):
         print "got to stop"
         '''
@@ -191,9 +192,14 @@ class TurnAndLook(State):
             return Stuck
         target_seen=self.wrapper.seeTarget()
         print "target seen: ",target_seen
+        #!current=None
+        #!if target_seen!=None:
+        #!    current=self.wrapper.vs.getTargetDistFromCenter(target_seen)
         target_cent=self.wrapper.targetCentered(target_seen)
+        #!s=lambda x: (x<0)*-1+(x>0)*1
         if target_cent:
-            if target_seen==self.wrapper.color:
+        #!or (current!=None and self.last_loc!=None and s(current)!=s(self.last_loc)):
+            if target_seen in ["greenBall","redBall"]:
                 print "centered ball, approach!"
                 return (Pause, ApproachBall)
             #i.e., first pause and then approach ball
@@ -251,6 +257,7 @@ class TurnAndLook(State):
             #in the future, should probably change direction
             #NEED TO DETECT WHICH PLACES ARE MORE OPEN!
         else:
+            #self.last_loc=current
             print "keep turning"
             return 0
             #keep turning
@@ -380,11 +387,13 @@ class Charge(State):
                 self.wrapper.balls_collected+=1
                 return Stuck
         if self.target in ["yellowWall","purplePyramid"]:
+            if (stuck_info[0]==3 and stuck_info[1]==3) or\
+               (self.wrapper.ir_module2.getIRVal()>=250 and self.wrapper.ir_module2.getIRVal()<=350 and self.wrapper.ir_module.getIRVal()>=550) or\
+               (time.time()>self.wrapper.time+5 and (stuck_info[0]==3 or stuck_info[1]==3)):
+                return Score
             if time.time()>self.wrapper.time+5:
                 return Stuck
-            if (stuck_info[0]==3 and stuck_info[1]==3) or\
-               (self.wrapper[FRONT_DIST2]>=250 and self.wrapper[FRONT_DIST2]<=350 and self.wrapper[FRONT_DIST]>=550):
-                return Score
+
         return 0
         #keep capturing
 
@@ -441,11 +450,18 @@ class Score(State):
         State.__init__(self,wrap)
         self.action=ReleaseBalls
     def stopfunction(self):
+        fl=0
+        f=math.floor(time.time()-self.wrapper.time)
+        if f>fl:
+            self.wrapper[RELEASE_MOTOR]=CLOSED
+            time.sleep(0.1)
+            self.wrapper[RELEASE_MOTOR]=OPEN
+            fl=f
         if time.time()>self.wrapper.time+5:
             self.wrapper[RELEASE_MOTOR]=CLOSED
             self.wrapper.mode=BALL_MODE
             a=165
-            if time.time()>=wrapper.start_time+150:
+            if time.time()>=self.wrapper.start_time+150:
                 a=180
             self.wrapper.wt=WallTimer(a)
             self.wrapper.wt.start()
@@ -476,11 +492,10 @@ class ApproachWall(State):
         #note presence of AND here: give up when both sensors bumped,
         #or when one sensor bumped and time too long, or too long
         #if within 4 inches
-        if (stuck_info[0]==3 and stuck_info[1]==3):
+        if (stuck_info[0]==3 and stuck_info[1]==3) and ((stuck_info[0]==3 or stuck_info[1]==3) and\
+            time.time()>=self.wrapper.time+3):
             return Score
-        if ((stuck_info[0]==3 or stuck_info[1]==3) and\
-            time.time()>=self.wrapper.time+3) or\
-            time.time()>=self.wrapper.time+6:
+        if time.time()>=self.wrapper.time+6:
             #if stuck_info[0]==3 and stuck_info[1]==3:
             #    self.wrapper.hitButton()
             return Stuck

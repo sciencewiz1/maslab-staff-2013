@@ -401,9 +401,9 @@ class VisionSystem(threading.Thread):
                 self.dataQueue.put(False)
                 return False
             (x1,y1),center,leftExt,rightExt=imageData
-            print "ball at:",(xAbs,yAbs)
-            print "image size",(x1,y1)
-            if yAbs>=(y1*5/float(6)):
+            #print "ball at:",(xAbs,yAbs)
+            #print "image size",(x1,y1)
+            if yAbs>=(y1*3/float(4)):
                 self.dataQueue.put(True)
                 return True
             else:

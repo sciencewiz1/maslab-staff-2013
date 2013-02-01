@@ -15,8 +15,8 @@ RIGHT_SIGN=-1
 ROLLER_SIGN=1
 ROLLER_ANGLE=180
 ROLLER_STOP=107
-CLOSED=165
-OPEN=30#check these angles
+CLOSED=0
+OPEN=90#check these angles
 HELIX_SPEED=126
 '''!!!!!!!!!!'''
 LEFT_TURN=LEFT_SIGN*20
@@ -35,7 +35,7 @@ WALL_MODE=1
 #experimentally find this.
 #later, preferably change this to dynamic control
 SPEED=4.0 #inches per second
-TURN_SPEED=50.0
+TURN_SPEED=40.0
 #color
 RED="redBall"
 GREEN="greenBall"
@@ -43,16 +43,16 @@ GREEN="greenBall"
 LEFT=-1
 RIGHT=1
 
-CENTER_THRESHOLD=100
+CENTER_THRESHOLD=150
 WALL_CENTER_THRESHOLD=200
 
 #Right now I randomly estimate 1 degree/4 pixels, change this to something more
 #exact later
 #in units of (motor speed)/(angle in degrees).
 #motor speed is -126 to 126
-TURN_KP = .5
+TURN_KP = .8
 #in units of (motor speed)/(angle in degrees*s)
-TURN_KI = 0
+TURN_KI = .1
 #in units of (motor speed s)/(angle in degrees)
 TURN_KD = .1
 
