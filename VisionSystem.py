@@ -13,19 +13,20 @@ import json
 import sys
 from mapper import *
 from Tkinter import *
+#NOTE: THIS SOFTWARE HAS A MEMORY LEAK! OpenCV Images will start to accumulate in physical memory. After a period of time
+#depending on how much RAM your computer has, the system will no longer function and will spawn an error indicating that
+#a memory allocation failed! Please plan accordingly!
+'''Variable that when set to 1 will provide valuable debug information'''
 DEBUG_VISION=0
+'''Variable that controls the area threshold for recognizing objects'''
 TEMPLATE_MATCH_THRESHOLD=1 #depends on image size
-CLOSE_THRESHOLD=20000.0/2.7
-VALUE_THRESHOLD=200
-SAT_THRESHOLD=100
-HUE_THRESHOLD=25
-MAXRANGE=50
 #image dimensions from webcam are: 640x480
 #self.targets={"redBall":((0,160,150),(25,255,255))}
 #saturation-how much mixed with white
 #value-how much mixed with black
 #NOTE: This code is still in development stages and commenting has not been completed.
-
+'''This object replaces the standard stdout object so that we can write print statements
+to the console and to a file.'''
 class StdOut(object):
     def __init__(self, *files):
         self.files = files
@@ -35,6 +36,9 @@ class StdOut(object):
     def flush(self):
         for f in self.files:
             f.flush()
+'''This is an interface used to interact with the Vision System Process while
+in the main process. All of these methods correspond to methods in the Vision System
+Class.'''
 class VisionSystemWrapper:
     def __init__(self):
         self.cmdQueue=Queue(1000)
@@ -226,43 +230,68 @@ and command the robot to move towards them'''
 class VisionSystem(threading.Thread):
     '''Initialization method that creates the
         camera object and initializes Thread data'''
+    #The __init__ method can take a still image and analyze it,
+    #if it is given a still, video capture is disabled
     def __init__(self,cmdQueue,dataQueue,still=None):
+        #initiate log write
         self.writeLog()
+        #create video capture object
         self.capture = cv.CaptureFromCAM(0) #camera object
+        #targets list, list of currently tracked targets
         self.targets=[]
+        #these lists are used in excluding matched targets
+        #if the matched target is a ball target and the ball target
+        #is above a found wall target then it is ignored
+        #this helps prevent false positives above the field wall
         self.ballTargets=["redBall","greenBall","yellowWall"]
         self.wallTargets=["purpleWall","blueWall"]
+        #list used for edge detection (not used in final version of software)
         self.wallCoordinates=[]
         self.frameWriter=None
         if still!=None:
             self.still=cv.LoadImage(still)
         else:
             self.still=None
+        #mapper object (not used in final version of software)
         self.mapper=Mapper()
+        #used to keep thread alive or kill it, see run() method
         self.active=True
+        #boolean that controls if the vision system should do edge detection
         self.detectEdges=False
         #old values
         #"redBall":[((0, 147, 73), (15, 255, 255))
+        #color profiles for target detection
         self.targetColorProfiles={"redBall":[((0, 147, 73), (15, 255, 255)),((165, 58, 36), (180, 255, 255))],"greenBall":[((45, 150, 36), (90, 255, 255))],
                       "blueWall":[((103, 141, 94), (115, 255, 255))],"yellowWall":[((27, 108, 18), (34, 255, 255))],
                                   "purpleWall":[((110, 41, 52), (129, 255, 255))],"yellowWall2":[((26, 53,117), (32, 255, 255))],
                                   "cyanButton":[((95,176,115),(108,255,255))]}
+        #shape detection, references a function that checks that shape
         self.targetShapeProfiles={"redBall":self.detectCircle,"greenBall":self.detectCircle,
                       "blueWall":self.detectRectangle,"yellowWall":self.detectRectangle,"purpleWall":self.detectRectangle,
                                   "yellowWall2":self.detectRectangle,"cyanButton":self.detectRectangle}
         self.edgeDetectionProfiles={"main":(50,200,3,1,.5,2,70,20,90)} #c1,c2,ap,rh,deg,th,min_l,max_d,bwt
+        #two different edge detection types
+        #main does color filtering first, thresh just converts to black and white
         self.edgeDetectionFilters=["main","thresh"]
         self.edgeDetectionFilter="main"
+        #back up default profiles
         self.default= copy.deepcopy(self.targetColorProfiles)
         self.defaultEdgeDetectionProfiles= copy.deepcopy(self.edgeDetectionProfiles)
+        #dictionary that keeps track of where targets are relative to the center
         self.targetLocations={"redBall":None,"greenBall":None,"blueWall":None,"yellowWall":None,"purpleWall":None,
                               "yellowWall2":None,"cyanButton":None}
+        #keeps track of the closest target
         self.bestTargetOverall=None #will be (target,distFromCenter,absolute coordinates,area)
+        #detection threshold for detected colored objects
         self.detectionThreshold=TEMPLATE_MATCH_THRESHOLD
         self.override=False
+        #used to pause vision system
         self.pause=True
+        #keeps track of image parameters (size,etc...)
         self.imageParams=None
+        #command queue
         self.cmdQueue=cmdQueue
+        #data queue
         self.dataQueue=dataQueue
         self.lock=threading.Lock()
         #call super class init method and bind to instance
@@ -299,6 +328,10 @@ class VisionSystem(threading.Thread):
             self.edgeDetectionFilter=filt
         else:
             print "Filter does not exist!"
+    '''
+    Add a target to be tracked by the VS
+    @param targetStr-string that represents target to track, must be present as a key in the self.targetColorProfiles dictionary 
+    '''
     def addTarget(self,targetStr):
         if targetStr in self.targetColorProfiles:
             self.targets.append(targetStr)
@@ -328,6 +361,11 @@ class VisionSystem(threading.Thread):
         ans=self.wallCoordinates[:]
         self.dataQueue.put(ans)
         return ans
+    '''
+    Returns (x,y) dist of target center from center of image
+    @param target-string representing the target for which you want to know the distance from the center,
+    must be "all" or must be present as a key in the self.targetColorProfiles dictionary 
+    '''
     def getTargetDistFromCenterOld(self,target="all"):
         data=None
         if target in self.targetLocations:
@@ -342,6 +380,11 @@ class VisionSystem(threading.Thread):
         else:
             self.dataQueue.put(None)
             return None
+    '''
+    Returns (x,y) dist of target center from center of image
+    @param target-string or list representing the target(s) for which you want to know the distance from the center,
+    must be "all" or must be present as a key in the self.targetColorProfiles dictionary 
+    '''
     def getTargetDistFromCenter(self,*targetList):
         if isinstance(targetList[0],list):
             targetList=targetList[0]
@@ -356,6 +399,7 @@ class VisionSystem(threading.Thread):
         (target,(xdist,ydist),(xClosest,yClosest),areat,(xCOM,yCOM))=data
         self.dataQueue.put((xdist,ydist))
         return data
+    '''Of all targets, it gets the closest one'''
     def getClosest(self,targetList):
         closeData=[]
         for target in targetList:
@@ -381,6 +425,7 @@ class VisionSystem(threading.Thread):
         else:
             targetStr,(xDiff,yDiff),(xAbs,yAbs),area,(xCOM,yCOM)=sample
             return (yAbs,target)
+    '''Returns true if the closest target of the tracked targets is close'''
     def isClose(self,*targetList):
         if isinstance(targetList[0],list):
             targetList=targetList[0]
@@ -488,6 +533,8 @@ class VisionSystem(threading.Thread):
         leftExtreme=(0,int(image.height/float(2)))
         rightExtreme=(image.width,int(image.height/float(2)))
         return ((image.width,image.height),(center,centerEnd),leftExtreme,rightExtreme)
+    '''Renders all image frames the user sees, added target circles onto captured video to indicate where the vision system
+        thinks it has found a target!'''
     def renderImages(self,original,edgeLinePoints,processedImages,allTargetLocations):
         #cv.ShowImage('Ball Tracker Original',original)
         ((width,height),(center,centerEnd),leftExtreme,rightExtreme)=self.findCenterOfImageAndExtremes(original)
@@ -517,6 +564,7 @@ class VisionSystem(threading.Thread):
         #del(completeProcessedImage)
         #del(overlay)
         #del(original)
+    '''Main function that calls each of the individual processing modules.'''
     def explore(self,image):
         if DEBUG_VISION:
             print "in explore"
@@ -534,6 +582,9 @@ class VisionSystem(threading.Thread):
         self.renderImages(image,points,processedImages,targetLocations)
         #del(initialProcessedImage)
         #del(image)
+    '''Find Targets Processing Module, takes in an image and will locate the targets speicifed in the target list
+    according to the target color profiles and the area thresholds.
+    '''
     def findTargets(self,initialProcessedImage):
         #remove top of image
         ignoreTargetRegions=self.wallTargets
@@ -573,6 +624,9 @@ class VisionSystem(threading.Thread):
             (targetsData,processedImagePhase2)= self.findTarget(initialProcessedImage,None)
             processedImages.append(processedImagePhase2)
         return (processedImages,targetLocations)
+    '''
+    Called by findTargets() to find a particular target.
+    '''
     def findTarget(self,processedImage,target,ignoreRegions=None):
          #3 in away=3386655.0 pixel area
         image=cv.CloneImage(processedImage)
@@ -601,10 +655,13 @@ class VisionSystem(threading.Thread):
             #create target find overlay
             h=cv.CreateMemStorage(0)
             cloneForContour=cv.CloneImage(processedImagePhase2)
+            #find all contours
             contours= cv.FindContours(cloneForContour,h ,cv.CV_RETR_LIST, cv.CV_CHAIN_APPROX_SIMPLE)
             centers=[]
+            #iterate through all found contours
             while contours:
                 area1=cv.ContourArea (contours)
+                #if the contour area is above a threshold it is probably a valid target
                 if area1>=TEMPLATE_MATCH_THRESHOLD:
                     if DEBUG_VISION:
                         print "found object above thresh"
@@ -707,22 +764,29 @@ class VisionSystem(threading.Thread):
         #del(lines)
         #del(image2)
         return points
+    '''Detect QR codes. This part of the VS was abandoned!'''
     def detectQR(self,processedImage):
         pass
     def writeLog(self):
         self.log=open("vision_log.txt",'w')
         sys.stdout = StdOut(sys.stdout,self.log)
-        self.err_log = open('error.log', 'w')               
+        self.err_log = open('error.log', 'w')
+    '''Parses a string command from the cmd queue
+        and executes the corresponding command.
+    '''
     def parseCMD(self,cmd):
         method,args=cmd
         func=getattr(self,method)
         func(*args)
+    '''Terminates the vision system'''
     def stop(self):
         self.active=False
         self.log.close()
         self.err_log.close()
         del(self.frameWriter);
         print "Stopping Vision System"
+    '''This is was is continuously run to operate the vision system. Please investigate
+    Python Threading for more information.'''
     def run(self):
         print "Starting Vision System"
         if self.capture==None:
@@ -733,6 +797,8 @@ class VisionSystem(threading.Thread):
             if not self.cmdQueue.empty():
                 self.parseCMD(self.cmdQueue.get())
             if not self.pause or self.override:
+                #I surround all the code by a try,catch combo so that if there is an error on
+                #a particular run of the VS code, the entire process will not terminate.
                 try:#try to execute target find
                     #print self.targets[self.target]
                     #print self.getTargetDistFromCenter()
@@ -762,6 +828,7 @@ class VisionSystem(threading.Thread):
         #destroy capture 
         del(self.capture)
         cv.DestroyWindow("Tracker")
+#a few vision system tests
 def testVS():
     cmdQueue=Queue(1000)
     dataQueue=Queue(1000)

@@ -19,7 +19,8 @@ class Tee(object):
         for f in self.files:
             f.flush()
 '''
-Main GUI class used to control the robot.
+Main GUI class used to control the robot. When issuing key commands, the window titled
+Manual Control MUST have focus.
 '''
 class RobotControllerApp(Frame, threading.Thread):
     def __init__(self):
